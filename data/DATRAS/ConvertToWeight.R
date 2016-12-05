@@ -108,8 +108,9 @@ HL$LngtClass  <- an(HL$LngtClass)
 HL$HLNoAtLngt <- an(HL$HLNoAtLngt)
 HL$SubFactor  <- an(HL$SubFactor)
 
-
 # Deal with different length codes - standarise to cm
+
+HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] <-  HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] / 10 ## Dodgy datapoint!
 HL$LngtClass[HL$LngtCode == ". "] <- HL$LngtClass[HL$LngtCode == '. ']/10
 HL$LngtClass[HL$LngtCode == 0] <- HL$LngtClass[HL$LngtCode == 0]/10
 
@@ -122,7 +123,38 @@ HL$LngtClass[HL$LngtCode != "5"] <- HL$LngtClass[HL$LngtCode != "5"]+0.5
 # Now raise the length data to weights
 # a*L^b
 
-HL$Wt <- (HL$SpeciesA * HL$LngtClass)^HL$SpeciesB * (HL$HLNoAtLngt * HL$SubFactor) * 100 # in kg
+HL$WtL <- HL$SpeciesA * HL$LngtClass^HL$SpeciesB
+HL$Wt <- HL$WtL * HL$HLNoAtLngt * HL$SubFactor #  in g
+HL$Wt <- HL$Wt / 1000 
+
+########################################
+## Now try with the Model predictions
+load('LengthWeightPredictGadoids.RData')
+
+# Filter to the 3 gadoids
+HL$Species <- HL$SpeciesName
+spp <- c('Gadus morhua','Merlangius merlangus','Melanogrammus aeglefinus')
+HL <- filter(HL, Species %in% spp)
+
+# Add log(length)
+HL$lL  <- log(HL$LngtClass * 10)
+
+# Predict log weight
+HL$LogWtLength <- predict(lm2, newdata = HL)
+HL$WtLength <- exp(HL$LogWtLength) # convert back to weight in grams
+
+HL$Wt2 <- HL$WtLength * HL$HLNoAtLngt * HL$SubFactor # Total weight in g
+HL$Wt2 <- HL$Wt2 / 1000 # Weight in Kg
+
+
+plot(HL$Wt, HL$Wt2, col = HL$Species)
+
+library(ggplot2)
+
+ggplot(HL, aes(x = WtL/1000, y = WtLength/1000)) + geom_point() + facet_wrap(~Species)
+ggplot(HL, aes(x = Wt, y = Wt2)) + geom_point() + facet_wrap(~Species, scale = 'free') + geom_abline(intercept = 0, slope = 1)
+
+#########################################
 
 # COD <- filter(HL, SpeciesName == 'Gadus morhua')
 # boxplot((COD$Wt/COD$HLNoAtLngt) ~ COD$LngtClass) 
@@ -131,7 +163,7 @@ HL$Wt <- (HL$SpeciesA * HL$LngtClass)^HL$SpeciesB * (HL$HLNoAtLngt * HL$SubFacto
 
 # split into Ju and Ad
 
-HL$SpeciesName <- toupper(HL$SpeciesName)
+Hq$SpeciesName <- toupper(HL$SpeciesName)
 
 HL$SpeciesName <- ifelse(HL$SpeciesName == 'GADUS MORHUA' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'), 
 ifelse(HL$SpeciesName == 'GADUS MORHUA' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
