@@ -1,0 +1,11 @@
+
+## exclude shapefile folders
+
+**/Covariates/*/
+**/Covariates/*/*
+
+## Exclude figures
+
+*.png
+*.jpg
+*.pdf
