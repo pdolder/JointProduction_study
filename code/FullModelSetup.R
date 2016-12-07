@@ -20,7 +20,7 @@ library(VAST)
 run <- 'RUN_FULL'
 
 # This is where all runs will be located
-DateFile <- file.path(getwd(),paste(Sys.Date(),'_',run,'/', sep = ""))
+DateFile <- file.path('..','results',paste(Sys.Date(),'_',run,'/', sep = ""))
 dir.create(DateFile)
 
 ###############
@@ -30,8 +30,8 @@ dir.create(DateFile)
   Version = "VAST_v1_8_0"
   Method = c("Grid", "Mesh")[2]
   #grid_size_km = 20 
-  n_x = c(100, 250, 500, 1000, 2000)[1] # Number of stations
-  FieldConfig = c("Omega1"=4, "Epsilon1"=5, "Omega2"=5, "Epsilon2"=6) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
+  n_x = c(100, 250, 500, 1000, 2000)[3] # Number of stations
+  FieldConfig = c("Omega1"=6, "Epsilon1"=6, "Omega2"=6, "Epsilon2"=6) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
   RhoConfig = c("Beta1"=0, "Beta2"=0, "Epsilon1"=0, "Epsilon2"=0) # Structure for beta or epsilon over time: 0=None (default); 1=WhiteNoise; 2=RandomWalk; 3=Constant
   ObsModel = c(2,0)  # 0=normal (log-link); 1=lognormal; 2=gamma; 4=ZANB; 5=ZINB; 11=lognormal-mixture; 12=gamma-mixture
   OverdispersionConfig = c("eta1" = 0,"eta2" = 0) # 0 - number of factors
@@ -58,13 +58,10 @@ dir.create(DateFile)
 ################
 
   # Read or simulate trawl data
-  load(file.path('..','data','CelticSurveyFormattedSize.RData')) ## EVHOE and IE-IGFS
-  load(file.path('..','data','CelticSurvey2FormattedSize.RData')) ## Various Cefas surveys
+  load(file.path('..','data', 'Cleaned','CelticSurveyFormattedSize.RData')) ## EVHOE and IE-IGFS
+  load(file.path('..','data', 'Cleaned','CelticSurvey2FormattedSize.RData')) ## Various Cefas surveys
 
   # Combine the survey data
-  DF$SpeciesName <- toupper(DF$SpeciesName)
-  FSS$fldScientificName <- toupper(FSS$fldScientificName)
-
   DF2 <- DF
 
   ac <- as.character
@@ -74,7 +71,7 @@ dir.create(DateFile)
 		   Lat           = c(DF2$HaulLatMid,  FSS$HaulLatMid),
 		   Lon           = c(DF2$HaulLonMid,  FSS$HaulLonMid),
 		   AreaSwept_km2 = c(DF2$SweptArea,   FSS$SweptArea),
-		   spp           = c(DF2$SpeciesName, ac(FSS$fldScientificName)),
+		   spp           = c(DF2$SpeciesName, ac(FSS$Species)),
 		   Kg            = c(DF2$Kg,          FSS$Kg))
 
  table(DF$Survey, DF$Year)		   
@@ -89,17 +86,12 @@ dir.create(DateFile)
 			 # 'LEPIDORHOMBUS WHIFFIAGONIS')),]
 
 ## At size
- DF <- DF[(DF$spp %in% c('GADUS MORHUA_JUV',
-			 'GADUS MORHUA_ADU',
-			 'MELANOGRAMMUS AEGLEFINUS_JUV',
-			 'MELANOGRAMMUS AEGLEFINUS_ADU',
-		         'MERLANGIUS MERLANGUS_JUV',		 
-			 'MERLANGIUS MERLANGUS_ADU',
-			 'MERLUCCIUS MERLUCCIUS_ADU',
-			 'MERLUCCIUS MERLUCCIUS_JUV',
-			 'LOPHIUS PISCATORIUS_ALL',
-			 'LEPIDORHOMBUS WHIFFIAGONIS_ADU',
-			 'LEPIDORHOMBUS WHIFFIAGONIS_JUV')),]
+ DF <- DF[(DF$spp %in% c('Gadus morhua_Juv',
+			 'Gadus morhua_Adu',
+			 'Melanogrammus aeglefinus_Juv',
+			 'Melanogrammus aeglefinus_Adu',
+		         'Merlangius merlangus_Juv',		 
+			 'Merlangius merlangus_Adu')),]
 
 # Trim years
   DF <- DF[(DF$Year %in% c(1990:2015)),]
@@ -113,9 +105,6 @@ dir.create(DateFile)
   DF$Ship        <- factor(DF$Survey)
   DF$Year        <- factor(DF$Year)
 
-  # Remove some surveys
-  # DF <- DF[DF$Survey %in% c('CEXP','THA2','WCGFS','Q1SWIBTS','Q1SWBEAM'),]
-
   an <- as.numeric
   Data_Geostat = cbind("spp"=DF[,"SpeciesName"], 
 		       "Year"=DF[,"Year"], 
@@ -126,19 +115,24 @@ dir.create(DateFile)
 		       "Lon"=DF[,"Lon"] )
 
 ## Prepare the fixed vessel covariates, Q_ik
-Vess_Cov <- as.matrix(Data_Geostat[,'Vessel']-1)
+Vess_Cov <- vector_to_design_matrix(Data_Geostat[,'Vessel'])
+Vess_Cov <- Vess_Cov[,-1]
 
-# Read in the habitat covariates X_xj
-load(file.path('..','data','KmeansHab.RData'))
-KmeanHab$Habitat <- factor(KmeanHab$Habitat)
-Hab <- as.matrix(as.numeric(KmeanHab$Habitat)-1)
+# Read in the habitat covariate function to generate X_xj
+source(file.path('..', 'data', 'Covariates', 'HabitatCovariateFunc.R'))
+
  
   # Get extrapolation data
-  Extrapolation_List = SpatialDeltaGLMM::Prepare_Extrapolation_Data_Fn( Region=Region, strata.limits=strata.limits, observations_LL=Data_Geostat[,c('Lat','Lon')], maximum_distance_from_sample = max_dist)
+ Extrapolation_List = SpatialDeltaGLMM::Prepare_Extrapolation_Data_Fn( Region=Region, strata.limits=strata.limits, observations_LL=Data_Geostat[,c('Lat','Lon')], maximum_distance_from_sample = max_dist)
 
   # Calculate spatial information for SPDE mesh, strata areas, and AR1 process
   Spatial_List = SpatialDeltaGLMM::Spatial_Information_Fn(n_x=n_x, Method=Method, Lon=Data_Geostat[,'Lon'], Lat=Data_Geostat[,'Lat'], Extrapolation_List=Extrapolation_List, randomseed=Kmeans_Config[["randomseed"]], nstart=Kmeans_Config[["nstart"]], iter.max=Kmeans_Config[["iter.max"]], DirPath=DateFile )
   Data_Geostat = cbind( Data_Geostat, Spatial_List$loc_UTM, "knot_i"=Spatial_List$knot_i )
+
+Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 29, locationHabMap = file.path('..', 'data', 'Covariates', '201208_EUSeaMap_Atlantic_Habitats'), nameHabMap = '201208_EUSeaMap_Atlantic_Habitats')  
+  
+Hab2 <- vector_to_design_matrix(Hab$Habitat)
+Hab2 <- Hab2[,-6]
 
 ################
 # Make and Run TMB model
@@ -146,11 +140,11 @@ Hab <- as.matrix(as.numeric(KmeanHab$Habitat)-1)
 ################
 
   # Make TMB data list
-  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "X_xj" = Hab,"s_i"=Data_Geostat[,'knot_i']-1, "t_i"=Data_Geostat[,'Year'], "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method )
+  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "X_xj" = Hab2,"s_i"=Data_Geostat[,'knot_i']-1, "t_i"=Data_Geostat[,'Year'], "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method )
 
   # Make TMB object
   #dyn.unload( paste0(DateFile,"/",dynlib(TMB:::getUserDLL())) )
-  TmbList = Build_TMB_Fn("TmbData"=TmbData, "RunDir"=DateFile, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_x)
+  TmbList = Build_TMB_Fn("TmbData"=TmbData, "RunDir"=getwd(), "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_x)
   Obj = TmbList[["Obj"]]
 
   # Run model

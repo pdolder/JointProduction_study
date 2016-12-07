@@ -94,14 +94,6 @@ HH$SweptAreaAdj <- HH$SweptArea * HH$SweptAreaAdjFac
 load('DatrasSpeciesCodes.RData')
 HL$SpeciesName <- DatrasSpeciesCodes$scientific.name[match(HL$SpecCode, DatrasSpeciesCodes$code_number)]
 
-## Add a and b parameters for length-weight
-load('length.weight.RData')
-
-HL$SpeciesA <- length.weight$a[match(HL$SpeciesName, length.weight$scientific.name)]
-HL$SpeciesB <- length.weight$b[match(HL$SpeciesName, length.weight$scientific.name)]
-
-# Weight at length class
-
 # need as numeric
 an <- as.numeric
 HL$LngtClass  <- an(HL$LngtClass)
@@ -109,7 +101,6 @@ HL$HLNoAtLngt <- an(HL$HLNoAtLngt)
 HL$SubFactor  <- an(HL$SubFactor)
 
 # Deal with different length codes - standarise to cm
-
 HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] <-  HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] / 10 ## Dodgy datapoint!
 HL$LngtClass[HL$LngtCode == ". "] <- HL$LngtClass[HL$LngtCode == '. ']/10
 HL$LngtClass[HL$LngtCode == 0] <- HL$LngtClass[HL$LngtCode == 0]/10
@@ -120,15 +111,8 @@ HL$LngtClass[HL$LngtCode != "5"] <- HL$LngtClass[HL$LngtCode != "5"]+0.5
 
 # boxplot(HL$LngtClass ~ HL$SpeciesName)
 
-# Now raise the length data to weights
-# a*L^b
-
-HL$WtL <- HL$SpeciesA * HL$LngtClass^HL$SpeciesB
-HL$Wt <- HL$WtL * HL$HLNoAtLngt * HL$SubFactor #  in g
-HL$Wt <- HL$Wt / 1000 
-
 ########################################
-## Now try with the Model predictions
+## Now raise with the Model predictions
 load('LengthWeightPredictGadoids.RData')
 
 # Filter to the 3 gadoids
@@ -143,46 +127,34 @@ HL$lL  <- log(HL$LngtClass * 10)
 HL$LogWtLength <- predict(lm2, newdata = HL)
 HL$WtLength <- exp(HL$LogWtLength) # convert back to weight in grams
 
-HL$Wt2 <- HL$WtLength * HL$HLNoAtLngt * HL$SubFactor # Total weight in g
-HL$Wt2 <- HL$Wt2 / 1000 # Weight in Kg
+HL$Wt <- HL$WtLength * HL$HLNoAtLngt * HL$SubFactor # Total weight in g
+HL$Wt <- HL$Wt / 1000 # Weight in Kg
+HL$Wt <- HL$Wt * corr.fact  # bias correct
 
-
-plot(HL$Wt, HL$Wt2, col = HL$Species)
-
-library(ggplot2)
-
-ggplot(HL, aes(x = WtL/1000, y = WtLength/1000)) + geom_point() + facet_wrap(~Species)
-ggplot(HL, aes(x = Wt, y = Wt2)) + geom_point() + facet_wrap(~Species, scale = 'free') + geom_abline(intercept = 0, slope = 1)
 
 #########################################
 
-# COD <- filter(HL, SpeciesName == 'Gadus morhua')
-# boxplot((COD$Wt/COD$HLNoAtLngt) ~ COD$LngtClass) 
-
 ## And aggregate across lengths
-
 # split into Ju and Ad
 
-Hq$SpeciesName <- toupper(HL$SpeciesName)
-
-HL$SpeciesName <- ifelse(HL$SpeciesName == 'GADUS MORHUA' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'), 
-ifelse(HL$SpeciesName == 'GADUS MORHUA' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'MELANOGRAMMUS AEGLEFINUS' & HL$LngtClass <  29.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'MELANOGRAMMUS AEGLEFINUS' & HL$LngtClass >= 29.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'MERLANGIUS MERLANGUS' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'MERLANGIUS MERLANGUS' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'MERLUCCIUS MERLUCCIUS' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'MERLUCCIUS MERLUCCIUS' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'POLLACHIUS VIRENS' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'POLLACHIUS VIRENS' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'PLEURONECTES PLATESSA' & HL$LngtClass < 26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'PLEURONECTES PLATESSA' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'SOLEA SOLEA' & HL$LngtClass < 23.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'SOLEA SOLEA' & HL$LngtClass >= 23.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'LEPIDORHOMBUS WHIFFIAGONIS' & HL$LngtClass >= 19.5, paste(HL$SpeciesName,'Adu', sep = '_'),
-ifelse(HL$SpeciesName == 'LEPIDORHOMBUS WHIFFIAGONIS' & HL$LngtClass <  19.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'DICENTRATCHUS LABRAX' & HL$LngtClass <  35.5, paste(HL$SpeciesName,'Juv', sep = '_'),
-ifelse(HL$SpeciesName == 'DICENTRARCHUS LABRAX' & HL$LngtClass >= 35.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+HL$SpeciesName <- ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'), 
+ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Melanogrammus aeglefinus' & HL$LngtClass <  29.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Melanogrammus aeglefinus' & HL$LngtClass >= 29.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Merlangius merlangus' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Merlangius merlangus' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Merluccius merluccius' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Merluccius merluccius' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Pollachius virens' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Pollachius virens' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Pleuronectes platessa' & HL$LngtClass < 26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Pleuronectes platessa' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Solea solea' & HL$LngtClass < 23.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Solea solea' & HL$LngtClass >= 23.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lepidorhombus whiffiagonis' & HL$LngtClass >= 19.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lepidorhombus whiffiagonis' & HL$LngtClass <  19.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'dicentratchus labrax' & HL$LngtClass <  35.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Dicentrarchus labrax' & HL$LngtClass >= 35.5, paste(HL$SpeciesName,'Adu', sep = '_'),
        paste(HL$SpeciesName,'All', sep ='_')))))))))))))))))))
 
 
@@ -217,9 +189,12 @@ DF <- DF2[c('Survey','Ship','StNo','HaulNo','Year','SpeciesName','HaulLatMid','H
 DF <- filter(DF, HaulLonMid < -2 & HaulLonMid > -12)
 DF <- filter(DF, HaulLatMid >  48 & HaulLatMid < 52)
 
+
+ggplot(DF, aes(x = HaulLonMid, y = HaulLatMid)) + geom_point(aes(size = log(Kg))) + facet_wrap(~SpeciesName, ncol = 2)
+
 # Save
 
 # save(DF, file = file.path('..','CelticSurveyFormatted.RData'))
-save(DF, file = file.path('..','CelticSurveyFormattedSize.RData'))
+save(DF, file = file.path('..', 'Cleaned','CelticSurveyFormattedSize.RData'))
 
 

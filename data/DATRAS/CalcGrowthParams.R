@@ -43,14 +43,57 @@ drop1(lm1)
 #######################################################
 lm2 <- glm(lWt ~ lL + Species, data = DF)
 
-predDF <- expand.grid(lL = log(seq(min(DF$LngtClass), max(DF$LngtClass), 10)), Species  = spp)
+predDF <- data.frame(lL = log(c(seq(min(DF$LngtClass[DF$Species == spp[1]]), max(DF$LngtClass[DF$Species == spp[1]]), l = 80),
+			       seq(min(DF$LngtClass[DF$Species == spp[2]]), max(DF$LngtClass[DF$Species == spp[2]]), l = 80),
+			       seq(min(DF$LngtClass[DF$Species == spp[3]]), max(DF$LngtClass[DF$Species == spp[3]]), l = 80))),
+                     Species = rep(spp, each = 80))
+
 
 predDF$lWt <- predict(lm2, newdata = predDF)
 
 predDF$L <- exp(predDF$lL)
 predDF$Wt <- exp(predDF$lWt)
 
-ggplot(DF, aes(x = LngtClass, y = IndWgt)) + geom_point() +
-	facet_wrap(~ Species ) + geom_line(data = predDF, aes(x = L, y = Wt), col = 'red')
+## Now we need to bias correct due to the fact that the mean on the logscale is
+## the geometric mean...
 
-save(lm2, file = 'LengthWeightPredictGadoids.RData')
+corr.fact <- exp(sigma(lm2)^2/2)
+predDF$WtCorr <- predDF$Wt * corr.fact
+
+ggplot(DF, aes(x = LngtClass, y = IndWgt)) + geom_point() +
+	facet_wrap(~ Species, scale = 'free') + geom_line(data = predDF, aes(x = L, y = Wt), col = 'red') +
+        geom_line(data = predDF, aes(x = L, y = WtCorr), col = 'blue')
+
+## Save the fit and the correction factor
+save(lm2, corr.fact, file = 'LengthWeightPredictGadoids.RData')
+
+###################################################
+## Liklihood approach to estimate a and b params ##
+###################################################
+
+# data
+Wt = DF$IndWgt[DF$Species == 'Gadus morhua']
+L =  DF$LngtClass[DF$Species == 'Gadus morhua'] 
+
+reg.ll <- function (theta) {
+	mean.vec <- theta[1] * (L^theta[2])
+	ll.vec <- dnorm(Wt, mean = mean.vec, sd = theta[3], log = TRUE)
+	nll <- sum(-ll.vec)
+	return(nll)
+}
+
+## starting params
+a <- 0.0002 
+b <- 3
+sigma <-  2 
+par <- c(a, b, sigma)
+
+fit <- optim(par, reg.ll, control = list(trace = 3))
+
+plot(x = DF$LngtClass[DF$Species == 'Gadus morhua'], y = DF$IndWgt[DF$Species == 'Gadus morhua'])
+x  <-  seq(min(DF$LngtClass[DF$Species == 'Gadus morhua']), max(DF$LngtClass[DF$Species == 'Gadus morhua']), 10)
+lines(x = x,y = fit$par[1] * (x^fit$par[2]), col = 'red')
+lines(x = predDF$L[predDF$Species== 'Gadus morhua'], y = predDF$Wt[predDF$Species == 'Gadus morhua'], col = 'blue')
+
+
+## Fit doesn't 'look' as good...

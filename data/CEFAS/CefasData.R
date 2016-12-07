@@ -115,18 +115,29 @@ FSS$fldLengthGroup <- (FSS$fldLengthGroup / 10) + 0.5
 
 # load a/b parameters
 ## Add a and b parameters for length-weight
-load(file.path('..','DATRAS','length.weight.RData'))
 
-length.weight$scientific.name <- toupper(length.weight$scientific.name)
+# Only gadoids
+FSS <- filter(FSS, fldScientificName %in% c('GADUS MORHUA', 'MELANOGRAMMUS AEGLEFINUS', 'MERLANGIUS MERLANGUS'))
 
-FSS$SpeciesA <- length.weight$a[match(FSS$fldScientificName,
-				      length.weight$scientific.name)]
+## Load the modelled length weight relationships....
+load(file.path('..', 'DATRAS', 'LengthWeightPredictGadoids.RData'))
 
-FSS$SpeciesB <- length.weight$b[match(FSS$fldScientificName,
-				      length.weight$scientific.name)]
+# Add log length
+FSS$lL <- log(FSS$fldLengthGroup * 10)
 
-# a*L^b
-FSS$Wt <- (FSS$SpeciesA * FSS$fldLengthGroup)^FSS$SpeciesB * (FSS$Numbers) * 100 # in kg
+# Scientific names to small case except first letter
+FSS$Species <- paste(toupper(substring(FSS$fldScientificName, 1, 1)), tolower(substring(FSS$fldScientificName, 2, 1000)), sep = '')
+
+# Predict log weight
+FSS$LogWtLength <- predict(lm2, newdata = FSS)
+
+FSS$WtLength <- exp(FSS$LogWtLength) # convert back to weight in grams
+
+FSS$Wt <- FSS$WtLength * FSS$Numbers # Total weight in g
+FSS$Wt <- FSS$Wt / 1000 # Weight in Kg
+FSS$Wt <- FSS$Wt * corr.fact  # bias correct
+
+FSS <- FSS[!is.na(FSS$Wt),]  ## Lack length measurements
 
 COD <- filter(FSS, fldScientificName == 'GADUS MORHUA')
 
@@ -138,10 +149,6 @@ boxplot(COD$Wt / COD$Numbers ~ COD$fldLengthGroup) # Looks OK
 an <- as.numeric
 FSS$HaulLatMid <- (an(FSS$fldShotLatDecimalDegrees) + an(FSS$fldHaulLatDecimalDegrees)) / 2 
 FSS$HaulLonMid <- (an(FSS$fldShotLonDecimalDegrees) + an(FSS$fldHaulLonDecimalDegrees )) / 2
-
-# Only species with valid weights
-FSS <- FSS[!is.na(FSS$Wt),]
-
 
 ## Calculate the swept area per gear
 ## for beam trawls its easy, for otter trawls need to include the doorspread
@@ -213,30 +220,30 @@ plot(FSS$SweptAreaAdj ~ FSS$fldSeriesName)
 
 # split into Ju and Ad
 
-FSS$fldScientificName <- ifelse(FSS$fldScientificName == 'GADUS MORHUA' & FSS$fldLengthGroup <  34.5, paste(FSS$fldScientificName,'Juv', sep = '_'), 
-ifelse(FSS$fldScientificName == 'GADUS MORHUA' & FSS$fldLengthGroup >= 34.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'MELANOGRAMMUS AEGLEFINUS' & FSS$fldLengthGroup <  29.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'MELANOGRAMMUS AEGLEFINUS' & FSS$fldLengthGroup >= 29.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'MERLANGIUS MERLANGUS' & FSS$fldLengthGroup <  26.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'MERLANGIUS MERLANGUS' & FSS$fldLengthGroup >= 26.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'MERLUCCIUS MERLUCCIUS' & FSS$fldLengthGroup <  26.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'MERLUCCIUS MERLUCCIUS' & FSS$fldLengthGroup >= 26.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'POLLACHIUS VIRENS' & FSS$fldLengthGroup <  34.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'POLLACHIUS VIRENS' & FSS$fldLengthGroup >= 34.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'PLEURONECTES PLATESSA' & FSS$fldLengthGroup < 26.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'PLEURONECTES PLATESSA' & FSS$fldLengthGroup >= 26.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'SOLEA SOLEA' & FSS$fldLengthGroup < 23.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'SOLEA SOLEA' & FSS$fldLengthGroup >= 23.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'LEPIDORHOMBUS WHIFFIAGONIS' & FSS$fldLengthGroup >= 19.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-ifelse(FSS$fldScientificName == 'LEPIDORHOMBUS WHIFFIAGONIS' & FSS$fldLengthGroup <  19.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'DICENTRATCHUS LABRAX' & FSS$fldLengthGroup <  35.5, paste(FSS$fldScientificName,'Juv', sep = '_'),
-ifelse(FSS$fldScientificName == 'DICENTRARCHUS LABRAX' & FSS$fldLengthGroup >= 35.5, paste(FSS$fldScientificName,'Adu', sep = '_'),
-       paste(FSS$fldScientificName,'All', sep ='_')))))))))))))))))))
+FSS$Species <- ifelse(FSS$Species == 'Gadus morhua' & FSS$fldLengthGroup <  34.5, paste(FSS$Species,'Juv', sep = '_'), 
+ifelse(FSS$Species == 'Gadus morhua' & FSS$fldLengthGroup >= 34.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Melanogrammus aeglefinus' & FSS$fldLengthGroup <  29.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Melanogrammus aeglefinus' & FSS$fldLengthGroup >= 29.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Merlangius merlangus' & FSS$fldLengthGroup <  26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Merlangius merlangus' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Merluccius merluccius' & FSS$fldLengthGroup <  26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Merluccius merluccius' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Pollachius virens' & FSS$fldLengthGroup <  34.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Pollachius virens' & FSS$fldLengthGroup >= 34.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Pleuronectes platessa' & FSS$fldLengthGroup < 26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Pleuronectes platessa' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Solea solea' & FSS$fldLengthGroup < 23.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Solea solea' & FSS$fldLengthGroup >= 23.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lepidorhombus whiffiagonis' & FSS$fldLengthGroup >= 19.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lepidorhombus whiffiagonis' & FSS$fldLengthGroup <  19.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Dicentratchus labrax' & FSS$fldLengthGroup <  35.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Dicentrarchus labrax' & FSS$fldLengthGroup >= 35.5, paste(FSS$Species,'Adu', sep = '_'),
+       paste(FSS$Species,'All', sep ='_')))))))))))))))))))
 
 
-FSS <- group_by(FSS, fldSeriesName, Year, fldPrimeStation, fldCruiseStationNumber, HaulLatMid, HaulLonMid, fldTowDuration, SweptArea, SweptAreaAdj, fldScientificName) %>% summarise(Kg = sum(Wt)) %>% as.data.frame()
+FSS <- group_by(FSS, fldSeriesName, Year, Month, fldPrimeStation, fldCruiseStationNumber, HaulLatMid, HaulLonMid, fldTowDuration, SweptArea, SweptAreaAdj, Species) %>% summarise(Kg = sum(Wt)) %>% as.data.frame()
 
-FSS <- FSS[c('fldSeriesName','Year','fldPrimeStation','fldCruiseStationNumber','HaulLatMid','HaulLonMid','fldTowDuration', 'SweptArea', 'SweptAreaAdj' ,'fldScientificName','Kg')]
+FSS <- FSS[c('fldSeriesName','Year', 'Month','fldPrimeStation','fldCruiseStationNumber','HaulLatMid','HaulLonMid','fldTowDuration', 'SweptArea', 'SweptAreaAdj' ,'Species','Kg')]
 
 ## Trim to only keep data within core Celtic Sea
 
@@ -246,7 +253,8 @@ FSS <- filter(FSS, HaulLatMid >  48 &  HaulLatMid < 52) # remove extreme Lats
 plot(FSS$SweptAreaAdj ~ FSS$fldSeriesName)
 boxplot(FSS$SweptAreaAdj ~ FSS$Year)
 
+table(FSS$Month, FSS$Year, FSS$fldSeriesName)
 
 # save(FSS, file = file.path('..','CelticSurvey2Formatted.RData'))
-save(FSS, file = file.path('..','CelticSurvey2FormattedSize.RData'))
+save(FSS, file = file.path('..', 'Cleaned','CelticSurvey2FormattedSize.RData'))
 
