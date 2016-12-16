@@ -1,0 +1,589 @@
+\documentclass[12pt]{article}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{fullpage}
+\usepackage{pdflscape}
+\usepackage{rotfloat}
+\usepackage{listings}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{dcolumn}
+\hypersetup{pdfpagemode=UseNone} % don't show bookmarks on initial view
+\hypersetup{colorlinks, urlcolor={blue}}
+% revise margins
+\setlength{\headheight}{0.0in}
+\setlength{\topmargin}{0.0in}
+\setlength{\headsep}{0.0in}
+\setlength{\textheight}{8.65in}
+\setlength{\footskip}{0.35in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Processing and exploration for Celtic Sea fishery-independent trawl
+	survey data}
+\author{Paul J Dolder}
+\date{\today}
+
+\begin{document}
+
+<<echo=FALSE>>=
+library(knitr)
+set.seed(1)
+opts_chunk$set(size="footnotesize")
+@
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This document is to detail the processing steps and workng up of data for fitting
+a geostatistical model (VAST; see \url{https://github.com/james-thorson/VAST}
+for detail) to trawl survey data covering the Celtic Sea. \\
+
+The following data sources were used:
+
+\begin{itemize}
+	\item ICES Datras
+		(\url{http://www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx}
+		exhchange data of Ifremer (France) EVHOE and Marine Institute
+		(Ireland) fisheries-independent survey locations and catch
+		records.
+	\item Cefas (UK) collection of trawl survey locations and catch
+		records.
+	\item ICES Datras data product on estimated weights of fish at various
+		lengths from the EVHOE survey series.
+\end{itemize}
+
+\section{Length-weight conversion factors}
+
+As the survey records consist of count of fish at each length class and we are
+interested in working with weight (biomass) of fish, we first estimate a
+length-weight relationship for the different species from the Datras data
+product of weight at length estimates, from the EVHOE survey series. \\
+
+A standard von bertalanffy length weight relationship was used, with two
+parameters to estimate:
+
+\begin{equation}\label{eq:1}
+	Wt = a \cdot L^b
+\end{equation}
+
+The raw data looks as follows for cod, haddock and whiting:
+
+<<echo = F, fig.cap = 'Estimates of individual weights at length for the gadoid species', fig.width = 9, fig.height = 3>>=
+
+# Library for plotting
+library(ggplot2) 
+
+# Read data and remove records without corresponding weight
+DF <- read.csv(file.path('DATRAS', 'SMALK_EVHOE.csv')) # read data
+DF <- DF[!is.na(DF$IndWgt),]
+
+# Subset to cod, haddock and whiting
+spp <- c('Gadus morhua','Merlangius merlangus','Melanogrammus aeglefinus')
+DF <- DF[DF$Species %in% spp,]
+
+# Plot
+ggplot(DF, aes(x = LngtClass, y = IndWgt)) + 
+	geom_point(aes(colour = factor(Year))) + 
+	facet_wrap(~Species, scale = 'free')
+@
+
+To simplify the fitting procedure, the von bertalanffy relationship \ref{eq:1}
+was rearranged to be linear on a log scale:
+
+\begin{equation}\label{eq:2}
+	log(Wt) = log(a) + b \cdot log(L) + \varepsilon
+\end{equation} 
+
+\vspace{1cm}
+
+<<echo = F, fig.caption = 'Length and weight measurements on a log scale',fig.width = 9, fig.height = 3>>=
+
+DF$lWt <- log(DF$IndWgt)
+DF$lL  <- log(DF$LngtClass)
+
+ggplot(DF, aes(x = lL, y = lWt)) + geom_point(aes(colour = factor(Year))) + facet_wrap(~Species, scale = 'free' )
+@
+
+The following model was fit using the \textit{glm} function in the base R package:
+
+<<GLM fit, results = 'asis'>>=
+library(stargazer) # For nice model output
+lm1 <- glm(lWt ~ lL + Species + Year, data = DF)
+lm2 <- glm(lWt ~ lL + Species, data = DF)
+stargazer(lm1, lm2, font.size  = 'small', align = T, 
+	  title = 'glm output from the two model fits', 
+	  table.placement = 'H')
+@
+
+Year was initially also included as a factor, but found not to be significant
+and lm2 was chosen. This model was then used to predict over all lengths for
+each species.  A bias correction was applied to adjust for the fact that the
+mean weights from the model fit on a log scale are the geometric mean
+(cf = $e^{\frac{\sigma^{2}}{2}}$).
+
+<<Prediction1, echo = F>>=
+
+predDF <- data.frame(lL = log(c(seq(min(DF$LngtClass[DF$Species == spp[1]]), max(DF$LngtClass[DF$Species == spp[1]]), l = 80),
+			       seq(min(DF$LngtClass[DF$Species == spp[2]]), max(DF$LngtClass[DF$Species == spp[2]]), l = 80),
+			       seq(min(DF$LngtClass[DF$Species == spp[3]]), max(DF$LngtClass[DF$Species == spp[3]]), l = 80))),
+                     Species = rep(spp, each = 80))
+
+predDF$lWt <- predict(lm2, newdata = predDF)
+@
+
+<<Predictions2, fig.width  = 9, fig.height = 3>>=
+
+# Exponentiate the predictions
+predDF$L <- exp(predDF$lL)
+predDF$Wt <- exp(predDF$lWt)
+
+## Now we need to bias correct due to the fact that the mean on the logscale is
+## the geometric mean...
+corr.fact <- exp(sigma(lm2)^2/2)
+print(corr.fact)
+predDF$WtCorr <- predDF$Wt * corr.fact
+
+# Plot the von bertalanffy fits
+ggplot(DF, aes(x = LngtClass, y = IndWgt)) + geom_point() +
+	facet_wrap(~ Species, scale = 'free') + 
+	geom_line(data = predDF, aes(x = L, y = Wt), col = 'red') +
+        geom_line(data = predDF, aes(x = L, y = WtCorr), col = 'blue')
+
+## Save the fit and the correction factor
+save(lm2, corr.fact, file = 'LengthWeightPredictGadoids.RData')
+
+@
+
+\section{DATRAS data processing}
+
+Next the ICES Datras database was queried for all survey data from the Celtic
+Sea, extracting the haul data with the function \textit{getHHdata} and the
+catch data using the function \textit{getHLdata} from the package
+\textit{icesDatras}. \\
+
+The objective was to check, clean and format the data into suitable input data
+for the VAST model. For the Datras data this involved:
+
+\begin{itemize}
+	\item Only retain valid hauls (excluding those at night, where there
+		were problems with the gear etc..)
+	\item As we want point data, calculate the midpoint of each tow based
+		on the geodesic distance (also estimating any missing data).
+	\item In order to calculate swept area, obtain model estimates for any
+		missing data points on door spread
+	\item Calculate swept area for the survey.
+	\item Estimate weight at length using the length weight relationship
+		predictions obtained above.
+	\item Raise the data to weight split between adult and juvenile fish.
+	\item Merge station and catch data.
+\end{itemize}
+
+\subsection{Midpoint of tows}
+
+To calculate the tow midpoints, we assume tows are in a straight line and use
+the haversine formula (based on location in radians) to calculate the total distance.
+
+\begin{equation}
+	Loc(R) = Loc(D) \cdot \frac{\pi}{180}
+\end{equation}
+
+Where R and D are radians and decimal degrees respectively. \\
+
+To calculate the distance:
+
+\begin{equation}
+	R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
+	\sqrt{\sin({\frac{Lat_{x} - Lat_{y}}{2}})^2 + \cos(Lat_{x}) \cdot
+		\cos(Lat_{y}) \cdot \sin({\frac{Lon_{x} -
+				Lon_{y}}{2})^2}}\bigg)\Bigg)\Bigg]
+\end{equation}
+
+Where $R$ is the mean Radius of the Earth. \\
+
+Total records were: \\
+
+<<Distance calcs, echo = F, message = F>>=
+# packages
+library(dplyr) 
+load(file.path('DATRAS', 'CelticSurveyData.RData')) # pre-downloaded data, HH is station, HL is catch
+
+kable(group_by(HH, Survey, HaulVal) %>% summarise(n = n()))
+
+## Some initial cleaning
+HH <- filter(HH, HaulVal == 'V') # only valid hauls
+
+# Convert degrees to radians
+deg2rad <- function(deg) return(deg*pi/180)
+
+# Calculates the geodesic distance between two points specified by radian
+# latitude/longitude using the
+# Haversine formula (hf)
+gcd.hf <- function(long1, lat1, long2, lat2) {
+	  R <- 6371 # Earth mean radius [km]
+ 	  delta.long <- (long2 - long1)
+   	  delta.lat <- (lat2 - lat1)
+    	  a <- sin(delta.lat/2)^2 + cos(lat1) * cos(lat2) * sin(delta.long/2)^2
+      	  c <- 2 * asin(min(1,sqrt(a)))
+      	  d = R * c
+          return(d) # Distance in km
+}
+############################
+an <- as.numeric
+
+@
+
+<< Distances2, fig.width = 4, fig.height = 4, fig.align = 'center'>>=
+
+HH$Dist <- mapply(gcd.hf, long1 = deg2rad(an(HH$ShootLong)),
+       	         lat1  = deg2rad(an(HH$ShootLat)),
+	         long2 = deg2rad(an(HH$HaulLong)),
+	         lat2  = deg2rad(an(HH$HaulLat)))
+
+plot(an(HH$Distance[(HH$Distance != -9)])/1000 ~ HH$Dist[(HH$Distance != -9)],
+     main = 'Comparison recorded and calculated distance',
+     ylab='Recorded distance', xlab = 'Calculated distance', cex = 0.7)
+## Looks good - use the calculated estimates ##
+@
+
+\subsection{Swept area}
+
+To calculate the swept area, we first have to estimate the door spread for any
+records where it's missing. There were only 5 records with missing door spread.
+This was achieved by fitting a fourth order polynomial to the data, following
+model selection. \\
+
+<<DoorSpread, fig.width = 5, fig.height = 5, echo = F, fig.align = 'center'>>=
+
+plot(HH$DoorSpread[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9] ~
+     HH$Depth[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9], ylab = 'Door
+     spread', xlab = 'Depth', main = 'Relationship between depth of gear and
+     door spread')
+
+Spread <- an(HH$DoorSpread[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
+Depth  <- an(HH$Depth[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
+
+@
+
+There looks to be a relationship between depth and doorspread where it
+increases to around 200 m and then flattens out.  We will model this
+relationship with a polynomial.
+
+<<Doorspread2, results = 'asis'>>=
+
+model2 <- lm(Spread ~ poly(Depth,2))
+model3 <- lm(Spread ~ poly(Depth,3))
+model4 <- lm(Spread ~ poly(Depth,4))
+
+stargazer(model2, model3, model4, font.size  = 'small', align = T, 
+	  title = 'lm output from the three polynomial model fits', 
+	  table.placement = 'H')
+@
+
+Fourth order looks best.  Now to plot of predicted door spread against the data for each depth.
+
+<<Doorspread3, fig.width = 5, fig.height = 5, echo = F, fig.align = 'center'>>=
+
+pred <- predict(model4, newdata = data.frame(Depth = seq(min(Depth), max(Depth), l = 1000), 
+					    Spread = seq(min(Spread), max(Spread), l = 1000)))
+
+plot(Spread ~ Depth)
+lines(pred, col = 'red')
+
+@
+
+Looks OK.  We use this to predict the missing 5 data points. Then, we calculate
+swept area based on:
+
+\begin{equation}
+	Swept Area (km^2) = Distance (km) \cdot \frac{Doorspread (m)}{1000}
+	\cdot CF 
+\end{equation}
+
+Where CF is a correction factor for the efficiency of the gear, taken from Piet
+et al as 0.38 for otter trawl gears. \textcolor{red}{ADD REF}
+
+<<SweptArea, echo = F, fig.align = 'center', fig.height = 5, fig.width = 5>>=
+
+HH$PredSpread <- predict(model4, newdata = data.frame(Depth = an(HH$Depth), Spread = an(HH$DoorSpread)))
+HH$SweptArea <- HH$Dist * HH$PredSpread/1000
+
+HH$SweptAreaAdjFac <- 0.38
+HH$SweptAreaAdj <- HH$SweptArea * HH$SweptAreaAdjFac
+
+boxplot(HH$SweptAreaAdj ~ HH$Survey, ylab = 'Area Swept (km2)', xlab = 'Survey series')
+@
+
+\subsection{Converting to weight}
+
+The length data were converted to weight through the following process:
+
+\begin{itemize}
+	\item Standardise unit of measurement to cm
+	\item Add .5cm to each length group to reflect the fact that lengths
+		are rounded down on measurement.
+	\item Adjusting one outlier (a single whiting of 2.5 m, an order
+		greater than actual length) 
+	\item Predict weights from the length weight relationships obtained
+		above.
+	\item Multiply the number caught at length by the subfactor (fraction
+		measured at length from the haul) by the predicted weight at
+		length.
+	\item Relabel the species to reflect if they are juvenile or adult
+		length. The lengths to define this split were based on the EU
+		technical regulation defining the minimum conservation
+		reference size (MCRS); for cod = 35 cm, haddock = 30 cm,
+		whiting = 27 cm.
+	\item Aggregate across length classes by species.
+	\item Merge the station information with the catch records, retaining
+		zero entries for each species at each station, where
+		appropriate.
+	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N.
+\end{itemize}
+
+\section{Cefas survey data}
+
+The same process was undergone for the Cefas survey data. The only differences
+were:
+
+\begin{itemize}
+	\item Due to some abnormally large tow distances, a standardised tow
+		distance (per 60 m ) was calculated, and a Median Absolute
+		Deviation (MAD), where only standardised tow distances +- 5
+		times the value were kept. This removed 578 outlier tows
+		(keeping 9022).
+	\item Swept Area sometimes reflected the use of a single or double beam
+		trawl.
+	\item The correction factor used was either an otter trawl value of
+		0.38 (as above) or a beam trawl value of 0.19, as appropriate.
+\end{itemize}
+
+\section{Exploratory plots}
+
+Here are some exploratory plots from the cleaned data.
+
+<<Exploratory Plots1, echo = F, message = F>>=
+
+rm(list = ls())
+
+library(dplyr)
+library(ggplot2)
+library(maps)
+
+##################################################
+
+# Load in data
+load(file.path('Cleaned', 'CelticSurveyFormattedSize.RData')) # Datras data by weight
+load(file.path('Cleaned', 'CelticSurvey2FormattedSize.RData')) # Cefas data by weight
+
+DWt <- DF; CWt <- FSS; rm(DF, FSS) # Rename to avoid confusion
+
+load(file.path('Cleaned', 'DATRAS_No_At_Length.RData')) # Datras data by length 
+load(file.path('Cleaned', 'Cefas_No_At_Length.RData')) # Cefas data by length 
+
+Dln <- DF; Cln <- FSS; rm(DF, FSS)
+
+##################################################
+
+## Combine the datasets
+Wt <- data.frame(Survey    = c(DWt$Survey      , as.character(CWt$fldSeriesName)),
+		 Year      = c(DWt$Year        , CWt$Year),
+		 Month     = c(DWt$Month       , CWt$Month),
+		 HaulNo    = c(DWt$HaulNo      , CWt$fldCruiseStationNumber),
+		 Lon       = c(DWt$HaulLonMid  , CWt$HaulLonMid),
+		 Lat       = c(DWt$HaulLatMid  , CWt$HaulLatMid),
+		 HaulDur   = c(DWt$HaulDur     , CWt$fldTowDuration),
+		 SweptArea = c(DWt$SweptAreaAdj, CWt$SweptAreaAdj),
+		 Species   = c(DWt$Species,      CWt$Species),
+		 Kg        = c(DWt$Kg          , CWt$Kg))
+rm(DWt, CWt)
+
+Ln <- data.frame(Survey    = c(Dln$Survey      , as.character(Cln$fldSeriesName)),
+		 Year      = c(Dln$Year        , Cln$Year),
+		 Month     = c(Dln$Month       , Cln$Month),
+		 HaulNo    = c(Dln$HaulNo      , Cln$fldCruiseStationNumber),
+		 Lon       = c(Dln$HaulLonMid  , Cln$HaulLonMid),
+		 Lat       = c(Dln$HaulLatMid  , Cln$HaulLatMid),
+		 HaulDur   = c(Dln$HaulDur     , Cln$fldTowDuration),
+		 SweptArea = c(Dln$SweptAreaAdj, Cln$SweptAreaAdj),
+		 Species   = c(as.character(Dln$SpeciesName) , Cln$Species),
+		 Length    = c(Dln$LngtClass   , Cln$Length),
+		 Number    = c(Dln$Number      , Cln$Numbers),
+		 Kg        = c(Dln$Kg          , Cln$Kg))
+
+rm(Dln, Cln)
+
+@
+
+\begin{landscape}
+
+<<Survey locations, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+Stations <- Wt[!duplicated(paste(Wt$Survey, Wt$Year, Wt$Lon, Wt$Lat)),]
+
+yrs <- sort(unique(Stations$Year))
+n.yrs <- length(yrs)
+
+map <- map_data('world', region = c('UK', 'Ireland', 'France'))
+
+print(ggplot() + 
+	geom_polygon(data = map, aes(x = long, y = lat, group = group), colour = 'black', fill = 'grey') +
+	coord_fixed(xlim = c(-12, 2), ylim = c(48, 52), ratio = 1.3) + 
+	geom_point(data  = Stations, aes(x = Lon, y = Lat, colour = Survey), shape = '+') + 
+	facet_wrap(~ Year, ncol = 5) +
+	theme_classic()+ ggtitle('Survey locations by year and survey'))
+
+@
+
+\end{landscape}
+
+<<Survey by year, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+
+kable(table(Stations$Year, Stations$Survey))
+
+surveyyrs <- reshape2::melt(table(Stations$Survey, Stations$Year))
+
+print(ggplot(surveyyrs[surveyyrs$value !=0,], aes(x = Var2, y = Var1)) +
+	geom_point(aes(size = value)) + xlab('') + ylab('') +
+	theme(legend.title = element_blank()) + geom_vline(xintercept = 1997) + 
+	ggtitle('Number of Stations Per Survey Per Year'))
+@
+
+<<Survey by month, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+surveymo <- reshape2::melt(table(Stations$Month, Stations$Year))
+
+print(ggplot(surveymo[surveymo$value !=0,], aes(x = Var2, y = Var1)) +
+	geom_point(aes(size = value)) + xlab('') + ylab('') +
+	theme(legend.title = element_blank()) + geom_vline(xintercept = 1997) + 
+	ggtitle('Number of Stations Per Survey Per Month'))
+
+@
+
+<<Survey effort by year, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+
+surveyno <- group_by(Stations, Survey, Year) %>% summarise(n= n())
+
+print(ggplot(surveyno, aes(x = Year, y = n)) + 
+	geom_bar(stat = 'identity', aes(fill = Survey), colour = 'black') +
+	theme_bw() + theme(axis.text.x = element_text(angle = -90)) +
+	ggtitle('No stations per month'))
+@
+
+<<Survey swept area, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+boxplot(Stations$SweptArea ~ Stations$Survey, xlab = 'Survey Series', ylab =
+	'Swept Area (km2)', main = 'Swept Area by Survey', cex.lab = 0.5)
+
+boxplot(as.numeric(as.character(Stations$HaulDur)) ~ Stations$Survey, xlab = 'Survey Series', ylab =
+	'Haul Duration (m)', main = 'Haul Duration by Survey', cex.lab = 0.5)
+
+@
+
+<<Survey Spatial extent, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+
+
+Lats_Lons <- group_by(Stations, Year) %>% summarise(minLon = min(Lon), maxLon = max(Lon), meanLon = mean(Lon),
+						    minLat = min(Lat), maxLat = max(Lat), meanLat = mean(Lat))
+print(ggplot(Lats_Lons, aes(x = Year, y = minLon)) + geom_segment(aes(xend = Year, yend = maxLon), lwd = 2) +
+	geom_point(aes(y = meanLon), colour = 'red') +
+	theme(axis.text.x = element_text(angle = -90)) + ylim(0, -14) + ylab('') + xlab('') +
+	ggtitle('Longitudinal survey coverage: min, max and mean'))
+
+print(ggplot(Lats_Lons, aes(x = Year, y = minLat)) + geom_segment(aes(xend = Year, yend = maxLat), lwd = 2) +
+	geom_point(aes(y = meanLat), colour = 'red') +
+	theme(axis.text.x = element_text(angle = -90)) + ylim(47, 53) + ylab('') + xlab('') +
+	ggtitle('Latitudinal survey coverage: min, max and mean'))
+@
+
+
+\begin{landscape}
+
+<<Survey catches, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+
+spp <- unique(Wt$Species)
+
+for (s in 1:length(spp)) {
+
+
+plotDF <- Wt[Wt$Species == spp[s],]
+
+print(ggplot() + 
+	geom_polygon(data = map, aes(x = long, y = lat, group = group), colour = 'black', fill = 'grey') +
+	coord_fixed(xlim = c(-12, 2), ylim = c(48, 52), ratio = 1.3) + 
+	geom_point(data  = plotDF[plotDF$Kg != 0,], aes(x = Lon, y = Lat, size = sqrt(Kg)), colour = 'blue', alpha = 0.5) + 
+	scale_size_continuous(limits = range(sqrt(Wt$Kg))) + 
+	geom_point(data  = plotDF[plotDF$Kg == 0,], aes(x = Lon, y = Lat), colour = 'red', shape = '+') +
+	facet_wrap(~ Year, ncol = 5) + 
+	theme_classic() + ggtitle(paste('Spatial catches of',spp[s], 'in Kg',
+					sep = ' ')))
+
+
+}
+
+@
+
+<<CPUE, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+
+Wt$HaulDur <- as.numeric(as.character(Wt$HaulDur))
+
+cpue <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/HaulDur * 60, prob = 0.05, na.rm = T),
+							  q50 = quantile(Kg/HaulDur * 60, prob = 0.50, na.rm = T),
+							  mean = mean(Kg/HaulDur * 60,na.rm = T),
+							  q95 = quantile(Kg/HaulDur * 60, prob = 0.95, na.rm = T))
+
+print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
+	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	ylab('Kg per hour tow') + xlab('') + ggtitle('CPUE (Kg per hour tow)'))
+
+cpsa <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/SweptArea, prob = 0.05, na.rm = T),
+							  q50 = quantile(Kg/SweptArea, prob = 0.50, na.rm = T),
+							  mean = mean(Kg/SweptArea,na.rm = T),
+							  q95 = quantile(Kg/SweptArea, prob = 0.95, na.rm = T))
+
+print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
+	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	ylab('Density (catch per km2 swept)') + xlab('') + ggtitle('CPUE (Catch per km2 swept area)'))
+
+@
+
+<<Length comp1, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+
+
+Lcomp <- group_by(Ln, Survey, Species, Length) %>% summarise(n = sum(Number)) %>% as.data.frame()
+
+print(ggplot(Lcomp, aes(x = Length, y = n)) + geom_line(aes(colour = Survey)) + 
+      facet_wrap( ~Species, scale = 'free_y') + ggtitle(paste('Length composition aggregated across years')))
+
+@
+
+<<Length Comp2, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+
+Lcomp <- group_by(Ln, Survey, Year, Species, Length) %>% summarise(n = sum(Number)) %>% as.data.frame()
+
+spp <- unique(Lcomp$Species)
+for (s in 1:length(spp)) {
+plotDF <- Lcomp[Lcomp$Species == spp[s],]
+print(ggplot(plotDF, aes(x = Length, y = n)) + geom_line(aes(colour = Survey)) +
+      facet_wrap(Year ~Species, scale = 'free_y') + ggtitle(paste('Length composition of', spp[s],
+							  ' by year',sep = ' ')))
+}
+
+@
+
+
+\end{landscape}
+
+
+\section{Habitat covariates}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+

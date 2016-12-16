@@ -1,0 +1,717 @@
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{fullpage}
+\usepackage{pdflscape}
+\usepackage{rotfloat}
+\usepackage{listings}
+\usepackage{wasysym}
+\usepackage{wrapfig}
+\usepackage{dcolumn}
+\hypersetup{pdfpagemode=UseNone} % don't show bookmarks on initial view
+\hypersetup{colorlinks, urlcolor={blue}}
+% revise margins
+\setlength{\headheight}{0.0in}
+\setlength{\topmargin}{0.0in}
+\setlength{\headsep}{0.0in}
+\setlength{\textheight}{8.65in}
+\setlength{\footskip}{0.35in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Processing and exploration for Celtic Sea fishery-independent trawl
+	survey data}
+\author{Paul J Dolder}
+\date{\today}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This document is to detail the processing steps and workng up of data for fitting
+a geostatistical model (VAST; see \url{https://github.com/james-thorson/VAST}
+for detail) to trawl survey data covering the Celtic Sea. \\
+
+The following data sources were used:
+
+\begin{itemize}
+	\item ICES Datras
+		(\url{http://www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx}
+		exhchange data of Ifremer (France) EVHOE and Marine Institute
+		(Ireland) fisheries-independent survey locations and catch
+		records.
+	\item Cefas (UK) collection of trawl survey locations and catch
+		records.
+	\item ICES Datras data product on estimated weights of fish at various
+		lengths from the EVHOE survey series.
+\end{itemize}
+
+\section{Length-weight conversion factors}
+
+As the survey records consist of count of fish at each length class and we are
+interested in working with weight (biomass) of fish, we first estimate a
+length-weight relationship for the different species from the Datras data
+product of weight at length estimates, from the EVHOE survey series. \\
+
+A standard von bertalanffy length weight relationship was used, with two
+parameters to estimate:
+
+\begin{equation}\label{eq:1}
+	Wt = a \cdot L^b
+\end{equation}
+
+The raw data looks as follows for cod, haddock and whiting:
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} \caption[Estimates of individual weights at length for the gadoid species]{Estimates of individual weights at length for the gadoid species}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+
+\end{knitrout}
+
+To simplify the fitting procedure, the von bertalanffy relationship \ref{eq:1}
+was rearranged to be linear on a log scale:
+
+\begin{equation}\label{eq:2}
+	log(Wt) = log(a) + b \cdot log(L) + \varepsilon
+\end{equation} 
+
+\vspace{1cm}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-3-1} 
+
+\end{knitrout}
+
+The following model was fit using the \textit{glm} function in the base R package:
+
+\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(stargazer)} \hlcom{# For nice model output}
+\hlstd{lm1} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{= DF)}
+\hlstd{lm2} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{= DF)}
+\hlkwd{stargazer}\hlstd{(lm1, lm2,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits'}\hlstd{,}
+          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Fri, Dec 16, 2016 - 19:32:55
+% Requires LaTeX packages: dcolumn 
+\begin{table}[H] \centering 
+  \caption{glm output from the two model fits} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{lWt} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
+\hline \\[-1.8ex] 
+ lL & 3.085^{***} & 3.085^{***} \\ 
+  & (0.005) & (0.005) \\ 
+  & & \\ 
+ SpeciesMelanogrammus aeglefinus & -0.015^{**} & -0.015^{**} \\ 
+  & (0.007) & (0.007) \\ 
+  & & \\ 
+ SpeciesMerlangius merlangus & -0.199^{***} & -0.199^{***} \\ 
+  & (0.008) & (0.008) \\ 
+  & & \\ 
+ Year & 0.0001 &  \\ 
+  & (0.001) &  \\ 
+  & & \\ 
+ Constant & -12.263^{***} & -11.977^{***} \\ 
+  & (1.607) & (0.034) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{6,623} & \multicolumn{1}{c}{6,623} \\ 
+Log Likelihood & \multicolumn{1}{c}{3,218.662} & \multicolumn{1}{c}{3,218.647} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.325} & \multicolumn{1}{c}{-6,429.293} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+Year was initially also included as a factor, but found not to be significant
+and lm2 was chosen. This model was then used to predict over all lengths for
+each species.  A bias correction was applied to adjust for the fact that the
+mean weights from the model fit on a log scale are the geometric mean
+(cf = $e^{\frac{\sigma^{2}}{2}}$).
+
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Exponentiate the predictions}
+\hlstd{predDF}\hlopt{$}\hlstd{L} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL)}
+\hlstd{predDF}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lWt)}
+
+\hlcom{## Now we need to bias correct due to the fact that the mean on the logscale is}
+\hlcom{## the geometric mean...}
+\hlstd{corr.fact} \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
+\hlkwd{print}\hlstd{(corr.fact)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.011141
+\end{verbatim}
+\begin{alltt}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt} \hlopt{*} \hlstd{corr.fact}
+
+\hlcom{# Plot the von bertalanffy fits}
+\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+        \hlkwd{facet_wrap}\hlstd{(}\hlopt{~} \hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{'free'}\hlstd{)} \hlopt{+}
+        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= Wt),} \hlkwc{col} \hlstd{=} \hlstr{'red'}\hlstd{)} \hlopt{+}
+        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= WtCorr),} \hlkwc{col} \hlstd{=} \hlstr{'blue'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Predictions2-1} 
+\begin{kframe}\begin{alltt}
+\hlcom{## Save the fit and the correction factor}
+\hlkwd{save}\hlstd{(lm2, corr.fact,} \hlkwc{file} \hlstd{=} \hlstr{'LengthWeightPredictGadoids.RData'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\section{DATRAS data processing}
+
+Next the ICES Datras database was queried for all survey data from the Celtic
+Sea, extracting the haul data with the function \textit{getHHdata} and the
+catch data using the function \textit{getHLdata} from the package
+\textit{icesDatras}. \\
+
+The objective was to check, clean and format the data into suitable input data
+for the VAST model. For the Datras data this involved:
+
+\begin{itemize}
+	\item Only retain valid hauls (excluding those at night, where there
+		were problems with the gear etc..)
+	\item As we want point data, calculate the midpoint of each tow based
+		on the geodesic distance (also estimating any missing data).
+	\item In order to calculate swept area, obtain model estimates for any
+		missing data points on door spread
+	\item Calculate swept area for the survey.
+	\item Estimate weight at length using the length weight relationship
+		predictions obtained above.
+	\item Raise the data to weight split between adult and juvenile fish.
+	\item Merge station and catch data.
+\end{itemize}
+
+\subsection{Midpoint of tows}
+
+To calculate the tow midpoints, we assume tows are in a straight line and use
+the haversine formula (based on location in radians) to calculate the total distance.
+
+\begin{equation}
+	Loc(R) = Loc(D) \cdot \frac{\pi}{180}
+\end{equation}
+
+Where R and D are radians and decimal degrees respectively. \\
+
+To calculate the distance:
+
+\begin{equation}
+	R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
+	\sqrt{\sin({\frac{Lat_{x} - Lat_{y}}{2}})^2 + \cos(Lat_{x}) \cdot
+		\cos(Lat_{y}) \cdot \sin({\frac{Lon_{x} -
+				Lon_{y}}{2})^2}}\bigg)\Bigg)\Bigg]
+\end{equation}
+
+Where $R$ is the mean Radius of the Earth. \\
+
+Total records were: \\
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\begin{tabular}{l|l|r}
+\hline
+Survey & HaulVal & n\\
+\hline
+EVHOE & I & 2\\
+\hline
+EVHOE & V & 2643\\
+\hline
+IE-IGFS & V & 2118\\
+\hline
+\end{tabular}
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{HH}\hlopt{$}\hlstd{Dist} \hlkwb{<-} \hlkwd{mapply}\hlstd{(gcd.hf,} \hlkwc{long1} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLong)),}
+                 \hlkwc{lat1}  \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLat)),}
+                 \hlkwc{long2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLong)),}
+                 \hlkwc{lat2}  \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLat)))}
+
+\hlkwd{plot}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{Distance[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!= -}\hlnum{9}\hlstd{)])}\hlopt{/}\hlnum{1000} \hlopt{~} \hlstd{HH}\hlopt{$}\hlstd{Dist[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!= -}\hlnum{9}\hlstd{)],}
+     \hlkwc{main} \hlstd{=} \hlstr{'Comparison recorded and calculated distance'}\hlstd{,}
+     \hlkwc{ylab}\hlstd{=}\hlstr{'Recorded distance'}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{'Calculated distance'}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{0.7}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Distances2-1} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlcom{## Looks good - use the calculated estimates ##}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Swept area}
+
+To calculate the swept area, we first have to estimate the door spread for any
+records where it's missing. There were only 5 records with missing door spread.
+This was achieved by fitting a fourth order polynomial to the data, following
+model selection. \\
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/DoorSpread-1} 
+
+}
+
+
+
+\end{knitrout}
+
+There looks to be a relationship between depth and doorspread where it
+increases to around 200 m and then flattens out.  We will model this
+relationship with a polynomial.
+
+\begin{kframe}
+\begin{alltt}
+\hlstd{model2} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{2}\hlstd{))}
+\hlstd{model3} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{3}\hlstd{))}
+\hlstd{model4} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{4}\hlstd{))}
+
+\hlkwd{stargazer}\hlstd{(model2, model3, model4,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+          \hlkwc{title} \hlstd{=} \hlstr{'lm output from the three polynomial model fits'}\hlstd{,}
+          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Fri, Dec 16, 2016 - 19:33:11
+% Requires LaTeX packages: dcolumn 
+\begin{table}[H] \centering 
+  \caption{lm output from the three polynomial model fits} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Spread} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ poly(Depth, 2)1 & 568.842^{***} &  &  \\ 
+  & (15.403) &  &  \\ 
+  & & & \\ 
+ poly(Depth, 2)2 & -401.032^{***} &  &  \\ 
+  & (15.403) &  &  \\ 
+  & & & \\ 
+ poly(Depth, 3)1 &  & 568.842^{***} &  \\ 
+  &  & (15.052) &  \\ 
+  & & & \\ 
+ poly(Depth, 3)2 &  & -401.032^{***} &  \\ 
+  &  & (15.052) &  \\ 
+  & & & \\ 
+ poly(Depth, 3)3 &  & 202.116^{***} &  \\ 
+  &  & (15.052) &  \\ 
+  & & & \\ 
+ poly(Depth, 4)1 &  &  & 568.842^{***} \\ 
+  &  &  & (15.029) \\ 
+  & & & \\ 
+ poly(Depth, 4)2 &  &  & -401.032^{***} \\ 
+  &  &  & (15.029) \\ 
+  & & & \\ 
+ poly(Depth, 4)3 &  &  & 202.116^{***} \\ 
+  &  &  & (15.029) \\ 
+  & & & \\ 
+ poly(Depth, 4)4 &  &  & -54.097^{***} \\ 
+  &  &  & (15.029) \\ 
+  & & & \\ 
+ Constant & 97.463^{***} & 97.463^{***} & 97.463^{***} \\ 
+  & (0.250) & (0.244) & (0.244) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,806} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.349} & \multicolumn{1}{c}{0.379} & \multicolumn{1}{c}{0.381} \\ 
+Adjusted R$^{2}$ & \multicolumn{1}{c}{0.349} & \multicolumn{1}{c}{0.378} & \multicolumn{1}{c}{0.380} \\ 
+Residual Std. Error & \multicolumn{1}{c}{15.403 (df = 3803)} & \multicolumn{1}{c}{15.052 (df = 3802)} & \multicolumn{1}{c}{15.029 (df = 3801)} \\ 
+F Statistic & \multicolumn{1}{c}{1,020.847$^{***}$ (df = 2; 3803)} & \multicolumn{1}{c}{772.750$^{***}$ (df = 3; 3802)} & \multicolumn{1}{c}{584.624$^{***}$ (df = 4; 3801)} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+Fourth order looks best.  Now to plot of predicted door spread against the data for each depth.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-1} 
+
+}
+
+
+
+\end{knitrout}
+
+Looks OK.  We use this to predict the missing 5 data points. Then, we calculate
+swept area based on:
+
+\begin{equation}
+	Swept Area (km^2) = Distance (km) \cdot \frac{Doorspread (m)}{1000}
+	\cdot CF 
+\end{equation}
+
+Where CF is a correction factor for the efficiency of the gear, taken from Piet
+et al as 0.38 for otter trawl gears. \textcolor{red}{ADD REF}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/SweptArea-1} 
+
+}
+
+
+
+\end{knitrout}
+
+\subsection{Converting to weight}
+
+The length data were converted to weight through the following process:
+
+\begin{itemize}
+	\item Standardise unit of measurement to cm
+	\item Add .5cm to each length group to reflect the fact that lengths
+		are rounded down on measurement.
+	\item Adjusting one outlier (a single whiting of 2.5 m, an order
+		greater than actual length) 
+	\item Predict weights from the length weight relationships obtained
+		above.
+	\item Multiply the number caught at length by the subfactor (fraction
+		measured at length from the haul) by the predicted weight at
+		length.
+	\item Relabel the species to reflect if they are juvenile or adult
+		length. The lengths to define this split were based on the EU
+		technical regulation defining the minimum conservation
+		reference size (MCRS); for cod = 35 cm, haddock = 30 cm,
+		whiting = 27 cm.
+	\item Aggregate across length classes by species.
+	\item Merge the station information with the catch records, retaining
+		zero entries for each species at each station, where
+		appropriate.
+	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N.
+\end{itemize}
+
+\section{Cefas survey data}
+
+The same process was undergone for the Cefas survey data. The only differences
+were:
+
+\begin{itemize}
+	\item Due to some abnormally large tow distances, a standardised tow
+		distance (per 60 m ) was calculated, and a Median Absolute
+		Deviation (MAD), where only standardised tow distances +- 5
+		times the value were kept. This removed 578 outlier tows
+		(keeping 9022).
+	\item Swept Area sometimes reflected the use of a single or double beam
+		trawl.
+	\item The correction factor used was either an otter trawl value of
+		0.38 (as above) or a beam trawl value of 0.19, as appropriate.
+\end{itemize}
+
+\section{Exploratory plots}
+
+Here are some exploratory plots from the cleaned data.
+
+
+
+\begin{landscape}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/Survey_locations-1} 
+
+\end{knitrout}
+
+\end{landscape}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+  & CARLHELMAR & EVHOE & IE-IGFS & NWGFS & Q1SWBEAM & Q4SWIBTS & WCGFS\\
+\hline
+1982 & 0 & 0 & 0 & 0 & 0 & 0 & 59\\
+\hline
+1983 & 0 & 0 & 0 & 0 & 0 & 0 & 32\\
+\hline
+1984 & 0 & 0 & 0 & 0 & 0 & 0 & 52\\
+\hline
+1985 & 0 & 0 & 0 & 0 & 0 & 0 & 84\\
+\hline
+1986 & 0 & 0 & 0 & 0 & 0 & 0 & 77\\
+\hline
+1987 & 0 & 0 & 0 & 0 & 0 & 0 & 88\\
+\hline
+1988 & 0 & 0 & 0 & 21 & 0 & 0 & 105\\
+\hline
+1989 & 52 & 0 & 0 & 51 & 0 & 0 & 52\\
+\hline
+1990 & 54 & 0 & 0 & 20 & 0 & 0 & 52\\
+\hline
+1991 & 50 & 0 & 0 & 32 & 0 & 0 & 100\\
+\hline
+1992 & 54 & 0 & 0 & 34 & 0 & 0 & 111\\
+\hline
+1993 & 55 & 0 & 0 & 105 & 0 & 0 & 55\\
+\hline
+1994 & 57 & 0 & 0 & 95 & 0 & 0 & 31\\
+\hline
+1995 & 53 & 0 & 0 & 57 & 0 & 0 & 54\\
+\hline
+1996 & 57 & 0 & 0 & 81 & 0 & 0 & 53\\
+\hline
+1997 & 52 & 46 & 0 & 86 & 0 & 0 & 64\\
+\hline
+1998 & 58 & 55 & 0 & 69 & 0 & 0 & 63\\
+\hline
+1999 & 56 & 56 & 0 & 40 & 0 & 0 & 64\\
+\hline
+2000 & 56 & 47 & 0 & 33 & 0 & 0 & 64\\
+\hline
+2001 & 51 & 76 & 0 & 37 & 0 & 0 & 59\\
+\hline
+2002 & 70 & 73 & 0 & 43 & 0 & 0 & 62\\
+\hline
+2003 & 128 & 72 & 49 & 43 & 0 & 35 & 48\\
+\hline
+2004 & 72 & 62 & 54 & 41 & 0 & 52 & 57\\
+\hline
+2005 & 59 & 67 & 60 & 41 & 0 & 40 & 0\\
+\hline
+2006 & 58 & 59 & 71 & 43 & 61 & 18 & 0\\
+\hline
+2007 & 58 & 70 & 77 & 41 & 64 & 38 & 0\\
+\hline
+2008 & 53 & 65 & 74 & 36 & 68 & 37 & 0\\
+\hline
+2009 & 55 & 59 & 64 & 43 & 63 & 32 & 0\\
+\hline
+2010 & 57 & 59 & 81 & 41 & 81 & 42 & 0\\
+\hline
+2011 & 57 & 71 & 86 & 40 & 80 & 39 & 0\\
+\hline
+2012 & 54 & 56 & 85 & 42 & 80 & 0 & 0\\
+\hline
+2013 & 58 & 63 & 83 & 42 & 127 & 0 & 0\\
+\hline
+2014 & 0 & 69 & 84 & 43 & 86 & 0 & 0\\
+\hline
+2015 & 0 & 62 & 68 & 43 & 126 & 0 & 0\\
+\hline
+2016 & 0 & 0 & 0 & 0 & 132 & 0 & 0\\
+\hline
+\end{tabular}
+
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_by_year-1} 
+
+}
+
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_by_month-1} 
+
+}
+
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_effort_by_year-1} 
+
+}
+
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_swept_area-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_swept_area-2} 
+
+}
+
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_Spatial_extent-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/Survey_Spatial_extent-2} 
+
+}
+
+
+
+\end{knitrout}
+
+
+\begin{landscape}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/Survey_catches-1} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-2} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-3} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-4} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-5} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-6} 
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/CPUE-1} 
+
+\includegraphics[width=1\linewidth]{figure/CPUE-2} 
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/Length_comp1-1} 
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1\linewidth]{figure/Length_Comp2-1} 
+
+\includegraphics[width=1\linewidth]{figure/Length_Comp2-2} 
+
+\includegraphics[width=1\linewidth]{figure/Length_Comp2-3} 
+
+\end{knitrout}
+
+
+\end{landscape}
+
+
+\section{Habitat covariates}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+
