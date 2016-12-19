@@ -52,7 +52,7 @@ The following data sources were used:
 	\item ICES Datras
 		(\url{http://www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx}
 		exhchange data of Ifremer (France) EVHOE and Marine Institute
-		(Ireland) fisheries-independent survey locations and catch
+		(Ireland) IGFS fisheries-independent survey locations and catch
 		records.
 	\item Cefas (UK) collection of trawl survey locations and catch
 		records.
@@ -63,9 +63,10 @@ The following data sources were used:
 \section{Length-weight conversion factors}
 
 As the survey records consist of count of fish at each length class and we are
-interested in working with weight (biomass) of fish, we first estimate a
+interested in working with biomass(weight) of fish, we first estimate a
 length-weight relationship for the different species from the Datras data
-product of weight at length estimates, from the EVHOE survey series. \\
+product of weight at length estimates. The data is baseds on the EVHOE survey
+series only, due to availability within Datras. \\
 
 A standard von bertalanffy length weight relationship was used, with two
 parameters to estimate:
@@ -76,7 +77,7 @@ parameters to estimate:
 
 The raw data looks as follows for cod, haddock and whiting:
 
-<<echo = F, fig.cap = 'Estimates of individual weights at length for the gadoid species', fig.width = 9, fig.height = 3>>=
+<<echo = F, fig.cap = 'Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements', fig.width = 9, fig.height = 3>>=
 
 # Library for plotting
 library(ggplot2) 
@@ -95,8 +96,8 @@ ggplot(DF, aes(x = LngtClass, y = IndWgt)) +
 	facet_wrap(~Species, scale = 'free')
 @
 
-To simplify the fitting procedure, the von bertalanffy relationship \ref{eq:1}
-was rearranged to be linear on a log scale:
+To simplify the fitting procedure, the von bertalanffy relationship in equation
+\ref{eq:1} was rearranged to be linear on a log scale:
 
 \begin{equation}\label{eq:2}
 	log(Wt) = log(a) + b \cdot log(L) + \varepsilon
@@ -112,7 +113,8 @@ DF$lL  <- log(DF$LngtClass)
 ggplot(DF, aes(x = lL, y = lWt)) + geom_point(aes(colour = factor(Year))) + facet_wrap(~Species, scale = 'free' )
 @
 
-The following model was fit using the \textit{glm} function in the base R package:
+A linear model with species and year as factors was fit using the \textit{glm}
+function in the base R package:
 
 <<GLM fit, results = 'asis'>>=
 library(stargazer) # For nice model output
@@ -124,10 +126,10 @@ stargazer(lm1, lm2, font.size  = 'small', align = T,
 @
 
 Year was initially also included as a factor, but found not to be significant
-and lm2 was chosen. This model was then used to predict over all lengths for
-each species.  A bias correction was applied to adjust for the fact that the
-mean weights from the model fit on a log scale are the geometric mean
-(cf = $e^{\frac{\sigma^{2}}{2}}$).
+and lm2 was chosen as the best model (Table 1). This model was then used to
+predict over all lengths for each species.  A bias correction was applied to
+adjust for the fact that the mean weights from the model fit on a log scale are
+geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
 
 <<Prediction1, echo = F>>=
 
@@ -139,7 +141,7 @@ predDF <- data.frame(lL = log(c(seq(min(DF$LngtClass[DF$Species == spp[1]]), max
 predDF$lWt <- predict(lm2, newdata = predDF)
 @
 
-<<Predictions2, fig.width  = 9, fig.height = 3>>=
+<<Predictions2, fig.width  = 9, fig.height = 3, fig.caption = 'Predicted weights at length for the bias uncorrected (red) and bias corrected (blue) values'>>=
 
 # Exponentiate the predictions
 predDF$L <- exp(predDF$lL)
@@ -176,14 +178,18 @@ for the VAST model. For the Datras data this involved:
 	\item Only retain valid hauls (excluding those at night, where there
 		were problems with the gear etc..)
 	\item As we want point data, calculate the midpoint of each tow based
-		on the geodesic distance (also estimating any missing data).
+		on the geodesic distance (also estimating any missing data on
+		distance towed).
 	\item In order to calculate swept area, obtain model estimates for any
-		missing data points on door spread
-	\item Calculate swept area for the survey.
+		missing data points on door spread through modelling the
+		relationship between depth and door spread.
+	\item Calculate swept area for each tow in the surveys.
 	\item Estimate weight at length using the length weight relationship
-		predictions obtained above.
-	\item Raise the data to weight split between adult and juvenile fish.
-	\item Merge station and catch data.
+		predictions obtained from equation \ref{eq:1} above.
+	\item Raise the data to weight, partioned between adult and juvenile fish.
+	\item Merge station and catch data ensuring there is one record per
+		species for each of the stations fished (including where there
+		were zero catches).
 \end{itemize}
 
 \subsection{Midpoint of tows}
@@ -200,13 +206,14 @@ Where R and D are radians and decimal degrees respectively. \\
 To calculate the distance:
 
 \begin{equation}
+	D(km) = \\
 	R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
-	\sqrt{\sin({\frac{Lat_{x} - Lat_{y}}{2}})^2 + \cos(Lat_{x}) \cdot
-		\cos(Lat_{y}) \cdot \sin({\frac{Lon_{x} -
-				Lon_{y}}{2})^2}}\bigg)\Bigg)\Bigg]
+	\sqrt{\sin({\frac{Lat_{y1} - Lat_{y2}}{2}})^2 + \cos(Lat_{x1}) \cdot
+		\cos(Lat_{x2}) \cdot \sin({\frac{Lon_{x1} -
+				Lon_{x2}}{2})^2}}\bigg)\Bigg)\Bigg]
 \end{equation}
 
-Where $R$ is the mean Radius of the Earth. \\
+Where $R$ is the mean Radius of the Earth, 6 341 km. \\
 
 Total records were: \\
 
@@ -248,7 +255,7 @@ HH$Dist <- mapply(gcd.hf, long1 = deg2rad(an(HH$ShootLong)),
 	         lat2  = deg2rad(an(HH$HaulLat)))
 
 plot(an(HH$Distance[(HH$Distance != -9)])/1000 ~ HH$Dist[(HH$Distance != -9)],
-     main = 'Comparison recorded and calculated distance',
+     main = 'Recorded vs calculated distance',
      ylab='Recorded distance', xlab = 'Calculated distance', cex = 0.7)
 ## Looks good - use the calculated estimates ##
 @
@@ -256,9 +263,8 @@ plot(an(HH$Distance[(HH$Distance != -9)])/1000 ~ HH$Dist[(HH$Distance != -9)],
 \subsection{Swept area}
 
 To calculate the swept area, we first have to estimate the door spread for any
-records where it's missing. There were only 5 records with missing door spread.
-This was achieved by fitting a fourth order polynomial to the data, following
-model selection. \\
+records where it's missing. There were only 5 records with missing door spread,
+but use the predicted door spread for all records. \\
 
 <<DoorSpread, fig.width = 5, fig.height = 5, echo = F, fig.align = 'center'>>=
 
@@ -274,7 +280,7 @@ Depth  <- an(HH$Depth[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
 
 There looks to be a relationship between depth and doorspread where it
 increases to around 200 m and then flattens out.  We will model this
-relationship with a polynomial.
+relationship with a polynomial, fitting with different degrees. 
 
 <<Doorspread2, results = 'asis'>>=
 
@@ -287,7 +293,8 @@ stargazer(model2, model3, model4, font.size  = 'small', align = T,
 	  table.placement = 'H')
 @
 
-Fourth order looks best.  Now to plot of predicted door spread against the data for each depth.
+Fourth order looks best as it has the highest $R^2$.  Now to plot of predicted
+door spread against the data for each depth.
 
 <<Doorspread3, fig.width = 5, fig.height = 5, echo = F, fig.align = 'center'>>=
 
@@ -299,7 +306,7 @@ lines(pred, col = 'red')
 
 @
 
-Looks OK.  We use this to predict the missing 5 data points. Then, we calculate
+Looks OK.  We use this to predict the door spread for the tows. Then, we calculate
 swept area based on:
 
 \begin{equation}
@@ -332,10 +339,10 @@ The length data were converted to weight through the following process:
 	\item Adjusting one outlier (a single whiting of 2.5 m, an order
 		greater than actual length) 
 	\item Predict weights from the length weight relationships obtained
-		above.
+		above using equation \ref{eq:1}.
 	\item Multiply the number caught at length by the subfactor (fraction
-		measured at length from the haul) by the predicted weight at
-		length.
+		measured at length from the haul) and by the predicted weight
+		at length, converting to KG.
 	\item Relabel the species to reflect if they are juvenile or adult
 		length. The lengths to define this split were based on the EU
 		technical regulation defining the minimum conservation
@@ -345,7 +352,8 @@ The length data were converted to weight through the following process:
 	\item Merge the station information with the catch records, retaining
 		zero entries for each species at each station, where
 		appropriate.
-	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N.
+	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N (the
+		Celtic Sea area).
 \end{itemize}
 
 \section{Cefas survey data}
@@ -354,11 +362,13 @@ The same process was undergone for the Cefas survey data. The only differences
 were:
 
 \begin{itemize}
+	\item 12 040 tows were recorded as valid, with 677 either recorded
+		invalid, abnormal or otherwise classified as irregular.
 	\item Due to some abnormally large tow distances, a standardised tow
 		distance (per 60 m ) was calculated, and a Median Absolute
-		Deviation (MAD), where only standardised tow distances +- 5
-		times the value were kept. This removed 578 outlier tows
-		(keeping 9022).
+		Deviation (MAD) per survey series, with only standardised tow
+		distances +- 5 times the value kept. This removed 578 outlier
+		tows (keeping 9022).
 	\item Swept Area sometimes reflected the use of a single or double beam
 		trawl.
 	\item The correction factor used was either an otter trawl value of
@@ -367,7 +377,9 @@ were:
 
 \section{Exploratory plots}
 
-Here are some exploratory plots from the cleaned data.
+The following section details some exploratory plots from the cleaned data.
+This guides the final dataset used to fit the VAST model.
+
 
 <<Exploratory Plots1, echo = F, message = F>>=
 
@@ -422,6 +434,25 @@ rm(Dln, Cln)
 
 @
 
+\subsection{Survey locations}
+
+The following figure shows the surveys locations each year, with each survey
+coloured differently.\\
+
+As can be seen, initially (1982 - 1985) survey coverage was sparse and
+irregular, only covered by the Cefas WCGFS. From 1986 this survey becomes more
+regular and established, but is discontinued in 2003. The NWGFS beam trawl
+survey was added in 1988 and the CARLHELMAR beam trawl survey covered the
+western channel from 1989 until 2013.\\
+
+The next significant change is the addition of the EVHOE survey in 1997,
+followed by the IE-IGFS survey and the Q1SWIBTS in 2003 (with the latter
+discontinuing in 2010). Finally, the Q1SWBEAM is added around 2006. \\
+
+It is worth noting that the ICES cod and whiting assessments use a truncated
+survey series from the WCGFS, only using 1992 - 2004 due to changes in survey
+area and concerns about its impact on selectivity. \\
+
 \begin{landscape}
 
 <<Survey locations, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
@@ -442,6 +473,18 @@ print(ggplot() +
 @
 
 \end{landscape}
+
+\subsection{Survey temporal coverage}
+
+The following table and plots detail the temporal coverage of the surveys. As
+can be seen, the number of stations was initially low (< 100) but increased to
+> 200 by 1997.\\
+
+The majority of survey effort is in the fourth quarter, though some survey
+effort is also undertaken in the first quarter
+
+The majority of survey effort is in the fourth quarter, though some survey
+effort is also undertaken in the first quarter. \\ 
 
 <<Survey by year, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
 
@@ -475,17 +518,35 @@ print(ggplot(surveyno, aes(x = Year, y = n)) +
 	ggtitle('No stations per month'))
 @
 
+The surveys are using different gears. The main difference being that the
+WCGFS, IE-IGFS, EVHOE and WCGFS use otter trawl gears, while the CARLHELMAR,
+NWGFS, Q1SWBEAM use beam trawl gears. The WCGFS initially used hour long tows,
+but changes to 30 min tows consistent with other surveys later in the series. \\ 
+
 <<Survey swept area, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
 boxplot(Stations$SweptArea ~ Stations$Survey, xlab = 'Survey Series', ylab =
-	'Swept Area (km2)', main = 'Swept Area by Survey', cex.lab = 0.5)
+	'Swept Area (km2)', main = 'Swept Area by Survey', cex.axis = 0.5)
+axis(2, las = 1)
 
 boxplot(as.numeric(as.character(Stations$HaulDur)) ~ Stations$Survey, xlab = 'Survey Series', ylab =
-	'Haul Duration (m)', main = 'Haul Duration by Survey', cex.lab = 0.5)
+	'Haul Duration (m)', main = 'Haul Duration by Survey', cex.axis = 0.5)
 
 @
 
-<<Survey Spatial extent, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+The following plots show the minimum, maximum and mean (red points) survey
+latitude and longitude per year, to explore changes in survey coverage. \\
 
+The longitude max and min has broadly been at -2.5 to -12 for the time series,
+though has been more consistent since 1990. The addition of the CARLHELMAR
+survey in 1988 shifted the mean survey location eastwards, from around -8 to -5
+degrees. \\
+
+The latitudinal max and min has also generally been from 48 to 52 degrees over
+the time series, though this has been more consistent since 1996. The mean has
+generally been around 51 degrees.
+
+
+<<Survey Spatial extent, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
 
 Lats_Lons <- group_by(Stations, Year) %>% summarise(minLon = min(Lon), maxLon = max(Lon), meanLon = mean(Lon),
 						    minLat = min(Lat), maxLat = max(Lat), meanLat = mean(Lat))
@@ -499,6 +560,25 @@ print(ggplot(Lats_Lons, aes(x = Year, y = minLat)) + geom_segment(aes(xend = Yea
 	theme(axis.text.x = element_text(angle = -90)) + ylim(47, 53) + ylab('') + xlab('') +
 	ggtitle('Latitudinal survey coverage: min, max and mean'))
 @
+
+
+The following details the total catch by year, by survey. As can be seen, the
+IE-IGFS, EVHOE, WCGFS, Q4SWIBTS and Q1SWBEAM catch reasonable quantities of
+gadoids, while the CARLHELMAR and NWGFS catch very little. \\
+
+<<TotalCatch, echo = F, fig.width = 6, fig.height = 4, fig.align = 'center'>>=
+tot <- group_by(Wt, Survey, Species, Year) %>% summarise(Kg = sum(Kg))
+
+print(ggplot(tot, aes(x = Year, y = Kg)) + geom_bar(stat = 'identity', aes(fill =
+								     Species))
++ facet_wrap(~Survey))
+
+@
+
+The next pages detail the spatial catch distribution of the different species,
+followed by the catch per unit effort for the different survey series for each
+species. \\
+
 
 
 \begin{landscape}
@@ -551,6 +631,23 @@ print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colo
 
 @
 
+\end{landscape}
+
+It's apparent from the information that the CARLHELMAR survey area in the
+Western Channel sees little catch of the gadoid species. This is perhaps
+unsurprising given its designed as a flatfish survey. \\
+
+The WCGFS, EVHOE, IE-IGFS and Q4SWIBTS show reasonable consistency with each
+other in terms of CPUE trends for cod, though the WCGFS caught less haddock and
+whiting. \\
+
+The following pages show the length composition of the catch for the three
+species from the surveys. There looks reasonable consistency between the EVHOE,
+IE-IGFS, WCGFS and the Q4SWIBTS. The NWGFS looks to catch a smaller size class
+of fish, likely due to its inshore distribution. \\
+
+\begin{landscape}
+
 <<Length comp1, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
 
 
@@ -575,13 +672,113 @@ print(ggplot(plotDF, aes(x = Length, y = n)) + geom_line(aes(colour = Survey)) +
 
 @
 
+\end{landscape}
+
+\subsection{Conclusion on survey availability}
+
+Having reviewed the available survey data, its concluded that coverage prior to
+1992 was patchy and incomplete. Further, the CARLHELMAR and NWGFS surveys are
+focused on flatfish catches, with little information on gadoid species. As
+such, the dataset is truncated to include only the years 1992 - 2015 and the
+surveys: WCGFS, EVHOE, IE-IGFS, Q4SWIBTS, Q1SWBEAM. The following survey
+location plots and CPUEs show that the revised dataset gives good spatial
+coverage and information from the surveys. \\
+
+\begin{landscape}
+
+<<Revised Survey locations, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
+
+Stations <- filter(Stations, Year %in% 1992:2015, Survey %in% c('WCGFS',
+								'EVHOE',
+								'IE-IGFS',
+								'Q4SWIBTS',
+								'Q1SWBEAM'))
+
+print(ggplot() + 
+	geom_polygon(data = map, aes(x = long, y = lat, group = group), colour = 'black', fill = 'grey') +
+	coord_fixed(xlim = c(-12, 2), ylim = c(48, 52), ratio = 1.3) + 
+	geom_point(data  = Stations, aes(x = Lon, y = Lat, colour = Survey), shape = '+') + 
+	facet_wrap(~ Year, ncol = 5) +
+	theme_classic()+ ggtitle('Survey locations by year and survey (revised)'))
+
+Wt <- filter(Wt, Year %in% 1992:2015, Survey %in% c('WCGFS',
+						    'EVHOE',
+						    'IE-IGFS',
+						    'Q4SWIBTS',
+						    'Q1SWBEAM'))
+
+
+cpue <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/HaulDur * 60, prob = 0.05, na.rm = T),
+							  q50 = quantile(Kg/HaulDur * 60, prob = 0.50, na.rm = T),
+							  mean = mean(Kg/HaulDur * 60,na.rm = T),
+							  q95 = quantile(Kg/HaulDur * 60, prob = 0.95, na.rm = T))
+
+print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
+	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	ylab('Kg per hour tow') + xlab('') + ggtitle('CPUE (Kg per hour tow) - revised surveys only'))
+
+cpsa <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/SweptArea, prob = 0.05, na.rm = T),
+							  q50 = quantile(Kg/SweptArea, prob = 0.50, na.rm = T),
+							  mean = mean(Kg/SweptArea,na.rm = T),
+							  q95 = quantile(Kg/SweptArea, prob = 0.95, na.rm = T))
+
+print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
+	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	ylab('Density (catch per km2 swept)') + xlab('') + ggtitle('CPUE (Catch per km2 swept area - revised surveys only'))
+
+
+@
 
 \end{landscape}
 
-
 \section{Habitat covariates}
 
+There is also the possibility to include habitat covariates in the model. In
+order to explore this, two datasets were downloaded:
 
+\begin{itemize}
+	\item EU Sea Map Atlantic Habitat Classifications (from
+		\url{http://www.emodnet-seabedhabitats.eu/}) which provides a
+		substrate classification (e.g. rocky, sandy etc..) for the
+		Celtic Sea area.
+	\item Bathymetry data (from \url{http://www.emodnet-hydrography.eu/}
+		which provides water depth.
+
+\end{itemize}
+
+The following function is used to assign the correct habitat location to the
+knot locations generated by the VAST model. \\
+
+<<Habitat Covariate Function>>=
+
+HabAssignFunc <- function(Kmeans = NULL, zone = 29, locationHabMap = NULL, 
+			  nameHabMap = NULL) {
+library(rgdal)
+library(VAST)
+# Create a dataframe of the knots
+DF <- data.frame(X = Kmeans$centers[,'E_km'], Y = Kmeans$centers[,'N_km'])
+attr(DF, 'projection') = 'UTM'
+attr(DF, "zone") <- zone
+
+LLs <- PBSmapping::convUL(DF)
+
+HabMap <- readOGR(dsn = file.path(locationHabMap), layer = nameHabMap)
+
+# joint the spatial points..
+LLs <- SpatialPoints(LLs)
+proj4string(LLs) <- 
+	CRS('+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0')
+
+join <- over(x = LLs, y = HabMap)
+
+LLs <- SpatialPointsDataFrame(LLs, join)
+KmeanHab <- data.frame(Habitat = LLs$substrate)
+
+return(KmeanHab)
+
+}
+
+@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

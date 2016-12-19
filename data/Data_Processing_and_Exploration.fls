@@ -269,6 +269,9 @@ INPUT ./figure/Survey_Spatial_extent-1.pdf
 INPUT figure/Survey_Spatial_extent-2.pdf
 INPUT ./figure/Survey_Spatial_extent-2.pdf
 INPUT ./figure/Survey_Spatial_extent-2.pdf
+INPUT figure/TotalCatch-1.pdf
+INPUT ./figure/TotalCatch-1.pdf
+INPUT ./figure/TotalCatch-1.pdf
 INPUT figure/Survey_catches-1.pdf
 INPUT ./figure/Survey_catches-1.pdf
 INPUT ./figure/Survey_catches-1.pdf
@@ -305,6 +308,17 @@ INPUT ./figure/Length_Comp2-2.pdf
 INPUT figure/Length_Comp2-3.pdf
 INPUT ./figure/Length_Comp2-3.pdf
 INPUT ./figure/Length_Comp2-3.pdf
+INPUT figure/Revised_Survey_locations-1.pdf
+INPUT ./figure/Revised_Survey_locations-1.pdf
+INPUT ./figure/Revised_Survey_locations-1.pdf
+INPUT figure/Revised_Survey_locations-2.pdf
+INPUT ./figure/Revised_Survey_locations-2.pdf
+INPUT ./figure/Revised_Survey_locations-2.pdf
+INPUT figure/Revised_Survey_locations-3.pdf
+INPUT ./figure/Revised_Survey_locations-3.pdf
+INPUT ./figure/Revised_Survey_locations-3.pdf
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 INPUT Data_Processing_and_Exploration.aux
 INPUT ./Data_Processing_and_Exploration.out
 INPUT ./Data_Processing_and_Exploration.out

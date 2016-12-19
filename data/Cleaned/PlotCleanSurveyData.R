@@ -76,7 +76,7 @@ print(ggplot() +
 	coord_fixed(xlim = c(-12, 2), ylim = c(48, 52), ratio = 1.3) + 
 	geom_point(data  = Stations, aes(x = Lon, y = Lat, colour = Survey), shape = '+') + 
 	facet_wrap(~ Year, ncol = 5) +
-	theme_classic())
+	theme_classic() + ggtitle('Survey locations by year and survey'))
 
 
 
@@ -100,7 +100,7 @@ surveymo <- reshape2::melt(table(Stations$Month, Stations$Year))
 print(ggplot(surveymo[surveymo$value !=0,], aes(x = Var2, y = Var1)) +
 	geom_point(aes(size = value)) + xlab('') + ylab('') +
 	theme(legend.title = element_blank()) + geom_vline(xintercept = 1997) + 
-	ggtitle('Number of Stations Per Survey Per Year'))
+	ggtitle('Number of Stations Per Survey Per Month'))
 
 
 
