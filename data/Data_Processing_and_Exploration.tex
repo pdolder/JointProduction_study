@@ -159,7 +159,7 @@ function in the base R package:
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Dec 19, 2016 - 14:03:20
+% Date and time: Mon, Dec 19, 2016 - 14:31:57
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits} 
@@ -282,11 +282,13 @@ Where R and D are radians and decimal degrees respectively. \\
 To calculate the distance:
 
 \begin{equation}
-	D(km) = \\
-	R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
+	\begin{split}
+	& D(km) = \\
+	& R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
 	\sqrt{\sin({\frac{Lat_{y1} - Lat_{y2}}{2}})^2 + \cos(Lat_{x1}) \cdot
 		\cos(Lat_{x2}) \cdot \sin({\frac{Lon_{x1} -
 				Lon_{x2}}{2})^2}}\bigg)\Bigg)\Bigg]
+\end{split}
 \end{equation}
 
 Where $R$ is the mean Radius of the Earth, 6 341 km. \\
@@ -368,7 +370,7 @@ relationship with a polynomial, fitting with different degrees.
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Dec 19, 2016 - 14:03:37
+% Date and time: Mon, Dec 19, 2016 - 14:32:14
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{lm output from the three polynomial model fits} 
@@ -739,9 +741,7 @@ gadoids, while the CARLHELMAR and NWGFS catch very little. \\
 
 The next pages detail the spatial catch distribution of the different species,
 followed by the catch per unit effort for the different survey series for each
-species. \\
-
-
+species. 
 
 \begin{landscape}
 
