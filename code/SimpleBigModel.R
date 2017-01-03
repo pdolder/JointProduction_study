@@ -30,8 +30,7 @@ dir.create(DateFile)
 
   Version = "VAST_v1_8_0"
   Method = c("Grid", "Mesh")[2]
-  #grid_size_km = 20 
-  n_x = c(100, 250, 500, 1000, 2000)[3] # Number of stations
+  n_x = c(100, 250, 500, 1000, 2000)[1] # Number of stations
   FieldConfig = c("Omega1"=6, "Epsilon1"=6, "Omega2"=6, "Epsilon2"=6) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
   RhoConfig = c("Beta1"=0, "Beta2"=0, "Epsilon1"=0, "Epsilon2"=0) # Structure for beta or epsilon over time: 0=None (default); 1=WhiteNoise; 2=RandomWalk; 3=Constant
   ObsModel = c(2,0)  # 0=normal (log-link); 1=lognormal; 2=gamma; 4=ZANB; 5=ZINB; 11=lognormal-mixture; 12=gamma-mixture
@@ -88,12 +87,13 @@ dir.create(DateFile)
 			 'Merlangius merlangus_Adu')),]
 
 # Trim years and surveys
-  DF <- DF[(DF$Year %in% c(1997:2015) & !DF$Survey %in% c('CARLHELMAR')),]
+  DF <- DF[(DF$Year %in% c(1992:2015)),]
+#  DF <- DF[(!DF$Survey %in% c('CARLHELMAR', 'NWGFS')),]
   
   ## Add missing zeros
 #  DF <- reshape2::dcast(DF, Survey + Year + Station + Lat + Lon + AreaSwept_km2 ~ spp, value.var = 'Kg', fill = 0)
 #  DF <- reshape2::melt(DF, id = c('Survey','Year','Station','Lat','Lon','AreaSwept_km2'), value.name = 'Kg')
-#  colnames(DF)[7] <- 'spp'
+  colnames(DF)[7] <- 'spp'
 
   DF$SpeciesName <- factor(DF$spp) # drop empty factors
   DF$Ship        <- factor(DF$Survey)
