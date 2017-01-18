@@ -239,6 +239,15 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT figure/DoorSpread-1.pdf
 INPUT ./figure/DoorSpread-1.pdf
 INPUT ./figure/DoorSpread-1.pdf
+INPUT figure/DoorSpread2-1.pdf
+INPUT ./figure/DoorSpread2-1.pdf
+INPUT ./figure/DoorSpread2-1.pdf
+INPUT figure/Residualcheck-1.pdf
+INPUT ./figure/Residualcheck-1.pdf
+INPUT ./figure/Residualcheck-1.pdf
+INPUT figure/Residualcheck-2.pdf
+INPUT ./figure/Residualcheck-2.pdf
+INPUT ./figure/Residualcheck-2.pdf
 INPUT figure/Doorspread3-1.pdf
 INPUT ./figure/Doorspread3-1.pdf
 INPUT ./figure/Doorspread3-1.pdf

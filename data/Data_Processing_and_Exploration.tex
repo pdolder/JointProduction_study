@@ -159,7 +159,7 @@ function in the base R package:
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Dec 19, 2016 - 14:31:57
+% Date and time: Wed, Jan 18, 2017 - 12:24:49
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits} 
@@ -226,10 +226,11 @@ geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
 \hlstd{predDF}\hlopt{$}\hlstd{WtCorr} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt} \hlopt{*} \hlstd{corr.fact}
 
 \hlcom{# Plot the von bertalanffy fits}
-\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{'grey'}\hlstd{)} \hlopt{+}
         \hlkwd{facet_wrap}\hlstd{(}\hlopt{~} \hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{'free'}\hlstd{)} \hlopt{+}
         \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= Wt),} \hlkwc{col} \hlstd{=} \hlstr{'red'}\hlstd{)} \hlopt{+}
-        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= WtCorr),} \hlkwc{col} \hlstd{=} \hlstr{'blue'}\hlstd{)}
+        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= WtCorr),} \hlkwc{col} \hlstd{=} \hlstr{'blue'}\hlstd{)} \hlopt{+}
+        \hlkwd{theme_bw}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Predictions2-1} 
@@ -283,7 +284,7 @@ To calculate the distance:
 
 \begin{equation}
 	\begin{split}
-	& D(km) = \\
+	f D(km) = \\
 	& R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
 	\sqrt{\sin({\frac{Lat_{y1} - Lat_{y2}}{2}})^2 + \cos(Lat_{x1}) \cdot
 		\cos(Lat_{x2}) \cdot \sin({\frac{Lon_{x1} -
@@ -344,7 +345,10 @@ records where it's missing. There were only 5 records with missing door spread,
 but use the predicted door spread for all records. \\
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/DoorSpread-1} 
 
@@ -354,26 +358,62 @@ but use the predicted door spread for all records. \\
 
 \end{knitrout}
 
+There may be another covariate affecting doorspread, indicated by the
+clustering of some of the data...lets look at some of them.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/DoorSpread2-1} 
+
+}
+
+
+
+\end{knitrout}
+
 There looks to be a relationship between depth and doorspread where it
-increases to around 200 m and then flattens out.  We will model this
-relationship with a polynomial, fitting with different degrees. 
+increases to around 200 m and then flattens out, but with a covariate effect.
+We will model this relationship with a gam. 
 
 \begin{kframe}
 \begin{alltt}
-\hlstd{model2} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{2}\hlstd{))}
-\hlstd{model3} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{3}\hlstd{))}
-\hlstd{model4} \hlkwb{<-} \hlkwd{lm}\hlstd{(Spread} \hlopt{~} \hlkwd{poly}\hlstd{(Depth,}\hlnum{4}\hlstd{))}
+\hlkwd{library}\hlstd{(mgcv)}
 
-\hlkwd{stargazer}\hlstd{(model2, model3, model4,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
-          \hlkwc{title} \hlstd{=} \hlstr{'lm output from the three polynomial model fits'}\hlstd{,}
+\hlcom{# Without covariate}
+\hlstd{m1} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth,} \hlkwc{data} \hlstd{= HH)}
+\hlcom{#summary(m1)}
+
+\hlcom{# With all covariate, no interactions}
+\hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+} \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+}
+          \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
+\hlcom{#summary(m2)}
+
+\hlcom{### full interactions}
+\hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{*} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*} \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*}
+          \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
+\hlcom{#summary(m3)}
+
+
+\hlkwd{stargazer}\hlstd{(m1, m2, m3,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+          \hlkwc{title} \hlstd{=} \hlstr{'gam output from model with and without covariates'}\hlstd{,}
           \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Dec 19, 2016 - 14:32:14
+% Date and time: Wed, Jan 18, 2017 - 12:25:09
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
-  \caption{lm output from the three polynomial model fits} 
+  \caption{gam output from model with and without covariates} 
   \label{} 
 \small 
 \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
@@ -381,57 +421,255 @@ relationship with a polynomial, fitting with different degrees.
 \hline \\[-1.8ex] 
  & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{Spread} \\ 
+\\[-1.8ex] & \multicolumn{3}{c}{DoorSpread} \\ 
 \\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
 \hline \\[-1.8ex] 
- poly(Depth, 2)1 & 568.842^{***} &  &  \\ 
-  & (15.403) &  &  \\ 
+ Depth & 0.112^{***} & -0.025^{***} & 0.046 \\ 
+  & (0.003) & (0.007) & (0.043) \\ 
   & & & \\ 
- poly(Depth, 2)2 & -401.032^{***} &  &  \\ 
-  & (15.403) &  &  \\ 
+ factor(DoorWgt)1400 &  & 17.275^{***} & 9.402^{***} \\ 
+  &  & (0.371) & (1.474) \\ 
   & & & \\ 
- poly(Depth, 3)1 &  & 568.842^{***} &  \\ 
-  &  & (15.052) &  \\ 
+ Warplngt &  & 0.032^{***} & 0.088^{***} \\ 
+  &  & (0.003) & (0.010) \\ 
   & & & \\ 
- poly(Depth, 3)2 &  & -401.032^{***} &  \\ 
-  &  & (15.052) &  \\ 
+ factor(Warpdia)26 &  & -3.972^{***} & -8.167 \\ 
+  &  & (0.494) & (6.088) \\ 
   & & & \\ 
- poly(Depth, 3)3 &  & 202.116^{***} &  \\ 
-  &  & (15.052) &  \\ 
+ factor(SweepLngt)55 &  & -6.609^{***} & -0.955 \\ 
+  &  & (0.311) & (0.931) \\ 
   & & & \\ 
- poly(Depth, 4)1 &  &  & 568.842^{***} \\ 
-  &  &  & (15.029) \\ 
+ factor(SweepLngt)100 &  & 15.157^{***} & 47.418^{***} \\ 
+  &  & (0.424) & (3.378) \\ 
   & & & \\ 
- poly(Depth, 4)2 &  &  & -401.032^{***} \\ 
-  &  &  & (15.029) \\ 
+ factor(SweepLngt)110 &  & 23.884^{***} & 10.357^{***} \\ 
+  &  & (0.270) & (0.758) \\ 
   & & & \\ 
- poly(Depth, 4)3 &  &  & 202.116^{***} \\ 
-  &  &  & (15.029) \\ 
+ Depth:factor(DoorWgt)1400 &  &  & 0.032 \\ 
+  &  &  & (0.036) \\ 
   & & & \\ 
- poly(Depth, 4)4 &  &  & -54.097^{***} \\ 
-  &  &  & (15.029) \\ 
+ Depth:Warplngt &  &  & -0.0001 \\ 
+  &  &  & (0.0001) \\ 
   & & & \\ 
- Constant & 97.463^{***} & 97.463^{***} & 97.463^{***} \\ 
-  & (0.250) & (0.244) & (0.244) \\ 
+ factor(DoorWgt)1400:Warplngt &  &  & -0.012 \\ 
+  &  &  & (0.007) \\ 
+  & & & \\ 
+ Depth:factor(Warpdia)26 &  &  & 0.058 \\ 
+  &  &  & (0.149) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(Warpdia)26 &  &  & 9.402^{***} \\ 
+  &  &  & (1.474) \\ 
+  & & & \\ 
+ Warplngt:factor(Warpdia)26 &  &  & 0.005 \\ 
+  &  &  & (0.030) \\ 
+  & & & \\ 
+ Depth:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
+  &  &  & (0.021) \\ 
+  & & & \\ 
+ Depth:factor(SweepLngt)100 &  &  & -0.053 \\ 
+  &  &  & (0.046) \\ 
+  & & & \\ 
+ Depth:factor(SweepLngt)110 &  &  & -0.025 \\ 
+  &  &  & (0.018) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(SweepLngt)55 &  &  & -0.955 \\ 
+  &  &  & (0.931) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
+  &  &  & (0.758) \\ 
+  & & & \\ 
+ Warplngt:factor(SweepLngt)55 &  &  & -0.0001 \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ Warplngt:factor(SweepLngt)100 &  &  & -0.081^{***} \\ 
+  &  &  & (0.012) \\ 
+  & & & \\ 
+ Warplngt:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.955 \\ 
+  &  &  & (0.931) \\ 
+  & & & \\ 
+ factor(Warpdia)26:factor(SweepLngt)100 &  &  & -19.638^{**} \\ 
+  &  &  & (8.131) \\ 
+  & & & \\ 
+ factor(Warpdia)26:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
+  &  &  & (0.758) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt &  &  & -0.00002 \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(Warpdia)26 &  &  & 0.032 \\ 
+  &  &  & (0.036) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(Warpdia)26 &  &  & -0.0002 \\ 
+  &  &  & (0.0003) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(Warpdia)26 &  &  & -0.012 \\ 
+  &  &  & (0.007) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
+  &  &  & (0.021) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(SweepLngt)110 &  &  & -0.025 \\ 
+  &  &  & (0.018) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(SweepLngt)100 &  &  & 0.0001 \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
+  &  &  & (0.00004) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(SweepLngt)55 &  &  & -0.0001 \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ Depth:factor(Warpdia)26:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
+  &  &  & (0.021) \\ 
+  & & & \\ 
+ Depth:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.028 \\ 
+  &  &  & (0.156) \\ 
+  & & & \\ 
+ Depth:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.025 \\ 
+  &  &  & (0.018) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.955 \\ 
+  &  &  & (0.931) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
+  &  &  & (0.758) \\ 
+  & & & \\ 
+ Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001 \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.032 \\ 
+  &  &  & (0.033) \\ 
+  & & & \\ 
+ Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26 &  &  & -0.00002 \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
+  &  &  & (0.00004) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
+  &  &  & (0.021) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.025 \\ 
+  &  &  & (0.018) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.0001 \\ 
+  &  &  & (0.0003) \\ 
+  & & & \\ 
+ Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
+  &  &  & (0.00004) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001 \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
+  &  &  & (0.004) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
+  &  &  & (0.0001) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
+  &  &  & (0.000) \\ 
+  & & & \\ 
+ Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
+  &  &  & (0.00004) \\ 
+  & & & \\ 
+ Constant & 82.251^{***} & 65.456^{***} & 44.639^{***} \\ 
+  & (0.523) & (0.492) & (2.270) \\ 
   & & & \\ 
 \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,806} \\ 
-R$^{2}$ & \multicolumn{1}{c}{0.349} & \multicolumn{1}{c}{0.379} & \multicolumn{1}{c}{0.381} \\ 
-Adjusted R$^{2}$ & \multicolumn{1}{c}{0.349} & \multicolumn{1}{c}{0.378} & \multicolumn{1}{c}{0.380} \\ 
-Residual Std. Error & \multicolumn{1}{c}{15.403 (df = 3803)} & \multicolumn{1}{c}{15.052 (df = 3802)} & \multicolumn{1}{c}{15.029 (df = 3801)} \\ 
-F Statistic & \multicolumn{1}{c}{1,020.847$^{***}$ (df = 2; 3803)} & \multicolumn{1}{c}{772.750$^{***}$ (df = 3; 3802)} & \multicolumn{1}{c}{584.624$^{***}$ (df = 4; 3801)} \\ 
+Observations & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,623} & \multicolumn{1}{c}{3,623} \\ 
+Adjusted R$^{2}$ & \multicolumn{1}{c}{0.233} & \multicolumn{1}{c}{0.833} & \multicolumn{1}{c}{0.870} \\ 
+Log Likelihood & \multicolumn{1}{c}{-16,121.900} & \multicolumn{1}{c}{-12,576.370} & \multicolumn{1}{c}{-12,131.980} \\ 
+UBRE & \multicolumn{1}{c}{279.620} & \multicolumn{1}{c}{60.588} & \multicolumn{1}{c}{47.409} \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
+\begin{kframe}\begin{alltt}
+\hlkwd{kable}\hlstd{(}\hlkwd{AIC}\hlstd{(m1, m2, m3))}
+\end{alltt}
+\end{kframe}
+\begin{tabular}{l|r|r}
+\hline
+  & df & AIC\\
+\hline
+m1 & 3 & 32243.81\\
+\hline
+m2 & 8 & 25152.74\\
+\hline
+m3 & 25 & 24263.96\\
+\hline
+\end{tabular}
 
 
-Fourth order looks best as it has the highest $R^2$.  Now to plot of predicted
-door spread against the data for each depth.
 
+Full model looks best, but let's check the residuals against the covariates
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Residualcheck-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/Residualcheck-2} 
+
+}
+
+
+
+\end{knitrout}
+
+Residuals look OK, so let's check the predictions against the measurements...
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 1138 rows containing missing values (geom\_point).}}\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-1} 
 

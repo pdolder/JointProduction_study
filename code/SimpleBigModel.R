@@ -138,7 +138,7 @@ dir.create(DateFile)
 
   # Make TMB object
   #dyn.unload( paste0(DateFile,"/",dynlib(TMB:::getUserDLL())) )
-  TmbList = Build_TMB_Fn("TmbData"=TmbData, "RunDir"= getwd(), "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_x)
+  TmbList = Build_TMB_Fn("TmbData"=TmbData, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_x)
   Obj = TmbList[["Obj"]]
 
   # Run model
@@ -147,6 +147,6 @@ dir.create(DateFile)
 
   # Save stuff
 Save = list(Obj = Obj,"Opt"=Opt, "Report"=Report, "ParHat"=Obj$env$parList(Opt$par), "TmbData"=TmbData, "Data_Geostat" = Data_Geostat)
- save(Save, file=paste0(DateFile,"Save.RData"))
+save(Save, file=paste0(DateFile,"Save.RData"))
 
 
