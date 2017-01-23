@@ -4,6 +4,7 @@
 
 # packages
 library(dplyr) 
+library(ggplot2)
 load('CelticSurveyData.RData') # pre-downloaded data, HH is station, HL is catch
 
 ## Some initial cleaning
@@ -41,40 +42,98 @@ HH$Dist <- mapply(gcd.hf, long1 = deg2rad(an(HH$ShootLong)),
 plot(an(HH$Distance[(HH$Distance != -9)])/1000 ~ HH$Dist[(HH$Distance != -9)])
 ## Looks good - use the calculated estimates ##
 
-# Now look at door spread
-plot(HH$DoorSpread[an(HH$DoorSpread) != -9]) # Differences by survey?
+###########################
+# Now look at door spread #
+###########################
 
-par(mfrow = c(1,2))
-plot(HH$DoorSpread[an(HH$DoorSpread) != -9 & HH$Survey == 'EVHOE'], ylim = c(0, 150), col = HH$Year[an(HH$DoorSpread) != -9 & HH$Survey == 'EVHOE'])
-plot(HH$DoorSpread[an(HH$DoorSpread) != -9 & HH$Survey == 'IE-IGFS'], ylim = c(0, 150), col = HH$Year[an(HH$DoorSpread) != -9 & HH$Survey == 'IE-IGFS'])
-# Yes, but also a split within the IE-IGFS, not by year though
+# Covert numeric variables so we can explore the covariates
+HH$SweepLngt   <- as.numeric(HH$SweepLngt) ;  HH$HaulDur     <- as.numeric(HH$HaulDur)
+HH$DoorSpread  <- as.numeric(HH$DoorSpread) ; HH$Depth       <- as.numeric(HH$Depth)
+HH$Netopening  <- as.numeric(HH$Netopening) ; HH$Warplngt    <- as.numeric(HH$Warplngt)
+HH$Warpdia     <- as.numeric(HH$Warpdia) ;    HH$DoorSurface <- as.numeric(HH$DoorSurface)
+HH$DoorWgt     <- as.numeric(HH$DoorWgt) ;    HH$WingSpread  <- as.numeric(HH$WingSpread)
+HH$KiteDim     <- as.numeric(HH$KiteDim);     HH$TowDir      <- as.numeric(HH$TowDir)
+HH$GroundSpeed <- as.numeric(HH$GroundSpeed); HH$SpeedWater  <- as.numeric(HH$SpeedWater)
+HH$SurCurDir   <- as.numeric(HH$SurCurDir) ;  HH$SurCurSpeed <- as.numeric(HH$SurCurSpeed)
+HH$BotCurDir   <- as.numeric(HH$BotCurDir);   HH$BotCurSpeed <- as.numeric(HH$BotCurSpeed)
+HH$WindDir     <- as.numeric(HH$WindDir) ;    HH$WindSpeed   <- as.numeric(HH$WindSpeed)
+HH$SwellDir    <- as.numeric(HH$SwellDir) ;   HH$SwellHeight <- as.numeric(HH$SwellHeight)
+HH$SurTemp     <- as.numeric(HH$SurTemp) ;    HH$BotTemp     <- as.numeric(HH$BotTemp)
+HH$SurSal      <- as.numeric(HH$SurSal) ;     HH$BotSal      <- as.numeric(HH$BotSal)
 
-# Seems to be a relationship between depth and doorspread
-plot(HH$DoorSpread[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9] ~
-     HH$Depth[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
+HH[HH == -9] <- NA
 
-table(an(HH$Depth[an(HH$DoorSpread) == -9]))
-#  As only 5 records have both no depth and no doorspread, lets fill the door
-#  spread based on this relationship
+ggplot(HH, aes(x = Depth, y = DoorSpread)) + geom_point() + 
+	theme_bw() + ggtitle('Relationship between depth of gear and
+     door spread')
 
-Spread <- an(HH$DoorSpread[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
-Depth  <- an(HH$Depth[an(HH$DoorSpread) !=-9 & an(HH$Depth) != -9])
+library(gridExtra)
 
-model <- lm(Spread ~ poly(Depth,4))
-summary(model)
+p1 <- ggplot(HH, aes(x = Depth, y = DoorSpread)) + geom_point(aes(colour = factor(DoorWgt))) +
+theme_bw() + ggtitle('..with door weight') + theme(legend.position = 'top')
 
-plot(fitted(model), residuals(model))
+p2 <- ggplot(HH, aes(x = Depth, y = DoorSpread)) + geom_point(aes(colour = Warplngt)) + theme_bw() + 
+	ggtitle('..with warp length') + theme(legend.position = 'top')
 
-pred <- predict(model, newdata = data.frame(Depth = seq(min(Depth), max(Depth), l = 1000), 
-					    Spread = seq(min(Spread), max(Spread), l = 1000)))
+p3 <- ggplot(HH, aes(x = Depth, y = DoorSpread)) + geom_point(aes(colour = factor(Warpdia))) + theme_bw() + 
+	ggtitle('..with warp diameter') + theme(legend.position = 'top')
 
-plot(Spread ~ Depth)
-lines(pred, col = 'red')
+p4 <- ggplot(HH, aes(x = Depth, y = DoorSpread)) + geom_point(aes(colour = factor(SweepLngt) )) + theme_bw() + 
+	ggtitle('..with warp sweep length') + theme(legend.position = 'top')
 
-## looks OK, now predict the missing door spreads..
-HH$PredSpread <- predict(model, newdata = data.frame(Depth = an(HH$Depth), Spread = an(HH$DoorSpread)))
+grid.arrange(p1, p2, p3, p4, ncol = 2)
 
-## Take the actuals or predicted spreads to calculate the swept area...
+library(mgcv)
+
+# Without covariate
+m1 <- gam(DoorSpread ~ Depth, data = HH)
+#summary(m1)
+
+# With all covariate, no interactions
+m2 <- gam(DoorSpread ~ Depth + factor(DoorWgt) + Warplngt + factor(Warpdia) +
+	  factor(SweepLngt), data =   HH)
+#summary(m2)
+
+### full interactions
+m3 <- gam(DoorSpread ~ Depth * factor(DoorWgt) * Warplngt * factor(Warpdia) *
+	  factor(SweepLngt), data =   HH)
+#summary(m3)
+
+HHresid <- filter(HH, !is.na(DoorWgt), !is.na(Warplngt), 
+		  !is.na(Warpdia),  !is.na(SweepLngt), 
+		  !is.na(Depth), !is.na(DoorSpread))
+
+HHresid$residm3   <- resid(m3)
+HHresid$predictm3 <- fitted(m3)
+
+ggplot(HHresid, aes(x = predictm3, y = residm3)) + geom_point() +
+	geom_smooth(method = 'loess', col = 'red') +
+	theme_bw() + ggtitle('fitted values against residuals') +
+	geom_hline(yintercept = 0)
+
+p1 <- ggplot(HHresid, aes(x = factor(DoorWgt), y = residm3)) + geom_boxplot() +
+	theme_bw()
+
+p2 <- ggplot(HHresid, aes(x = Warplngt, y = residm3)) + geom_point() +
+	geom_smooth(method = 'loess', colour = 'red') + theme_bw() +
+	geom_hline(yintercept = 0)
+
+p3 <- ggplot(HHresid, aes(x = factor(Warpdia), y = residm3)) + geom_boxplot() +
+	theme_bw()
+
+p4 <- ggplot(HHresid, aes(x = factor(SweepLngt), y = residm3)) + geom_boxplot() +
+	theme_bw()
+
+grid.arrange(p1, p2, p3, p4, ncol = 2)
+
+HH$PredSpread <- predict(m3, newdata = HH)
+
+ggplot(HH, aes(x = DoorSpread, y = PredSpread )) + geom_point(colour = 'grey') +
+	geom_abline(slope = 1, intercept = 0, col = 'red') + theme_bw() +
+	ylab('Predicted door spread') + xlab('Measured door spred') +
+	ggtitle('Door spread predictions against measurements')
+
+## Take the or predicted spreads to calculate the swept area...
 
 HH$SweptArea <- HH$Dist * HH$PredSpread/1000
 

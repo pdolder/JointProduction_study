@@ -108,7 +108,7 @@ The following data sources were used:
 \section{Length-weight conversion factors}
 
 As the survey records consist of count of fish at each length class and we are
-interested in working with biomass(weight) of fish, we first estimate a
+interested in working with biomass (weight) of fish, we first estimate a
 length-weight relationship for the different species from the Datras data
 product of weight at length estimates. The data is baseds on the EVHOE survey
 series only, due to availability within Datras. \\
@@ -123,8 +123,22 @@ parameters to estimate:
 The raw data looks as follows for cod, haddock and whiting:
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} \caption[Estimates of individual weights at length for the gadoid species]{Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements}\label{fig:unnamed-chunk-2}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+##  [1] Chelidonichthys cuculus    Chelidonichthys lucerna   
+##  [3] Dicentrarchus labrax       Engraulis encrasicolus    
+##  [5] Gadus morhua               Glyptocephalus cynoglossus
+##  [7] Lepidorhombus whiffiagonis Lophius piscatorius       
+##  [9] Melanogrammus aeglefinus   Merlangius merlangus      
+## [11] Merluccius merluccius      Microstomus kitt          
+## [13] Mullus surmuletus          Phycis blennoides         
+## [15] Pleuronectes platessa      Pollachius pollachius     
+## [17] Scophthalmus maximus       Scophthalmus rhombus      
+## [19] Solea solea               
+## 20 Levels: Chelidonichthys cuculus ... Solea solea
+\end{verbatim}
+\end{kframe}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/LWt-1} \caption[Estimates of individual weights at length for the gadoid species]{Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements}\label{fig:LWt}
 \end{figure}
 
 
@@ -141,28 +155,36 @@ To simplify the fitting procedure, the von bertalanffy relationship in equation
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-3-1} 
+\includegraphics[width=\maxwidth]{figure/LWt2-1} 
 
 \end{knitrout}
 
 A linear model with species and year as factors was fit using the \textit{glm}
-function in the base R package:
+function in the base R package. We separate the roundfish and flatfish due to
+the different morphological forms affecting the length weight relationship:
 
 \begin{kframe}
 \begin{alltt}
 \hlkwd{library}\hlstd{(stargazer)} \hlcom{# For nice model output}
-\hlstd{lm1} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{= DF)}
-\hlstd{lm2} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{= DF)}
-\hlkwd{stargazer}\hlstd{(lm1, lm2,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
-          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits'}\hlstd{,}
+
+\hlstd{gads}  \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Gadus morhua'}\hlstd{,} \hlstr{'Melanogrammus aeglefinus'}\hlstd{,}
+           \hlstr{'Merluccius merluccius'}\hlstd{,} \hlstr{'Merlangius merlangus'}\hlstd{)}
+\hlstd{flats} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Lepidorhombus whiffiagonis'}\hlstd{,} \hlstr{'Solea solea'}\hlstd{,} \hlstr{'Pleuronectes platessa'}\hlstd{)}
+\hlstd{lops}  \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Lophius piscatorius'}\hlstd{,} \hlstr{'Lophius budegassa'}\hlstd{)}
+
+\hlstd{lm1.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{gads))}
+\hlstd{lm2.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{gads))}
+
+\hlkwd{stargazer}\hlstd{(lm1.gad, lm2.gad,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits to gadoids'}\hlstd{,}
           \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Wed, Jan 18, 2017 - 12:24:49
+% Date and time: Mon, Jan 23, 2017 - 19:36:53
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
-  \caption{glm output from the two model fits} 
+  \caption{glm output from the two model fits to gadoids} 
   \label{} 
 \small 
 \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
@@ -182,6 +204,9 @@ function in the base R package:
  SpeciesMerlangius merlangus & -0.199^{***} & -0.199^{***} \\ 
   & (0.008) & (0.008) \\ 
   & & \\ 
+ SpeciesMerluccius merluccius & -0.435^{***} & -0.436^{***} \\ 
+  & (0.149) & (0.149) \\ 
+  & & \\ 
  Year & 0.0001 &  \\ 
   & (0.001) &  \\ 
   & & \\ 
@@ -189,9 +214,57 @@ function in the base R package:
   & (1.607) & (0.034) \\ 
   & & \\ 
 \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{6,623} & \multicolumn{1}{c}{6,623} \\ 
-Log Likelihood & \multicolumn{1}{c}{3,218.662} & \multicolumn{1}{c}{3,218.647} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.325} & \multicolumn{1}{c}{-6,429.293} \\ 
+Observations & \multicolumn{1}{c}{6,624} & \multicolumn{1}{c}{6,624} \\ 
+Log Likelihood & \multicolumn{1}{c}{3,219.649} & \multicolumn{1}{c}{3,219.633} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.297} & \multicolumn{1}{c}{-6,429.266} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\begin{kframe}\begin{alltt}
+\hlstd{lm1.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{flats ))}
+\hlstd{lm2.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{flats))}
+
+\hlkwd{stargazer}\hlstd{(lm1.flat, lm2.flat,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits to flatfish'}\hlstd{,}
+          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Mon, Jan 23, 2017 - 19:36:53
+% Requires LaTeX packages: dcolumn 
+\begin{table}[H] \centering 
+  \caption{glm output from the two model fits to flatfish} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{lWt} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
+\hline \\[-1.8ex] 
+ lL & 3.106^{***} & 3.106^{***} \\ 
+  & (0.010) & (0.010) \\ 
+  & & \\ 
+ SpeciesPleuronectes platessa & 0.361^{***} & 0.358^{***} \\ 
+  & (0.013) & (0.012) \\ 
+  & & \\ 
+ SpeciesSolea solea & 0.190^{***} & 0.188^{***} \\ 
+  & (0.009) & (0.009) \\ 
+  & & \\ 
+ Year & -0.001 &  \\ 
+  & (0.002) &  \\ 
+  & & \\ 
+ Constant & -9.739^{***} & -12.410^{***} \\ 
+  & (3.147) & (0.056) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{3,180} & \multicolumn{1}{c}{3,180} \\ 
+Log Likelihood & \multicolumn{1}{c}{753.089} & \multicolumn{1}{c}{752.728} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{-1,496.177} & \multicolumn{1}{c}{-1,497.456} \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
@@ -200,10 +273,15 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.325} & \multicolumn{1}{c}{-6,429.2
 
 
 Year was initially also included as a factor, but found not to be significant
-and lm2 was chosen as the best model (Table 1). This model was then used to
-predict over all lengths for each species.  A bias correction was applied to
-adjust for the fact that the mean weights from the model fit on a log scale are
-geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
+and the second, across year, fit was chosen as the best models (Table 1, Table
+2). These models were then used to predict over all lengths for each species.  A
+bias correction was applied to adjust for the fact that the mean weights from
+the model fit on a log scale are geometric means on the normal scale (cf =
+$e^{\frac{\sigma^{2}}{2}}$).
+
+For anglerfish, as there is insufficient data for a fit a model (few data
+points for piscatorius, no data points for budegassa), we use estimates from
+fishbase: $a = 0.03330$, $b= 2.766$.
 
 
 
@@ -211,19 +289,23 @@ geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{# Exponentiate the predictions}
-\hlstd{predDF}\hlopt{$}\hlstd{L} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL)}
-\hlstd{predDF}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lWt)}
+\hlstd{predDF}\hlopt{$}\hlstd{L}  \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL)}
+\hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlkwd{c}\hlstd{(gads,flats)]} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lWt[predDF}\hlopt{$}\hlstd{Species}
+                                                    \hlopt{%in%} \hlkwd{c}\hlstd{(gads, flats)])}
 
 \hlcom{## Now we need to bias correct due to the fact that the mean on the logscale is}
 \hlcom{## the geometric mean...}
-\hlstd{corr.fact} \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
-\hlkwd{print}\hlstd{(corr.fact)}
+\hlstd{corr.fact.gad}  \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2.gad)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
+\hlstd{corr.fact.flat} \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2.flat)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
+\hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{'Correction factor for gadoids='}\hlstd{,corr.fact.gad,}\hlstr{'\textbackslash{}n and flats = '}\hlstd{, corr.fact.flat))}
 \end{alltt}
 \begin{verbatim}
-## [1] 1.011141
+## [1] "Correction factor for gadoids= 1.01114083963943 \n and flats =  1.01841349658617"
 \end{verbatim}
 \begin{alltt}
-\hlstd{predDF}\hlopt{$}\hlstd{WtCorr} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt} \hlopt{*} \hlstd{corr.fact}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]}  \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]}\hlopt{*} \hlstd{corr.fact.gad}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]}\hlopt{*} \hlstd{corr.fact.flat}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-}  \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]}
 
 \hlcom{# Plot the von bertalanffy fits}
 \hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{'grey'}\hlstd{)} \hlopt{+}
@@ -235,8 +317,11 @@ geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Predictions2-1} 
 \begin{kframe}\begin{alltt}
+\hlstd{lm2} \hlkwb{<-} \hlkwd{list}\hlstd{(lm2.gad, lm2.flat)}
+\hlstd{corr.fact} \hlkwb{<-} \hlkwd{list}\hlstd{(corr.fact.gad, corr.fact.flat)}
+
 \hlcom{## Save the fit and the correction factor}
-\hlkwd{save}\hlstd{(lm2, corr.fact,} \hlkwc{file} \hlstd{=} \hlstr{'LengthWeightPredictGadoids.RData'}\hlstd{)}
+\hlkwd{save}\hlstd{(lm2, corr.fact, lop,} \hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{'DATRAS'}\hlstd{,}\hlstr{'LengthWeightPredictCelticSea.RData'}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -284,7 +369,7 @@ To calculate the distance:
 
 \begin{equation}
 	\begin{split}
-	f D(km) = \\
+	& f D(km) = \\
 	& R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
 	\sqrt{\sin({\frac{Lat_{y1} - Lat_{y2}}{2}})^2 + \cos(Lat_{x1}) \cdot
 		\cos(Lat_{x2}) \cdot \sin({\frac{Lon_{x1} -
@@ -345,10 +430,7 @@ records where it's missing. There were only 5 records with missing door spread,
 but use the predicted door spread for all records. \\
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 955 rows containing missing values (geom\_point).}}\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
 {\centering \includegraphics[width=\maxwidth]{figure/DoorSpread-1} 
 
@@ -394,242 +476,18 @@ We will model this relationship with a gam.
 \hlcom{#summary(m1)}
 
 \hlcom{# With all covariate, no interactions}
-\hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+} \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+}
-          \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
+\hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+}
+          \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
 \hlcom{#summary(m2)}
 
 \hlcom{### full interactions}
-\hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{*} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*} \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*}
-          \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
+\hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{*} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*}
+          \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
 \hlcom{#summary(m3)}
-
-
-\hlkwd{stargazer}\hlstd{(m1, m2, m3,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
-          \hlkwc{title} \hlstd{=} \hlstr{'gam output from model with and without covariates'}\hlstd{,}
-          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
 \end{alltt}
 \end{kframe}
-% Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Wed, Jan 18, 2017 - 12:25:09
-% Requires LaTeX packages: dcolumn 
-\begin{table}[H] \centering 
-  \caption{gam output from model with and without covariates} 
-  \label{} 
-\small 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{DoorSpread} \\ 
-\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
-\hline \\[-1.8ex] 
- Depth & 0.112^{***} & -0.025^{***} & 0.046 \\ 
-  & (0.003) & (0.007) & (0.043) \\ 
-  & & & \\ 
- factor(DoorWgt)1400 &  & 17.275^{***} & 9.402^{***} \\ 
-  &  & (0.371) & (1.474) \\ 
-  & & & \\ 
- Warplngt &  & 0.032^{***} & 0.088^{***} \\ 
-  &  & (0.003) & (0.010) \\ 
-  & & & \\ 
- factor(Warpdia)26 &  & -3.972^{***} & -8.167 \\ 
-  &  & (0.494) & (6.088) \\ 
-  & & & \\ 
- factor(SweepLngt)55 &  & -6.609^{***} & -0.955 \\ 
-  &  & (0.311) & (0.931) \\ 
-  & & & \\ 
- factor(SweepLngt)100 &  & 15.157^{***} & 47.418^{***} \\ 
-  &  & (0.424) & (3.378) \\ 
-  & & & \\ 
- factor(SweepLngt)110 &  & 23.884^{***} & 10.357^{***} \\ 
-  &  & (0.270) & (0.758) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400 &  &  & 0.032 \\ 
-  &  &  & (0.036) \\ 
-  & & & \\ 
- Depth:Warplngt &  &  & -0.0001 \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt &  &  & -0.012 \\ 
-  &  &  & (0.007) \\ 
-  & & & \\ 
- Depth:factor(Warpdia)26 &  &  & 0.058 \\ 
-  &  &  & (0.149) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(Warpdia)26 &  &  & 9.402^{***} \\ 
-  &  &  & (1.474) \\ 
-  & & & \\ 
- Warplngt:factor(Warpdia)26 &  &  & 0.005 \\ 
-  &  &  & (0.030) \\ 
-  & & & \\ 
- Depth:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
-  &  &  & (0.021) \\ 
-  & & & \\ 
- Depth:factor(SweepLngt)100 &  &  & -0.053 \\ 
-  &  &  & (0.046) \\ 
-  & & & \\ 
- Depth:factor(SweepLngt)110 &  &  & -0.025 \\ 
-  &  &  & (0.018) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(SweepLngt)55 &  &  & -0.955 \\ 
-  &  &  & (0.931) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
-  &  &  & (0.758) \\ 
-  & & & \\ 
- Warplngt:factor(SweepLngt)55 &  &  & -0.0001 \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- Warplngt:factor(SweepLngt)100 &  &  & -0.081^{***} \\ 
-  &  &  & (0.012) \\ 
-  & & & \\ 
- Warplngt:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.955 \\ 
-  &  &  & (0.931) \\ 
-  & & & \\ 
- factor(Warpdia)26:factor(SweepLngt)100 &  &  & -19.638^{**} \\ 
-  &  &  & (8.131) \\ 
-  & & & \\ 
- factor(Warpdia)26:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
-  &  &  & (0.758) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt &  &  & -0.00002 \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(Warpdia)26 &  &  & 0.032 \\ 
-  &  &  & (0.036) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(Warpdia)26 &  &  & -0.0002 \\ 
-  &  &  & (0.0003) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(Warpdia)26 &  &  & -0.012 \\ 
-  &  &  & (0.007) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
-  &  &  & (0.021) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(SweepLngt)110 &  &  & -0.025 \\ 
-  &  &  & (0.018) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(SweepLngt)100 &  &  & 0.0001 \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
-  &  &  & (0.00004) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(SweepLngt)55 &  &  & -0.0001 \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- Depth:factor(Warpdia)26:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
-  &  &  & (0.021) \\ 
-  & & & \\ 
- Depth:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.028 \\ 
-  &  &  & (0.156) \\ 
-  & & & \\ 
- Depth:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.025 \\ 
-  &  &  & (0.018) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.955 \\ 
-  &  &  & (0.931) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 10.357^{***} \\ 
-  &  &  & (0.758) \\ 
-  & & & \\ 
- Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001 \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.032 \\ 
-  &  &  & (0.033) \\ 
-  & & & \\ 
- Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26 &  &  & -0.00002 \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
-  &  &  & (0.00004) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)55 &  &  & 0.056^{***} \\ 
-  &  &  & (0.021) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.025 \\ 
-  &  &  & (0.018) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.0001 \\ 
-  &  &  & (0.0003) \\ 
-  & & & \\ 
- Depth:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
-  &  &  & (0.00004) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001 \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & -0.012^{***} \\ 
-  &  &  & (0.004) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)55 &  &  & -0.0001^{**} \\ 
-  &  &  & (0.0001) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)100 &  &  & 0.000 \\ 
-  &  &  & (0.000) \\ 
-  & & & \\ 
- Depth:factor(DoorWgt)1400:Warplngt:factor(Warpdia)26:factor(SweepLngt)110 &  &  & 0.0001^{**} \\ 
-  &  &  & (0.00004) \\ 
-  & & & \\ 
- Constant & 82.251^{***} & 65.456^{***} & 44.639^{***} \\ 
-  & (0.523) & (0.492) & (2.270) \\ 
-  & & & \\ 
-\hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{3,806} & \multicolumn{1}{c}{3,623} & \multicolumn{1}{c}{3,623} \\ 
-Adjusted R$^{2}$ & \multicolumn{1}{c}{0.233} & \multicolumn{1}{c}{0.833} & \multicolumn{1}{c}{0.870} \\ 
-Log Likelihood & \multicolumn{1}{c}{-16,121.900} & \multicolumn{1}{c}{-12,576.370} & \multicolumn{1}{c}{-12,131.980} \\ 
-UBRE & \multicolumn{1}{c}{279.620} & \multicolumn{1}{c}{60.588} & \multicolumn{1}{c}{47.409} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-\begin{kframe}\begin{alltt}
-\hlkwd{kable}\hlstd{(}\hlkwd{AIC}\hlstd{(m1, m2, m3))}
-\end{alltt}
-\end{kframe}
+
+
 \begin{tabular}{l|r|r}
 \hline
   & df & AIC\\
@@ -720,7 +578,10 @@ The length data were converted to weight through the following process:
 		length. The lengths to define this split were based on the EU
 		technical regulation defining the minimum conservation
 		reference size (MCRS); for cod = 35 cm, haddock = 30 cm,
-		whiting = 27 cm.
+		whiting = 27 cm, hake = 27 cm, plaice = 27 cm, sole = 24 cm,
+		megrim = 20 cm. For anglerfishes (piscatorius and budegassa) at
+		value of 32 cm was used, equivalent to the 500 g minimum
+		marketing weight.
 	\item Aggregate across length classes by species.
 	\item Merge the station information with the catch records, retaining
 		zero entries for each species at each station, where
@@ -728,6 +589,36 @@ The length data were converted to weight through the following process:
 	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N (the
 		Celtic Sea area).
 \end{itemize}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## $root
+## [1] 32.35575
+## 
+## $f.root
+## [1] 1.712325e-07
+## 
+## $iter
+## [1] 10
+## 
+## $init.it
+## [1] NA
+## 
+## $estim.prec
+## [1] 6.103516e-05
+\end{verbatim}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/AddingWeights-1} 
+
+}
+
+
+\begin{kframe}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Joining, by = c("{}Survey"{}, "{}Quarter"{}, "{}Country"{}, "{}Ship"{}, "{}Gear"{}, "{}StNo"{}, "{}HaulNo"{}, "{}Year"{}, "{}SpeciesName"{})}}\end{kframe}
+\end{knitrout}
 
 \section{Cefas survey data}
 
@@ -747,6 +638,12 @@ were:
 	\item The correction factor used was either an otter trawl value of
 		0.38 (as above) or a beam trawl value of 0.19, as appropriate.
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Exploratory plots}
 
@@ -997,6 +894,30 @@ species.
 
 \includegraphics[width=1\linewidth]{figure/Survey_catches-6} 
 
+\includegraphics[width=1\linewidth]{figure/Survey_catches-7} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-8} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-9} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-10} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-11} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-12} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-13} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-14} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-15} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-16} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-17} 
+
+\includegraphics[width=1\linewidth]{figure/Survey_catches-18} 
+
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
@@ -1017,54 +938,13 @@ The WCGFS, EVHOE, IE-IGFS and Q4SWIBTS show reasonable consistency with each
 other in terms of CPUE trends for cod, though the WCGFS caught less haddock and
 whiting. \\
 
-The following pages show the length composition of the catch for the three
-species from the surveys. There looks reasonable consistency between the EVHOE,
-IE-IGFS, WCGFS and the Q4SWIBTS. The NWGFS looks to catch a smaller size class
-of fish, likely due to its inshore distribution. \\
-
-\begin{landscape}
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=1\linewidth]{figure/Length_comp1-1} 
-
-\end{knitrout}
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=1\linewidth]{figure/Length_Comp2-1} 
-
-\includegraphics[width=1\linewidth]{figure/Length_Comp2-2} 
-
-\includegraphics[width=1\linewidth]{figure/Length_Comp2-3} 
-
-\end{knitrout}
-
-\end{landscape}
-
 \subsection{Conclusion on survey availability}
 
-Having reviewed the available survey data, its concluded that coverage prior to
-1992 was patchy and incomplete. Further, the CARLHELMAR and NWGFS surveys are
-focused on flatfish catches, with little information on gadoid species. As
-such, the dataset is truncated to include only the years 1992 - 2015 and the
-surveys: WCGFS, EVHOE, IE-IGFS, Q4SWIBTS, Q1SWBEAM. The following survey
-location plots and CPUEs show that the revised dataset gives good spatial
-coverage and information from the surveys. \\
-
-\begin{landscape}
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=1\linewidth]{figure/Revised_Survey_locations-1} 
-
-\includegraphics[width=1\linewidth]{figure/Revised_Survey_locations-2} 
-
-\includegraphics[width=1\linewidth]{figure/Revised_Survey_locations-3} 
-
-\end{knitrout}
-
-\end{landscape}
+Having reviewed the available survey data, coverage prior to 1992 was patchy
+and incomplete and the CARLHELMAR and NWGFS surveys are focused on flatfish
+catches, with little information on gadoid species. Therefore it will be
+important to check model diagnostics to entire the characteristics are being
+treated appropriately. However, all the data will be kept for the first runs.\\
 
 \section{Habitat covariates}
 

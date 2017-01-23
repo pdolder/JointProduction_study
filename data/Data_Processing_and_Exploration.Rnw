@@ -33,8 +33,10 @@
 
 \begin{document}
 
-<<echo=FALSE>>=
+<<Setup, echo=FALSE, comment = F, results = 'hide'>>=
 library(knitr)
+library(ggplot2) 
+library(dplyr)
 set.seed(1)
 opts_chunk$set(size="footnotesize")
 @
@@ -63,7 +65,7 @@ The following data sources were used:
 \section{Length-weight conversion factors}
 
 As the survey records consist of count of fish at each length class and we are
-interested in working with biomass(weight) of fish, we first estimate a
+interested in working with biomass (weight) of fish, we first estimate a
 length-weight relationship for the different species from the Datras data
 product of weight at length estimates. The data is baseds on the EVHOE survey
 series only, due to availability within Datras. \\
@@ -77,17 +79,21 @@ parameters to estimate:
 
 The raw data looks as follows for cod, haddock and whiting:
 
-<<echo = F, fig.cap = 'Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements', fig.width = 9, fig.height = 3>>=
-
-# Library for plotting
-library(ggplot2) 
+<<LWt, echo = F, fig.cap = 'Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements', fig.width = 9, fig.height = 9>>=
 
 # Read data and remove records without corresponding weight
 DF <- read.csv(file.path('DATRAS', 'SMALK_EVHOE.csv')) # read data
 DF <- DF[!is.na(DF$IndWgt),]
 
-# Subset to cod, haddock and whiting
-spp <- c('Gadus morhua','Merlangius merlangus','Melanogrammus aeglefinus')
+# Subset to species of interest
+sort(unique(DF$Species))
+spp <- c('Gadus morhua', 'Lepidorhombus whiffiagonis', 'Lophius piscatorius',
+	 'Lophius budegassa','Merlangius merlangus','Melanogrammus aeglefinus', 'Merluccius merluccius', 'Pleuronectes platessa', 'Solea solea')
+
+## N.B. The length-weight relationship for anglerfishes doesn't hold, so we
+## might need an alternative solution....'Pollachius pollachius' - no
+## juveniles?? 
+
 DF <- DF[DF$Species %in% spp,]
 
 # Plot
@@ -105,7 +111,7 @@ To simplify the fitting procedure, the von bertalanffy relationship in equation
 
 \vspace{1cm}
 
-<<echo = F, fig.caption = 'Length and weight measurements on a log scale',fig.width = 9, fig.height = 3>>=
+<<LWt2, echo = F, fig.caption = 'Length and weight measurements on a log scale',fig.width = 9, fig.height = 9>>=
 
 DF$lWt <- log(DF$IndWgt)
 DF$lL  <- log(DF$LngtClass)
@@ -117,44 +123,75 @@ ggplot(DF, aes(x = lL, y = lWt)) +
 @
 
 A linear model with species and year as factors was fit using the \textit{glm}
-function in the base R package:
+function in the base R package. We separate the roundfish and flatfish due to
+the different morphological forms affecting the length weight relationship:
 
 <<GLM fit, results = 'asis'>>=
 library(stargazer) # For nice model output
-lm1 <- glm(lWt ~ lL + Species + Year, data = DF)
-lm2 <- glm(lWt ~ lL + Species, data = DF)
-stargazer(lm1, lm2, font.size  = 'small', align = T, 
-	  title = 'glm output from the two model fits', 
+
+gads  <- c('Gadus morhua', 'Melanogrammus aeglefinus', 
+	   'Merluccius merluccius', 'Merlangius merlangus')
+flats <- c('Lepidorhombus whiffiagonis', 'Solea solea', 'Pleuronectes platessa')
+lops  <- c('Lophius piscatorius', 'Lophius budegassa')
+
+lm1.gad <- glm(lWt ~ lL + Species + Year, data = filter(DF, Species %in% gads))
+lm2.gad <- glm(lWt ~ lL + Species, data = filter(DF, Species %in% gads))
+
+stargazer(lm1.gad, lm2.gad, font.size  = 'small', align = T, 
+	  title = 'glm output from the two model fits to gadoids', 
 	  table.placement = 'H')
+
+lm1.flat <- glm(lWt ~ lL + Species + Year, data = filter(DF, Species %in% flats	))
+lm2.flat <- glm(lWt ~ lL + Species, data = filter(DF, Species %in% flats))
+
+stargazer(lm1.flat, lm2.flat, font.size  = 'small', align = T, 
+	  title = 'glm output from the two model fits to flatfish', 
+	  table.placement = 'H')
+
 @
 
 Year was initially also included as a factor, but found not to be significant
-and lm2 was chosen as the best model (Table 1). This model was then used to
-predict over all lengths for each species.  A bias correction was applied to
-adjust for the fact that the mean weights from the model fit on a log scale are
-geometric means on the normal scale (cf = $e^{\frac{\sigma^{2}}{2}}$).
+and the second, across year, fit was chosen as the best models (Table 1, Table
+2). These models were then used to predict over all lengths for each species.  A
+bias correction was applied to adjust for the fact that the mean weights from
+the model fit on a log scale are geometric means on the normal scale (cf =
+$e^{\frac{\sigma^{2}}{2}}$).
+
+For anglerfish, as there is insufficient data for a fit a model (few data
+points for piscatorius, no data points for budegassa), we use estimates from
+fishbase: $a = 0.03330$, $b= 2.766$.
 
 <<Prediction1, echo = F>>=
 
-predDF <- data.frame(lL = log(c(seq(min(DF$LngtClass[DF$Species == spp[1]]), max(DF$LngtClass[DF$Species == spp[1]]), l = 80),
-			       seq(min(DF$LngtClass[DF$Species == spp[2]]), max(DF$LngtClass[DF$Species == spp[2]]), l = 80),
-			       seq(min(DF$LngtClass[DF$Species == spp[3]]), max(DF$LngtClass[DF$Species == spp[3]]), l = 80))),
-                     Species = rep(spp, each = 80))
+lop <- c(a = 0.03330, b = 2.766)
 
-predDF$lWt <- predict(lm2, newdata = predDF)
+predDF <- expand.grid(lL = seq(log(min(DF$LngtClass)),
+			       log(max(DF$LngtClass)), l = 80),
+		      Species = spp)
+
+predDF$lWt[predDF$Species %in% gads]  <- predict(lm2.gad, newdata = predDF[predDF$Species %in% gads,])
+predDF$lWt[predDF$Species %in% flats] <- predict(lm2.flat, newdata = predDF[predDF$Species %in% flats,])
+predDF$Wt[predDF$Species %in% lops] <- lop[['a']] *(exp(predDF$lL[predDF$Species %in% lops])^lop[['b']]) / 1000
+
+
 @
 
-<<Predictions2, fig.width  = 9, fig.height = 3, fig.caption = 'Predicted weights at length for the bias uncorrected (red) and bias corrected (blue) values'>>=
+<<Predictions2, fig.width  = 9, fig.height = 9, fig.caption = 'Predicted weights at length for the bias uncorrected (red) and bias corrected (blue) values'>>=
 
 # Exponentiate the predictions
-predDF$L <- exp(predDF$lL)
-predDF$Wt <- exp(predDF$lWt)
+predDF$L  <- exp(predDF$lL)
+predDF$Wt[predDF$Species %in% c(gads,flats)] <- exp(predDF$lWt[predDF$Species
+						    %in% c(gads, flats)])
 
 ## Now we need to bias correct due to the fact that the mean on the logscale is
 ## the geometric mean...
-corr.fact <- exp(sigma(lm2)^2/2)
-print(corr.fact)
-predDF$WtCorr <- predDF$Wt * corr.fact
+corr.fact.gad  <- exp(sigma(lm2.gad)^2/2)
+corr.fact.flat <- exp(sigma(lm2.flat)^2/2)
+print(paste('Correction factor for gadoids=',corr.fact.gad,'\n and flats = ', corr.fact.flat))
+
+predDF$WtCorr[predDF$Species %in% gads]  <- predDF$Wt[predDF$Species %in% gads]* corr.fact.gad
+predDF$WtCorr[predDF$Species %in% flats] <- predDF$Wt[predDF$Species %in% flats]* corr.fact.flat
+predDF$WtCorr[predDF$Species %in% lops] <-  predDF$Wt[predDF$Species %in% lops]
 
 # Plot the von bertalanffy fits
 ggplot(DF, aes(x = LngtClass, y = IndWgt)) + geom_point(colour = 'grey') +
@@ -163,8 +200,11 @@ ggplot(DF, aes(x = LngtClass, y = IndWgt)) + geom_point(colour = 'grey') +
         geom_line(data = predDF, aes(x = L, y = WtCorr), col = 'blue') +
 	theme_bw()
 
+lm2 <- list(lm2.gad, lm2.flat)
+corr.fact <- list(corr.fact.gad, corr.fact.flat)
+
 ## Save the fit and the correction factor
-save(lm2, corr.fact, file = 'LengthWeightPredictGadoids.RData')
+save(lm2, corr.fact, lop, file = file.path('DATRAS','LengthWeightPredictCelticSea.RData'))
 
 @
 
@@ -211,7 +251,7 @@ To calculate the distance:
 
 \begin{equation}
 	\begin{split}
-	f D(km) = \\
+	& f D(km) = \\
 	& R \cdot \Bigg[2 \cdot \arcsin \Bigg(\min\bigg(1,
 	\sqrt{\sin({\frac{Lat_{y1} - Lat_{y2}}{2}})^2 + \cos(Lat_{x1}) \cdot
 		\cos(Lat_{x2}) \cdot \sin({\frac{Lon_{x1} -
@@ -224,8 +264,6 @@ Where $R$ is the mean Radius of the Earth, 6 341 km. \\
 Total records were: \\
 
 <<Distance calcs, echo = F, message = F>>=
-# packages
-library(dplyr) 
 load(file.path('DATRAS', 'CelticSurveyData.RData')) # pre-downloaded data, HH is station, HL is catch
 
 kable(group_by(HH, Survey, HaulVal) %>% summarise(n = n()))
@@ -272,7 +310,7 @@ To calculate the swept area, we first have to estimate the door spread for any
 records where it's missing. There were only 5 records with missing door spread,
 but use the predicted door spread for all records. \\
 
-<<DoorSpread, fig.width = 5, fig.height = 5, echo = F, warnings = F, fig.align = 'center'>>=
+<<DoorSpread, fig.width = 5, fig.height = 5, echo = F, warning = F, message = F, fig.align = 'center'>>=
 
 # Covert numeric variables so we can explore the covariates
 HH$SweepLngt   <- as.numeric(HH$SweepLngt) ;  HH$HaulDur     <- as.numeric(HH$HaulDur)
@@ -324,7 +362,7 @@ There looks to be a relationship between depth and doorspread where it
 increases to around 200 m and then flattens out, but with a covariate effect.
 We will model this relationship with a gam. 
 
-<<Doorspread4, results = 'asis', echo = T, warnings = F>>=
+<<Doorspread4, results = 'asis', echo = T, warning = F>>=
 
 library(mgcv)
 
@@ -333,21 +371,25 @@ m1 <- gam(DoorSpread ~ Depth, data = HH)
 #summary(m1)
 
 # With all covariate, no interactions
-m2 <- gam(DoorSpread ~ Depth + factor(DoorWgt) + Warplngt + factor(Warpdia) +
-	  factor(SweepLngt), data =   HH)
+m2 <- gam(DoorSpread ~ Depth + factor(DoorWgt) + Warplngt +
+	  factor(Warpdia) + factor(SweepLngt), data =   HH)
 #summary(m2)
 
 ### full interactions
-m3 <- gam(DoorSpread ~ Depth * factor(DoorWgt) * Warplngt * factor(Warpdia) *
-	  factor(SweepLngt), data =   HH)
+m3 <- gam(DoorSpread ~ Depth * factor(DoorWgt) * Warplngt * 
+	  factor(Warpdia) * factor(SweepLngt), data =   HH)
 #summary(m3)
 
+@
 
-stargazer(m1, m2, m3, font.size  = 'small', align = T, 
-	  title = 'gam output from model with and without covariates', 
-	  table.placement = 'H')
+<<Doorspread5, results = 'asis', echo = F, warning = F>>=
 
 kable(AIC(m1, m2, m3))
+
+#stargazer(m1,m2,m3, font.size  = 'small', align = T, 
+#	  title = 'gam output from model with and without 
+#	  covariates', table.placement = 'H', single.row = T)
+
 
 @
 
@@ -361,6 +403,7 @@ HHresid <- filter(HH, !is.na(DoorWgt), !is.na(Warplngt),
 HHresid$residm3   <- resid(m3)
 HHresid$predictm3 <- fitted(m3)
 
+## Plot resids
 ggplot(HHresid, aes(x = predictm3, y = residm3)) + geom_point() +
 	geom_smooth(method = 'loess', col = 'red') +
 	theme_bw() + ggtitle('fitted values against residuals') +
@@ -393,7 +436,6 @@ ggplot(HH, aes(x = DoorSpread, y = PredSpread )) + geom_point(colour = 'grey') +
 	geom_abline(slope = 1, intercept = 0, col = 'red') + theme_bw() +
 	ylab('Predicted door spread') + xlab('Measured door spred') +
 	ggtitle('Door spread predictions against measurements')
-
 @
 
 Looks OK.  We use this to predict the door spread for the tows. Then, we calculate
@@ -436,7 +478,10 @@ The length data were converted to weight through the following process:
 		length. The lengths to define this split were based on the EU
 		technical regulation defining the minimum conservation
 		reference size (MCRS); for cod = 35 cm, haddock = 30 cm,
-		whiting = 27 cm.
+		whiting = 27 cm, hake = 27 cm, plaice = 27 cm, sole = 24 cm,
+		megrim = 20 cm. For anglerfishes (piscatorius and budegassa) at
+		value of 32 cm was used, equivalent to the 500 g minimum
+		marketing weight.
 	\item Aggregate across length classes by species.
 	\item Merge the station information with the catch records, retaining
 		zero entries for each species at each station, where
@@ -444,6 +489,133 @@ The length data were converted to weight through the following process:
 	\item Retaining all stations within 12 W - 2 W \&  48 N - 52 N (the
 		Celtic Sea area).
 \end{itemize}
+
+<<AddingWeights, echo = F, warning = F, fig.width = 4, fig.height = 4, fig.align= 'center'>>=
+
+## Add species names
+load(file.path('DATRAS', 'DatrasSpeciesCodes.RData'))
+HL$SpeciesName <- DatrasSpeciesCodes$scientific.name[match(HL$SpecCode, DatrasSpeciesCodes$code_number)]
+
+# need as numeric
+an <- as.numeric
+HL$LngtClass  <- an(HL$LngtClass)
+HL$HLNoAtLngt <- an(HL$HLNoAtLngt)
+HL$SubFactor  <- an(HL$SubFactor)
+
+# Deal with different length codes - standarise to cm
+HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] <-  HL$LngtClass[(HL$LngtClass == 2460 & HL$SpeciesName == 'Merlangius merlangus')] / 10 ## Dodgy datapoint!
+HL$LngtClass[HL$LngtCode == ". "] <- HL$LngtClass[HL$LngtCode == '. ']/10
+HL$LngtClass[HL$LngtCode == 0] <- HL$LngtClass[HL$LngtCode == 0]/10
+
+# Round down length classes & add 0.5
+HL$LngtClass[HL$LngtCode != "5"] <- round(HL$LngtClass[HL$LngtCode != "5"])
+HL$LngtClass[HL$LngtCode != "5"] <- HL$LngtClass[HL$LngtCode != "5"]+0.5
+
+## Now raise with the Model predictions
+load(file = file.path('DATRAS','LengthWeightPredictCelticSea.RData'))
+
+# Filter to the species of interest 
+HL$Species <- HL$SpeciesName
+HL <- filter(HL, Species %in% spp) ## spp from above
+
+# Add log(length)
+HL$lL  <- log(HL$LngtClass * 10)
+
+# Predict log weight
+#gadoids
+HL$LogWtLength[HL$Species %in% gads] <- predict(lm2[[1]], newdata = HL[HL$Species %in% gads,])
+# flats
+HL$LogWtLength[HL$Species %in% flats] <- predict(lm2[[2]], newdata = HL[HL$Species %in% flats,])
+# anglerfishes
+HL$LogWtLength[HL$Species %in% lops] <- log(lop[['a']] * (exp(HL$lL[HL$Species %in% lops])^lop[['b']])/1000)
+
+HL$WtLength <- exp(HL$LogWtLength) # convert back to weight in grams
+
+HL$Wt <- HL$WtLength * HL$HLNoAtLngt * HL$SubFactor # Total weight in g
+HL$Wt <- HL$Wt / 1000 # Weight in Kg
+# bias correct
+HL$Wt[HL$Species %in% gads] <- HL$Wt[HL$Species %in% gads] * corr.fact[[1]]  
+HL$Wt[HL$Species %in% flats] <- HL$Wt[HL$Species %in% flats] * corr.fact[[2]]  
+
+## And aggregate across lengths
+# split into Ju and Ad
+
+## For anglerfish, there is no minimum size but a minimum landing weight of
+## 500g for marketing...let's find the equivalent length from the data
+x <- filter(HL, Species %in% lops)
+x$Wt <- x$Wt / x$SubFactor / x$HLNoAtLngt
+
+
+# Find the length equivalent of the 500 g 
+fn_opt <- function(a, b, L) {
+res <- (a * (L^b))/1000
+return(res - 0.5000)
+}
+
+# optimise
+print(uniroot(f = fn_opt, a = lop[['a']], b = lop[['b']], interval = c(0,150)))
+size <- uniroot(f = fn_opt, a = lop[['a']], b = lop[['b']], interval = c(0,150))$root
+## Anglerfish minimum size is equivalent to 32.5 cm
+
+plot(x$Wt ~ x$LngtClass, main = 'Lophius spp: 500 g minimum marketing
+     size and MCRS', xlab = 'Length', ylab = 'weight (kg)')
+lines(x = c(size, size), y = c(0,0.5), col = 'red')
+lines(x = c(0, size), y = c(0.5,0.5), col = 'red')
+
+HL$SpeciesName <- ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'), 
+ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Melanogrammus aeglefinus' & HL$LngtClass <  29.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Melanogrammus aeglefinus' & HL$LngtClass >= 29.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Merlangius merlangus' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Merlangius merlangus' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Merluccius merluccius' & HL$LngtClass <  26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Merluccius merluccius' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Pleuronectes platessa' & HL$LngtClass < 26.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Pleuronectes platessa' & HL$LngtClass >= 26.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Solea solea' & HL$LngtClass < 23.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Solea solea' & HL$LngtClass >= 23.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lepidorhombus whiffiagonis' & HL$LngtClass >= 19.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lepidorhombus whiffiagonis' & HL$LngtClass <  19.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Lophius piscatorius' & HL$LngtClass >= 32.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lophius piscatorius' & HL$LngtClass <  32.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+ifelse(HL$SpeciesName == 'Lophius budegassa' & HL$LngtClass >= 32.5, paste(HL$SpeciesName,'Adu', sep = '_'),
+ifelse(HL$SpeciesName == 'Lophius budegassa' & HL$LngtClass <  32.5, paste(HL$SpeciesName,'Juv', sep = '_'),
+       paste(HL$SpeciesName,'All', sep ='_')))))))))))))))))))
+
+DF <- HL[!is.na(HL$Wt),]
+DF <- DF %>% group_by(Survey, Quarter, Country, Ship, Gear, StNo, HaulNo, Year, SpeciesName) %>%
+	summarise(Kg = sum(Wt)) %>% as.data.frame()
+
+# Now merge in the station details: lat, lon etc..
+# midpoint of haul locations - small enough distances to not worry about
+# spherical distances
+HH$HaulLatMid <- (an(HH$ShootLat) + an(HH$HaulLat)) / 2 
+HH$HaulLonMid <- (an(HH$ShootLon) + an(HH$HaulLon )) / 2
+
+# Fix blank spaces in variables...
+DF$Survey <- gsub(' ','',DF$Survey)
+DF$Gear   <- gsub(' ','',DF$Gear)
+DF$Ship   <- gsub(' ','',DF$Ship)
+DF$StNo   <- gsub(' ','',DF$StNo)
+
+## Create a haul record for each species
+HH <- merge(x = HH, y = data.frame(SpeciesName = unique(DF$SpeciesName)))
+
+# Join on the catch data
+DF2 <- full_join(x = HH, y = DF)
+DF2$Kg[is.na(DF2$Kg)] <- 0  #NAs are zero catches of the species
+
+# Subset to variables of interest
+DF <- DF2[c('Survey','Ship','StNo','HaulNo','Year', 'Month','SpeciesName','HaulLatMid','HaulLonMid','HaulDur', 'SweptArea', 'SweptAreaAdj','Kg')]
+
+# Remove marginal areas
+DF <- filter(DF, HaulLonMid < -2 & HaulLonMid > -12)
+DF <- filter(DF, HaulLatMid >  48 & HaulLatMid < 52)
+
+# Save
+save(DF, file = file.path('Cleaned','CelticSurveyFormattedSize.RData'))
+
+@
 
 \section{Cefas survey data}
 
@@ -464,6 +636,212 @@ were:
 		0.38 (as above) or a beam trawl value of 0.19, as appropriate.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<Cefas_Survey_Processing, echo = F, warning = F, message = F, results = 'hide'>>=
+
+FSS <- read.csv(file = file.path('CEFAS', 'WesternSurveys_V20160905.dat'))
+
+######################################
+# Process station data
+######################################
+Stations <- group_by(FSS, fldSeriesName, fldCruiseName, fldGearDescription,Year, Month, Day, Time, fldCruiseStationNumber,fldValidityCode, fldTowDuration) %>% 
+	    summarise(ShootLat = mean(fldShotLatDecimalDegrees),
+		  ShootLon = mean(fldShotLonDecimalDegrees),
+		  HaulLat  = mean(fldHaulLatDecimalDegrees),
+		  HaulLon  = mean(fldHaulLonDecimalDegrees)) %>% as.data.frame()
+######################################
+
+# Keep only valid hauls
+table(Stations$fldValidityCode)
+Stations <- filter(Stations, fldValidityCode == 'V')
+
+##################################################################
+## There are some tows which are clearly too large a distance...
+## so to clean the data
+# but note tow distance varies greatly over time - so standardise
+##################################################################
+
+############################3
+Stations$Dist <- mapply(gcd.hf, long1 = deg2rad(Stations$ShootLon),
+       	         lat1  = deg2rad(Stations$ShootLat),
+	         long2 = deg2rad(Stations$HaulLon),
+	         lat2  = deg2rad(Stations$HaulLat))
+
+summary(Stations$Dist)
+
+Stations$DistStand <- (Stations$Dist / Stations$fldTowDuration) * 60
+
+# Remove any over or under the SE of median distance for the survey (robust
+# detection of outliers
+# https://www.r-bloggers.com/absolute-deviation-around-the-median/)
+
+StationsClean    <- group_by(Stations, fldSeriesName) %>% 
+	            summarise(median = median(DistStand),
+			      mean   = mean(DistStand),
+		    MAD = mad(DistStand, center = median(DistStand))) %>%
+		    as.data.frame()
+
+StationsClean$Up <- StationsClean$median + 5 * StationsClean$MAD
+StationsClean$Lo <- StationsClean$median - 5 * StationsClean$MAD
+
+## Now add the upper and lower thresholds to the stations
+Stations$LoThres <- StationsClean$Lo[match(Stations$fldSeriesName,
+					   StationsClean$fldSeriesName)]
+Stations$UpThres <- StationsClean$Up[match(Stations$fldSeriesName,
+					   StationsClean$fldSeriesName)]
+
+Stations$InTol   <- ifelse(Stations$DistStand >= Stations$LoThres & Stations$DistStand <= Stations$UpThres, 'KEEP', 'LOSE')
+
+table(Stations$InTol)
+
+########################################################################
+# midpoint of haul locations - small enough distances to not worry about
+# spherical distances
+an <- as.numeric
+Stations$HaulLatMid <- (an(Stations$ShootLat) + an(Stations$HaulLat)) / 2 
+Stations$HaulLonMid <- (an(Stations$ShootLon) + an(Stations$HaulLon)) / 2
+
+## Calculate the swept area per gear
+## for beam trawls its easy, for otter trawls need to include the doorspread
+## for effective swept area
+
+Surveys <- sort(unique(Stations$fldGearDescription))
+
+Surveys <- Surveys[c(1:9,23,31:46,48,49)]
+# Only keep the trawl fish surveys
+print(Surveys)
+Stations <- filter(Stations, fldGearDescription %in% Surveys)
+
+## No details for otter trawl deployment, so use the standard 87m doorspread
+Stations$GearWidth <- ifelse(Stations$fldGearDescription %in% Surveys[1], 2,  ifelse(
+			Stations$fldGearDescription %in% Surveys[2:5], 3,  ifelse(
+			Stations$fldGearDescription %in% Surveys[6:9], 4, ifelse(
+			Stations$fldGearDescription %in% Surveys[10], 87, ifelse(
+			Stations$fldGearDescription %in% Surveys[11:12], 4,ifelse(
+			Stations$fldGearDescription %in% Surveys[13:25], 87,ifelse(
+			Stations$fldGearDescription %in% Surveys[26:27], 4,ifelse(
+			Stations$fldGearDescription %in% Surveys[28], 87, NA))))))))
+
+Stations$SweptArea <- Stations$Dist * (Stations$GearWidth / 1000)
+
+## Adjust swept area for gear efficiencies, after Piet et al for roundfish:
+
+# BT: 0.19
+# OT: 0.22 - 0.54 (Juv, ad). 0.38
+
+Stations <- Stations[!is.na(Stations$GearWidth),]
+
+Stations$SweptAreaAdjFac <- sapply(Stations$GearWidth, function(x) {
+	       if(x %in% c(2.5, 3, 4))  return(0.19) 
+	       if(x == 87)  return(0.38)    
+	       else return(NA)
+		 })
+
+Stations$SweptAreaAdj <- Stations$SweptArea * Stations$SweptAreaAdjFac
+
+# Only keep stations in tolerance
+Stations <- filter(Stations, InTol == 'KEEP')
+
+by(data = Stations$SweptAreaAdj, INDICES = Stations$fldSeriesName, FUN = mean, na.rm = T)
+
+###############################
+###### Process the catches ####
+###############################
+
+# Convert all lengths to cm and round to 5cm size class
+FSS$fldLengthGroup <- (FSS$fldLengthGroup / 10) + 0.5
+
+# load a/b parameters
+## Add a and b parameters for length-weight
+## Load the modelled length weight relationships....
+load(file.path('DATRAS', 'LengthWeightPredictCelticSea.RData'))
+
+# Only species of interest 
+FSS <- filter(FSS, fldScientificName %in% toupper(spp)) # species list from above
+
+# Add log length
+FSS$lL <- log(FSS$fldLengthGroup * 10)
+
+# Scientific names to small case except first letter
+FSS$Species <- paste(toupper(substring(FSS$fldScientificName, 1, 1)), tolower(substring(FSS$fldScientificName, 2, 1000)), sep = '')
+
+# Predict log weight
+#gads
+FSS$LogWtLength[FSS$Species %in% gads] <- predict(lm2[[1]], newdata =	FSS[FSS$Species %in% gads,])
+# flats
+FSS$LogWtLength[FSS$Species %in% flats] <- predict(lm2[[2]], newdata =  FSS[FSS$Species %in% flats,])
+#anglers
+FSS$LogWtLength[FSS$Species %in% lops] <- log(lop[['a']] * (exp(FSS$lL[FSS$Species %in% lops])^lop[['b']])/1000)
+
+FSS$WtLength <- exp(FSS$LogWtLength) # convert back to weight in grams
+
+FSS$Wt <- FSS$WtLength * FSS$Numbers # Total weight in g
+FSS$Wt <- FSS$Wt / 1000 # Weight in Kg
+
+# bias correct
+FSS$Wt[FSS$Species %in% gads]  <- FSS$Wt[FSS$Species %in% gads] * corr.fact[[1]]
+FSS$Wt[FSS$Species %in% flats] <- FSS$Wt[FSS$Species %in% flats] * corr.fact[[2]]
+
+FSS <- FSS[!is.na(FSS$Wt),]  ## Lack length measurements
+
+# Aggregate
+# split into Ju and Ad
+
+FSS$Species <- ifelse(FSS$Species == 'Gadus morhua' & FSS$fldLengthGroup <  34.5, paste(FSS$Species,'Juv', sep = '_'), 
+ifelse(FSS$Species == 'Gadus morhua' & FSS$fldLengthGroup >= 34.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Melanogrammus aeglefinus' & FSS$fldLengthGroup <  29.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Melanogrammus aeglefinus' & FSS$fldLengthGroup >= 29.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Merlangius merlangus' & FSS$fldLengthGroup <  26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Merlangius merlangus' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Merluccius merluccius' & FSS$fldLengthGroup <  26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Merluccius merluccius' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Pleuronectes platessa' & FSS$fldLengthGroup < 26.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Pleuronectes platessa' & FSS$fldLengthGroup >= 26.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Pollachius pollachius' & FSS$fldLengthGroup < 29.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Pollachius pollachius' & FSS$fldLengthGroup >= 29.5,paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Solea solea' & FSS$fldLengthGroup < 23.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Solea solea' & FSS$fldLengthGroup >= 23.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lepidorhombus whiffiagonis' & FSS$fldLengthGroup >= 19.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lepidorhombus whiffiagonis' & FSS$fldLengthGroup <  19.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Lophius piscatorius' & FSS$fldLengthGroup >= 32.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lophius piscatorius' & FSS$fldLengthGroup <  32.5, paste(FSS$Species,'Juv', sep = '_'),
+ifelse(FSS$Species == 'Lophius budegassa' & FSS$fldLengthGroup >= 32.5, paste(FSS$Species,'Adu', sep = '_'),
+ifelse(FSS$Species == 'Lophius budegassa' & FSS$fldLengthGroup <  32.5, paste(FSS$Species,'Juv', sep = '_'),
+       paste(FSS$Species,'All', sep ='_')))))))))))))))))))))
+
+## Summarise as weight
+FSS <- group_by(FSS, fldSeriesName, Year, Month, fldCruiseStationNumber, Species) %>% summarise(Kg = sum(Wt)) %>% as.data.frame()
+
+## Now match the positional and catch data 
+Stations <- merge(x = Stations, y = data.frame(Species = unique(FSS$Species)))
+
+FSS <- FSS[c('fldSeriesName', 'Year', 'Month', 'fldCruiseStationNumber','Species', 'Kg')]
+
+FSS <- full_join(x = Stations, y = FSS)
+# Add zeros
+FSS$Kg[is.na(FSS$Kg)] <- 0
+
+by(FSS$Kg, INDICES = FSS$Species, summary)
+
+FSS <- FSS[c('fldSeriesName','Year', 'Month','fldCruiseStationNumber','HaulLatMid','HaulLonMid','fldTowDuration', 'SweptArea', 'SweptAreaAdj' ,'Species','Kg')]
+
+## Trim to only keep data within core Celtic Sea
+
+FSS <- filter(FSS, HaulLonMid > -12 &  HaulLonMid < -2) # remove extreme Lons
+FSS <- filter(FSS, HaulLatMid >  48 &  HaulLatMid < 52) # remove extreme Lats
+
+#plot(FSS$SweptAreaAdj ~ FSS$fldSeriesName)
+#boxplot(FSS$SweptAreaAdj ~ FSS$Year)
+
+table(FSS$Month, FSS$Year, FSS$fldSeriesName)
+
+save(FSS, file = file.path(getwd(), 'Cleaned','CelticSurvey2FormattedSize.RData'))
+
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Exploratory plots}
 
 The following section details some exploratory plots from the cleaned data.
@@ -481,18 +859,12 @@ library(maps)
 ##################################################
 
 # Load in data
-load(file.path('Cleaned', 'CelticSurveyFormattedSize.RData')) # Datras data by weight
-load(file.path('Cleaned', 'CelticSurvey2FormattedSize.RData')) # Cefas data by weight
+load(file.path(getwd(), 'Cleaned', 'CelticSurveyFormattedSize.RData')) # Datras data by weight
+load(file.path(getwd(), 'Cleaned', 'CelticSurvey2FormattedSize.RData')) # Cefas data by weight
 
 DWt <- DF; CWt <- FSS; rm(DF, FSS) # Rename to avoid confusion
 
-load(file.path('Cleaned', 'DATRAS_No_At_Length.RData')) # Datras data by length 
-load(file.path('Cleaned', 'Cefas_No_At_Length.RData')) # Cefas data by length 
-
-Dln <- DF; Cln <- FSS; rm(DF, FSS)
-
 ##################################################
-
 ## Combine the datasets
 Wt <- data.frame(Survey    = c(DWt$Survey      , as.character(CWt$fldSeriesName)),
 		 Year      = c(DWt$Year        , CWt$Year),
@@ -505,21 +877,6 @@ Wt <- data.frame(Survey    = c(DWt$Survey      , as.character(CWt$fldSeriesName)
 		 Species   = c(DWt$Species,      CWt$Species),
 		 Kg        = c(DWt$Kg          , CWt$Kg))
 rm(DWt, CWt)
-
-Ln <- data.frame(Survey    = c(Dln$Survey      , as.character(Cln$fldSeriesName)),
-		 Year      = c(Dln$Year        , Cln$Year),
-		 Month     = c(Dln$Month       , Cln$Month),
-		 HaulNo    = c(Dln$HaulNo      , Cln$fldCruiseStationNumber),
-		 Lon       = c(Dln$HaulLonMid  , Cln$HaulLonMid),
-		 Lat       = c(Dln$HaulLatMid  , Cln$HaulLatMid),
-		 HaulDur   = c(Dln$HaulDur     , Cln$fldTowDuration),
-		 SweptArea = c(Dln$SweptAreaAdj, Cln$SweptAreaAdj),
-		 Species   = c(as.character(Dln$SpeciesName) , Cln$Species),
-		 Length    = c(Dln$LngtClass   , Cln$Length),
-		 Number    = c(Dln$Number      , Cln$Numbers),
-		 Kg        = c(Dln$Kg          , Cln$Kg))
-
-rm(Dln, Cln)
 
 @
 
@@ -674,10 +1031,9 @@ species.
 
 <<Survey catches, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
 
-spp <- unique(Wt$Species)
+spp <- sort(unique(Wt$Species))
 
 for (s in 1:length(spp)) {
-
 
 plotDF <- Wt[Wt$Species == spp[s],]
 
@@ -690,8 +1046,6 @@ print(ggplot() +
 	facet_wrap(~ Year, ncol = 5) + 
 	theme_classic() + ggtitle(paste('Spatial catches of',spp[s], 'in Kg',
 					sep = ' ')))
-
-
 }
 
 @
@@ -706,7 +1060,7 @@ cpue <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/Haul
 							  q95 = quantile(Kg/HaulDur * 60, prob = 0.95, na.rm = T))
 
 print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
-	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	facet_wrap(~Species, ncol = 2, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
 	ylab('Kg per hour tow') + xlab('') + ggtitle('CPUE (Kg per hour tow)'))
 
 cpsa <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/SweptArea, prob = 0.05, na.rm = T),
@@ -715,7 +1069,7 @@ cpsa <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/Swep
 							  q95 = quantile(Kg/SweptArea, prob = 0.95, na.rm = T))
 
 print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
-	facet_wrap(~Species, ncol = 1, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
+	facet_wrap(~Species, ncol = 2, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
 	ylab('Density (catch per km2 swept)') + xlab('') + ggtitle('CPUE (Catch per km2 swept area)'))
 
 @
@@ -729,39 +1083,6 @@ unsurprising given its designed as a flatfish survey. \\
 The WCGFS, EVHOE, IE-IGFS and Q4SWIBTS show reasonable consistency with each
 other in terms of CPUE trends for cod, though the WCGFS caught less haddock and
 whiting. \\
-
-The following pages show the length composition of the catch for the three
-species from the surveys. There looks reasonable consistency between the EVHOE,
-IE-IGFS, WCGFS and the Q4SWIBTS. The NWGFS looks to catch a smaller size class
-of fish, likely due to its inshore distribution. \\
-
-\begin{landscape}
-
-<<Length comp1, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
-
-
-Lcomp <- group_by(Ln, Survey, Species, Length) %>% summarise(n = sum(Number)) %>% as.data.frame()
-
-print(ggplot(Lcomp, aes(x = Length, y = n)) + geom_line(aes(colour = Survey)) + 
-      facet_wrap( ~Species, scale = 'free_y') + ggtitle(paste('Length composition aggregated across years')))
-
-@
-
-<<Length Comp2, out.width = '1\\linewidth', fig.width = 12, fig.height = 9,echo = F>>=
-
-Lcomp <- group_by(Ln, Survey, Year, Species, Length) %>% summarise(n = sum(Number)) %>% as.data.frame()
-
-spp <- unique(Lcomp$Species)
-for (s in 1:length(spp)) {
-plotDF <- Lcomp[Lcomp$Species == spp[s],]
-print(ggplot(plotDF, aes(x = Length, y = n)) + geom_line(aes(colour = Survey)) +
-      facet_wrap(Year ~Species, scale = 'free_y') + ggtitle(paste('Length composition of', spp[s],
-							  ' by year',sep = ' ')))
-}
-
-@
-
-\end{landscape}
 
 \subsection{Conclusion on survey availability}
 
