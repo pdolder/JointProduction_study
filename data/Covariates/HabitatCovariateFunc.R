@@ -1,4 +1,6 @@
-
+######################################################################
+## Generic function for assigning the habitat classification to the ##
+#################### knot generated within VAST ######################
 
 HabAssignFunc <- function(Kmeans = NULL, zone = 29, locationHabMap = NULL, nameHabMap = NULL) {
 library(rgdal)

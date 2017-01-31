@@ -251,6 +251,12 @@ INPUT ./figure/Residualcheck-2.pdf
 INPUT figure/Doorspread3-1.pdf
 INPUT ./figure/Doorspread3-1.pdf
 INPUT ./figure/Doorspread3-1.pdf
+INPUT figure/Doorspread3-2.pdf
+INPUT ./figure/Doorspread3-2.pdf
+INPUT ./figure/Doorspread3-2.pdf
+INPUT figure/Doorspread3-3.pdf
+INPUT ./figure/Doorspread3-3.pdf
+INPUT ./figure/Doorspread3-3.pdf
 INPUT figure/SweptArea-1.pdf
 INPUT ./figure/SweptArea-1.pdf
 INPUT ./figure/SweptArea-1.pdf
@@ -284,6 +290,9 @@ INPUT ./figure/Survey_Spatial_extent-2.pdf
 INPUT figure/TotalCatch-1.pdf
 INPUT ./figure/TotalCatch-1.pdf
 INPUT ./figure/TotalCatch-1.pdf
+INPUT figure/ZeroCheck-1.pdf
+INPUT ./figure/ZeroCheck-1.pdf
+INPUT ./figure/ZeroCheck-1.pdf
 INPUT figure/Survey_catches-1.pdf
 INPUT ./figure/Survey_catches-1.pdf
 INPUT ./figure/Survey_catches-1.pdf

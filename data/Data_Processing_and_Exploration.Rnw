@@ -36,6 +36,7 @@
 <<Setup, echo=FALSE, comment = F, warning = F, results = 'hide'>>=
 library(knitr) # markdown
 library(ggplot2) # for plotting
+library(maps) # spatial plots
 library(dplyr) # for data processing
 library(stargazer) # For nice model output
 library(gridExtra) # for multi-panel ggplots
@@ -370,16 +371,16 @@ We will model this relationship with a gam.
 <<Doorspread4, results = 'asis', echo = T, warning = F, comment = F>>=
 
 # Without covariate
-m1 <- gam(DoorSpread ~ Depth, data = HH)
+m1 <- gam(DoorSpread ~ s(Depth), data = HH)
 #summary(m1)
 
 # With all covariate, no interactions
-m2 <- gam(DoorSpread ~ Depth + factor(DoorWgt) + Warplngt +
+m2 <- gam(DoorSpread ~ s(Depth) + factor(DoorWgt) + Warplngt +
 	  factor(Warpdia) + factor(SweepLngt), data =   HH)
 #summary(m2)
 
 ### full interactions
-m3 <- gam(DoorSpread ~ Depth * factor(DoorWgt) * Warplngt * 
+m3 <- gam(DoorSpread ~ s(Depth) + factor(DoorWgt) * Warplngt * 
 	  factor(Warpdia) * factor(SweepLngt), data =   HH)
 #summary(m3)
 
@@ -387,7 +388,7 @@ m3 <- gam(DoorSpread ~ Depth * factor(DoorWgt) * Warplngt *
 
 <<Doorspread5, results = 'asis', echo = F, warning = F, fig.align = 'center'>>=
 
-kable(AIC(m1, m2, m3))
+kable(AIC(m1, m2, m3, m4))
 
 #stargazer(m1,m2,m3, font.size  = 'small', align = T, 
 #	  title = 'gam output from model with and without 
@@ -429,9 +430,14 @@ grid.arrange(p1, p2, p3, p4, ncol = 2)
 
 @
 
-Residuals look OK, so let's check the predictions against the measurements...
+Residuals look OK, so let's look at a Q-Q plot, half-normal plot and check the
+predictions against the measurements...
 
-<<Doorspread3, fig.width = 5, fig.height = 5, echo = F, fig.align = 'center',warning = F, comment = F>>=
+<<Doorspread3, fig.width = 4, fig.height = 4, echo = F, fig.align = 'center',warning = F, comment = F>>=
+
+qq.gam(m3, main = 'Q-Q plot')
+
+faraway::halfnorm(resid(m3), main = 'Half-normal plot')
 
 HH$PredSpread <- predict(m3, newdata = HH)
 
@@ -439,10 +445,24 @@ ggplot(HH, aes(x = DoorSpread, y = PredSpread )) + geom_point(colour = 'grey') +
 	geom_abline(slope = 1, intercept = 0, col = 'red') + theme_bw() +
 	ylab('Predicted door spread') + xlab('Measured door spred') +
 	ggtitle('Door spread predictions against measurements')
+
+nrow(HH[is.na(HH$PredSpread),])
+
+HH$PredSpread[is.na(HH$PredSpread) & !is.na(HH$DoorSpread)] <- HH$DoorSpread[is.na(HH$PredSpread) & !is.na(HH$DoorSpread)]
+
+nrow(HH[is.na(HH$PredSpread),]) # leaves 17 values
+
+# Use simple depth relationship (m1) where possible
+HH$PredSpread[is.na(HH$PredSpread) & !is.na(HH$Depth)] <- predict(m1,newdata = HH[is.na(HH$PredSpread) &
+									  !is.na(HH$Depth),])
+
+# For the remainder, use the standard 87 estimate
+HH$PredSpread[is.na(HH$PredSpread)] <- 87
+
 @
 
-Looks OK.  We use this to predict the door spread for the tows. Then, we calculate
-swept area based on:
+Looks OK.  We use this to predict the door spread for the tows (filling some
+NAs without available covariates). Then, we calculate swept area based on:
 
 \begin{equation}
 	Swept Area (km^2) = Distance (km) \cdot \frac{Doorspread (m)}{1000}
@@ -550,9 +570,6 @@ HL$Wt[HL$Species %in% flats] <- HL$Wt[HL$Species %in% flats] * corr.fact[[2]]
 
 ## For anglerfish, there is no minimum size but a minimum landing weight of
 ## 500g for marketing...let's find the equivalent length from the data
-x <- filter(HL, Species %in% lops)
-x$Wt <- x$Wt / x$SubFactor / x$HLNoAtLngt
-
 
 # Find the length equivalent of the 500 g 
 fn_opt <- function(a, b, L) {
@@ -577,6 +594,7 @@ ggplot(lop.df, aes(x = L, y = Wt)) + geom_line() +
 			     theme_bw() + ggtitle('Lophius spp. size at minimum
 						  marketing weight')
 
+## Assign to length groups
 HL$SpeciesName <- ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass <  34.5, paste(HL$SpeciesName,'Juv', sep = '_'), 
 ifelse(HL$SpeciesName == 'Gadus morhua' & HL$LngtClass >= 34.5, paste(HL$SpeciesName,'Adu', sep = '_'),
 ifelse(HL$SpeciesName == 'Melanogrammus aeglefinus' & HL$LngtClass <  29.5, paste(HL$SpeciesName,'Juv', sep = '_'),
@@ -786,7 +804,8 @@ FSS$LogWtLength[FSS$Species %in% gads] <- predict(lm2[[1]], newdata =	FSS[FSS$Sp
 # flats
 FSS$LogWtLength[FSS$Species %in% flats] <- predict(lm2[[2]], newdata =  FSS[FSS$Species %in% flats,])
 #anglers
-FSS$WtLength[FSS$Species %in% lops] <- (lop[['a']] * FSS$LngtClass[FSS$Species %in%
+FSS$WtLength <- NA
+FSS$WtLength[FSS$Species %in% lops] <- (lop[['a']] * FSS$fldLengthGroup[FSS$Species %in%
 				      lops]^lop[['b']]) / 1000
 
 FSS$WtLength[FSS$Species %in% c(gads,flats)] <- exp(FSS$LogWtLength[FSS$Species
@@ -866,12 +885,6 @@ This guides the final dataset used to fit the VAST model.
 
 
 <<Exploratory Plots1, echo = F, message = F>>=
-
-rm(list = ls())
-
-library(dplyr)
-library(ggplot2)
-library(maps)
 
 ##################################################
 
@@ -978,7 +991,7 @@ surveyno <- group_by(Stations, Survey, Year) %>% summarise(n= n())
 print(ggplot(surveyno, aes(x = Year, y = n)) + 
 	geom_bar(stat = 'identity', aes(fill = Survey), colour = 'black') +
 	theme_bw() + theme(axis.text.x = element_text(angle = -90)) +
-	ggtitle('No stations per month'))
+	ggtitle('No stations per year, per survey'))
 @
 
 The surveys are using different gears. The main difference being that the
@@ -1040,6 +1053,40 @@ print(ggplot(tot, aes(x = Year, y = Kg)) + geom_bar(stat = 'identity', aes(fill 
 								   -90)))
 @
 
+We need to check on the proportion of zeros in the data (for the delta
+model)...
+
+
+<<ZeroCheck, echo = F, fig.width = 12, fig.height = 8, fig.align = 'center'>>=
+
+## Proportion of zeros for each species/year
+yrs <- sort(unique(Wt$Year))
+spp <- sort(unique(Wt$Species))
+
+PropZeros <- matrix(NA, nrow = length(yrs), ncol = length(spp))
+
+for (y in 1:length(yrs)) {
+	for (s in 1:length(spp)) {
+		tmp <- filter(Wt, Year == yrs[y], Species == spp[s])
+		PropZeros[y,s] <- nrow(tmp[tmp$Kg==0,])/length(tmp$Kg)
+	}
+}
+
+PropZeros <- as.data.frame(PropZeros)
+colnames(PropZeros) <- spp
+PropZeros$Year <- yrs 
+
+x <- reshape2::melt(PropZeros, id = 'Year')
+x$col <- ifelse(x$value == 0 | x$value == 1 , 'all zeros or none', 'OK')
+
+ggplot(x, aes(x = Year, y = variable)) + geom_point(aes(size = value, col = factor(col))) +
+						  theme_bw() +
+						  theme(axis.text.x =
+							element_text(angle
+								     =-90))
+
+@
+
 The next pages detail the spatial catch distribution of the different species,
 followed by the catch per unit effort for the different survey series for each
 species. 
@@ -1085,7 +1132,7 @@ cpsa <- group_by(Wt, Survey, Year, Species) %>% summarise(q05 = quantile(Kg/Swep
 							  mean = mean(Kg/SweptArea,na.rm = T),
 							  q95 = quantile(Kg/SweptArea, prob = 0.95, na.rm = T))
 
-print(ggplot(cpue, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
+print(ggplot(cpsa, aes(x = Year, y = mean)) + geom_line(aes(group = Survey, colour = Survey)) +
 	facet_wrap(~Species, ncol = 2, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90)) +
 	ylab('Density (catch per km2 swept)') + xlab('') + ggtitle('CPUE (Catch per km2 swept area)'))
 

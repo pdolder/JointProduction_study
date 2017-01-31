@@ -168,7 +168,7 @@ the different morphological forms affecting the length weight relationship:
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Tue, Jan 24, 2017 - 11:48:18
+% Date and time: Tue, Jan 31, 2017 - 11:31:49
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits to gadoids} 
@@ -221,7 +221,7 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.297} & \multicolumn{1}{c}{-6,429.2
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Tue, Jan 24, 2017 - 11:48:18
+% Date and time: Tue, Jan 31, 2017 - 11:31:49
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits to flatfish} 
@@ -453,16 +453,16 @@ We will model this relationship with a gam.
 \begin{kframe}
 \begin{alltt}
 \hlcom{# Without covariate}
-\hlstd{m1} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth,} \hlkwc{data} \hlstd{= HH)}
+\hlstd{m1} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth),} \hlkwc{data} \hlstd{= HH)}
 \hlcom{#summary(m1)}
 
 \hlcom{# With all covariate, no interactions}
-\hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+}
+\hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth)} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+}
           \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
 \hlcom{#summary(m2)}
 
 \hlcom{### full interactions}
-\hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlstd{Depth} \hlopt{*} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*}
+\hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth)} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*}
           \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
 \hlcom{#summary(m3)}
 \end{alltt}
@@ -473,11 +473,13 @@ We will model this relationship with a gam.
 \hline
   & df & AIC\\
 \hline
-m1 & 3 & 32243.81\\
+m1 & 10.37315 & 31310.46\\
 \hline
-m2 & 8 & 25152.74\\
+m2 & 14.90415 & 24524.39\\
 \hline
-m3 & 25 & 24263.96\\
+m3 & 20.57980 & 24261.34\\
+\hline
+m4 & 12.90202 & 26004.64\\
 \hline
 \end{tabular}
 
@@ -502,7 +504,8 @@ Full model looks best, but let's check the residuals against the covariates
 
 \end{knitrout}
 
-Residuals look OK, so let's check the predictions against the measurements...
+Residuals look OK, so let's look at a Q-Q plot, half-normal plot and check the
+predictions against the measurements...
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -513,10 +516,28 @@ Residuals look OK, so let's check the predictions against the measurements...
 
 
 
+
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-2} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-3} 
+
+}
+
+
+\begin{kframe}\begin{verbatim}
+FALSE [1] 209
+FALSE [1] 17
+\end{verbatim}
+\end{kframe}
 \end{knitrout}
 
-Looks OK.  We use this to predict the door spread for the tows. Then, we calculate
-swept area based on:
+Looks OK.  We use this to predict the door spread for the tows (filling some
+NAs without available covariates). Then, we calculate swept area based on:
 
 \begin{equation}
 	Swept Area (km^2) = Distance (km) \cdot \frac{Doorspread (m)}{1000}
@@ -849,6 +870,21 @@ gadoids, while the CARLHELMAR and NWGFS catch very little. \\
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
 {\centering \includegraphics[width=\maxwidth]{figure/TotalCatch-1} 
+
+}
+
+
+
+\end{knitrout}
+
+We need to check on the proportion of zeros in the data (for the delta
+model)...
+
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/ZeroCheck-1} 
 
 }
 
