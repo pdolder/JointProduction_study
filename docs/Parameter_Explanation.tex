@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
+\usepackage{longtable}
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\title{Parameter explanation for VAST output}
+\author{Paul J. Dolder}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Simple table to remember the meaning of the parameter estimates from the VAST
+model output. Also detailed are full model settings and number of fixed
+parameters for Celtic Sea analysis.\\
+
+\begin{longtable}{|p{2.5cm} |p{4cm}| p{4cm}| p{4cm}| p{1cm} |}
+	\hline
+	\textbf{Parameter} & \textbf{Meaning} & \textbf{Dimensions} &
+	\textbf{Full model} & \textbf{No} \\
+	\hline
+	beta1\_ct: & year effect, encounter probability per species group & (No spp * No years) & 
+	18 spp * 26 years & 468 \\
+
+	beta2\_ct: & year effect, positive catch rate per species group & (No
+	spp * No years) & 18 spp * 26 years & 468 \\
+
+	gamma1\_j: & Static covariates for encounter prob & No columns in design matrix for
+	factors & Habitat covariates: 6(-1) + Depth(cont) & 6 \\
+
+	gamma2\_j: & Static covariates for positive catch rate & No columns in
+	design matrix for factors & Habitat covariates: 6(-1) + Depth(cont) & 6 \\
+
+	lambda1\_k: & Catchability covariates for encounter prob & No
+	covariates - 1 & No gears - 1 & 6 \\
+
+	lambda2\_k: & Catchability covariates for positive catch rate & No
+	covariates - 1 & No gears - 1 & 6 \\
+
+	L\_epsilon1\_z & Spatio-temporal loading factors for encounter prob &
+	Equal to the non-zero elements of loading matrix (lower triangle
+	including diagonal). Dimensions are no factors (j) x no species (k) =
+	$k \cdot \frac{2j-k+1}{2}$ & j = 10, k = 18 & 135 \\
+	
+	L\_epsilon2\_z & Spatio-temporal loading factors for positive catch
+	rate &	Equal to the non-zero elements of loading matrix (lower triangle
+	including diagonal). Dimensions are no factors (j) x no species (k) =
+	$k \cdot \frac{2j-k+1}{2}$ & j = 10, k = 18 & 135 \\
+
+	ln\_H\_input & Anisotropic values (encounter + positive catch rate) &
+	default 2 values & - &  2 \\
+
+	logkappa1 & Range for correlation distance for encounter probability &
+	single value & - & 1 \\
+	
+	logkappa2 & Range for correlation distance for positive catch rate &
+	single value & - & 1 \\
+
+	logSigmaM & Log mean species positive catch rate & No species &
+	- & 18 \\
+
+	L\_omega1\_z & Spatial loading factors for encounter prob &
+	Equal to the non-zero elements of loading matrix (lower triangle
+	including diagonal). Dimensions are no factors (j) x no species (k) =
+	$k \cdot \frac{2j-k+1}{2}$ & j = 10, k = 18 &135 \\
+	
+	L\_omega2\_z & Spatial loading factors for positive catch
+	rate &	Equal to the non-zero elements of loading matrix (lower triangle
+	including diagonal). Dimensions are no factors (j) x no species (k) =
+	$k \cdot \frac{2j-k+1}{2}$ & j = 10, k = 18 &135 \\
+	\hline
+	& & & & 1522 \\
+	\hline
+\end{longtable}
+
+
+
+\end{document}

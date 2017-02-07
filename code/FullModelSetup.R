@@ -99,11 +99,11 @@ dir.create(DateFile)
 
 ## Prepare the fixed vessel covariates, Q_ik
 Vess_Cov <- vector_to_design_matrix(Data_Geostat[,'Vessel'])
-Vess_Cov <- Vess_Cov[,-1]
+Vess_Cov <- Vess_Cov[,-7]
 
 # Read in the habitat covariate function to generate X_xj
 source(file.path('..', 'data', 'Covariates', 'HabitatCovariateFunc.R'))
-
+source(file.path('..', 'data', 'Covariates', 'DepthCovariateFunc.R'))
 ##############################
 ##### Extrapolation grid #####
 ##############################
@@ -122,11 +122,17 @@ Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = f
 Hab2 <- vector_to_design_matrix(Hab$Habitat)
 Hab2 <- Hab2[,-6]
 
+## Now assign the depth
+Depths <- DepthAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationDepths = file.path('..', 'data', 'Covariates', 'Bathy.RData'))
+
+## Combine the covariates
+Qs <- cbind(Hab2, Depths)
+
 ################################
 #### Make and Run TMB model ####
 ################################
   # Make TMB data list
-  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "X_xj" = Hab2,"s_i"=Data_Geostat[,'knot_i']-1, "t_iz"=as.numeric(Data_Geostat[,'Year']), "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method)
+  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "X_xj" = Qs,"s_i"=Data_Geostat[,'knot_i']-1, "t_iz"=as.numeric(Data_Geostat[,'Year']), "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method)
 
   # Make TMB object
   #dyn.unload( paste0(DateFile,"/",dynlib(TMB:::getUserDLL())) )
