@@ -21,7 +21,7 @@ load('Save.RData')
 ########################
   Method = c("Grid", "Mesh")[2]
   #grid_size_km = 20 
-  n_x = c(50, 100, 250, 500, 1000, 2000)[3] # Number of stations
+  n_x = c(50, 100, 250, 500, 1000, 2000)[2] # Number of stations
   Kmeans_Config = list( "randomseed"=1, "nstart"=100, "iter.max"=1e3 )     # Samples: Do K-means on trawl locs; Domain: Do K-means on extrapolation grid
  strata.limits <- data.frame('STRATA'="All_areas") # Decide on strata for use when calculating indices
   Region = "Celtic_Sea"# Determine region
@@ -62,7 +62,7 @@ diag.plots <- TRUE      ## Do you want to plot diagnostics ??
  table(DF$Survey, DF$Year)		   
 
  ## Subset years to best data - based on data exp. doc
- DF <- DF[DF$Year %in% c(1990:2015),]
+ DF <- DF[DF$Year %in% c(2000:2015),]
 
  sort(unique(DF$spp)) 
 
@@ -79,37 +79,16 @@ diag.plots <- TRUE      ## Do you want to plot diagnostics ??
 		       "Lat"=DF[,"Lat"], 
 		       "Lon"=DF[,"Lon"] )
 
-## Prepare the fixed vessel covariates, Q_ik
-Vess_Cov <- vector_to_design_matrix(Data_Geostat[,'Vessel'])
-Vess_Cov <- Vess_Cov[,-7] # Relative to WCGFS
-
-# Read in the habitat covariate function to generate X_xj
-source(file.path('..','..' ,'data', 'Covariates', 'HabitatCovariateFunc.R'))
-source(file.path('..','..' ,'data', 'Covariates', 'DepthCovariateFunc.R'))
-
-
 ##############################
 ##### Extrapolation grid #####
 ##############################
   # Get extrapolation data
- Extrapolation_List = SpatialDeltaGLMM::Prepare_Extrapolation_Data_Fn( Region=Region, strata.limits=strata.limits, observations_LL=Data_Geostat[,c('Lat','Lon')], maximum_distance_from_sample = max_dist)
+  Extrapolation_List <- Save$Extrapolation_List
+  Spatial_List <- Save$Spatial_List
 
-  # Calculate spatial information for SPDE mesh, strata areas, and AR1 process
-  Spatial_List = SpatialDeltaGLMM::Spatial_Information_Fn(n_x=n_x, Method=Method, Lon=Data_Geostat[,'Lon'], Lat=Data_Geostat[,'Lat'], Extrapolation_List=Extrapolation_List, randomseed=Kmeans_Config[["randomseed"]], nstart=Kmeans_Config[["nstart"]], iter.max=Kmeans_Config[["iter.max"]], DirPath=DateFile )
 
 #### Prep data
 Data_Geostat = cbind(Data_Geostat, Spatial_List$loc_i, "knot_i"=Spatial_List$knot_i)
-
-#### Assign habitat class
-Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..','..' ,'data', 'Covariates', '201208_EUSeaMap_Atlantic_Habitats'), nameHabMap = '201208_EUSeaMap_Atlantic_Habitats')  
-  
-Hab2 <- vector_to_design_matrix(Hab$Habitat)
-Hab2 <- Hab2[,-6] # Relative to ???
-
-## Assign the depth                                                                                                 
-Depths <- DepthAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationDepths = file.path('..', '..','data', 'Covariates', 'Bathy.RData'))
-## Combine the covariates
-Qs <- cbind(Hab2, Depths)                                                                                               
 
 if(diag.plots == T) {
   Year_Set = seq(min(an(as.character(DF[,'Year']))),max(an(as.character(DF[,'Year']))))
@@ -122,10 +101,11 @@ if(diag.plots == T) {
   Q = SpatialDeltaGLMM::QQ_Fn( TmbData=Save$TmbData, Report=Save$Report, FileName_PP=paste0(DateFile,"Posterior_Predictive.jpg"), FileName_Phist=paste0(DateFile,"Posterior_Predictive-Histogram.jpg"), FileName_QQ=paste0(DateFile,"Q-Q_plot.jpg"), FileName_Qhist=paste0(DateFile,"Q-Q_hist.jpg"))
 
 # Get region-specific settings for plots
-  MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn("Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List" = Extrapolation_List)
+  MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn("Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap,
+						    "Extrapolation_List" = Extrapolation_List)
 
   ## Plot residuals
-  SpatialDeltaGLMM:::plot_residuals(Lat_i=Data_Geostat[,'Lat'], Lon_i=Data_Geostat[,'Lon'], TmbData=Save$TmbData, Report=Save$Report, Q=Q, savedir=DateFile, MappingDetails=MapDetails_List[["MappingDetails"]], PlotDF=MapDetails_List[["PlotDF"]], MapSizeRatio=MapDetails_List[["MapSizeRatio"]], Xlim=MapDetails_List[["Xlim"]], Ylim=MapDetails_List[["Ylim"]], FileName=DateFile, Year_Set=Year_Set, Years2Include=Years2Include, Rotate=MapDetails_List[["Rotate"]], Cex=MapDetails_List[["Cex"]], Legend=MapDetails_List[["Legend"]], zone=MapDetails_List[["Zone"]], mar=c(0,0,2,0), oma=c(3.5,3.5,0,0), cex=1.8)
+  SpatialDeltaGLMM:::plot_residuals(Lat_i=Data_Geostat[,'Lat'], Lon_i=Data_Geostat[,'Lon'], TmbData=TmbData, Report=Report, Q=Q, savedir=DateFile, MappingDetails=MapDetails_List[["MappingDetails"]], PlotDF=MapDetails_List[["PlotDF"]], MapSizeRatio=MapDetails_List[["MapSizeRatio"]], Xlim=MapDetails_List[["Xlim"]], Ylim=MapDetails_List[["Ylim"]], FileName=DateFile, Year_Set=Year_Set, Years2Include=Years2Include, Rotate=MapDetails_List[["Rotate"]], Cex=MapDetails_List[["Cex"]], Legend=MapDetails_List[["Legend"]], zone=MapDetails_List[["Zone"]], mar=c(0,0,2,0), oma=c(3.5,3.5,0,0), cex=1.8)
 
   # Plot Anisotropy  
   SpatialDeltaGLMM::PlotAniso_Fn( FileName=paste0(DateFile,"Aniso.png"), Report=Save$Report, TmbData=Save$TmbData )
@@ -154,5 +134,22 @@ Plot_factors(Report = Save$Report, ParHat = Save$ParHat, Data = Save$TmbData, SD
 ###############
 
 
+cov <- data.frame(cov = rep(colnames(Save$Vessel_Covariate), times = 2),
+		  MLE_enc = params$MLE[params$Param == 'lambda1_k'],
+		  MLE_pos = params$MLE[params$Param == 'lambda2_k'])
+
+cov$Survey  <- sapply(strsplit(as.character(cov$cov), '_'), '[', 1) 
+cov$Species <- sapply(strsplit(as.character(cov$cov), '_'), '[', 2) 
+cov$Stage <- sapply(strsplit(as.character(cov$cov), '_'), '[', 3) 
+
+sd_report <- Save$Opt$SD
+
+library(ggplot2)
+
+ggplot(cov, aes(x = Survey, y = MLE_enc)) + geom_point(aes(colour = Stage)) +
+	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0))
+
+ggplot(cov, aes(x = Survey, y = exp(MLE_pos))) + geom_point(aes(colour = Stage)) +
+	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0))
 
 
