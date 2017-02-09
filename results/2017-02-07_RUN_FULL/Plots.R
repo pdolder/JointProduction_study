@@ -105,7 +105,7 @@ if(diag.plots == T) {
 						    "Extrapolation_List" = Extrapolation_List)
 
   ## Plot residuals
-  SpatialDeltaGLMM:::plot_residuals(Lat_i=Data_Geostat[,'Lat'], Lon_i=Data_Geostat[,'Lon'], TmbData=TmbData, Report=Report, Q=Q, savedir=DateFile, MappingDetails=MapDetails_List[["MappingDetails"]], PlotDF=MapDetails_List[["PlotDF"]], MapSizeRatio=MapDetails_List[["MapSizeRatio"]], Xlim=MapDetails_List[["Xlim"]], Ylim=MapDetails_List[["Ylim"]], FileName=DateFile, Year_Set=Year_Set, Years2Include=Years2Include, Rotate=MapDetails_List[["Rotate"]], Cex=MapDetails_List[["Cex"]], Legend=MapDetails_List[["Legend"]], zone=MapDetails_List[["Zone"]], mar=c(0,0,2,0), oma=c(3.5,3.5,0,0), cex=1.8)
+  SpatialDeltaGLMM:::plot_residuals(Lat_i=Data_Geostat[,'Lat'], Lon_i=Data_Geostat[,'Lon'], TmbData=Save$TmbData, Report=Save$Report, Q=Q, savedir=DateFile, MappingDetails=MapDetails_List[["MappingDetails"]], PlotDF=MapDetails_List[["PlotDF"]], MapSizeRatio=MapDetails_List[["MapSizeRatio"]], Xlim=MapDetails_List[["Xlim"]], Ylim=MapDetails_List[["Ylim"]], FileName=DateFile, Year_Set=Year_Set, Years2Include=Years2Include, Rotate=MapDetails_List[["Rotate"]], Cex=MapDetails_List[["Cex"]], Legend=MapDetails_List[["Legend"]], zone=MapDetails_List[["Zone"]], mar=c(0,0,2,0), oma=c(3.5,3.5,0,0), cex=1.8)
 
   # Plot Anisotropy  
   SpatialDeltaGLMM::PlotAniso_Fn( FileName=paste0(DateFile,"Aniso.png"), Report=Save$Report, TmbData=Save$TmbData )
@@ -113,7 +113,6 @@ if(diag.plots == T) {
   # Plot covariances
   Cov_List = Summarize_Covariance( Report=Save$Report, ParHat=Save$ParHat, Data=Save$TmbData, SD=Save$Opt$SD, plot_cor=TRUE, category_names=levels(DF[,'SpeciesName']), figname=paste0("Spatio-temporal_covariances"), plotTF=c("Omega1"=TRUE,"Epsilon1"=TRUE,"Omega2"=TRUE,"Epsilon2"=TRUE), mgp=c(2,0.5,0), tck=-0.02, oma=c(0,5,2,2) )
 
-  TmbData <- Save$TmbData
   # Plot overdispersion
   Plot_Overdispersion( filename1=paste0(DateFile,"Overdispersion"), filename2=paste0(DateFile,"Overdispersion--panel"), Data=Save$TmbData, ParHat=Save$ParHat, Report=Save$Report, ControlList1=list("Width"=5, "Height"=10, "Res"=600, "Units"='in'), ControlList2=list("Width"=TmbData$n_c, "Height"=TmbData$n_c, "Res"=200, "Units"='in'))
 
@@ -133,6 +132,9 @@ Plot_factors(Report = Save$Report, ParHat = Save$ParHat, Data = Save$TmbData, SD
 }
 ###############
 
+load('parameter_estimates.RData')
+
+params <- parameter_estimates$diagnostics
 
 cov <- data.frame(cov = rep(colnames(Save$Vessel_Covariate), times = 2),
 		  MLE_enc = params$MLE[params$Param == 'lambda1_k'],
@@ -146,10 +148,15 @@ sd_report <- Save$Opt$SD
 
 library(ggplot2)
 
-ggplot(cov, aes(x = Survey, y = MLE_enc)) + geom_point(aes(colour = Stage)) +
-	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0))
 
-ggplot(cov, aes(x = Survey, y = exp(MLE_pos))) + geom_point(aes(colour = Stage)) +
-	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0))
+print(ggplot(cov, aes(x = Survey, y = MLE_enc)) + geom_point(aes(colour = Stage)) +
+	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0))+ 
+	ggtitle('Encounter prob. gear effect'))
+ggsave(file = 'Gear_effects_ecounter.png')
+
+print(ggplot(cov, aes(x = Survey, y = MLE_pos)) + geom_point(aes(colour = Stage)) +
+	facet_wrap(~Species) + theme(axis.text.x = element_text(angle = -90,hjust = 0)) +
+	ggtitle('Positive catch rate gear effect'))
+ggsave(file = 'Gear_effects_catch.png')
 
 

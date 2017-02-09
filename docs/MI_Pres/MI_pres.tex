@@ -15,7 +15,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Modelling spatio-temporal dynamics \\ 
 	of Celtic Sea fisheries}   
-\author{Paul Dolder, Cóilín Minto}
+\author{Paul Dolder, Jim Thorson \& Cóilín Minto}
 \date{February 9, 2017} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -28,11 +28,11 @@
 \frame{\frametitle{Goals for study} 
 \begin{enumerate}
 \setlength\itemsep{2em}
-\item Evaluate inter-species dynamics of main commercial fish populations in the
-	Celtic Sea 
+\item Evaluate inter-species dynamics of main commercial fish populations in
+	the Celtic Sea 
 \item Explore strength of interdependence of fisheries on the different species
-	(and the ability to separate catches) of species \textit{x} from species
-	\textit{y}
+	(as an insight into the ability to spatially separate catches of
+	species \textit{x} from species \textit{y})
 \item Make efficient use of (and combine) the various surveys that have been
 	undertaken in IE, FR, UK in past 20-odd years.
 \end{enumerate}
@@ -43,11 +43,13 @@
 \frame{\frametitle{Expected outcomes}
 \begin{enumerate}
 \setlength\itemsep{2em}
-	\item A useful index of abundance for the species/species groups taking
-		account of the irregular nature of survey coverage 
-	\item A measure of dependence of the species in space and time.
+	\item A useful index of abundance for the species/species groups
+		following treatment for the irregular spatial survey coverage
+		and sampling methods
+	\item A measure of dependence of the different species in space and time.
 	\item Insight into the spatio-temporal dynamics of the individual
-		species as a pre-cursor to exploring fisheries dynamics.
+		species as a pre-cursor to exploring how spatial abundance
+		estimates can be used for fleet dynamics models.
 \end{enumerate}
 }
 
@@ -77,14 +79,14 @@
 \frame{\frametitle{Modelling framework}
 
 \begin{itemize}
-	\item Implements a spatio-temporal delta-generalised linear mixed model
+	\item VAST implements a spatio-temporal delta-generalised linear mixed model
 		taking account of correlations among multiple species / size
 		classes.
 	\item Estimates spatio-temporal variation in density with spatial point
 		data.
 	\item VAST builds from several developments by Jim and others in using
-		model-based geostatistical methods. VAST can be found and
-		installed as an R package @
+		model-based geostatistical methods. 
+	\item It can be found and installed as an R package @
 		\url{https://github.com/james-thorson/VAST}
 	\end{itemize}
 }
@@ -113,18 +115,18 @@ Numerous publications documenting development of elements of the modelling frame
 \frame{\frametitle{Key properties of model} 
 \begin{enumerate}
 \setlength\itemsep{1em}
-	\item Two-step delta-Generalised GLMM
+	\item Two-stage "delta-"GLMM
 		\begin{itemize}
 			\item logit-link linear predictor for \textit{encounter
 				probability}
-			\item log-link or gamma linear predictor for \textit{catch rate}
+			\item log or gamma link linear predictor for \textit{catch rate}
 		\end{itemize}
 	\item Gaussian Markov Random Field (GMRF) process to model
 		spatio-temporal variation in abundance as a random effect
 		\begin{itemize}
 			\item Includes covariance matrices to describe
 				encounter probability \& catch rate among locations
-			\item Includes a covariance matrices to describe
+			\item Includes covariance matrices to describe
 				encounter probability \& catch rate among
 				species(group)
 			\item covariance modelled with a matérn correlation
@@ -136,7 +138,10 @@ Numerous publications documenting development of elements of the modelling frame
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{\frametitle{key properties of model}
-\centering
+	\begin{itemize}
+	\item Spatial correlation function - range and shape param estimated 
+	\end{itemize}
+	\centering
 \includegraphics[width = 8cm]{/home/paul/Dropbox/MARES_PhD/Geostatistics/Sim_data/plots/Matern_example}
 }
 
@@ -146,11 +151,13 @@ Numerous publications documenting development of elements of the modelling frame
 \setlength\itemsep{1em}
 		\setcounter{enumi}{2}
 	\item Covariance among species is represented by loading factors
-		following a factor-analysis decomposition.
+		following a factor-analysis decomposition.\\ \hspace{1cm}
+		\textgreater \textgreater \hspace{1cm} reduces dimensionality
+		of the model
 	\item Can incorporate fixed or random vessel effects as well as covariates
 		for spatial predictions (e.g. habitat, depth).
-	\item Input to the model is the point data for catches (in biomass) per
-		species, per station and estimate of swept area - seasonal
+	\item Input to the model is the point data for catches (in weight) per
+		species, per station and an estimate of swept area. Seasonal
 		variation can also be incorporated in later versions of
 		software.
 \end{enumerate}
@@ -161,22 +168,22 @@ Numerous publications documenting development of elements of the modelling frame
 \frame{\frametitle{Model implementation} 
 \begin{enumerate}
 \setlength\itemsep{1em}
-	\item Model uses INLA R package to find (user defined) spatial knots
+	\item Model uses INLA R package to find (a user defined number of) spatial knots
 		reflecting the spatial distribution of the data
 	\item Parameter estimation for fixed effects done via Maximum
-		Likelihood Estimation in Template Model Builder (TMB) using the
+		Likelihood Estimation (MLE) in Template Model Builder (TMB) via the
 		Laplace approximation. The TMB code is auto-generated by the R
 		package.
-	\item Fit using the super-computers at ICHEC (Irish Centre for High End Computing)
+	\item Have been fitting using the super-computer at ICHEC (Irish Centre for High End Computing)
 		\begin{itemize}
 			\item low level parallelisation on 24 cores, access to
 				lots of memory
 			\item Still takes long runtimes (~ 2 days)
-		\includegraphics[width =2cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068}
+				\begin{flushright}
+				\includegraphics[width = 3cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/ichec_logo}
+				\includegraphics[width =2cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068}
+			\end{flushright}
 		\end{itemize}
-	\begin{flushright}
-		\includegraphics[width = 3cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/ichec_logo}
-	\end{flushright}
 \end{enumerate}
 }
 
@@ -219,8 +226,10 @@ Haul data:
 	\includegraphics[width=2cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/thalasa}
 	\includegraphics[width=3cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/fish}
 	\end{center}
-	\item Estimate length weight relationships (from EVHOE data)
+	\item Estimate length weight relationships (from EVHOE data) using a
+		GLM
 		\begin{itemize}
+			\item Use to raise numbers at length to weight
 			\item Split catch between \textless MCRS and
 				\textgreater MCRS
 		\end{itemize}
@@ -250,7 +259,7 @@ Haul data:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{\frametitle {Survey spatial coverage 3}
-\includegraphics[height = 8cm]{Survey_locations-1}
+\includegraphics[height = 9cm]{Survey_locations-1}
 }
 
 \frame{\frametitle {Swept Area}
@@ -269,22 +278,30 @@ Haul data:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{\frametitle {Raw CPUE}
 	\centering
-\includegraphics[width = 10cm]{CPUE-1}
+\includegraphics[width = 12cm]{CPUE-1}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frame{\frametitle {Survey catches - example}
+\frame{\frametitle {Survey catches - example adult cod}
 	\centering
-\includegraphics[width = 10cm]{Survey_catches-1}
+\includegraphics[width = 12cm]{Survey_catches-1}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Initial outputs and conclusions} 
+\frame{\frametitle {Survey catches - example juvenile cod}
+	\centering
+\includegraphics[width = 12cm]{Survey_catches-2}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminary outputs and conclusions} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame{\frametitle{Model setup}
 
 \begin{itemize}
+		\setlength\itemsep{1em}
 	\item Years: \hspace{2cm}  1990 - 2015
 	\item Species/Groups:  \hspace{0.35cm} 18
 	\item Factors:  \hspace{1.7cm} 10
@@ -305,7 +322,7 @@ Haul data:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{\frametitle{Model checking}
 \includegraphics[width=5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Q-Q_plot}
-\includegraphics[width=4.5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Diag--Encounter_prob}
+\includegraphics[width=4.78cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Diag--Encounter_prob}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -315,20 +332,21 @@ Haul data:
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frame{\frametitle{Gear effect}
-\includegraphics[width=6cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Gear_effects_ecounter}
-\includegraphics[width=6cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Gear_effects_catch}
+\frame{\frametitle{Gear effect - needs work to understand}
+	\centering
+\includegraphics[width=5.5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Gear_effects_ecounter}
+\includegraphics[width=5.5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Gear_effects_catch}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frame{\frametitle{Covariances / Correlations}
+\frame{\frametitle{Species-group Covariances / Correlations}
 	\centering
 \includegraphics[width = 9.5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-04_RUN_FULL/Spatio-temporal_covariances--Analytic}
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frame{\frametitle{Factor loadings} 
+\frame{\frametitle{Factor loadings - Spatio-temporal catch rates} 
 	\centering
 \includegraphics[width=5cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/results/2016-12-20_RUN_SIMPLE_BIG/Factor_loadings--Epsilon2}
 }
@@ -358,22 +376,45 @@ Haul data:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\frame{\frametitle{Thoughts on outputs}
+	\begin{itemize}
+		\setlength\itemsep{2em}
+		\item Fully model-based geo statistical method incorporating
+			spatial and temporal correlations within and across
+			species
+		\item Strong correlations within groups (gadoids, flats, shelf)
+			indicating may be spatially difficult to separate
+			\begin{itemize}
+				\item Though may be some separation on the
+					second factor - needs further
+					exploration.
+			\end{itemize}
+		\item Indices show good agreement with assessment outputs
+		\item Model output is rich, and will be worthwhile exploring
+			how it can be best used - to consider further
+			analyses
+	\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{\frametitle{Future steps}
 	\begin{itemize}
+	\setlength\itemsep{2em}
 	\item Complete at run with a higher number of knots / factors to ensure
 		fidelity in the model
+	\item Ground-truthing with those familiar with the surveys and
+		fisheries  
 	\item Test predictive capability: drop 1 year, predict and compare to
 		data:  Useful for closed areas?
 	\item Can also be applied to commercial data: vessel as random effect -
 		Seasonal model? Useful for identifying hotspots ??
 	\end{itemize}
-
 }
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frame{
 	\centering
-\includegraphics[width=qcm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2025}
+\includegraphics[width=6cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2025}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

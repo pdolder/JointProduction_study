@@ -431,12 +431,12 @@ INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso10.tfm
 INPUT /home/paul/Dropbox/MARES_PhD/Geostatistics/Sim_data/plots/Matern_example.png
 INPUT /home/paul/Dropbox/MARES_PhD/Geostatistics/Sim_data/plots/Matern_example.png
 INPUT /home/paul/Dropbox/MARES_PhD/Geostatistics/Sim_data/plots/Matern_example.png
-INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
-INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
-INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/ichec_logo.png
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/ichec_logo.png
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/ichec_logo.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/IMG_2068.JPG
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/thalasa.jpg
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/thalasa.jpg
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/thalasa.jpg
@@ -476,6 +476,9 @@ INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/CPUE-1.pdf
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-1.pdf
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-1.pdf
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-1.pdf
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-2.pdf
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-2.pdf
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/data/figure/Survey_catches-2.pdf
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Q-Q_plot.jpg
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Q-Q_plot.jpg
 INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/results/2017-02-07_RUN_FULL/Q-Q_plot.jpg
