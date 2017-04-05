@@ -29,7 +29,7 @@ library(VAST)
 library(INLA)
 INLA:::inla.dynload.workaround() ## Needed on older linux machines 
 
-mod <- M0
+mod <- M1
 
 if(mod == M0) { run <- 'M0' }
 if(mod == M1) { run <- 'M1' }
