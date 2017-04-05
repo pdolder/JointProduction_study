@@ -3,11 +3,11 @@
 #################### knot generated within VAST ######################
 ######################################################################
 
-DepthAssignFunc <- function(Kmeans = NULL, zone = 29, locationDepths = NULL) {
+DepthAssignFunc <- function(KmeansCenters = NULL, zone = 29, locationDepths = NULL) {
 library(rgdal)
 library(VAST)
 # Create a dataframe of the knots
-DF <- data.frame(X = Kmeans$centers[,'E_km'], Y = Kmeans$centers[,'N_km'])
+DF <- data.frame(X = KmeansCenters[,'E_km'], Y = KmeansCenters[,'N_km'])
 attr(DF, 'projection') = 'UTM'
 attr(DF, "zone") <- zone
 

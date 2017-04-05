@@ -101,8 +101,9 @@ source(file.path('..','..' ,'data', 'Covariates', 'DepthCovariateFunc.R'))
 Data_Geostat = cbind(Data_Geostat, Spatial_List$loc_i, "knot_i"=Spatial_List$knot_i)
 
 #### Assign habitat class
-Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..','..' ,'data', 'Covariates', '201208_EUSeaMap_Atlantic_Habitats'), nameHabMap = '201208_EUSeaMap_Atlantic_Habitats')  
-  
+#Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..','..' ,'data', 'Covariates', '201208_EUSeaMap_Atlantic_Habitats'), nameHabMap = '201208_EUSeaMap_Atlantic_Habitats')  
+Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..', '..', 'data', 'Covariates', 'CelticSeaMap'), nameHabMap = 'CelticSeaMap') 
+ 
 Hab2 <- vector_to_design_matrix(Hab$Habitat)
 Hab2 <- Hab2[,-6] # Relative to ???
 
@@ -149,7 +150,110 @@ SpatialDeltaGLMM::PlotResultsOnMap_Fn(plot_set=1:3, MappingDetails=MapDetails_Li
 
 ## Plot factors
 
-Plot_factors(Report = Save$Report, ParHat = Save$ParHat, Data = Save$TmbData, SD = Save$Opt$SD, mapdetails_list = MapDetails_List, Year_Set = Year_Set, category_names = levels(DF[,'SpeciesName']), plotdir = DateFile)
+fac <- Plot_factors(Report = Save$Report, ParHat = Save$ParHat, Data = Save$TmbData, SD = Save$Opt$SD, mapdetails_list = MapDetails_List, Year_Set = Year_Set, category_names = levels(DF[,'SpeciesName']), plotdir = DateFile)
+
+PCAstyle <- TRUE
+
+if(PCAstyle == TRUE) {
+category_names = levels(DF[,'SpeciesName'])
+L_list = vector('list', length = 4)
+names(L_list) = c("Omega1", "Epsilon1", "Omega2", "Epsilon2")
+Data = Save$TmbData
+ParHat = Save$ParHat
+Report = Save$Report
+i <- 'Epsilon2'
+Par_name = 'Epsilon2'
+Var_name = 'Epsiloninput2_sft'
+L_list[[i]] <- calc_cov(L_z = ParHat[[paste0('L_',tolower(Par_name), '_z')]], n_f = Data[['FieldConfig']][[Par_name]], n_c = Data$n_c, returntype = 'loadings_matrix')
+rownames(L_list[[i]]) <- category_names
+Var_rot = SpatialDFA::Rotate_Fn(L_pj = L_list[[i]], Psi = Report[[Var_name]], RotationMethod = 'PCA', testcutoff = 1e-04)
+
+rownames(Var_rot$L_pj_rot) <- paste(rep(c('cod','meg','bud','pis','had','whg','hke','ple','sol'), each = 2), c('adu','juv'), sep = "_")
+
+plot(Var_rot$L_pj_rot[,1], Var_rot$L_pj_rot[,2], xlim = c(-1,1), ylim = c(-1,1), pch = 16, xlab = 'Factor 1', ylab = 'Factor 2')
+abline(v = 0)
+abline(h = 0)
+arrows(0,0,Var_rot$Eigen$vectors[1,1], Var_rot$Eigen$vectors[1,2], col = 'red', length = 0.1)
+text(Var_rot$Eigen$vectors[1,1], Var_rot$Eigen$vectors[1,2], label = 'Loading 1', col = 'red', cex = 0.8)
+arrows(0,0,Var_rot$Eigen$vectors[2,1], Var_rot$Eigen$vectors[2,2], col = 'red', length = 0.1)
+text(Var_rot$Eigen$vectors[2,1], Var_rot$Eigen$vectors[2,2], label = 'Loading 2', col = 'red', cex = 0.8)
+text(Var_rot$L_pj_rot[,1], Var_rot$L_pj_rot[,2], label = rownames(Var_rot$L_pj_rot))
+
+}
+
+
+plot.cov <- TRUE
+
+
+if(plot.cov == TRUE) {
+HabDF <- data.frame(x = Spatial_List$Kmeans$centers[,1], 
+		    y= Spatial_List$Kmeans$centers[,2],
+		    knot = 1:nrow(Spatial_List$Kmeans$centers),
+		    Habitat = Hab$Habitat, Depth = Depths)
+
+library(ggplot2); library(cowplot)
+p1 <- ggplot(HabDF, aes(x = x, y = y)) + geom_point(aes(colour = Habitat)) + theme_classic() + theme(legend.position = 'top')
+p2 <- ggplot(HabDF, aes(x = x, y = y))  + geom_point(aes(colour = Depth)) + theme(legend.position = 'top') +
+       scale_colour_gradient2(low = "black", mid = "grey90",   high = "blue", midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")
+
+plot_grid(p1,p2)
+ggsave(file = 'CovariatesPredUpdated.png', width = 10, height = 6)
+
+# Count of vessel covariates
+VessDF <- data.frame(group = paste(Data_Geostat[,'Vessel'],Data_Geostat[,'spp'], sep = '_'), value = Data_Geostat[,'Catch_KG'])
+VessDF$Zeros <- ifelse(VessDF$value == 0, 'Zero', 'Positive')
+
+VessDF <- as.matrix(table(VessDF$group, VessDF$Zeros))
+VessDF <- data.frame(group = rownames(VessDF), Positive = VessDF[,'Positive'], Zeros = VessDF[,'Zero'], Tot = rowSums(VessDF[,1:2]))
+VessDF[,c('Positive','Zeros')] <- VessDF[,c('Positive','Zeros')]/VessDF[,c('Tot')]
+VessDF <- reshape2::melt(VessDF, id = c('group'))
+
+ggplot(VessDF[VessDF$variable != 'Tot',], aes(x = group, y = value)) + geom_bar(stat = 'identity', aes(fill = variable)) + coord_flip() +
+	theme(axis.text = element_text(size = 4)) + ylab('Percentage zeros')
+ggsave(file = 'CovariatesQ.png', width = 14, height = 6)
+
+### Plot habitat covariates vs data
+
+## add hab to data
+
+HabCov <- Data_Geostat
+HabCov$Habitat <- HabDF$Habitat[match(HabCov$knot_i, HabDF$knot)]
+HabCov$Habitat <- factor(HabCov$Habitat)
+HabCov$Survey_spp <- paste(HabCov$Vessel, HabCov$spp)
+
+library(dplyr) ; library(tidyr)
+
+HabCovsppAgg <- group_by(HabCov, spp, Habitat) %>% summarise(Catch_KG = sum(Catch_KG)) %>% complete(spp, Habitat) %>% as.data.frame()
+HabCovsppAgg[is.na(HabCovsppAgg$Catch_KG),]
+
+## No missing spp - habitat combinations
+
+HabCovsppAgg <- group_by(HabCov, Vessel, Habitat) %>% summarise(Catch_KG = sum(Catch_KG)) %>% complete(Vessel, Habitat) %>% as.data.frame()
+HabCovsppAgg[is.na(HabCovsppAgg$Catch_KG),]
+
+## Carlhelmar - seabed missing
+## CEXP - rock or other hard substrate missing
+
+
+ggplot(HabCov, aes(x = spp, y = Catch_KG)) + geom_boxplot() + facet_wrap(~Habitat) + theme(axis.text.x = element_text(angle = -90, hjust = 0))
+ggsave(file = 'Covariates_Hab_sppUpdated.png', width = 14, height = 6)
+ggplot(HabCov, aes(x = Vessel, y = Catch_KG)) + geom_boxplot() + facet_wrap(~Habitat) + theme(axis.text.x = element_text(angle = -90, hjust = 0))
+ggsave(file = 'Covariates_Hab_vessUpdated.png', width = 14, height = 6)
+
+}
+
+
+
+
+
+
+
+
+
+}
+
+
+
 }
 ###############
 

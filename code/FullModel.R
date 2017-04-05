@@ -15,9 +15,9 @@ library(ThorsonUtilities)
 library(VAST)
 
 library(INLA)
-INLA:::inla.dynload.workaround() 
+#INLA:::inla.dynload.workaround() 
 
-run <- 'RUN_FULL'
+run <- 'RUN_DIAG'
 
 # This is where all runs will be located
 DateFile  <- file.path('..','results',paste(Sys.Date(),'_',run,'/', sep = ""))
@@ -28,15 +28,17 @@ dir.create(DateFile)
 # Settings
 ###############
 
+n.spp <- 1
+
 #########################
 ### VAST CPP version ###
-  Version = "VAST_v2_1_0"
+  Version = "VAST_v2_4_0"
 ########################
 ## Spatial settings ###
 ########################
   Method = c("Grid", "Mesh")[2]
   #grid_size_km = 20 
-  n_x = c(20, 50, 100, 250, 500, 1000, 2000)[1] # Number of stations
+  n_x = c(10, 50, 100, 250, 500, 1000, 2000)[1] # Number of stations
   Kmeans_Config = list( "randomseed"=1, "nstart"=100, "iter.max"=1e3 )     # Samples: Do K-means on trawl locs; Domain: Do K-means on extrapolation grid
  strata.limits <- data.frame('STRATA'="All_areas") # Decide on strata for use when calculating indices
   Region = "Celtic_Sea"# Determine region
@@ -45,8 +47,9 @@ dir.create(DateFile)
 ########################
 #### Model settings ####
 ########################
-  FieldConfig = c("Omega1"=10, "Epsilon1"=10, "Omega2"=10, "Epsilon2"=10) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
-  RhoConfig = c("Beta1"=0, "Beta2"=0, "Epsilon1"=0, "Epsilon2"=0) # Structure for beta or epsilon over time: 0=None (default); 1=WhiteNoise; 2=RandomWalk; 3=Constant
+
+  FieldConfig = c("Omega1"=n.spp, "Epsilon1"=n.spp, "Omega2"=n.spp, "Epsilon2"=n.spp) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
+  RhoConfig = c("Beta1"=2, "Beta2"=2, "Epsilon1"=2, "Epsilon2"=2) # Structure for beta or epsilon over time: 0=None (default); 1=WhiteNoise; 2=RandomWalk; 3=Constant
   ObsModel = c(2,0)  # 0=normal (log-link); 1=lognormal; 2=gamma; 4=ZANB; 5=ZINB; 11=lognormal-mixture; 12=gamma-mixture
   OverdispersionConfig = c("eta1" = 0,"eta2" = 0) # 0 - number of factors
   BiasCorr = FALSE 
@@ -83,9 +86,13 @@ dir.create(DateFile)
  table(DF$Survey, DF$Year)		   
 
  ## Subset years to best data - based on data exp. doc
- DF <- DF[DF$Year %in% c(1990:2015),]
+ DF <- DF[DF$Year %in% c(2000:2015),]
 
- sort(unique(DF$spp)) 
+ species <- sort(unique(DF$spp)) 
+
+ ## plaice 
+ DF <- DF[DF$spp %in% species[c(15:16)],]
+
 
   DF$SpeciesName <- factor(DF$spp) # drop empty factors
   DF$Ship        <- factor(DF$Survey)
@@ -101,19 +108,58 @@ dir.create(DateFile)
 		       "Lon"=DF[,"Lon"] )
 
 ## Prepare the fixed vessel covariates, Q_ik
-Vess_Cov <- vector_to_design_matrix(paste(Data_Geostat[,'Vessel'],Data_Geostat[,'spp'], sep = '_'))
-Vess_Cov <- Vess_Cov[,-109] # Relative to WCGFS cod_adu
+
+## try species only 
+#spp <- sapply(strsplit(as.character(Data_Geostat[,'spp']), '\\_'), '[',1)
+
+#sz  <- sapply(strsplit(as.character(Data_Geostat[,'spp']), '\\_'), '[',2)
+
+## 0. Vessel only 
+Vess_Cov <- vector_to_design_matrix(paste(Data_Geostat[,'Vessel']))
+ 
+## 1. Vessel and species concatenated 
+#Vess_Cov <- vector_to_design_matrix(paste(Data_Geostat[,'Vessel'],Data_Geostat[,'spp'], sep = '_'))
+
+# 1a. Drop only single vessel-species combo
+ Vess_Cov  <- Vess_Cov[,-1]
+
+# 1b. Drop set of vessel-species combos
+#Vess_Cov <- Vess_Cov[,-c(1:18)] # Relative to WCGFS cod_adu
+
+# 2. Vessel and species separately
+#Vess_Cov <- vector_to_design_matrix(Data_Geostat[,'Vessel'])
+#spp_Cov <- vector_to_design_matrix(Data_Geostat[,'spp'])
+#Vess_Cov <- cbind(Vess_Cov[,-1],spp_Cov[,-1])
+
+# 2b. Vessel and species separated, interacting
+# use the design formula function in R
+
+#vess <- factor(Data_Geostat[,'Vessel'])
+#sp   <- factor(Data_Geostat[,'spp'])
+#Vess_Cov <- model.matrix(~ vess)
+
+# remove the column name
+#colnames(Vess_Cov) <- sub('vess', '', colnames(Vess_Cov))
+#colnames(Vess_Cov) <- sub('sp', '', colnames(Vess_Cov))
+
+
+#Vess_Cov <- Vess_Cov[,-1]  ## Drop the intercept
+
+
+# 3. Vessel / species excluding size
+#Vess_Cov <- vector_to_design_matrix(Data_Geostat[,'Vessel'])
+#spp_Cov <- vector_to_design_matrix(spp)
+#Vess_Cov <- cbind(Vess_Cov[,-1],spp_Cov[,-1])
 
 # Read in the habitat covariate function to generate X_xj
-source(file.path('..', 'data', 'Covariates', 'HabitatCovariateFunc.R'))
-source(file.path('..', 'data', 'Covariates', 'DepthCovariateFunc.R'))
-
+#source(file.path('..', 'data', 'Covariates', 'HabitatCovariateFunc.R'))
+#source(file.path('..', 'data', 'Covariates', 'DepthCovariateFunc.R'))
 
 ##############################
 ##### Extrapolation grid #####
 ##############################
   # Get extrapolation data
- Extrapolation_List = SpatialDeltaGLMM::Prepare_Extrapolation_Data_Fn( Region=Region, strata.limits=strata.limits, observations_LL=Data_Geostat[,c('Lat','Lon')], maximum_distance_from_sample = max_dist)
+ Extrapolation_List = SpatialDeltaGLMM::Prepare_Extrapolation_Data_Fn(Region=Region, strata.limits=strata.limits, observations_LL=Data_Geostat[,c('Lat','Lon')], maximum_distance_from_sample = max_dist)
 
   # Calculate spatial information for SPDE mesh, strata areas, and AR1 process
   Spatial_List = SpatialDeltaGLMM::Spatial_Information_Fn(n_x=n_x, Method=Method, Lon=Data_Geostat[,'Lon'], Lat=Data_Geostat[,'Lat'], Extrapolation_List=Extrapolation_List, randomseed=Kmeans_Config[["randomseed"]], nstart=Kmeans_Config[["nstart"]], iter.max=Kmeans_Config[["iter.max"]], DirPath=DateFile )
@@ -122,36 +168,67 @@ source(file.path('..', 'data', 'Covariates', 'DepthCovariateFunc.R'))
 Data_Geostat = cbind(Data_Geostat, Spatial_List$loc_i, "knot_i"=Spatial_List$knot_i)
 
 #### Assign habitat class
-Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..', 'data', 'Covariates', '201208_EUSeaMap_Atlantic_Habitats'), nameHabMap = '201208_EUSeaMap_Atlantic_Habitats')  
-  
-Hab2 <- vector_to_design_matrix(Hab$Habitat)
-Hab2 <- Hab2[,-6] # Relative to ???
+#Hab <- HabAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationHabMap = file.path('..', 'data', 'Covariates', 'CelticSeaMap'), nameHabMap = 'CelticSeaMap')  
+ 
+#Hab2 <- vector_to_design_matrix(Hab$Habitat)
+#Hab2 <- Hab2[,-6] # Relative to ???
 
 ## Assign the depth                                                                                                 
-Depths <- DepthAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationDepths = file.path('..', 'data', 'Covariates', 'Bathy.RData'))
+#Depths <- DepthAssignFunc(Kmeans = Spatial_List$Kmeans, zone = 30, locationDepths = file.path('..', 'data', 'Covariates', 'Bathy.RData'))
 ## Combine the covariates
-Qs <- cbind(Hab2, Depths)                                                                                               
+#Qs <- cbind(Hab2, Depths)                                                                                               
+
+###
 
 ################################
 #### Make and Run TMB model ####
 ################################
   # Make TMB data list
-  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "X_xj" = Qs,"s_i"=Data_Geostat[,'knot_i']-1, "t_iz"=as.numeric(Data_Geostat[,'Year']), "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method)
+
+## Note - removed the habitat covariates for testintg !!!
+  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], Q_ik = Vess_Cov, "s_i"=Data_Geostat[,'knot_i']-1, "t_iz"=as.numeric(Data_Geostat[,'Year']), "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method)
 
   # Make TMB object
-  #dyn.unload( paste0(DateFile,"/",dynlib(TMB:::getUserDLL())) )
-  TmbList = Build_TMB_Fn("TmbData"=TmbData, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_x)
+#  dyn.unload( paste0(DateFile,"/",dynlib(TMB:::getUserDLL())))
+  setwd(DateFile) # so executables go to the right place...
+
+  
+###############
+# create map - need to edit that defined by Make Map function
+##############
+
+  ## Identify position cod Carlhelmar cod and budgessa juv
+#  pos_juv <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Juv','CARLHELMAR_Lophius budegassa_Juv'))
+#  pos_adu <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Adu','CARLHELMAR_Lophius budegassa_Adu'))
+
+  # Make bespoke map
+#  Params <- Param_Fn(Version = Version, DataList = TmbData, RhoConfig = RhoConfig) # - list of parameters
+#  map <- Make_Map(TmbData = TmbData, TmbParams = Params, CovConfig = TRUE, Q_Config = TRUE,RhoConfig = RhoConfig) # make the map
+ 
+ # Replace the values for carlhelmar cod/bud juv  
+ # map$lambda1_k[pos_juv] <- NA
+ # map$lambda2_k[pos_juv] <- NA
+
+  # or make the same as the adults ?? #
+#  map$lambda1_k[pos_juv] <- map$lambda1_k[pos_adu]
+#  map$lambda2_k[pos_juv] <- map$lambda2_k[pos_adu]
+
+  # Relevel
+#  levels(map$lambda1_k) <- map$lambda1_k
+#  levels(map$lambda2_k) <- map$lambda2_k
+
+  TmbList = Build_TMB_Fn("TmbData"=TmbData, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_xi)#, "Map" = map)
   Obj = TmbList[["Obj"]]
 
   # Run model
-  Opt = TMBhelper::Optimize( obj=Obj, lower=TmbList[["Lower"]], upper=TmbList[["Upper"]], getsd=TRUE, savedir=DateFile, bias.correct=BiasCorr )
+  Opt = TMBhelper::Optimize(obj=Obj, lower=TmbList[["Lower"]], upper=TmbList[["Upper"]], getsd=TRUE, savedir=paste0('../',DateFile), bias.correct=BiasCorr) 
   Report = Obj$report()
 
 #################################  
 ######## Save outputs ###########
 #################################
 Save = list(Obj = Obj,"Opt"=Opt, "Report"=Report, "ParHat"=Obj$env$parList(Opt$par), "TmbData"=TmbData, "Data_Geostat" = Data_Geostat)
- save(Save, file=paste0(DateFile,"Save.RData"))
+save(Save, file=paste0('../',DateFile,"Save.RData"))
 
 ##########################
 # Make diagnostic plots ##

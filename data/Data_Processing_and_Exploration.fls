@@ -135,6 +135,15 @@ OUTPUT Data_Processing_and_Exploration.pdf
 INPUT ./Data_Processing_and_Exploration.out
 INPUT ./Data_Processing_and_Exploration.out
 OUTPUT Data_Processing_and_Exploration.out
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrro7t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrro7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrro8r.tfm
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
@@ -147,9 +156,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/wasy/wasy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/wasy/wasy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/wasy/wasy7.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
@@ -173,9 +179,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT figure/LWt-1.pdf
 INPUT ./figure/LWt-1.pdf
 INPUT ./figure/LWt-1.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
@@ -239,9 +242,6 @@ INPUT ./figure/DoorSpread-1.pdf
 INPUT figure/DoorSpread2-1.pdf
 INPUT ./figure/DoorSpread2-1.pdf
 INPUT ./figure/DoorSpread2-1.pdf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrro7t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrro7t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrro8r.tfm
 INPUT figure/Residualcheck-1.pdf
 INPUT ./figure/Residualcheck-1.pdf
 INPUT ./figure/Residualcheck-1.pdf
@@ -353,6 +353,9 @@ INPUT ./figure/CPUE-1.pdf
 INPUT figure/CPUE-2.pdf
 INPUT ./figure/CPUE-2.pdf
 INPUT ./figure/CPUE-2.pdf
+INPUT figure/CPUE-3.pdf
+INPUT ./figure/CPUE-3.pdf
+INPUT ./figure/CPUE-3.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd
 INPUT Data_Processing_and_Exploration.aux
