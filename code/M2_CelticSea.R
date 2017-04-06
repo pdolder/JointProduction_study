@@ -144,7 +144,7 @@ Data_Geostat = cbind(Data_Geostat, Spatial_List$loc_i, "knot_i"=Spatial_List$kno
 #### Static covariates ######
 #############################
 
-if (mod == M2) {
+if (mod == 'M2') {
 #### Assign habitat class
 # Read in the habitat covariate function to generate X_xj
 source('HabitatCovariateFunc.R')
