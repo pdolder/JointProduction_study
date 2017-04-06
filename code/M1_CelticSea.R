@@ -29,11 +29,9 @@ library(VAST)
 library(INLA)
 INLA:::inla.dynload.workaround() ## Needed on older linux machines 
 
-mod <- M1
-
-if(mod == M0) { run <- 'M0' }
-if(mod == M1) { run <- 'M1' }
-if(mod == M2) { run <- 'M2' }
+# setup run
+mod <- 'M1'
+run <- mod 
 
 # This is where all runs will be located
 DateFile  <- file.path('..','results',paste(Sys.Date(),'_',run,'/', sep = ""))
