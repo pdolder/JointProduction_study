@@ -69,10 +69,9 @@ cols <- brewer.pal(9, 'Blues')[c(9,5,1)]
 
 p2 <- ggplot() + geom_point(data = HabDF2, aes(x = Lon, y = Lat, colour = Depth), size = 0.02) + geom_point(data = HabDF, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
 	coast.poly + coast.outline + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
-	scale_colour_gradient2(low = cols[1], mid = cols[2], high = cols[3], midpoint = mean(HabDF$Depth), space = "Lab",
-       na.value = "grey50", guide = "colourbar")
+	scale_colour_gradient2(low = cols[1], mid = cols[2], high = cols[3], midpoint = mean(HabDF$Depth), space = "Lab", na.value = "grey50", guide = "colourbar")
 
-plot_grid(p1,p2, labels = c('(a) Habitat', '(b) Depth'), vjust = c(1.5, -1), ncol = 1)
+plot_grid(p1,p2, labels = c('(a) Substrate', '(b) Depth'), vjust = c(1.5, -1), ncol = 1)
 
 ggsave(file.path('..', 'plots', 'HabitatCovariatesPoly.png'), width = 8, height = 12)
 
