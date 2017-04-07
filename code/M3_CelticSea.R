@@ -31,7 +31,7 @@ library(INLA)
 INLA:::inla.dynload.workaround() ## Needed on older linux machines 
 
 # setup run
-mod <- 'M4'
+mod <- 'M3'
 run <- mod 
 
 # This is where all runs will be located
@@ -265,24 +265,19 @@ if (mod == 'M3') {
   lam1_k <- unlist(lapply(Qs, function(x) x$par.fixed[names(x$par.fixed) == 'lambda1_k']))
   lam2_k <- unlist(lapply(Qs, function(x) x$par.fixed[names(x$par.fixed) == 'lambda2_k']))
 
-  Params$lambda1_k <- lam1_k
-  Params$lambda2_k <- lam2_k
-
   # cod juv, bud juv should be fixed at their adult values 
   pos_juv <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Juv','CARLHELMAR_Lophius budegassa_Juv'))
   pos_adu <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Adu','CARLHELMAR_Lophius budegassa_Adu'))
  
-  Params$lambda1_k[pos_juv] <- Params$lambda1_k[pos_adu]
-  Params$lambda2_k[pos_juv] <- Params$lambda2_k[pos_adu]
+  Params$lambda1_k[pos_juv] <- lam1_k[pos_adu]
+  Params$lambda2_k[pos_juv] <- lam2_k[pos_adu]
 
   map <- Make_Map(TmbData = TmbData, TmbParams = Params, CovConfig = TRUE, Q_Config = TRUE,RhoConfig = RhoConfig) # make the map
  
  # Replace the values for carlhelmar cod/bud juv  - only fix these parameters,
   # allow rest to be estimated
   map$lambda1_k[pos_juv] <- NA 
-  map$lambda1_k <- factor(map$lambda1_k)
   map$lambda2_k[pos_juv] <- NA
-  map$lambda2_k <- factor(map$lambda2_k)
 
   # Relevel
   levels(map$lambda1_k) <- map$lambda1_k

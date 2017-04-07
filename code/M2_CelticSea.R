@@ -27,7 +27,7 @@ library(ThorsonUtilities)
 library(VAST)
 
 library(INLA)
-INLA:::inla.dynload.workaround() ## Needed on older linux machines 
+#INLA:::inla.dynload.workaround() ## Needed on older linux machines 
 
 # setup run
 mod <- 'M2'
