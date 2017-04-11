@@ -43,13 +43,13 @@ skips <- seq(1, 1981, l = 12)
 ## Each year as a list
 
 #Save to HadDat
-HadDat <- lapply(urls_dec, function(url) {
+HadDat <- lapply(urls_yrs, function(url) {
 # Download the yearly file and manipulate a bit
 tmpFile <- tempfile()
 fileName <- gsub(".gz","",basename(url))
 download.file(url, tmpFile)
 x <- readLines(tmpFile)
-y <- gsub('-32768', ' 9999 ', x)
+y <- gsub('-32768', ' -9999 ', x)
 cat(y, file = tmpFile, sep = "\n")
 
 ## For each month, save the data in a list
@@ -83,7 +83,10 @@ names(HadDat)
 rotate <- function(x) t(apply(x, 2, rev))
 
 par(mfrow = c(3,4))
-lapply(1:12, function(x) image(rotate(HadDat[['year_2004']][[x]]), zlim = c(-180, 3500), col = grey(seq(0.1,1,l = 100))))
 
+lapply(1:12, function(x) {
+	       res <- HadDat[['year_2004']][[x]]
+	       image(rotate(res), zlim = c(-180, 3500), col = grey(seq(0.1,1,l = 100))))
 
+}
 
