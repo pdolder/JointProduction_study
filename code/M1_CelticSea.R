@@ -7,7 +7,7 @@
 ## M1 = Vessel as fixed effect (Q covariate), no static cov
 ## M2 = Vessel as fixed effect, habitat and depth as static cov
 ############################################################
-## 05 April 2017
+## 06 April 2017
 ## Paul Dolder
 ##############################################################
 
@@ -144,7 +144,7 @@ Data_Geostat = cbind(Data_Geostat, Spatial_List$loc_i, "knot_i"=Spatial_List$kno
 #### Static covariates ######
 #############################
 
-if (mod == 'M2') {
+if (mod %in% c('M2')) {
 #### Assign habitat class
 # Read in the habitat covariate function to generate X_xj
 source('HabitatCovariateFunc.R')
@@ -184,7 +184,7 @@ if (mod == 'M1') {
 }
 
 # M2 - vessel as fixed effect + habitat covariates
-if (mod == 'M2') {
+if (mod %in% c('M2')) {
  TmbData = Data_Fn("Version"=Version, "FieldConfig"=FieldConfig, "RhoConfig"=RhoConfig, "ObsModel"=ObsModel, "OverdispersionConfig" = OverdispersionConfig, "c_i"=as.numeric(Data_Geostat[,'spp'])-1, "b_i"=Data_Geostat[,'Catch_KG'], "a_i"=Data_Geostat[,'AreaSwept_km2'], "Q_ik" = Vess_Cov,"X_xj" = StatCov, "s_i"=Data_Geostat[,'knot_i']-1, "t_iz"=as.numeric(Data_Geostat[,'Year']), "a_xl"=Spatial_List$a_xl, "MeshList"=Spatial_List$MeshList, "GridList"=Spatial_List$GridList, "Method"=Spatial_List$Method)
 
 }
@@ -211,45 +211,43 @@ if (mod == 'M0') {
   ## are estimated from another fit ##############
   ################################################
 
-if (mod %in% c('M1', 'M2')) {
-  ## loading in values
-  load(file.path('../','QEstimates.RData')) ## results folder
+if (mod %in% c('M1, M2')) {
 
-  # Define parameter list
+  ## loading in values
+ load(file.path('../','QEstimates.RData')) ## results folder - to fix the problem gear-species combinations
+
+ # Define parameter list
   Params <- Param_Fn(Version = Version, DataList = TmbData, RhoConfig = RhoConfig) # - list of parameters
 
-  # extract and assign lambda k values
+  # extract and assign lambda k values - is this case, use these as the
+# starting pos
   lam1_k <- unlist(lapply(Qs, function(x) x$par.fixed[names(x$par.fixed) == 'lambda1_k']))
   lam2_k <- unlist(lapply(Qs, function(x) x$par.fixed[names(x$par.fixed) == 'lambda2_k']))
-
-  Params$lambda1_k <- lam1_k
-  Params$lambda2_k <- lam2_k
 
   # cod juv, bud juv should be fixed at their adult values 
   pos_juv <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Juv','CARLHELMAR_Lophius budegassa_Juv'))
   pos_adu <- which(colnames(Vess_Cov) %in% c('CARLHELMAR_Gadus morhua_Adu','CARLHELMAR_Lophius budegassa_Adu'))
  
-  Params$lambda1_k[pos_juv] <- Params$lambda1_k[pos_adu]
-  Params$lambda2_k[pos_juv] <- Params$lambda2_k[pos_adu]
+  Params$lambda1_k[pos_juv] <- lam1_k[pos_adu]
+  Params$lambda2_k[pos_juv] <- lam2_k[pos_adu]
 
   map <- Make_Map(TmbData = TmbData, TmbParams = Params, CovConfig = TRUE, Q_Config = TRUE,RhoConfig = RhoConfig) # make the map
  
- # Replace the values for carlhelmar cod/bud juv  
-  map$lambda1_k[] <- NA 
-  map$lambda1_k <- factor(map$lambda1_k)
-  map$lambda2_k[] <- NA
-  map$lambda2_k <- factor(map$lambda2_k)
+ # Replace the values for carlhelmar cod/bud juv  - only fix these parameters,
+  # allow rest to be estimated
+  map$lambda1_k[pos_juv] <- NA 
+  map$lambda2_k[pos_juv] <- NA
 
   # Relevel
   levels(map$lambda1_k) <- map$lambda1_k
   levels(map$lambda2_k) <- map$lambda2_k
 
   # Parameters with fixed gear estimates and a map
-  TmbList = Build_TMB_Fn("TmbData"=TmbData, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_xi,
-  "Parameters" = Params, "Map" = map)
+  TmbList = Build_TMB_Fn("TmbData"=TmbData, "Version"=Version, "RhoConfig"=RhoConfig, "loc_x"=Spatial_List$loc_xi, "Parameters" = Params, "Map" = map)
   Obj = TmbList[["Obj"]]
 
 }
+
 
 
   ############

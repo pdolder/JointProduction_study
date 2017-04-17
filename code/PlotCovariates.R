@@ -42,16 +42,6 @@ ylim = c(48, 52)
   coast.poly = geom_polygon(data=mapdata, aes(x=long, y=lat, group=group), colour="#999999", fill="#999999", lwd=0.2)
   coast.outline = geom_path(data=mapdata, aes(x=long, y=lat, group=group), colour="#000000", lwd=0.2)
 
-p1 <- ggplot() + coast.poly + coast.outline + geom_point(data = HabDF, aes(x = Lat, y =  Lon, colour = Habitat)) +   coord_quickmap(xlim, ylim) +
-	theme(legend.position = 'top')
-p2 <- ggplot() + coast.poly + coast.outline + geom_point(data = HabDF, aes(x = Lat, y = Lon, colour = Depth)) + coord_quickmap(xlim, ylim) + 
-	theme(legend.position = 'bottom')
-
-plot_grid(p1,p2, ncol = 1)
-
-ggsave(file.path('..', 'plots', 'HabitatCovariates.png'), width = 8, height = 12)
-
-
 
 #####################################
 # Plotting all areas
