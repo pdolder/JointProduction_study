@@ -81,7 +81,8 @@ Key points:
 \newpage
 
 \begin{itemize}
-	\item Within species correlations (among size classes) are strong, for all species. 
+	\item Within species correlations (among size classes) are strong, for
+		all species. 
 	\item Spatial encounter correlations are very strong for similar
 		species types (i.e. gadoids: cod, haddock, whiting and hake;
 		flatfish: plaice, sole....also with whiting, haddock)
@@ -111,15 +112,15 @@ Key points:
 \begin{itemize}
 	\item Factor analysis shows common trend for encounter probability
 		based on spatial gradient from nearshore to offshore (seen in
-		Figure 5, Figure 6 factor maps, omega). There is no clear species
+		Figure 4, Figure 5 factor maps, omega). There is no clear species
 		grouping (Figure 14, PCA / factor loadings). 
 	\item This could mean that the probability of encountering a species
-		can be described through a combination of spatially determined
-		factors (linked to depth, habitat etc.. ??? - though habitat
-		covariates appear uninformative) 
+		can be consistently described through a combination of
+		spatially determined factors (linked to depth, distance from
+		shore etc.. (?? though habitat covariates appear uninformative) 
 	\item Conversely, the positive catch rates spatio-temporal effect is
 		better described through linkage among species groups (Figure
-		4, PCA / factor loadings). The first two factors separate among
+		6, PCA / factor loadings). The first two factors separate among
 		the key species groups (roundfish, flatfish and deep water
 		species). However, there is not as clear a spatial pattern
 		(Figure 15, factor maps, epsilon).
@@ -128,30 +129,38 @@ Key points:
 		groups of species (can this be an environmental driver???).
 		Would be good to include a temporally changing environmental
 		predictor (e.g. temperature - we could do this...) 
-	\item Ergo: Encounter probability for each species remains stable (and
-		predictable) from year to year based on geographic location.
-		Positive catch rates, much more dynamic from year to year,
-		though some common linkage among species groups.
+	\item  Overall, it appears encounter probability for each species
+		remains stable over time (and predictable) based on spatial
+		factors.  Positive catch rates are much, much more dynamic from
+		year to year, though appears some common linkage among species
+		groups.
 \end{itemize}
 
-\begin{figure}[!ht]
-	\includegraphics[width 	=\linewidth]{../../results/2017-04-08_M2/PCAstyle_Plots_Spatiotemporal}
-	\label{fig:PCA2}
-	\caption{PCA style plots for spatio-temporal encounter probability and
-		positive catch rates}
-\end{figure}
 
 \begin{figure}[!ht]
 	\includegraphics[width	=\linewidth]{../../results/2017-04-08_M2/Factor_maps--Omega1}
 	\label{fig:FactMap1}
-	\caption{Factor plot for spatial encounter probability}
+	\caption{Factor plot for spatial encounter probability : maybe first 2
+	-3 is enough ?}
 \end{figure}
 
 \begin{figure}[!ht]
 	\includegraphics[width	=\linewidth]{../../results/2017-04-08_M2/Factor_maps--Omega2}
 	\label{fig:FactMap2}
-	\caption{Factor plot for spatio-temporal encounter probability}
+	\caption{Factor plot for spatial positive catch rates: maybe first 2-3
+	is enough}
 \end{figure}
+
+\begin{figure}[!ht]
+	\includegraphics[width 	=\linewidth]{../../results/2017-04-08_M2/PCAstyle_Plots_Spatiotemporal}
+	\label{fig:PCA2}
+	\caption{PCA style plots for spatio-temporal encounter probability and
+		positive catch rates. N.B. It would be quite cool to do these
+		points as images of the fish, would show clustering of
+		flatfish, gadoid etc..}
+\end{figure}
+
+\newpage
 
 Specific spatial pattens for density of cod, haddock and whiting (Figure 7):
 
@@ -168,9 +177,11 @@ Specific spatial pattens for density of cod, haddock and whiting (Figure 7):
 	\includegraphics[width	=\linewidth]{../../plots/Density_Differences}
 	\label{fig:DensityDiff}
 	\caption{Plot of difference between normalised density estimates in
-		2015 for selected species. Blue indicates more of species 1
-		(LHS),	red more of species 2 (RHS). White indicates no
-		difference}
+		2015 for selected species. The proportion of each species in
+		each area are calculated, and the difference for each area is
+		[spp1 - spp2]. The scale ranges from -6 \% to + 2 \%. Blue indicates
+		more of species 1 (LHS),red more of species 2 (RHS).  White
+		indicates no difference}
 \end{figure}
 
 
@@ -291,6 +302,20 @@ Some of the other plots which were quite informative.
 	\caption{Spatial factor loading map - Epsilon 2, spatio-temporal positive catch rates}
 \end{figure}
 
+\begin{figure}[!ht]
+	\center
+	\includegraphics[width	=0.5\linewidth]{../../results/2017-04-08_M2/Aniso}
+	\label{fig:Aniso}
+	\caption{Anisotropic direction and strength}
+\end{figure}
+
+\begin{figure}[!ht]
+	\center
+	\includegraphics[width	=0.5\linewidth]{../../results/2017-04-08_M2/RealativeIndexVRelativeAssessSSB}
+	\label{fig:IndexRel}
+	\caption{Plot of relative index from VAST and relative assessment SSB
+		for cod, haddock and whitinq}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

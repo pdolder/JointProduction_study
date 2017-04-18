@@ -1,8 +1,19 @@
 
-Index <- read.csv('../../results/2017-02-04_RUN_FULL/Table_for_SS3.csv')
+Index <- read.csv('../results/2017-04-08_M2/Table_for_SS3.csv')
+
+levels(Index$Category)[levels(Index$Category) == 'cod_adu'] <- 'Gadus morhua_Adu'
+levels(Index$Category)[levels(Index$Category) == 'cod_juv'] <- 'Gadus morhua_Juv'
+
+levels(Index$Category)[levels(Index$Category) == 'had_adu'] <- 'Melanogrammus aeglefinus_Adu'
+levels(Index$Category)[levels(Index$Category) == 'had_juv'] <- 'Melanogrammus aeglefinus_Juv'
+
+levels(Index$Category)[levels(Index$Category) == 'whg_adu'] <- 'Merlangius merlangus_Adu'
+levels(Index$Category)[levels(Index$Category) == 'whg_juv'] <- 'Merlangius merlangus_Juv'
+
+
 
 ## ICES assessment SSB
-CS <-	read.csv(file.path('..','..','..','SFG_talk','CSAssessmentOutput2016.csv'))
+CS <-	read.csv(file.path('..','..','SFG_talk','CSAssessmentOutput2016.csv'))
 
 library(dplyr) 
 CS <- filter(CS, StockDescription %in%  unique(CS$StockDescription)[c(5,7,12)])
@@ -54,6 +65,6 @@ print(ggplot(Index, aes(x = Year, y = scaled)) + geom_line() +
 #      geom_ribbon(data = CS, aes(x =  Year,  ymin =   scaled   - scaled *   scaledMult, ymax =
 #    scaled  + scaled *   scaledMult),alpha = 0.5, fill ='blue') +
       ggtitle('Blue = Assessment, black = VAST estimates') + theme_bw())
-ggsave('RealativeIndexVRelativeAssessSSB.png')
+ggsave(file.path('..','results','2017-04-08_M2','RealativeIndexVRelativeAssessSSB.png'))
 
 
