@@ -45,19 +45,19 @@ ylim = c(48, 52)
 
 #####################################
 # Plotting all areas
-
+library(dplyr)
 HabDF2 <- MapDetails_List[['PlotDF']]
 
 HabDF2$Habitat <- HabDF$Habitat[match(HabDF2$x2i, HabDF$knot)]
 HabDF2$Depth   <- HabDF$Depth[match(HabDF2$x2i, HabDF$knot)]
 
-p1 <- ggplot() + geom_point(data = HabDF2, aes(x = Lon, y =  Lat, colour = Habitat), size = 0.02) + geom_point(data = HabDF, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+p1 <- ggplot() + geom_point(data = filter(HabDF2, Include == T), aes(x = Lon, y =  Lat, colour = Habitat), size = 0.02) + geom_point(data = HabDF, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
 	coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'top', legend.title = element_blank()) + 
 	guides(colour = guide_legend(override.aes = list(size = 4, shape = 15)))
 
 cols <- brewer.pal(9, 'Blues')[c(9,5,1)]
 
-p2 <- ggplot() + geom_point(data = HabDF2, aes(x = Lon, y = Lat, colour = Depth), size = 0.02) + geom_point(data = HabDF, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
+p2 <- ggplot() + geom_point(data = filter(HabDF2, Include == T), aes(x = Lon, y = Lat, colour = Depth), size = 0.02) + geom_point(data = HabDF, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
 	coast.poly + coast.outline + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
 	scale_colour_gradient2(low = cols[1], mid = cols[2], high = cols[3], midpoint = mean(HabDF$Depth), space = "Lab", na.value = "grey50", guide = "colourbar")
 

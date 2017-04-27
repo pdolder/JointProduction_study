@@ -75,17 +75,17 @@ ggplot(filter(Qs_all, Param %in% c('lambda1_k','lambda2_k')), aes(x = spp, y = E
 ggsave('QEstimatesALL.png', width = 9, height = 12)
 
 ggplot(filter(Qs_all, Param %in% c('lambda1_k')), aes(x = Survey, y = Estimate)) +
-	 facet_wrap(~spp, scale = 'free', nrow = 6) + scale_color_manual(values = pal) +
+	 facet_wrap(~spp, scale = 'free_y', nrow = 6) + scale_color_manual(values = pal) +
 	geom_pointrange(aes(y = Estimate, ymin = Estimate - 1.96 * Std.Error, ymax = Estimate + 1.96 * Std.Error, colour = Survey)) +
 	geom_point(data = filter(Qs, Param == 'lambda1_k'), aes(y = Estimate), colour = 'red', shape = 2) +
-	theme_bw() + ggtitle('Encounter Prob') + theme(axis.text.x = element_text(angle = -90)) + geom_hline(aes(yintercept = 0), linetype = 'dotdash')
+	theme_bw() + ggtitle('Encounter Prob') + theme(axis.text.x = element_text(angle = -90, hjust = 0)) + geom_hline(aes(yintercept = 0), linetype = 'dotdash')
 ggsave('QEstimatesGridEnc.png', width = 12, height = 15)
 
 ggplot(filter(Qs_all, Param %in% c('lambda2_k')), aes(x = Survey, y = Estimate)) +
-	 facet_wrap(~spp, scale = 'free', nrow = 6) + scale_color_manual(values = pal) +
+	 facet_wrap(~spp, scale = 'free_y', nrow = 6) + scale_color_manual(values = pal) +
 	geom_pointrange(aes(y = Estimate, ymin = Estimate - 1.96 * Std.Error, ymax = Estimate + 1.96 * Std.Error, colour = Survey)) +
 	geom_point(data = filter(Qs, Param == 'lambda2_k'), aes(y = Estimate), colour = 'red', shape = 2) +
-	theme_bw() + ggtitle('Positive catch rates') + theme(axis.text.x = element_text(angle = -90))+ geom_hline(aes(yintercept = 0), linetype = 'dotdash')
+	theme_bw() + ggtitle('Positive catch rates') + theme(axis.text.x = element_text(angle = -90, hjust = 0))+ geom_hline(aes(yintercept = 0), linetype = 'dotdash')
 
 ggsave('QEstimatesGridPos.png', width = 12, height = 15)
 

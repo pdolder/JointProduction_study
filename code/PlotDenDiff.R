@@ -12,17 +12,21 @@ MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=
 cod <- Save$Report$Index_xcyl[,1,,]
 had <- Save$Report$Index_xcyl[,9,,]
 whg <- Save$Report$Index_xcyl[,11,,]
+ple <- Save$Report$Index_xcyl[,15,,]
+sol <- Save$Report$Index_xcyl[,17,,]
 
 # Check overall index
-par(mfrow = c(1,3))
-plot(colSums(cod), type = 'b')
-plot(colSums(had), type = 'b') 
-plot(colSums(whg), type = 'b')
+#par(mfrow = c(1,3))
+#plot(colSums(cod), type = 'b')
+#plot(colSums(had), type = 'b') 
+#plot(colSums(whg), type = 'b')
 
 # Now standardise the 2015 values
 cod <- cod[,26] / sum(cod[,26]) * 100
 had <- had[,26] / sum(had[,26]) * 100 
 whg <- whg[,26] / sum(whg[,26]) * 100
+ple <- ple[,26] / sum(ple[,26]) * 100 
+sol <- sol[,26] / sum(sol[,26]) * 100
 
 # Make the plot dataframe
 
@@ -43,11 +47,14 @@ plotDF$Lat <- LLs$X
 plotDF$cod <- cod
 plotDF$had <- had
 plotDF$whg <- whg
+plotDF$ple <- ple 
+plotDF$sol <- sol 
 
 ## Area densities relative to... 
 plotDF$cod_had  <- plotDF$cod - plotDF$had
 plotDF$cod_whg  <- plotDF$cod - plotDF$whg
 plotDF$had_whg  <- plotDF$had - plotDF$whg
+plotDF$ple_sol  <- plotDF$ple - plotDF$sol
 
 #############
 ## the Map ##
@@ -84,17 +91,19 @@ DF2 <- MapDetails_List[['PlotDF']]
 DF2$cod_had <- plotDF$cod_had[match(DF2$x2i, plotDF$knot)]
 DF2$cod_whg <- plotDF$cod_whg[match(DF2$x2i, plotDF$knot)]
 DF2$had_whg <- plotDF$had_whg[match(DF2$x2i, plotDF$knot)]
+DF2$ple_sol <- plotDF$ple_sol[match(DF2$x2i, plotDF$knot)]
 
+library(dplyr)
 ## The plots
-p1 <- ggplot() + geom_point(data = DF2, aes(x = Lon, y =  Lat, colour = cod_had), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+p1 <- ggplot() + geom_point(data = filter(DF2, Include == T), aes(x = Lon, y =  Lat, colour = cod_had), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
 	coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
 	scale_colour_gradient2(low = 'red', mid = 'white', high = 'blue', midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")
 
-p2 <- ggplot() + geom_point(data = DF2, aes(x = Lon, y = Lat, colour = cod_whg), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
+p2 <- ggplot() + geom_point(data = filter(DF2, Include == T), aes(x = Lon, y = Lat, colour = cod_whg), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
 	coast.poly + coast.outline + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
 	scale_colour_gradient2(low = 'red', mid = 'white', high = 'blue', midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")
 
-p3 <- ggplot() + geom_point(data = DF2, aes(x = Lon, y = Lat, colour = had_whg), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
+p3 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = had_whg), size = 0.02) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
 	coast.poly + coast.outline + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
 	scale_colour_gradient2(low = 'red', mid = 'white', high = 'blue', midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")
 
@@ -102,9 +111,9 @@ p3 <- ggplot() + geom_point(data = DF2, aes(x = Lon, y = Lat, colour = had_whg),
 
 DF3 <- reshape2::melt(DF2, id = c('Lat', 'Lon', 'x2i', 'Include'))
 
-ggplot() + geom_point(data = DF3, aes(x = Lon, y = Lat, colour = value), size = 0.02) + geom_point(data = DF3, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
+ggplot() + geom_point(data = filter(DF3, Include ==  T), aes(x = Lon, y = Lat, colour = value), size = 0.02) + geom_point(data = DF3, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
 	coast.poly + coast.outline + coord_quickmap(xlim, ylim) + theme(legend.position = 'bottom', legend.text = element_text(angle = -90), legend.title = element_blank()) + 
-	scale_colour_gradient2(low = 'red', mid = 'white', high = 'blue', midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") + facet_wrap(~variable)
+	scale_colour_gradient2(low = 'red', mid = 'white', high = 'blue', midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") + facet_wrap(~variable, ncol = 2)
 
-ggsave(file.path('..', 'plots', 'Density_Differences.png'), width = 12, height = 4)
+ggsave(file.path('..', 'plots', 'Density_Differences.png'), width = 8, height = 8)
 
