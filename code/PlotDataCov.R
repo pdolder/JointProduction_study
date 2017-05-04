@@ -11,11 +11,15 @@ DF$Habitat <- Hab$Habitat[match(DF$knot_i, rownames(Hab))]
 Depths <- data.frame(Depth = Depths, knot_i = 1:250)
 DF$Depth   <- Depths$Depth[match(DF$knot_i, Depths$knot_i)]
 
-ggplot(DF, aes(x = Habitat, y = Catch_KG / AreaSwept_km2)) + geom_boxplot() +
+ggplot(DF, aes(x = Habitat, y = log((Catch_KG / AreaSwept_km2)+1))) + geom_boxplot(notch = T) +
 	facet_wrap(~spp, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90, hjust = 0))
 
-ggplot(DF, aes(x = abs(Depth), y = Catch_KG / AreaSwept_km2)) + geom_point() +
-	facet_wrap(~spp, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90, hjust = 0))
+ggsave(file.path('..', 'plots', 'HabitatCovDiag.png'), width = 16, height = 16)
 
-ggplot(DF, aes(x = log(abs(Depth)), y = Catch_KG / AreaSwept_km2)) + geom_point() +
+ggplot(DF, aes(x = abs(Depth), y = log((Catch_KG / AreaSwept_km2)+1))) + geom_point() +
+	facet_wrap(~spp, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90, hjust = 0)) + geom_smooth()
+ggsave(file.path('..', 'plots', 'DepthCovDiag.png'), width = 16, height = 16)
+
+
+ggplot(DF, aes(x = log(abs(Depth)), y = log((Catch_KG / AreaSwept_km2)+1))) + geom_point() +
 	facet_wrap(~spp, scale = 'free_y') + theme(axis.text.x = element_text(angle = -90, hjust = 0))

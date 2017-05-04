@@ -21,6 +21,7 @@
 \newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
 \newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
 \newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
 
 \usepackage{framed}
 \makeatletter
@@ -82,34 +83,7 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE \\FALSE Attaching package: 'dplyr'}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE The following objects are masked from 'package:stats':\\FALSE \\FALSE\ \ \ \  filter, lag}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE The following objects are masked from 'package:base':\\FALSE \\FALSE\ \ \ \  intersect, setdiff, setequal, union}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE \\FALSE Please cite as:}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE\ \ Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables.}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE\ \ R package version 5.2. http://CRAN.R-project.org/package=stargazer}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE \\FALSE Attaching package: 'gridExtra'}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE The following object is masked from 'package:dplyr':\\FALSE \\FALSE\ \ \ \  combine}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE Loading required package: nlme}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE \\FALSE Attaching package: 'nlme'}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE The following object is masked from 'package:dplyr':\\FALSE \\FALSE\ \ \ \  collapse}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE This is mgcv 1.8-13. For overview type 'help("{}mgcv-package"{})'.}}\end{kframe}
-\end{knitrout}
 
 \maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -151,7 +125,28 @@ The raw data looks as follows for cod, megrim, anglerfishes, haddock, whiting,
 hake, plaice and sole:
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Read data and remove records without corresponding weight}
+\hlstd{DF} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"SMALK_EVHOE.csv"}\hlstd{))}  \hlcom{# read data}
+\hlstd{DF} \hlkwb{<-} \hlstd{DF[}\hlopt{!}\hlkwd{is.na}\hlstd{(DF}\hlopt{$}\hlstd{IndWgt), ]}
+
+\hlcom{# Subset to species of interest sort(unique(DF$Species))}
+\hlstd{spp} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Gadus morhua"}\hlstd{,} \hlstr{"Lepidorhombus whiffiagonis"}\hlstd{,} \hlstr{"Lophius piscatorius"}\hlstd{,}
+    \hlstr{"Lophius budegassa"}\hlstd{,} \hlstr{"Merlangius merlangus"}\hlstd{,} \hlstr{"Melanogrammus aeglefinus"}\hlstd{,}
+    \hlstr{"Merluccius merluccius"}\hlstd{,} \hlstr{"Pleuronectes platessa"}\hlstd{,} \hlstr{"Solea solea"}\hlstd{)}
+
+\hlcom{## N.B. The length-weight relationship for anglerfishes}
+\hlcom{## doesn't hold, so we might need an alternative}
+\hlcom{## solution....'Pollachius pollachius' - no juveniles??}
+
+\hlstd{DF} \hlkwb{<-} \hlstd{DF[DF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{spp, ]}
+
+\hlcom{# Plot}
+\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlkwd{factor}\hlstd{(Year)))} \hlopt{+}
+    \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{"free"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
+\end{alltt}
+\end{kframe}\begin{figure}
 \includegraphics[width=\maxwidth]{figure/LWt-1} \caption[Estimates of individual weights at length for the gadoid species]{Estimates of individual weights at length for the gadoid species. Colours indicate individual years measurements}\label{fig:LWt}
 \end{figure}
 
@@ -168,7 +163,15 @@ To simplify the fitting procedure, the von bertalanffy relationship in equation
 \vspace{1cm}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{DF}\hlopt{$}\hlstd{lWt} \hlkwb{<-} \hlkwd{log}\hlstd{(DF}\hlopt{$}\hlstd{IndWgt)}
+\hlstd{DF}\hlopt{$}\hlstd{lL} \hlkwb{<-} \hlkwd{log}\hlstd{(DF}\hlopt{$}\hlstd{LngtClass)}
+
+\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= lL,} \hlkwc{y} \hlstd{= lWt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlkwd{factor}\hlstd{(Year)))} \hlopt{+}
+    \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{"free"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
+\end{alltt}
+\end{kframe}
 \includegraphics[width=\maxwidth]{figure/LWt2-1} 
 
 \end{knitrout}
@@ -179,23 +182,22 @@ the different morphological forms affecting the length weight relationship:
 
 \begin{kframe}
 \begin{alltt}
-\hlstd{gads}  \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Gadus morhua'}\hlstd{,} \hlstr{'Melanogrammus aeglefinus'}\hlstd{,}
-           \hlstr{'Merluccius merluccius'}\hlstd{,} \hlstr{'Merlangius merlangus'}\hlstd{)}
-\hlstd{flats} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Lepidorhombus whiffiagonis'}\hlstd{,} \hlstr{'Solea solea'}\hlstd{,} \hlstr{'Pleuronectes platessa'}\hlstd{)}
-\hlstd{lops}  \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'Lophius piscatorius'}\hlstd{,} \hlstr{'Lophius budegassa'}\hlstd{)}
+\hlstd{gads} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Gadus morhua"}\hlstd{,} \hlstr{"Melanogrammus aeglefinus"}\hlstd{,} \hlstr{"Merluccius merluccius"}\hlstd{,}
+    \hlstr{"Merlangius merlangus"}\hlstd{)}
+\hlstd{flats} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Lepidorhombus whiffiagonis"}\hlstd{,} \hlstr{"Solea solea"}\hlstd{,} \hlstr{"Pleuronectes platessa"}\hlstd{)}
+\hlstd{lops} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Lophius piscatorius"}\hlstd{,} \hlstr{"Lophius budegassa"}\hlstd{)}
 
-\hlstd{lm1.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,}
-               \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{gads))}
-\hlstd{lm2.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,}
-               \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{gads))}
+\hlstd{lm1.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%}
+    \hlstd{gads))}
+\hlstd{lm2.gad} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%}
+    \hlstd{gads))}
 
-\hlkwd{stargazer}\hlstd{(lm1.gad, lm2.gad,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
-          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits to gadoids'}\hlstd{,}
-          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
+\hlkwd{stargazer}\hlstd{(lm1.gad, lm2.gad,} \hlkwc{font.size} \hlstd{=} \hlstr{"small"}\hlstd{,} \hlkwc{align} \hlstd{= T,} \hlkwc{title} \hlstd{=} \hlstr{"glm output from the two model fits to gadoids"}\hlstd{,}
+    \hlkwc{table.placement} \hlstd{=} \hlstr{"H"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Apr 03, 2017 - 18:25:06
+% Date and time: Thu, May 04, 2017 - 09:55:18
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits to gadoids} 
@@ -237,18 +239,18 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{-6,427.297} & \multicolumn{1}{c}{-6,429.2
 \end{tabular} 
 \end{table} 
 \begin{kframe}\begin{alltt}
-\hlstd{lm1.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,}
-                \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{flats    ))}
-\hlstd{lm2.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,}
-                \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%} \hlstd{flats))}
+\hlstd{lm1.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species} \hlopt{+} \hlstd{Year,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF,}
+    \hlstd{Species} \hlopt{%in%} \hlstd{flats))}
+\hlstd{lm2.flat} \hlkwb{<-} \hlkwd{glm}\hlstd{(lWt} \hlopt{~} \hlstd{lL} \hlopt{+} \hlstd{Species,} \hlkwc{data} \hlstd{=} \hlkwd{filter}\hlstd{(DF, Species} \hlopt{%in%}
+    \hlstd{flats))}
 
-\hlkwd{stargazer}\hlstd{(lm1.flat, lm2.flat,} \hlkwc{font.size}  \hlstd{=} \hlstr{'small'}\hlstd{,} \hlkwc{align} \hlstd{= T,}
-          \hlkwc{title} \hlstd{=} \hlstr{'glm output from the two model fits to flatfish'}\hlstd{,}
-          \hlkwc{table.placement} \hlstd{=} \hlstr{'H'}\hlstd{)}
+\hlkwd{stargazer}\hlstd{(lm1.flat, lm2.flat,} \hlkwc{font.size} \hlstd{=} \hlstr{"small"}\hlstd{,} \hlkwc{align} \hlstd{= T,}
+    \hlkwc{title} \hlstd{=} \hlstr{"glm output from the two model fits to flatfish"}\hlstd{,}
+    \hlkwc{table.placement} \hlstd{=} \hlstr{"H"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 % Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Apr 03, 2017 - 18:25:06
+% Date and time: Thu, May 04, 2017 - 09:55:25
 % Requires LaTeX packages: dcolumn 
 \begin{table}[H] \centering 
   \caption{glm output from the two model fits to flatfish} 
@@ -299,39 +301,55 @@ For anglerfish, as there is insufficient data for a fit a model (few data
 points for piscatorius, no data points for budegassa), we use estimates from
 fishbase: $a = 0.03330$, $b= 2.766$.
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{lop} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwc{a} \hlstd{=} \hlnum{0.0333}\hlstd{,} \hlkwc{b} \hlstd{=} \hlnum{2.766}\hlstd{)}
 
+\hlstd{predDF} \hlkwb{<-} \hlkwd{expand.grid}\hlstd{(}\hlkwc{lL} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlkwd{log}\hlstd{(}\hlkwd{min}\hlstd{(DF}\hlopt{$}\hlstd{LngtClass)),} \hlkwd{log}\hlstd{(}\hlkwd{max}\hlstd{(DF}\hlopt{$}\hlstd{LngtClass)),}
+    \hlkwc{l} \hlstd{=} \hlnum{80}\hlstd{),} \hlkwc{Species} \hlstd{= spp)}
+
+\hlstd{predDF}\hlopt{$}\hlstd{lWt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2.gad,} \hlkwc{newdata} \hlstd{= predDF[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{gads, ])}
+\hlstd{predDF}\hlopt{$}\hlstd{lWt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2.flat,} \hlkwc{newdata} \hlstd{= predDF[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{flats, ])}
+\hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-} \hlstd{lop[[}\hlstr{"a"}\hlstd{]]} \hlopt{*} \hlstd{(}\hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{lops])}\hlopt{^}\hlstd{lop[[}\hlstr{"b"}\hlstd{]])}\hlopt{/}\hlnum{1000}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{# Exponentiate the predictions}
-\hlstd{predDF}\hlopt{$}\hlstd{L}  \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL)}
-\hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlkwd{c}\hlstd{(gads,flats)]} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lWt[predDF}\hlopt{$}\hlstd{Species}
-                                                    \hlopt{%in%} \hlkwd{c}\hlstd{(gads, flats)])}
+\hlstd{predDF}\hlopt{$}\hlstd{L} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lL)}
+\hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlkwd{c}\hlstd{(gads, flats)]} \hlkwb{<-} \hlkwd{exp}\hlstd{(predDF}\hlopt{$}\hlstd{lWt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlkwd{c}\hlstd{(gads, flats)])}
 
-\hlcom{## Now we need to bias correct due to the fact that the mean on the logscale is}
-\hlcom{## the geometric mean...}
-\hlstd{corr.fact.gad}  \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2.gad)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
+\hlcom{## Now we need to bias correct due to the fact that the mean}
+\hlcom{## on the logscale is the geometric mean...}
+\hlstd{corr.fact.gad} \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2.gad)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
 \hlstd{corr.fact.flat} \hlkwb{<-} \hlkwd{exp}\hlstd{(}\hlkwd{sigma}\hlstd{(lm2.flat)}\hlopt{^}\hlnum{2}\hlopt{/}\hlnum{2}\hlstd{)}
-\hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{'Correction factor for gadoids='}\hlstd{,}\hlkwd{round}\hlstd{(corr.fact.gad,}\hlnum{3}\hlstd{),}
-            \hlstr{'and flats = '}\hlstd{,} \hlkwd{round}\hlstd{(corr.fact.flat,}\hlnum{3}\hlstd{)))}
+\hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Correction factor for gadoids="}\hlstd{,} \hlkwd{round}\hlstd{(corr.fact.gad,}
+    \hlnum{3}\hlstd{),} \hlstr{"and flats = "}\hlstd{,} \hlkwd{round}\hlstd{(corr.fact.flat,} \hlnum{3}\hlstd{)))}
 \end{alltt}
 \begin{verbatim}
 ## [1] "Correction factor for gadoids= 1.011 and flats =  1.018"
 \end{verbatim}
 \begin{alltt}
-\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]}  \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]}\hlopt{*}
-        \hlstd{corr.fact.gad}
-\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]}\hlopt{*}
-        \hlstd{corr.fact.flat}
-\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-}  \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{gads]} \hlopt{*} \hlstd{corr.fact.gad}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{flats]} \hlopt{*} \hlstd{corr.fact.flat}
+\hlstd{predDF}\hlopt{$}\hlstd{WtCorr[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-} \hlstd{predDF}\hlopt{$}\hlstd{Wt[predDF}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{lops]}
 
 \hlcom{# Plot the von bertalanffy fits}
-\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{'grey'}\hlstd{)} \hlopt{+}
-        \hlkwd{facet_wrap}\hlstd{(}\hlopt{~} \hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{'free'}\hlstd{)} \hlopt{+}
-        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= Wt),} \hlkwc{col} \hlstd{=} \hlstr{'red'}\hlstd{)} \hlopt{+}
-        \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= WtCorr),} \hlkwc{col} \hlstd{=} \hlstr{'blue'}\hlstd{)} \hlopt{+}
-        \hlkwd{theme_bw}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(DF,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= LngtClass,} \hlkwc{y} \hlstd{= IndWgt))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{"grey"}\hlstd{)} \hlopt{+}
+    \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Species,} \hlkwc{scale} \hlstd{=} \hlstr{"free"}\hlstd{)} \hlopt{+} \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,}
+    \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= Wt),} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{geom_line}\hlstd{(}\hlkwc{data} \hlstd{= predDF,}
+    \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= WtCorr),} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/Predictions2-1} 
@@ -340,7 +358,7 @@ fishbase: $a = 0.03330$, $b= 2.766$.
 \hlstd{corr.fact} \hlkwb{<-} \hlkwd{list}\hlstd{(corr.fact.gad, corr.fact.flat)}
 
 \hlcom{## Save the fit and the correction factor}
-\hlkwd{save}\hlstd{(lm2, corr.fact, lop,} \hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{'DATRAS'}\hlstd{,}\hlstr{'LengthWeightPredictCelticSea.RData'}\hlstd{))}
+\hlkwd{save}\hlstd{(lm2, corr.fact, lop,} \hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"LengthWeightPredictCelticSea.RData"}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -401,7 +419,13 @@ Where $R$ is the mean Radius of the Earth, 6 341 km. \\
 Total records were: \\
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{load}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"CelticSurveyData.RData"}\hlstd{))}  \hlcom{# pre-downloaded data, HH is station, HL is catch}
+
+\hlkwd{kable}\hlstd{(}\hlkwd{group_by}\hlstd{(HH, Survey, HaulVal)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{n} \hlstd{=} \hlkwd{n}\hlstd{()))}
+\end{alltt}
+\end{kframe}
 \begin{tabular}{l|l|r}
 \hline
 Survey & HaulVal & n\\
@@ -414,20 +438,41 @@ IE-IGFS & V & 2118\\
 \hline
 \end{tabular}
 
+\begin{kframe}\begin{alltt}
+\hlcom{## Some initial cleaning}
+\hlstd{HH} \hlkwb{<-} \hlkwd{filter}\hlstd{(HH, HaulVal} \hlopt{==} \hlstr{"V"}\hlstd{)}  \hlcom{# only valid hauls}
 
+\hlcom{# Convert degrees to radians}
+\hlstd{deg2rad} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{deg}\hlstd{)} \hlkwd{return}\hlstd{(deg} \hlopt{*} \hlstd{pi}\hlopt{/}\hlnum{180}\hlstd{)}
+
+\hlcom{# Calculates the geodesic distance between two points}
+\hlcom{# specified by radian latitude/longitude using the Haversine}
+\hlcom{# formula (hf)}
+\hlstd{gcd.hf} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{long1}\hlstd{,} \hlkwc{lat1}\hlstd{,} \hlkwc{long2}\hlstd{,} \hlkwc{lat2}\hlstd{) \{}
+    \hlstd{R} \hlkwb{<-} \hlnum{6371}  \hlcom{# Earth mean radius [km]}
+    \hlstd{delta.long} \hlkwb{<-} \hlstd{(long2} \hlopt{-} \hlstd{long1)}
+    \hlstd{delta.lat} \hlkwb{<-} \hlstd{(lat2} \hlopt{-} \hlstd{lat1)}
+    \hlstd{a} \hlkwb{<-} \hlkwd{sin}\hlstd{(delta.lat}\hlopt{/}\hlnum{2}\hlstd{)}\hlopt{^}\hlnum{2} \hlopt{+} \hlkwd{cos}\hlstd{(lat1)} \hlopt{*} \hlkwd{cos}\hlstd{(lat2)} \hlopt{*} \hlkwd{sin}\hlstd{(delta.long}\hlopt{/}\hlnum{2}\hlstd{)}\hlopt{^}\hlnum{2}
+    \hlstd{c} \hlkwb{<-} \hlnum{2} \hlopt{*} \hlkwd{asin}\hlstd{(}\hlkwd{min}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwd{sqrt}\hlstd{(a)))}
+    \hlstd{d} \hlkwb{=} \hlstd{R} \hlopt{*} \hlstd{c}
+    \hlkwd{return}\hlstd{(d)}  \hlcom{# Distance in km}
+\hlstd{\}}
+\hlcom{############################ }
+\hlstd{an} \hlkwb{<-} \hlstd{as.numeric}
+\end{alltt}
+\end{kframe}
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{HH}\hlopt{$}\hlstd{Dist} \hlkwb{<-} \hlkwd{mapply}\hlstd{(gcd.hf,} \hlkwc{long1} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLong)),}
-                 \hlkwc{lat1}  \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLat)),}
-                 \hlkwc{long2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLong)),}
-                 \hlkwc{lat2}  \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLat)))}
+    \hlkwc{lat1} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLat)),} \hlkwc{long2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLong)),}
+    \hlkwc{lat2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLat)))}
 
-\hlkwd{plot}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{Distance[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!= -}\hlnum{9}\hlstd{)])}\hlopt{/}\hlnum{1000} \hlopt{~} \hlstd{HH}\hlopt{$}\hlstd{Dist[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!= -}\hlnum{9}\hlstd{)],}
-     \hlkwc{main} \hlstd{=} \hlstr{'Recorded vs calculated distance'}\hlstd{,}
-     \hlkwc{ylab}\hlstd{=}\hlstr{'Recorded distance'}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{'Calculated distance'}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{0.7}\hlstd{)}
+\hlkwd{plot}\hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{Distance[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!= -}\hlnum{9}\hlstd{)])}\hlopt{/}\hlnum{1000} \hlopt{~} \hlstd{HH}\hlopt{$}\hlstd{Dist[(HH}\hlopt{$}\hlstd{Distance} \hlopt{!=}
+    \hlopt{-}\hlnum{9}\hlstd{)],} \hlkwc{main} \hlstd{=} \hlstr{"Recorded vs calculated distance"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Recorded distance"}\hlstd{,}
+    \hlkwc{xlab} \hlstd{=} \hlstr{"Calculated distance"}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{0.7}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
@@ -449,7 +494,43 @@ records where it's missing. There were only 5 records with missing door spread,
 but use the predicted door spread for all records. \\
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Covert numeric variables so we can explore the covariates}
+\hlstd{HH}\hlopt{$}\hlstd{SweepLngt} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SweepLngt)}
+\hlstd{HH}\hlopt{$}\hlstd{HaulDur} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{HaulDur)}
+\hlstd{HH}\hlopt{$}\hlstd{DoorSpread} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{DoorSpread)}
+\hlstd{HH}\hlopt{$}\hlstd{Depth} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{Depth)}
+\hlstd{HH}\hlopt{$}\hlstd{Netopening} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{Netopening)}
+\hlstd{HH}\hlopt{$}\hlstd{Warplngt} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{Warplngt)}
+\hlstd{HH}\hlopt{$}\hlstd{Warpdia} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{Warpdia)}
+\hlstd{HH}\hlopt{$}\hlstd{DoorSurface} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{DoorSurface)}
+\hlstd{HH}\hlopt{$}\hlstd{DoorWgt} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{DoorWgt)}
+\hlstd{HH}\hlopt{$}\hlstd{WingSpread} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{WingSpread)}
+\hlstd{HH}\hlopt{$}\hlstd{KiteDim} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{KiteDim)}
+\hlstd{HH}\hlopt{$}\hlstd{TowDir} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{TowDir)}
+\hlstd{HH}\hlopt{$}\hlstd{GroundSpeed} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{GroundSpeed)}
+\hlstd{HH}\hlopt{$}\hlstd{SpeedWater} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SpeedWater)}
+\hlstd{HH}\hlopt{$}\hlstd{SurCurDir} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SurCurDir)}
+\hlstd{HH}\hlopt{$}\hlstd{SurCurSpeed} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SurCurSpeed)}
+\hlstd{HH}\hlopt{$}\hlstd{BotCurDir} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{BotCurDir)}
+\hlstd{HH}\hlopt{$}\hlstd{BotCurSpeed} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{BotCurSpeed)}
+\hlstd{HH}\hlopt{$}\hlstd{WindDir} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{WindDir)}
+\hlstd{HH}\hlopt{$}\hlstd{WindSpeed} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{WindSpeed)}
+\hlstd{HH}\hlopt{$}\hlstd{SwellDir} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SwellDir)}
+\hlstd{HH}\hlopt{$}\hlstd{SwellHeight} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SwellHeight)}
+\hlstd{HH}\hlopt{$}\hlstd{SurTemp} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SurTemp)}
+\hlstd{HH}\hlopt{$}\hlstd{BotTemp} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{BotTemp)}
+\hlstd{HH}\hlopt{$}\hlstd{SurSal} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{SurSal)}
+\hlstd{HH}\hlopt{$}\hlstd{BotSal} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(HH}\hlopt{$}\hlstd{BotSal)}
+
+\hlstd{HH[HH} \hlopt{== -}\hlnum{9}\hlstd{]} \hlkwb{<-} \hlnum{NA}
+
+\hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Depth,} \hlkwc{y} \hlstd{= DoorSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+}
+    \hlkwd{ggtitle}\hlstd{(}\hlstr{"Relationship between depth of gear and
+     door spread"}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/DoorSpread-1} 
 
@@ -463,7 +544,23 @@ There may be another covariate affecting doorspread, indicated by the
 clustering of some of the data...lets look at some of them.
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{p1} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Depth,} \hlkwc{y} \hlstd{= DoorSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlkwd{factor}\hlstd{(DoorWgt)))} \hlopt{+}
+    \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"..with door weight"}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.position} \hlstd{=} \hlstr{"top"}\hlstd{)}
+
+\hlstd{p2} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Depth,} \hlkwc{y} \hlstd{= DoorSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{= Warplngt))} \hlopt{+}
+    \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"..with warp length"}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.position} \hlstd{=} \hlstr{"top"}\hlstd{)}
+
+\hlstd{p3} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Depth,} \hlkwc{y} \hlstd{= DoorSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlkwd{factor}\hlstd{(Warpdia)))} \hlopt{+}
+    \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"..with warp diameter"}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.position} \hlstd{=} \hlstr{"top"}\hlstd{)}
+
+\hlstd{p4} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Depth,} \hlkwc{y} \hlstd{= DoorSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlkwd{factor}\hlstd{(SweepLngt)))} \hlopt{+}
+    \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"..with warp sweep length"}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.position} \hlstd{=} \hlstr{"top"}\hlstd{)}
+
+\hlkwd{grid.arrange}\hlstd{(p1, p2, p3, p4,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/DoorSpread2-1} 
 
@@ -481,21 +578,25 @@ We will model this relationship with a gam.
 \begin{alltt}
 \hlcom{# Without covariate}
 \hlstd{m1} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth),} \hlkwc{data} \hlstd{= HH)}
-\hlcom{#summary(m1)}
+\hlcom{# summary(m1)}
 
 \hlcom{# With all covariate, no interactions}
 \hlstd{m2} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth)} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{+} \hlstd{Warplngt} \hlopt{+}
-          \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
-\hlcom{#summary(m2)}
+    \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{+} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{= HH)}
+\hlcom{# summary(m2)}
 
 \hlcom{### full interactions}
 \hlstd{m3} \hlkwb{<-} \hlkwd{gam}\hlstd{(DoorSpread} \hlopt{~} \hlkwd{s}\hlstd{(Depth)} \hlopt{+} \hlkwd{factor}\hlstd{(DoorWgt)} \hlopt{*} \hlstd{Warplngt} \hlopt{*}
-          \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{=   HH)}
-\hlcom{#summary(m3)}
+    \hlkwd{factor}\hlstd{(Warpdia)} \hlopt{*} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{data} \hlstd{= HH)}
+\hlcom{# summary(m3)}
 \end{alltt}
 \end{kframe}
 
-
+\begin{kframe}
+\begin{alltt}
+\hlkwd{kable}\hlstd{(}\hlkwd{AIC}\hlstd{(m1, m2, m3))}
+\end{alltt}
+\end{kframe}
 \begin{tabular}{l|r|r}
 \hline
   & df & AIC\\
@@ -508,18 +609,52 @@ m3 & 20.57980 & 24261.34\\
 \hline
 \end{tabular}
 
-
+\begin{kframe}\begin{alltt}
+\hlcom{# stargazer(m1,m2,m3, font.size = 'small', align = T, title =}
+\hlcom{# 'gam output from model with and without covariates',}
+\hlcom{# table.placement = 'H', single.row = T)}
+\end{alltt}
+\end{kframe}
 
 Full model looks best, but let's check the residuals against the covariates
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{HHresid} \hlkwb{<-} \hlkwd{filter}\hlstd{(HH,} \hlopt{!}\hlkwd{is.na}\hlstd{(DoorWgt),} \hlopt{!}\hlkwd{is.na}\hlstd{(Warplngt),} \hlopt{!}\hlkwd{is.na}\hlstd{(Warpdia),}
+    \hlopt{!}\hlkwd{is.na}\hlstd{(SweepLngt),} \hlopt{!}\hlkwd{is.na}\hlstd{(Depth),} \hlopt{!}\hlkwd{is.na}\hlstd{(DoorSpread))}
+
+\hlstd{HHresid}\hlopt{$}\hlstd{residm3} \hlkwb{<-} \hlkwd{resid}\hlstd{(m3)}
+\hlstd{HHresid}\hlopt{$}\hlstd{predictm3} \hlkwb{<-} \hlkwd{fitted}\hlstd{(m3)}
+
+\hlcom{## Plot resids}
+\hlkwd{ggplot}\hlstd{(HHresid,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= predictm3,} \hlkwc{y} \hlstd{= residm3))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+    \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method} \hlstd{=} \hlstr{"loess"}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+}
+    \hlkwd{ggtitle}\hlstd{(}\hlstr{"fitted values against residuals"}\hlstd{)} \hlopt{+} \hlkwd{geom_hline}\hlstd{(}\hlkwc{yintercept} \hlstd{=} \hlnum{0}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Residualcheck-1} 
 
 }
 
 
+\begin{kframe}\begin{alltt}
+\hlstd{p1} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HHresid,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{factor}\hlstd{(DoorWgt),} \hlkwc{y} \hlstd{= residm3))} \hlopt{+}
+    \hlkwd{geom_boxplot}\hlstd{()} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
 
+\hlstd{p2} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HHresid,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Warplngt,} \hlkwc{y} \hlstd{= residm3))} \hlopt{+} \hlkwd{geom_point}\hlstd{()} \hlopt{+}
+    \hlkwd{geom_smooth}\hlstd{(}\hlkwc{method} \hlstd{=} \hlstr{"loess"}\hlstd{,} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+}
+    \hlkwd{geom_hline}\hlstd{(}\hlkwc{yintercept} \hlstd{=} \hlnum{0}\hlstd{)}
+
+\hlstd{p3} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HHresid,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{factor}\hlstd{(Warpdia),} \hlkwc{y} \hlstd{= residm3))} \hlopt{+}
+    \hlkwd{geom_boxplot}\hlstd{()} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
+
+\hlstd{p4} \hlkwb{<-} \hlkwd{ggplot}\hlstd{(HHresid,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{factor}\hlstd{(SweepLngt),} \hlkwc{y} \hlstd{= residm3))} \hlopt{+}
+    \hlkwd{geom_boxplot}\hlstd{()} \hlopt{+} \hlkwd{theme_bw}\hlstd{()}
+
+\hlkwd{grid.arrange}\hlstd{(p1, p2, p3, p4,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Residualcheck-2} 
 
@@ -533,31 +668,65 @@ Residuals look OK, so let's look at a Q-Q plot, half-normal plot and check the
 predictions against the measurements...
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{qq.gam}\hlstd{(m3,} \hlkwc{main} \hlstd{=} \hlstr{"Q-Q plot"}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
-{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-1} 
-
-}
-
-
-
-
-{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-2} 
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread5-1} 
 
 }
 
 
+\begin{kframe}\begin{alltt}
+\hlstd{faraway}\hlopt{::}\hlkwd{halfnorm}\hlstd{(}\hlkwd{resid}\hlstd{(m3),} \hlkwc{main} \hlstd{=} \hlstr{"Half-normal plot"}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
-
-{\centering \includegraphics[width=\maxwidth]{figure/Doorspread3-3} 
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread5-2} 
 
 }
 
 
-\begin{kframe}\begin{verbatim}
-FALSE [1] 209
-FALSE [1] 17
+\begin{kframe}\begin{alltt}
+\hlstd{HH}\hlopt{$}\hlstd{PredSpread} \hlkwb{<-} \hlkwd{predict}\hlstd{(m3,} \hlkwc{newdata} \hlstd{= HH)}
+
+\hlkwd{ggplot}\hlstd{(HH,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= DoorSpread,} \hlkwc{y} \hlstd{= PredSpread))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{colour} \hlstd{=} \hlstr{"grey"}\hlstd{)} \hlopt{+}
+    \hlkwd{geom_abline}\hlstd{(}\hlkwc{slope} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{intercept} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+}
+    \hlkwd{ylab}\hlstd{(}\hlstr{"Predicted door spread"}\hlstd{)} \hlopt{+} \hlkwd{xlab}\hlstd{(}\hlstr{"Measured door spred"}\hlstd{)} \hlopt{+}
+    \hlkwd{ggtitle}\hlstd{(}\hlstr{"Door spread predictions against measurements"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/Doorspread5-3} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlkwd{nrow}\hlstd{(HH[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread), ])}
+\end{alltt}
+\begin{verbatim}
+## [1] 209
 \end{verbatim}
+\begin{alltt}
+\hlstd{HH}\hlopt{$}\hlstd{PredSpread[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread)} \hlopt{& !}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{DoorSpread)]} \hlkwb{<-} \hlstd{HH}\hlopt{$}\hlstd{DoorSpread[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread)} \hlopt{&}
+    \hlopt{!}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{DoorSpread)]}
+
+\hlkwd{nrow}\hlstd{(HH[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread), ])}  \hlcom{# leaves 17 values}
+\end{alltt}
+\begin{verbatim}
+## [1] 17
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Use simple depth relationship (m1) where possible}
+\hlstd{HH}\hlopt{$}\hlstd{PredSpread[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread)} \hlopt{& !}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{Depth)]} \hlkwb{<-} \hlkwd{predict}\hlstd{(m1,}
+    \hlkwc{newdata} \hlstd{= HH[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread)} \hlopt{& !}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{Depth), ])}
+
+\hlcom{# For the remainder, use the standard 87 estimate}
+\hlstd{HH}\hlopt{$}\hlstd{PredSpread[}\hlkwd{is.na}\hlstd{(HH}\hlopt{$}\hlstd{PredSpread)]} \hlkwb{<-} \hlnum{87}
+\end{alltt}
 \end{kframe}
 \end{knitrout}
 
@@ -573,7 +742,17 @@ Where CF is a correction factor for the efficiency of the gear, taken from Piet
 et al as 0.38 for otter trawl gears. \textcolor{red}{ADD REF}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{HH}\hlopt{$}\hlstd{SweptArea} \hlkwb{<-} \hlstd{HH}\hlopt{$}\hlstd{Dist} \hlopt{*} \hlstd{HH}\hlopt{$}\hlstd{PredSpread}\hlopt{/}\hlnum{1000}
+
+\hlstd{HH}\hlopt{$}\hlstd{SweptAreaAdjFac} \hlkwb{<-} \hlnum{0.38}
+\hlstd{HH}\hlopt{$}\hlstd{SweptAreaAdj} \hlkwb{<-} \hlstd{HH}\hlopt{$}\hlstd{SweptArea} \hlopt{*} \hlstd{HH}\hlopt{$}\hlstd{SweptAreaAdjFac}
+
+\hlkwd{boxplot}\hlstd{(HH}\hlopt{$}\hlstd{SweptAreaAdj} \hlopt{~} \hlstd{HH}\hlopt{$}\hlstd{Survey,} \hlkwc{ylab} \hlstd{=} \hlstr{"Area Swept (km2)"}\hlstd{,}
+    \hlkwc{xlab} \hlstd{=} \hlstr{"Survey series"}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/SweptArea-1} 
 
@@ -619,23 +798,115 @@ anglerfishes was as follows:
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Add species names}
+\hlkwd{load}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"DatrasSpeciesCodes.RData"}\hlstd{))}
+\hlstd{HL}\hlopt{$}\hlstd{SpeciesName} \hlkwb{<-} \hlstd{DatrasSpeciesCodes}\hlopt{$}\hlstd{scientific.name[}\hlkwd{match}\hlstd{(HL}\hlopt{$}\hlstd{SpecCode,}
+    \hlstd{DatrasSpeciesCodes}\hlopt{$}\hlstd{code_number)]}
+
+\hlcom{# need as numeric}
+\hlstd{an} \hlkwb{<-} \hlstd{as.numeric}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlkwb{<-} \hlkwd{an}\hlstd{(HL}\hlopt{$}\hlstd{LngtClass)}
+\hlstd{HL}\hlopt{$}\hlstd{HLNoAtLngt} \hlkwb{<-} \hlkwd{an}\hlstd{(HL}\hlopt{$}\hlstd{HLNoAtLngt)}
+\hlstd{HL}\hlopt{$}\hlstd{SubFactor} \hlkwb{<-} \hlkwd{an}\hlstd{(HL}\hlopt{$}\hlstd{SubFactor)}
+
+\hlcom{# Deal with different length codes - standarise to cm}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass[(HL}\hlopt{$}\hlstd{LngtClass} \hlopt{==} \hlnum{2460} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Merlangius merlangus"}\hlstd{)]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{LngtClass[(HL}\hlopt{$}\hlstd{LngtClass} \hlopt{==}
+    \hlnum{2460} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Merlangius merlangus"}\hlstd{)]}\hlopt{/}\hlnum{10}  \hlcom{## Dodgy datapoint!}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{==} \hlstr{". "}\hlstd{]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{==}
+    \hlstr{". "}\hlstd{]}\hlopt{/}\hlnum{10}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{==} \hlnum{0}\hlstd{]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{==}
+    \hlnum{0}\hlstd{]}\hlopt{/}\hlnum{10}
+
+\hlcom{# Round down length classes & add 0.5}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{!=} \hlstr{"5"}\hlstd{]} \hlkwb{<-} \hlkwd{round}\hlstd{(HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{!=}
+    \hlstr{"5"}\hlstd{])}
+\hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{!=} \hlstr{"5"}\hlstd{]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{LngtCode} \hlopt{!=}
+    \hlstr{"5"}\hlstd{]} \hlopt{+} \hlnum{0.5}
+
+\hlcom{## Now raise with the Model predictions}
+\hlkwd{load}\hlstd{(}\hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"LengthWeightPredictCelticSea.RData"}\hlstd{))}
+
+\hlcom{# Filter to the species of interest}
+\hlstd{HL}\hlopt{$}\hlstd{Species} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{SpeciesName}
+\hlstd{HL} \hlkwb{<-} \hlkwd{filter}\hlstd{(HL, Species} \hlopt{%in%} \hlstd{spp)}  \hlcom{## spp from above}
+
+\hlcom{# Add log(length)}
+\hlstd{HL}\hlopt{$}\hlstd{lL} \hlkwb{<-} \hlkwd{log}\hlstd{(HL}\hlopt{$}\hlstd{LngtClass} \hlopt{*} \hlnum{10}\hlstd{)}
+
+\hlcom{# Predict log weight gadoids}
+\hlstd{HL}\hlopt{$}\hlstd{LogWtLength[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2[[}\hlnum{1}\hlstd{]],} \hlkwc{newdata} \hlstd{= HL[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{gads, ])}
+\hlcom{# flats}
+\hlstd{HL}\hlopt{$}\hlstd{LogWtLength[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2[[}\hlnum{2}\hlstd{]],} \hlkwc{newdata} \hlstd{= HL[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{flats, ])}
+\hlcom{# anglerfishes}
+\hlstd{HL}\hlopt{$}\hlstd{WtLength[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-} \hlstd{(lop[[}\hlstr{"a"}\hlstd{]]} \hlopt{*} \hlstd{HL}\hlopt{$}\hlstd{LngtClass[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{lops]}\hlopt{^}\hlstd{lop[[}\hlstr{"b"}\hlstd{]])}\hlopt{/}\hlnum{1000}
+
+\hlstd{HL}\hlopt{$}\hlstd{WtLength[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlkwd{c}\hlstd{(gads, flats)]} \hlkwb{<-} \hlkwd{exp}\hlstd{(HL}\hlopt{$}\hlstd{LogWtLength[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlkwd{c}\hlstd{(gads, flats)])}  \hlcom{# convert back to weight in grams}
+
+\hlstd{HL}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{WtLength} \hlopt{*} \hlstd{HL}\hlopt{$}\hlstd{HLNoAtLngt} \hlopt{*} \hlstd{HL}\hlopt{$}\hlstd{SubFactor}  \hlcom{# Total weight in g}
+\hlstd{HL}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{Wt}\hlopt{/}\hlnum{1000}  \hlcom{# Weight in Kg}
+\hlcom{# bias correct}
+\hlstd{HL}\hlopt{$}\hlstd{Wt[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{Wt[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlopt{*}
+    \hlstd{corr.fact[[}\hlnum{1}\hlstd{]]}
+\hlstd{HL}\hlopt{$}\hlstd{Wt[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlstd{HL}\hlopt{$}\hlstd{Wt[HL}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlopt{*}
+    \hlstd{corr.fact[[}\hlnum{2}\hlstd{]]}
+
+\hlcom{## And aggregate across lengths split into Ju and Ad}
+
+\hlcom{## For anglerfish, there is no minimum size but a minimum}
+\hlcom{## landing weight of 500g for marketing...let's find the}
+\hlcom{## equivalent length from the data}
+
+\hlcom{# Find the length equivalent of the 500 g}
+\hlstd{fn_opt} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{,} \hlkwc{b}\hlstd{,} \hlkwc{L}\hlstd{) \{}
+    \hlstd{res} \hlkwb{<-} \hlstd{(a} \hlopt{*} \hlstd{(L}\hlopt{^}\hlstd{b))}\hlopt{/}\hlnum{1000}
+    \hlkwd{return}\hlstd{(res} \hlopt{-} \hlnum{0.5}\hlstd{)}
+\hlstd{\}}
+
+\hlcom{# optimise}
+\hlkwd{print}\hlstd{(}\hlkwd{uniroot}\hlstd{(}\hlkwc{f} \hlstd{= fn_opt,} \hlkwc{a} \hlstd{= lop[[}\hlstr{"a"}\hlstd{]],} \hlkwc{b} \hlstd{= lop[[}\hlstr{"b"}\hlstd{]],} \hlkwc{interval} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}
+    \hlnum{150}\hlstd{)))}
+\end{alltt}
 \begin{verbatim}
-FALSE $root
-FALSE [1] 32.35575
-FALSE 
-FALSE $f.root
-FALSE [1] 1.712325e-07
-FALSE 
-FALSE $iter
-FALSE [1] 10
-FALSE 
-FALSE $init.it
-FALSE [1] NA
-FALSE 
-FALSE $estim.prec
-FALSE [1] 6.103516e-05
-FALSE [1] 0.5000002
+## $root
+## [1] 32.35575
+## 
+## $f.root
+## [1] 1.712325e-07
+## 
+## $iter
+## [1] 10
+## 
+## $init.it
+## [1] NA
+## 
+## $estim.prec
+## [1] 6.103516e-05
 \end{verbatim}
+\begin{alltt}
+\hlstd{size} \hlkwb{<-} \hlkwd{uniroot}\hlstd{(}\hlkwc{f} \hlstd{= fn_opt,} \hlkwc{a} \hlstd{= lop[[}\hlstr{"a"}\hlstd{]],} \hlkwc{b} \hlstd{= lop[[}\hlstr{"b"}\hlstd{]],} \hlkwc{interval} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}
+    \hlnum{150}\hlstd{))}\hlopt{$}\hlstd{root}
+\hlcom{## Anglerfish minimum size is equivalent to 32.35 cm}
+
+\hlstd{lop[[}\hlstr{"a"}\hlstd{]]} \hlopt{*} \hlstd{(size}\hlopt{^}\hlstd{lop[[}\hlstr{"b"}\hlstd{]])}\hlopt{/}\hlnum{1000}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5000002
+\end{verbatim}
+\begin{alltt}
+\hlstd{lop.df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{L} \hlstd{=} \hlnum{1}\hlopt{:}\hlnum{150}\hlstd{,} \hlkwc{Wt} \hlstd{= (lop[[}\hlstr{"a"}\hlstd{]]} \hlopt{*} \hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{150}\hlstd{)}\hlopt{^}\hlstd{lop[[}\hlstr{"b"}\hlstd{]]))}\hlopt{/}\hlnum{1000}\hlstd{)}
+
+\hlkwd{ggplot}\hlstd{(lop.df,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= L,} \hlkwc{y} \hlstd{= Wt))} \hlopt{+} \hlkwd{geom_line}\hlstd{()} \hlopt{+} \hlkwd{geom_segment}\hlstd{(}\hlkwc{data} \hlstd{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{= size,}
+    \hlkwc{x1} \hlstd{= size,} \hlkwc{y} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{y1} \hlstd{=} \hlnum{0.5}\hlstd{),} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= x,} \hlkwc{xend} \hlstd{= x1,} \hlkwc{y} \hlstd{= y,}
+    \hlkwc{yend} \hlstd{= y1),} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{geom_segment}\hlstd{(}\hlkwc{data} \hlstd{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{x} \hlstd{=} \hlnum{0}\hlstd{,}
+    \hlkwc{x1} \hlstd{= size,} \hlkwc{y} \hlstd{=} \hlnum{0.5}\hlstd{,} \hlkwc{y1} \hlstd{=} \hlnum{0.5}\hlstd{),} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= x,} \hlkwc{xend} \hlstd{= x1,} \hlkwc{y} \hlstd{= y,}
+    \hlkwc{yend} \hlstd{= y1),} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Lophius spp. size at minimum
+\textbackslash{}t\textbackslash{}t\textbackslash{}t\textbackslash{}t\textbackslash{}t\textbackslash{}t  marketing weight"}\hlstd{)}
+\end{alltt}
 \end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/AddingWeights-1} 
@@ -643,9 +914,80 @@ FALSE [1] 0.5000002
 }
 
 
-\begin{kframe}
+\begin{kframe}\begin{alltt}
+\hlcom{## Assign to length groups}
+\hlstd{HL}\hlopt{$}\hlstd{SpeciesName} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Gadus morhua"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<}
+    \hlnum{34.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==}
+    \hlstr{"Gadus morhua"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{34.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,}
+    \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Melanogrammus aeglefinus"} \hlopt{&}
+    \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),}
+    \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Melanogrammus aeglefinus"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=}
+        \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==}
+        \hlstr{"Merlangius merlangus"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,}
+        \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Merlangius merlangus"} \hlopt{&}
+        \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),}
+        \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Merluccius merluccius"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<}
+            \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==}
+            \hlstr{"Merluccius merluccius"} \hlopt{&} \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,}
+            \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Pleuronectes platessa"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Pleuronectes platessa"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Solea solea"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{23.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Solea solea"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{23.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lepidorhombus whiffiagonis"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{19.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lepidorhombus whiffiagonis"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{19.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lophius piscatorius"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lophius piscatorius"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lophius budegassa"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{>=} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Adu"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName} \hlopt{==} \hlstr{"Lophius budegassa"} \hlopt{&}
+            \hlstd{HL}\hlopt{$}\hlstd{LngtClass} \hlopt{<} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"Juv"}\hlstd{,}
+            \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{paste}\hlstd{(HL}\hlopt{$}\hlstd{SpeciesName,} \hlstr{"All"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{)))))))))))))))))))}
 
-{\ttfamily\noindent\itshape\color{messagecolor}{FALSE Joining, by = c("{}Survey"{}, "{}Quarter"{}, "{}Country"{}, "{}Ship"{}, "{}Gear"{}, "{}StNo"{}, "{}HaulNo"{}, "{}Year"{}, "{}SpeciesName"{})}}\end{kframe}
+\hlstd{DF} \hlkwb{<-} \hlstd{HL[}\hlopt{!}\hlkwd{is.na}\hlstd{(HL}\hlopt{$}\hlstd{Wt), ]}
+\hlstd{DF} \hlkwb{<-} \hlstd{DF} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Survey, Quarter, Country, Ship, Gear, StNo,}
+    \hlstd{HaulNo, Year, SpeciesName)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{Kg} \hlstd{=} \hlkwd{sum}\hlstd{(Wt))} \hlopt{%>%}
+    \hlkwd{as.data.frame}\hlstd{()}
+
+\hlcom{# Now merge in the station details: lat, lon etc..  midpoint}
+\hlcom{# of haul locations - small enough distances to not worry}
+\hlcom{# about spherical distances}
+\hlstd{HH}\hlopt{$}\hlstd{HaulLatMid} \hlkwb{<-} \hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLat)} \hlopt{+} \hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLat))}\hlopt{/}\hlnum{2}
+\hlstd{HH}\hlopt{$}\hlstd{HaulLonMid} \hlkwb{<-} \hlstd{(}\hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{ShootLon)} \hlopt{+} \hlkwd{an}\hlstd{(HH}\hlopt{$}\hlstd{HaulLon))}\hlopt{/}\hlnum{2}
+
+\hlcom{# Fix blank spaces in variables...}
+\hlstd{DF}\hlopt{$}\hlstd{Survey} \hlkwb{<-} \hlkwd{gsub}\hlstd{(}\hlstr{" "}\hlstd{,} \hlstr{""}\hlstd{, DF}\hlopt{$}\hlstd{Survey)}
+\hlstd{DF}\hlopt{$}\hlstd{Gear} \hlkwb{<-} \hlkwd{gsub}\hlstd{(}\hlstr{" "}\hlstd{,} \hlstr{""}\hlstd{, DF}\hlopt{$}\hlstd{Gear)}
+\hlstd{DF}\hlopt{$}\hlstd{Ship} \hlkwb{<-} \hlkwd{gsub}\hlstd{(}\hlstr{" "}\hlstd{,} \hlstr{""}\hlstd{, DF}\hlopt{$}\hlstd{Ship)}
+\hlstd{DF}\hlopt{$}\hlstd{StNo} \hlkwb{<-} \hlkwd{gsub}\hlstd{(}\hlstr{" "}\hlstd{,} \hlstr{""}\hlstd{, DF}\hlopt{$}\hlstd{StNo)}
+
+\hlcom{## Create a haul record for each species}
+\hlstd{HH} \hlkwb{<-} \hlkwd{merge}\hlstd{(}\hlkwc{x} \hlstd{= HH,} \hlkwc{y} \hlstd{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{SpeciesName} \hlstd{=} \hlkwd{unique}\hlstd{(DF}\hlopt{$}\hlstd{SpeciesName)))}
+
+\hlcom{# Join on the catch data}
+\hlstd{DF2} \hlkwb{<-} \hlkwd{full_join}\hlstd{(}\hlkwc{x} \hlstd{= HH,} \hlkwc{y} \hlstd{= DF)}
+\hlstd{DF2}\hlopt{$}\hlstd{Kg[}\hlkwd{is.na}\hlstd{(DF2}\hlopt{$}\hlstd{Kg)]} \hlkwb{<-} \hlnum{0}  \hlcom{#NAs are zero catches of the species}
+
+\hlcom{# Subset to variables of interest}
+\hlstd{DF} \hlkwb{<-} \hlstd{DF2[}\hlkwd{c}\hlstd{(}\hlstr{"Survey"}\hlstd{,} \hlstr{"Ship"}\hlstd{,} \hlstr{"StNo"}\hlstd{,} \hlstr{"HaulNo"}\hlstd{,} \hlstr{"Year"}\hlstd{,} \hlstr{"Month"}\hlstd{,}
+    \hlstr{"SpeciesName"}\hlstd{,} \hlstr{"HaulLatMid"}\hlstd{,} \hlstr{"HaulLonMid"}\hlstd{,} \hlstr{"HaulDur"}\hlstd{,} \hlstr{"SweptArea"}\hlstd{,}
+    \hlstr{"SweptAreaAdj"}\hlstd{,} \hlstr{"Kg"}\hlstd{)]}
+
+\hlcom{# Remove marginal areas}
+\hlstd{DF} \hlkwb{<-} \hlkwd{filter}\hlstd{(DF, HaulLonMid} \hlopt{< -}\hlnum{2} \hlopt{&} \hlstd{HaulLonMid} \hlopt{> -}\hlnum{12}\hlstd{)}
+\hlstd{DF} \hlkwb{<-} \hlkwd{filter}\hlstd{(DF, HaulLatMid} \hlopt{>} \hlnum{48} \hlopt{&} \hlstd{HaulLatMid} \hlopt{<} \hlnum{52}\hlstd{)}
+
+\hlcom{# Save}
+\hlkwd{save}\hlstd{(DF,} \hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{"Cleaned"}\hlstd{,} \hlstr{"CelticSurveyFormattedSize.RData"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 \end{knitrout}
 
 \section{Cefas survey data}
@@ -670,9 +1012,244 @@ were:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlstr{"CEFAS"}\hlstd{,} \hlstr{"WesternSurveys_V20160905.dat"}\hlstd{))}
 
+\hlcom{###################################### Process station data}
+\hlstd{Stations} \hlkwb{<-} \hlkwd{group_by}\hlstd{(FSS, fldSeriesName, fldCruiseName, fldGearDescription,}
+    \hlstd{Year, Month, Day, Time, fldCruiseStationNumber, fldValidityCode,}
+    \hlstd{fldTowDuration)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{ShootLat} \hlstd{=} \hlkwd{mean}\hlstd{(fldShotLatDecimalDegrees),}
+    \hlkwc{ShootLon} \hlstd{=} \hlkwd{mean}\hlstd{(fldShotLonDecimalDegrees),} \hlkwc{HaulLat} \hlstd{=} \hlkwd{mean}\hlstd{(fldHaulLatDecimalDegrees),}
+    \hlkwc{HaulLon} \hlstd{=} \hlkwd{mean}\hlstd{(fldHaulLonDecimalDegrees))} \hlopt{%>%} \hlkwd{as.data.frame}\hlstd{()}
+\hlcom{###################################### }
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'f' not found}}\end{kframe}
+\hlcom{# Keep only valid hauls}
+\hlkwd{table}\hlstd{(Stations}\hlopt{$}\hlstd{fldValidityCode)}
+\hlstd{Stations} \hlkwb{<-} \hlkwd{filter}\hlstd{(Stations, fldValidityCode} \hlopt{==} \hlstr{"V"}\hlstd{)}
+
+\hlcom{################################################################## There are some tows which are clearly too large a}
+\hlcom{################################################################## distance...  so to clean the data but note tow distance}
+\hlcom{################################################################## varies greatly over time - so standardise}
+
+\hlcom{############################ 3}
+\hlstd{Stations}\hlopt{$}\hlstd{Dist} \hlkwb{<-} \hlkwd{mapply}\hlstd{(gcd.hf,} \hlkwc{long1} \hlstd{=} \hlkwd{deg2rad}\hlstd{(Stations}\hlopt{$}\hlstd{ShootLon),}
+    \hlkwc{lat1} \hlstd{=} \hlkwd{deg2rad}\hlstd{(Stations}\hlopt{$}\hlstd{ShootLat),} \hlkwc{long2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(Stations}\hlopt{$}\hlstd{HaulLon),}
+    \hlkwc{lat2} \hlstd{=} \hlkwd{deg2rad}\hlstd{(Stations}\hlopt{$}\hlstd{HaulLat))}
+
+\hlkwd{summary}\hlstd{(Stations}\hlopt{$}\hlstd{Dist)}
+
+\hlstd{Stations}\hlopt{$}\hlstd{DistStand} \hlkwb{<-} \hlstd{(Stations}\hlopt{$}\hlstd{Dist}\hlopt{/}\hlstd{Stations}\hlopt{$}\hlstd{fldTowDuration)} \hlopt{*}
+    \hlnum{60}
+
+\hlcom{# Remove any over or under the SE of median distance for the}
+\hlcom{# survey (robust detection of outliers}
+\hlcom{# https://www.r-bloggers.com/absolute-deviation-around-the-median/)}
+
+\hlstd{StationsClean} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Stations, fldSeriesName)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{median} \hlstd{=} \hlkwd{median}\hlstd{(DistStand),}
+    \hlkwc{mean} \hlstd{=} \hlkwd{mean}\hlstd{(DistStand),} \hlkwc{MAD} \hlstd{=} \hlkwd{mad}\hlstd{(DistStand,} \hlkwc{center} \hlstd{=} \hlkwd{median}\hlstd{(DistStand)))} \hlopt{%>%}
+    \hlkwd{as.data.frame}\hlstd{()}
+
+\hlstd{StationsClean}\hlopt{$}\hlstd{Up} \hlkwb{<-} \hlstd{StationsClean}\hlopt{$}\hlstd{median} \hlopt{+} \hlnum{5} \hlopt{*} \hlstd{StationsClean}\hlopt{$}\hlstd{MAD}
+\hlstd{StationsClean}\hlopt{$}\hlstd{Lo} \hlkwb{<-} \hlstd{StationsClean}\hlopt{$}\hlstd{median} \hlopt{-} \hlnum{5} \hlopt{*} \hlstd{StationsClean}\hlopt{$}\hlstd{MAD}
+
+\hlcom{## Now add the upper and lower thresholds to the stations}
+\hlstd{Stations}\hlopt{$}\hlstd{LoThres} \hlkwb{<-} \hlstd{StationsClean}\hlopt{$}\hlstd{Lo[}\hlkwd{match}\hlstd{(Stations}\hlopt{$}\hlstd{fldSeriesName,}
+    \hlstd{StationsClean}\hlopt{$}\hlstd{fldSeriesName)]}
+\hlstd{Stations}\hlopt{$}\hlstd{UpThres} \hlkwb{<-} \hlstd{StationsClean}\hlopt{$}\hlstd{Up[}\hlkwd{match}\hlstd{(Stations}\hlopt{$}\hlstd{fldSeriesName,}
+    \hlstd{StationsClean}\hlopt{$}\hlstd{fldSeriesName)]}
+
+\hlstd{Stations}\hlopt{$}\hlstd{InTol} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{DistStand} \hlopt{>=} \hlstd{Stations}\hlopt{$}\hlstd{LoThres} \hlopt{&}
+    \hlstd{Stations}\hlopt{$}\hlstd{DistStand} \hlopt{<=} \hlstd{Stations}\hlopt{$}\hlstd{UpThres,} \hlstr{"KEEP"}\hlstd{,} \hlstr{"LOSE"}\hlstd{)}
+
+\hlkwd{table}\hlstd{(Stations}\hlopt{$}\hlstd{InTol)}
+
+\hlcom{######################################################################## midpoint of haul locations - small enough distances to not}
+\hlcom{######################################################################## worry about spherical distances}
+\hlstd{an} \hlkwb{<-} \hlstd{as.numeric}
+\hlstd{Stations}\hlopt{$}\hlstd{HaulLatMid} \hlkwb{<-} \hlstd{(}\hlkwd{an}\hlstd{(Stations}\hlopt{$}\hlstd{ShootLat)} \hlopt{+} \hlkwd{an}\hlstd{(Stations}\hlopt{$}\hlstd{HaulLat))}\hlopt{/}\hlnum{2}
+\hlstd{Stations}\hlopt{$}\hlstd{HaulLonMid} \hlkwb{<-} \hlstd{(}\hlkwd{an}\hlstd{(Stations}\hlopt{$}\hlstd{ShootLon)} \hlopt{+} \hlkwd{an}\hlstd{(Stations}\hlopt{$}\hlstd{HaulLon))}\hlopt{/}\hlnum{2}
+
+\hlcom{## Calculate the swept area per gear for beam trawls its easy,}
+\hlcom{## for otter trawls need to include the doorspread for}
+\hlcom{## effective swept area}
+
+\hlstd{Surveys} \hlkwb{<-} \hlkwd{sort}\hlstd{(}\hlkwd{unique}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription))}
+
+\hlstd{Surveys} \hlkwb{<-} \hlstd{Surveys[}\hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{9}\hlstd{,} \hlnum{23}\hlstd{,} \hlnum{31}\hlopt{:}\hlnum{46}\hlstd{,} \hlnum{48}\hlstd{,} \hlnum{49}\hlstd{)]}
+\hlcom{# Only keep the trawl fish surveys}
+\hlkwd{print}\hlstd{(Surveys)}
+\hlstd{Stations} \hlkwb{<-} \hlkwd{filter}\hlstd{(Stations, fldGearDescription} \hlopt{%in%} \hlstd{Surveys)}
+
+\hlcom{## No details for otter trawl deployment, so use the standard}
+\hlcom{## 87m doorspread}
+\hlstd{Stations}\hlopt{$}\hlstd{GearWidth} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%}
+    \hlstd{Surveys[}\hlnum{1}\hlstd{],} \hlnum{2}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%} \hlstd{Surveys[}\hlnum{2}\hlopt{:}\hlnum{5}\hlstd{],}
+    \hlnum{3}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%} \hlstd{Surveys[}\hlnum{6}\hlopt{:}\hlnum{9}\hlstd{],}
+        \hlnum{4}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%} \hlstd{Surveys[}\hlnum{10}\hlstd{],}
+            \hlnum{87}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%} \hlstd{Surveys[}\hlnum{11}\hlopt{:}\hlnum{12}\hlstd{],}
+                \hlnum{4}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%} \hlstd{Surveys[}\hlnum{13}\hlopt{:}\hlnum{25}\hlstd{],}
+                  \hlnum{87}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%}
+                    \hlstd{Surveys[}\hlnum{26}\hlopt{:}\hlnum{27}\hlstd{],} \hlnum{4}\hlstd{,} \hlkwd{ifelse}\hlstd{(Stations}\hlopt{$}\hlstd{fldGearDescription} \hlopt{%in%}
+                    \hlstd{Surveys[}\hlnum{28}\hlstd{],} \hlnum{87}\hlstd{,} \hlnum{NA}\hlstd{))))))))}
+
+\hlstd{Stations}\hlopt{$}\hlstd{SweptArea} \hlkwb{<-} \hlstd{Stations}\hlopt{$}\hlstd{Dist} \hlopt{*} \hlstd{(Stations}\hlopt{$}\hlstd{GearWidth}\hlopt{/}\hlnum{1000}\hlstd{)}
+
+\hlcom{## Adjust swept area for gear efficiencies, after Piet et al}
+\hlcom{## for roundfish:}
+
+\hlcom{# BT: 0.19 OT: 0.22 - 0.54 (Juv, ad). 0.38}
+
+\hlstd{Stations} \hlkwb{<-} \hlstd{Stations[}\hlopt{!}\hlkwd{is.na}\hlstd{(Stations}\hlopt{$}\hlstd{GearWidth), ]}
+
+\hlstd{Stations}\hlopt{$}\hlstd{SweptAreaAdjFac} \hlkwb{<-} \hlkwd{sapply}\hlstd{(Stations}\hlopt{$}\hlstd{GearWidth,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) \{}
+    \hlkwa{if} \hlstd{(x} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlnum{2.5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{))}
+        \hlkwd{return}\hlstd{(}\hlnum{0.19}\hlstd{)}
+    \hlkwa{if} \hlstd{(x} \hlopt{==} \hlnum{87}\hlstd{)}
+        \hlkwd{return}\hlstd{(}\hlnum{0.38}\hlstd{)} \hlkwa{else} \hlkwd{return}\hlstd{(}\hlnum{NA}\hlstd{)}
+\hlstd{\})}
+
+\hlstd{Stations}\hlopt{$}\hlstd{SweptAreaAdj} \hlkwb{<-} \hlstd{Stations}\hlopt{$}\hlstd{SweptArea} \hlopt{*} \hlstd{Stations}\hlopt{$}\hlstd{SweptAreaAdjFac}
+
+\hlcom{# Only keep stations in tolerance}
+\hlstd{Stations} \hlkwb{<-} \hlkwd{filter}\hlstd{(Stations, InTol} \hlopt{==} \hlstr{"KEEP"}\hlstd{)}
+
+\hlkwd{by}\hlstd{(}\hlkwc{data} \hlstd{= Stations}\hlopt{$}\hlstd{SweptAreaAdj,} \hlkwc{INDICES} \hlstd{= Stations}\hlopt{$}\hlstd{fldSeriesName,}
+    \hlkwc{FUN} \hlstd{= mean,} \hlkwc{na.rm} \hlstd{= T)}
+
+\hlcom{############################### Process the catches ####}
+
+\hlcom{# Convert all lengths to cm and round to 5cm size class}
+\hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlkwb{<-} \hlstd{(FSS}\hlopt{$}\hlstd{fldLengthGroup}\hlopt{/}\hlnum{10}\hlstd{)} \hlopt{+} \hlnum{0.5}
+
+\hlcom{# load a/b parameters Add a and b parameters for}
+\hlcom{# length-weight Load the modelled length weight}
+\hlcom{# relationships....}
+\hlkwd{load}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlstr{"DATRAS"}\hlstd{,} \hlstr{"LengthWeightPredictCelticSea.RData"}\hlstd{))}
+
+\hlcom{# Only species of interest}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{filter}\hlstd{(FSS, fldScientificName} \hlopt{%in%} \hlkwd{toupper}\hlstd{(spp))}  \hlcom{# species list from above}
+
+\hlcom{# Add log length}
+\hlstd{FSS}\hlopt{$}\hlstd{lL} \hlkwb{<-} \hlkwd{log}\hlstd{(FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{*} \hlnum{10}\hlstd{)}
+
+\hlcom{# Scientific names to small case except first letter}
+\hlstd{FSS}\hlopt{$}\hlstd{Species} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlkwd{toupper}\hlstd{(}\hlkwd{substring}\hlstd{(FSS}\hlopt{$}\hlstd{fldScientificName,}
+    \hlnum{1}\hlstd{,} \hlnum{1}\hlstd{)),} \hlkwd{tolower}\hlstd{(}\hlkwd{substring}\hlstd{(FSS}\hlopt{$}\hlstd{fldScientificName,} \hlnum{2}\hlstd{,} \hlnum{1000}\hlstd{)),}
+    \hlkwc{sep} \hlstd{=} \hlstr{""}\hlstd{)}
+
+\hlcom{# Predict log weight gads}
+\hlstd{FSS}\hlopt{$}\hlstd{LogWtLength[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2[[}\hlnum{1}\hlstd{]],} \hlkwc{newdata} \hlstd{= FSS[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{gads, ])}
+\hlcom{# flats}
+\hlstd{FSS}\hlopt{$}\hlstd{LogWtLength[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlkwd{predict}\hlstd{(lm2[[}\hlnum{2}\hlstd{]],}
+    \hlkwc{newdata} \hlstd{= FSS[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats, ])}
+\hlcom{# anglers}
+\hlstd{FSS}\hlopt{$}\hlstd{WtLength} \hlkwb{<-} \hlnum{NA}
+\hlstd{FSS}\hlopt{$}\hlstd{WtLength[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{lops]} \hlkwb{<-} \hlstd{(lop[[}\hlstr{"a"}\hlstd{]]} \hlopt{*} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlstd{lops]}\hlopt{^}\hlstd{lop[[}\hlstr{"b"}\hlstd{]])}\hlopt{/}\hlnum{1000}
+
+\hlstd{FSS}\hlopt{$}\hlstd{WtLength[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlkwd{c}\hlstd{(gads, flats)]} \hlkwb{<-} \hlkwd{exp}\hlstd{(FSS}\hlopt{$}\hlstd{LogWtLength[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%}
+    \hlkwd{c}\hlstd{(gads, flats)])}  \hlcom{# convert back to weight in grams}
+
+\hlstd{FSS}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlstd{FSS}\hlopt{$}\hlstd{WtLength} \hlopt{*} \hlstd{FSS}\hlopt{$}\hlstd{Numbers}  \hlcom{# Total weight in g}
+\hlstd{FSS}\hlopt{$}\hlstd{Wt} \hlkwb{<-} \hlstd{FSS}\hlopt{$}\hlstd{Wt}\hlopt{/}\hlnum{1000}  \hlcom{# Weight in Kg}
+
+\hlcom{# bias correct}
+\hlstd{FSS}\hlopt{$}\hlstd{Wt[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlkwb{<-} \hlstd{FSS}\hlopt{$}\hlstd{Wt[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{gads]} \hlopt{*}
+    \hlstd{corr.fact[[}\hlnum{1}\hlstd{]]}
+\hlstd{FSS}\hlopt{$}\hlstd{Wt[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlkwb{<-} \hlstd{FSS}\hlopt{$}\hlstd{Wt[FSS}\hlopt{$}\hlstd{Species} \hlopt{%in%} \hlstd{flats]} \hlopt{*}
+    \hlstd{corr.fact[[}\hlnum{2}\hlstd{]]}
+
+\hlstd{FSS} \hlkwb{<-} \hlstd{FSS[}\hlopt{!}\hlkwd{is.na}\hlstd{(FSS}\hlopt{$}\hlstd{Wt), ]}  \hlcom{## Lack length measurements}
+
+\hlcom{# Aggregate split into Ju and Ad}
+
+\hlstd{FSS}\hlopt{$}\hlstd{Species} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Gadus morhua"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<}
+    \hlnum{34.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==}
+    \hlstr{"Gadus morhua"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{34.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,}
+    \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Melanogrammus aeglefinus"} \hlopt{&}
+    \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),}
+    \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Melanogrammus aeglefinus"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=}
+        \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==}
+        \hlstr{"Merlangius merlangus"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,}
+        \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Merlangius merlangus"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Merluccius merluccius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Merluccius merluccius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Pleuronectes platessa"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Pleuronectes platessa"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{26.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Pollachius pollachius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Pollachius pollachius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{29.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Solea solea"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<}
+        \hlnum{23.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==}
+        \hlstr{"Solea solea"} \hlopt{&} \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{23.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,}
+        \hlstr{"Adu"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lepidorhombus whiffiagonis"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{19.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lepidorhombus whiffiagonis"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{19.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lophius piscatorius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lophius piscatorius"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lophius budegassa"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{>=} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Adu"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{ifelse}\hlstd{(FSS}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstr{"Lophius budegassa"} \hlopt{&}
+        \hlstd{FSS}\hlopt{$}\hlstd{fldLengthGroup} \hlopt{<} \hlnum{32.5}\hlstd{,} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"Juv"}\hlstd{,}
+        \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{),} \hlkwd{paste}\hlstd{(FSS}\hlopt{$}\hlstd{Species,} \hlstr{"All"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{"_"}\hlstd{)))))))))))))))))))))}
+
+\hlcom{# Summarise as weight}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{group_by}\hlstd{(FSS, fldSeriesName, fldGearDescription, Year,}
+    \hlstd{Month, fldCruiseStationNumber, Species)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{Kg} \hlstd{=} \hlkwd{sum}\hlstd{(Wt))} \hlopt{%>%}
+    \hlkwd{as.data.frame}\hlstd{()}
+
+\hlcom{## Some stations have multiple gear deployments, we want to}
+\hlcom{## have one location per station - to do so, sum the tow}
+\hlcom{## durations and swept area so we get an accurate swept area}
+
+\hlstd{Stations} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Stations, fldSeriesName, Year, Month, Day,}
+    \hlstd{Time, fldCruiseStationNumber, fldValidityCode, ShootLat,}
+    \hlstd{ShootLon, HaulLat, HaulLon, HaulLatMid, HaulLonMid)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{fldTowDuration} \hlstd{=} \hlkwd{mean}\hlstd{(fldTowDuration),}
+    \hlkwc{Dist} \hlstd{=} \hlkwd{sum}\hlstd{(Dist),} \hlkwc{DistStand} \hlstd{=} \hlkwd{sum}\hlstd{(DistStand),} \hlkwc{SweptArea} \hlstd{=} \hlkwd{sum}\hlstd{(SweptArea),}
+    \hlkwc{SweptAreaAdj} \hlstd{=} \hlkwd{sum}\hlstd{(SweptAreaAdj))} \hlopt{%>%} \hlkwd{as.data.frame}\hlstd{()}
+
+\hlcom{## Also need to sum the biological data}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{group_by}\hlstd{(FSS, fldSeriesName, Year, Month, fldCruiseStationNumber,}
+    \hlstd{Species)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{Kg} \hlstd{=} \hlkwd{sum}\hlstd{(Kg))} \hlopt{%>%} \hlkwd{as.data.frame}\hlstd{()}
+
+\hlcom{## Now match the positional and catch data}
+\hlstd{Stations} \hlkwb{<-} \hlkwd{merge}\hlstd{(}\hlkwc{x} \hlstd{= Stations,} \hlkwc{y} \hlstd{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{Species} \hlstd{=} \hlkwd{unique}\hlstd{(FSS}\hlopt{$}\hlstd{Species)))}
+
+\hlstd{FSS} \hlkwb{<-} \hlstd{FSS[}\hlkwd{c}\hlstd{(}\hlstr{"fldSeriesName"}\hlstd{,} \hlstr{"Year"}\hlstd{,} \hlstr{"Month"}\hlstd{,} \hlstr{"fldCruiseStationNumber"}\hlstd{,}
+    \hlstr{"Species"}\hlstd{,} \hlstr{"Kg"}\hlstd{)]}
+
+\hlstd{FSS} \hlkwb{<-} \hlkwd{full_join}\hlstd{(}\hlkwc{x} \hlstd{= Stations,} \hlkwc{y} \hlstd{= FSS)}
+\hlcom{# Add zeros}
+\hlstd{FSS}\hlopt{$}\hlstd{Kg[}\hlkwd{is.na}\hlstd{(FSS}\hlopt{$}\hlstd{Kg)]} \hlkwb{<-} \hlnum{0}
+
+\hlkwd{by}\hlstd{(FSS}\hlopt{$}\hlstd{Kg,} \hlkwc{INDICES} \hlstd{= FSS}\hlopt{$}\hlstd{Species, summary)}
+
+\hlstd{FSS} \hlkwb{<-} \hlstd{FSS[}\hlkwd{c}\hlstd{(}\hlstr{"fldSeriesName"}\hlstd{,} \hlstr{"Year"}\hlstd{,} \hlstr{"Month"}\hlstd{,} \hlstr{"fldCruiseStationNumber"}\hlstd{,}
+    \hlstr{"HaulLatMid"}\hlstd{,} \hlstr{"HaulLonMid"}\hlstd{,} \hlstr{"fldTowDuration"}\hlstd{,} \hlstr{"SweptArea"}\hlstd{,}
+    \hlstr{"SweptAreaAdj"}\hlstd{,} \hlstr{"Species"}\hlstd{,} \hlstr{"Kg"}\hlstd{)]}
+
+\hlcom{## Trim to only keep data within core Celtic Sea}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{filter}\hlstd{(FSS, HaulLonMid} \hlopt{> -}\hlnum{12} \hlopt{&} \hlstd{HaulLonMid} \hlopt{< -}\hlnum{2}\hlstd{)}  \hlcom{# remove extreme Lons}
+\hlstd{FSS} \hlkwb{<-} \hlkwd{filter}\hlstd{(FSS, HaulLatMid} \hlopt{>} \hlnum{48} \hlopt{&} \hlstd{HaulLatMid} \hlopt{<} \hlnum{52}\hlstd{)}  \hlcom{# remove extreme Lats}
+
+\hlcom{# plot(FSS$SweptAreaAdj ~ FSS$fldSeriesName)}
+\hlcom{# boxplot(FSS$SweptAreaAdj ~ FSS$Year)}
+
+\hlkwd{table}\hlstd{(FSS}\hlopt{$}\hlstd{Month, FSS}\hlopt{$}\hlstd{Year, FSS}\hlopt{$}\hlstd{fldSeriesName)}
+
+\hlkwd{save}\hlstd{(FSS,} \hlkwc{file} \hlstd{=} \hlkwd{file.path}\hlstd{(}\hlkwd{getwd}\hlstd{(),} \hlstr{"Cleaned"}\hlstd{,} \hlstr{"CelticSurvey2FormattedSize.RData"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 \end{knitrout}
 
 
@@ -684,7 +1261,31 @@ The following section details some exploratory plots from the cleaned data.
 This guides the final dataset used to fit the VAST model.
 
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{################################################## }
 
+\hlcom{# Load in data}
+\hlkwd{load}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlkwd{getwd}\hlstd{(),} \hlstr{"Cleaned"}\hlstd{,} \hlstr{"CelticSurveyFormattedSize.RData"}\hlstd{))}  \hlcom{# Datras data by weight}
+\hlkwd{load}\hlstd{(}\hlkwd{file.path}\hlstd{(}\hlkwd{getwd}\hlstd{(),} \hlstr{"Cleaned"}\hlstd{,} \hlstr{"CelticSurvey2FormattedSize.RData"}\hlstd{))}  \hlcom{# Cefas data by weight}
+
+\hlstd{DWt} \hlkwb{<-} \hlstd{DF}
+\hlstd{CWt} \hlkwb{<-} \hlstd{FSS}
+\hlkwd{rm}\hlstd{(DF, FSS)}  \hlcom{# Rename to avoid confusion}
+
+\hlcom{################################################## Combine the datasets}
+\hlstd{Wt} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{Survey} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{Survey,} \hlkwd{as.character}\hlstd{(CWt}\hlopt{$}\hlstd{fldSeriesName)),}
+    \hlkwc{Year} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{Year, CWt}\hlopt{$}\hlstd{Year),} \hlkwc{Month} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{Month, CWt}\hlopt{$}\hlstd{Month),}
+    \hlkwc{HaulNo} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{HaulNo, CWt}\hlopt{$}\hlstd{fldCruiseStationNumber),} \hlkwc{Lon} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{HaulLonMid,}
+        \hlstd{CWt}\hlopt{$}\hlstd{HaulLonMid),} \hlkwc{Lat} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{HaulLatMid, CWt}\hlopt{$}\hlstd{HaulLatMid),}
+    \hlkwc{HaulDur} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{HaulDur, CWt}\hlopt{$}\hlstd{fldTowDuration),} \hlkwc{SweptArea} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{SweptAreaAdj,}
+        \hlstd{CWt}\hlopt{$}\hlstd{SweptAreaAdj),} \hlkwc{Species} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{Species, CWt}\hlopt{$}\hlstd{Species),}
+    \hlkwc{Kg} \hlstd{=} \hlkwd{c}\hlstd{(DWt}\hlopt{$}\hlstd{Kg, CWt}\hlopt{$}\hlstd{Kg))}
+\hlkwd{rm}\hlstd{(DWt, CWt)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \subsection{Survey locations}
 
@@ -708,7 +1309,23 @@ area and concerns about its impact on selectivity. \\
 \begin{landscape}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Stations} \hlkwb{<-} \hlstd{Wt[}\hlopt{!}\hlkwd{duplicated}\hlstd{(}\hlkwd{paste}\hlstd{(Wt}\hlopt{$}\hlstd{Survey, Wt}\hlopt{$}\hlstd{Year, Wt}\hlopt{$}\hlstd{Lon,}
+    \hlstd{Wt}\hlopt{$}\hlstd{Lat)), ]}
+
+\hlstd{yrs} \hlkwb{<-} \hlkwd{sort}\hlstd{(}\hlkwd{unique}\hlstd{(Stations}\hlopt{$}\hlstd{Year))}
+\hlstd{n.yrs} \hlkwb{<-} \hlkwd{length}\hlstd{(yrs)}
+
+\hlstd{map} \hlkwb{<-} \hlkwd{map_data}\hlstd{(}\hlstr{"world"}\hlstd{,} \hlkwc{region} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"UK"}\hlstd{,} \hlstr{"Ireland"}\hlstd{,} \hlstr{"France"}\hlstd{))}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{()} \hlopt{+} \hlkwd{geom_polygon}\hlstd{(}\hlkwc{data} \hlstd{= map,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= long,} \hlkwc{y} \hlstd{= lat,}
+    \hlkwc{group} \hlstd{= group),} \hlkwc{colour} \hlstd{=} \hlstr{"black"}\hlstd{,} \hlkwc{fill} \hlstd{=} \hlstr{"grey"}\hlstd{)} \hlopt{+} \hlkwd{coord_fixed}\hlstd{(}\hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{12}\hlstd{,}
+    \hlnum{2}\hlstd{),} \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{48}\hlstd{,} \hlnum{52}\hlstd{),} \hlkwc{ratio} \hlstd{=} \hlnum{1.3}\hlstd{)} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{data} \hlstd{= Stations,}
+    \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Lon,} \hlkwc{y} \hlstd{= Lat,} \hlkwc{colour} \hlstd{= Survey),} \hlkwc{shape} \hlstd{=} \hlstr{"+"}\hlstd{)} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Year,}
+    \hlkwc{ncol} \hlstd{=} \hlnum{5}\hlstd{)} \hlopt{+} \hlkwd{theme_classic}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Survey locations by year and survey"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 \includegraphics[width=1\linewidth]{figure/Survey_locations-1} 
 
 \end{knitrout}
@@ -728,7 +1345,11 @@ The majority of survey effort is in the fourth quarter, though some survey
 effort is also undertaken in the first quarter. \\ 
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{kable}\hlstd{(}\hlkwd{table}\hlstd{(Stations}\hlopt{$}\hlstd{Year, Stations}\hlopt{$}\hlstd{Survey))}
+\end{alltt}
+\end{kframe}
 \begin{tabular}{l|r|r|r|r|r|r|r}
 \hline
   & CARLHELMAR & EVHOE & IE-IGFS & NWGFS & Q1SWBEAM & Q4SWIBTS & WCGFS\\
@@ -805,7 +1426,15 @@ effort is also undertaken in the first quarter. \\
 \hline
 \end{tabular}
 
+\begin{kframe}\begin{alltt}
+\hlstd{surveyyrs} \hlkwb{<-} \hlstd{reshape2}\hlopt{::}\hlkwd{melt}\hlstd{(}\hlkwd{table}\hlstd{(Stations}\hlopt{$}\hlstd{Survey, Stations}\hlopt{$}\hlstd{Year))}
 
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(surveyyrs[surveyyrs}\hlopt{$}\hlstd{value} \hlopt{!=} \hlnum{0}\hlstd{, ],} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Var2,}
+    \hlkwc{y} \hlstd{= Var1))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{size} \hlstd{= value))} \hlopt{+} \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+}
+    \hlkwd{theme}\hlstd{(}\hlkwc{legend.title} \hlstd{=} \hlkwd{element_blank}\hlstd{())} \hlopt{+} \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept} \hlstd{=} \hlnum{1997}\hlstd{)} \hlopt{+}
+    \hlkwd{ggtitle}\hlstd{(}\hlstr{"Number of Stations Per Survey Per Year"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_by_year-1} 
 
@@ -816,7 +1445,15 @@ effort is also undertaken in the first quarter. \\
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{surveymo} \hlkwb{<-} \hlstd{reshape2}\hlopt{::}\hlkwd{melt}\hlstd{(}\hlkwd{table}\hlstd{(Stations}\hlopt{$}\hlstd{Month, Stations}\hlopt{$}\hlstd{Year))}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(surveymo[surveymo}\hlopt{$}\hlstd{value} \hlopt{!=} \hlnum{0}\hlstd{, ],} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Var2,} \hlkwc{y} \hlstd{= Var1))} \hlopt{+}
+    \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{size} \hlstd{= value))} \hlopt{+} \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.title} \hlstd{=} \hlkwd{element_blank}\hlstd{())} \hlopt{+}
+    \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept} \hlstd{=} \hlnum{1997}\hlstd{)} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Number of Stations Per Survey Per Month"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_by_month-1} 
 
@@ -827,7 +1464,15 @@ effort is also undertaken in the first quarter. \\
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{surveyno} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Stations, Survey, Year)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{n} \hlstd{=} \hlkwd{n}\hlstd{())}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(surveyno,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= n))} \hlopt{+} \hlkwd{geom_bar}\hlstd{(}\hlkwc{stat} \hlstd{=} \hlstr{"identity"}\hlstd{,}
+    \hlkwd{aes}\hlstd{(}\hlkwc{fill} \hlstd{= Survey),} \hlkwc{colour} \hlstd{=} \hlstr{"black"}\hlstd{)} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))} \hlopt{+}
+    \hlkwd{ggtitle}\hlstd{(}\hlstr{"No stations per year, per survey"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_effort_by_year-1} 
 
@@ -843,14 +1488,26 @@ NWGFS, Q1SWBEAM use beam trawl gears. The WCGFS initially used hour long tows,
 but changes to 30 min tows consistent with other surveys later in the series. \\ 
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{boxplot}\hlstd{(Stations}\hlopt{$}\hlstd{SweptArea} \hlopt{~} \hlstd{Stations}\hlopt{$}\hlstd{Survey,} \hlkwc{xlab} \hlstd{=} \hlstr{"Survey Series"}\hlstd{,}
+    \hlkwc{ylab} \hlstd{=} \hlstr{"Swept Area (km2)"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Swept Area by Survey"}\hlstd{,}
+    \hlkwc{cex.axis} \hlstd{=} \hlnum{0.5}\hlstd{)}
+\hlkwd{axis}\hlstd{(}\hlnum{2}\hlstd{,} \hlkwc{las} \hlstd{=} \hlnum{1}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_swept_area-1} 
 
 }
 
 
-
+\begin{kframe}\begin{alltt}
+\hlkwd{boxplot}\hlstd{(}\hlkwd{as.numeric}\hlstd{(}\hlkwd{as.character}\hlstd{(Stations}\hlopt{$}\hlstd{HaulDur))} \hlopt{~} \hlstd{Stations}\hlopt{$}\hlstd{Survey,}
+    \hlkwc{xlab} \hlstd{=} \hlstr{"Survey Series"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Haul Duration (m)"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Haul Duration by Survey"}\hlstd{,}
+    \hlkwc{cex.axis} \hlstd{=} \hlnum{0.5}\hlstd{)}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_swept_area-2} 
 
@@ -874,14 +1531,30 @@ generally been around 51 degrees.
 
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Lats_Lons} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Stations, Year)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{minLon} \hlstd{=} \hlkwd{min}\hlstd{(Lon),}
+    \hlkwc{maxLon} \hlstd{=} \hlkwd{max}\hlstd{(Lon),} \hlkwc{meanLon} \hlstd{=} \hlkwd{mean}\hlstd{(Lon),} \hlkwc{minLat} \hlstd{=} \hlkwd{min}\hlstd{(Lat),}
+    \hlkwc{maxLat} \hlstd{=} \hlkwd{max}\hlstd{(Lat),} \hlkwc{meanLat} \hlstd{=} \hlkwd{mean}\hlstd{(Lat))}
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(Lats_Lons,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= minLon))} \hlopt{+} \hlkwd{geom_segment}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{xend} \hlstd{= Year,}
+    \hlkwc{yend} \hlstd{= maxLon),} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{y} \hlstd{= meanLon),} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+}
+    \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))} \hlopt{+} \hlkwd{ylim}\hlstd{(}\hlnum{0}\hlstd{,}
+    \hlopt{-}\hlnum{14}\hlstd{)} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Longitudinal survey coverage: min, max and mean"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_Spatial_extent-1} 
 
 }
 
 
-
+\begin{kframe}\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(Lats_Lons,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= minLat))} \hlopt{+} \hlkwd{geom_segment}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{xend} \hlstd{= Year,}
+    \hlkwc{yend} \hlstd{= maxLat),} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{y} \hlstd{= meanLat),} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{)} \hlopt{+}
+    \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))} \hlopt{+} \hlkwd{ylim}\hlstd{(}\hlnum{47}\hlstd{,}
+    \hlnum{53}\hlstd{)} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Latitudinal survey coverage: min, max and mean"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/Survey_Spatial_extent-2} 
 
@@ -897,7 +1570,15 @@ IE-IGFS, EVHOE, WCGFS, Q4SWIBTS and Q1SWBEAM catch reasonable quantities of
 gadoids, while the CARLHELMAR and NWGFS catch very little. \\
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{tot} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Wt, Survey, Species, Year)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{Kg} \hlstd{=} \hlkwd{sum}\hlstd{(Kg))}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(tot,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= Kg))} \hlopt{+} \hlkwd{geom_bar}\hlstd{(}\hlkwc{stat} \hlstd{=} \hlstr{"identity"}\hlstd{,}
+    \hlkwd{aes}\hlstd{(}\hlkwc{fill} \hlstd{= Species))} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Survey,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{)} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{legend.position} \hlstd{=} \hlstr{"bottom"}\hlstd{,}
+    \hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{)))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/TotalCatch-1} 
 
@@ -912,7 +1593,33 @@ model)...
 
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Proportion of zeros for each species/year}
+\hlstd{yrs} \hlkwb{<-} \hlkwd{sort}\hlstd{(}\hlkwd{unique}\hlstd{(Wt}\hlopt{$}\hlstd{Year))}
+\hlstd{spp} \hlkwb{<-} \hlkwd{sort}\hlstd{(}\hlkwd{unique}\hlstd{(Wt}\hlopt{$}\hlstd{Species))}
+
+\hlstd{PropZeros} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlkwd{length}\hlstd{(yrs),} \hlkwc{ncol} \hlstd{=} \hlkwd{length}\hlstd{(spp))}
+
+\hlkwa{for} \hlstd{(y} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(yrs)) \{}
+    \hlkwa{for} \hlstd{(s} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(spp)) \{}
+        \hlstd{tmp} \hlkwb{<-} \hlkwd{filter}\hlstd{(Wt, Year} \hlopt{==} \hlstd{yrs[y], Species} \hlopt{==} \hlstd{spp[s])}
+        \hlstd{PropZeros[y, s]} \hlkwb{<-} \hlkwd{nrow}\hlstd{(tmp[tmp}\hlopt{$}\hlstd{Kg} \hlopt{==} \hlnum{0}\hlstd{, ])}\hlopt{/}\hlkwd{length}\hlstd{(tmp}\hlopt{$}\hlstd{Kg)}
+    \hlstd{\}}
+\hlstd{\}}
+
+\hlstd{PropZeros} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(PropZeros)}
+\hlkwd{colnames}\hlstd{(PropZeros)} \hlkwb{<-} \hlstd{spp}
+\hlstd{PropZeros}\hlopt{$}\hlstd{Year} \hlkwb{<-} \hlstd{yrs}
+
+\hlstd{x} \hlkwb{<-} \hlstd{reshape2}\hlopt{::}\hlkwd{melt}\hlstd{(PropZeros,} \hlkwc{id} \hlstd{=} \hlstr{"Year"}\hlstd{)}
+\hlstd{x}\hlopt{$}\hlstd{col} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(x}\hlopt{$}\hlstd{value} \hlopt{==} \hlnum{0} \hlopt{|} \hlstd{x}\hlopt{$}\hlstd{value} \hlopt{==} \hlnum{1}\hlstd{,} \hlstr{"all zeros or none"}\hlstd{,}
+    \hlstr{"OK"}\hlstd{)}
+
+\hlkwd{ggplot}\hlstd{(x,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= variable))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{size} \hlstd{= value,}
+    \hlkwc{col} \hlstd{=} \hlkwd{factor}\hlstd{(col)))} \hlopt{+} \hlkwd{theme_bw}\hlstd{()} \hlopt{+} \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))}
+\end{alltt}
+\end{kframe}
 
 {\centering \includegraphics[width=\maxwidth]{figure/ZeroCheck-1} 
 
@@ -929,7 +1636,26 @@ species.
 \begin{landscape}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{spp} \hlkwb{<-} \hlkwd{sort}\hlstd{(}\hlkwd{unique}\hlstd{(Wt}\hlopt{$}\hlstd{Species))}
+
+\hlkwa{for} \hlstd{(s} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(spp)) \{}
+
+    \hlstd{plotDF} \hlkwb{<-} \hlstd{Wt[Wt}\hlopt{$}\hlstd{Species} \hlopt{==} \hlstd{spp[s], ]}
+
+    \hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{()} \hlopt{+} \hlkwd{geom_polygon}\hlstd{(}\hlkwc{data} \hlstd{= map,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= long,} \hlkwc{y} \hlstd{= lat,}
+        \hlkwc{group} \hlstd{= group),} \hlkwc{colour} \hlstd{=} \hlstr{"black"}\hlstd{,} \hlkwc{fill} \hlstd{=} \hlstr{"grey"}\hlstd{)} \hlopt{+} \hlkwd{coord_fixed}\hlstd{(}\hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{12}\hlstd{,}
+        \hlnum{2}\hlstd{),} \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{48}\hlstd{,} \hlnum{52}\hlstd{),} \hlkwc{ratio} \hlstd{=} \hlnum{1.3}\hlstd{)} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwc{data} \hlstd{= plotDF[plotDF}\hlopt{$}\hlstd{Kg} \hlopt{!=}
+        \hlnum{0}\hlstd{, ],} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Lon,} \hlkwc{y} \hlstd{= Lat,} \hlkwc{size} \hlstd{=} \hlkwd{sqrt}\hlstd{(Kg)),} \hlkwc{colour} \hlstd{=} \hlstr{"blue"}\hlstd{,}
+        \hlkwc{alpha} \hlstd{=} \hlnum{0.5}\hlstd{)} \hlopt{+} \hlkwd{scale_size_continuous}\hlstd{(}\hlkwc{limits} \hlstd{=} \hlkwd{range}\hlstd{(}\hlkwd{sqrt}\hlstd{(Wt}\hlopt{$}\hlstd{Kg)))} \hlopt{+}
+        \hlkwd{geom_point}\hlstd{(}\hlkwc{data} \hlstd{= plotDF[plotDF}\hlopt{$}\hlstd{Kg} \hlopt{==} \hlnum{0}\hlstd{, ],} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Lon,}
+            \hlkwc{y} \hlstd{= Lat),} \hlkwc{colour} \hlstd{=} \hlstr{"red"}\hlstd{,} \hlkwc{shape} \hlstd{=} \hlstr{"+"}\hlstd{)} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Year,}
+        \hlkwc{ncol} \hlstd{=} \hlnum{5}\hlstd{)} \hlopt{+} \hlkwd{theme_classic}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Spatial catches of"}\hlstd{,}
+        \hlstd{spp[s],} \hlstr{"in Kg"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{" "}\hlstd{)))}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
 \includegraphics[width=1\linewidth]{figure/Survey_catches-1} 
 
 \includegraphics[width=1\linewidth]{figure/Survey_catches-2} 
@@ -969,11 +1695,44 @@ species.
 \end{knitrout}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=1\linewidth]{figure/CPUE-1} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Wt}\hlopt{$}\hlstd{HaulDur} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(}\hlkwd{as.character}\hlstd{(Wt}\hlopt{$}\hlstd{HaulDur))}
 
+\hlstd{cpue} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Wt, Survey, Year, Species)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{q05} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{HaulDur} \hlopt{*}
+    \hlnum{60}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{0.05}\hlstd{,} \hlkwc{na.rm} \hlstd{= T),} \hlkwc{q50} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{HaulDur} \hlopt{*}
+    \hlnum{60}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{0.5}\hlstd{,} \hlkwc{na.rm} \hlstd{= T),} \hlkwc{mean} \hlstd{=} \hlkwd{mean}\hlstd{(Kg}\hlopt{/}\hlstd{HaulDur} \hlopt{*} \hlnum{60}\hlstd{,}
+    \hlkwc{na.rm} \hlstd{= T),} \hlkwc{q95} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{HaulDur} \hlopt{*} \hlnum{60}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlnum{0.95}\hlstd{,}
+    \hlkwc{na.rm} \hlstd{= T))}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(cpue,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= mean))} \hlopt{+} \hlkwd{geom_line}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{group} \hlstd{= Survey,}
+    \hlkwc{colour} \hlstd{= Survey))} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Species,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{scale} \hlstd{=} \hlstr{"free_y"}\hlstd{)} \hlopt{+}
+    \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{"Kg per hour tow"}\hlstd{)} \hlopt{+}
+    \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"CPUE (Kg per hour tow)"}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=1\linewidth]{figure/CPUE-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{cpsa} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Wt, Survey, Year, Species)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{q05} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{SweptArea,}
+    \hlkwc{prob} \hlstd{=} \hlnum{0.05}\hlstd{,} \hlkwc{na.rm} \hlstd{= T),} \hlkwc{q50} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{SweptArea,} \hlkwc{prob} \hlstd{=} \hlnum{0.5}\hlstd{,}
+    \hlkwc{na.rm} \hlstd{= T),} \hlkwc{mean} \hlstd{=} \hlkwd{mean}\hlstd{(Kg}\hlopt{/}\hlstd{SweptArea,} \hlkwc{na.rm} \hlstd{= T),} \hlkwc{q95} \hlstd{=} \hlkwd{quantile}\hlstd{(Kg}\hlopt{/}\hlstd{SweptArea,}
+    \hlkwc{prob} \hlstd{=} \hlnum{0.95}\hlstd{,} \hlkwc{na.rm} \hlstd{= T))}
+
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(cpsa,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Year,} \hlkwc{y} \hlstd{= mean))} \hlopt{+} \hlkwd{geom_line}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{group} \hlstd{= Survey,}
+    \hlkwc{colour} \hlstd{= Survey))} \hlopt{+} \hlkwd{facet_wrap}\hlstd{(}\hlopt{~}\hlstd{Species,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{scale} \hlstd{=} \hlstr{"free_y"}\hlstd{)} \hlopt{+}
+    \hlkwd{theme}\hlstd{(}\hlkwc{axis.text.x} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{angle} \hlstd{=} \hlopt{-}\hlnum{90}\hlstd{))} \hlopt{+} \hlkwd{ylab}\hlstd{(}\hlstr{"Density (catch per km2 swept)"}\hlstd{)} \hlopt{+}
+    \hlkwd{xlab}\hlstd{(}\hlstr{""}\hlstd{)} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"CPUE (Catch per km2 swept area)"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 \includegraphics[width=1\linewidth]{figure/CPUE-2} 
-\begin{kframe}\begin{verbatim}
+\begin{kframe}\begin{alltt}
+\hlcom{## Catchs per survey, per year}
+
+\hlstd{Wt_Sur} \hlkwb{<-} \hlkwd{group_by}\hlstd{(Wt, Survey, Species)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{wt} \hlstd{=} \hlkwd{sum}\hlstd{(Kg))}
+
+\hlstd{Wt_Sur[Wt_Sur}\hlopt{$}\hlstd{wt} \hlopt{==} \hlnum{0}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
 ## Source: local data frame [2 x 3]
 ## Groups: Survey [1]
 ## 
@@ -982,9 +1741,13 @@ species.
 ## 1 CARLHELMAR      Gadus morhua_Juv     0
 ## 2 CARLHELMAR Lophius budegassa_Juv     0
 \end{verbatim}
+\begin{alltt}
+\hlstd{Wt_Sur}\hlopt{$}\hlstd{wt[Wt_Sur}\hlopt{$}\hlstd{wt} \hlopt{==} \hlnum{0}\hlstd{]} \hlkwb{<-} \hlnum{NA}
 
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 2 rows containing missing values (geom\_point).}}\end{kframe}
+\hlkwd{print}\hlstd{(}\hlkwd{ggplot}\hlstd{(Wt_Sur,} \hlkwd{aes}\hlstd{(}\hlkwc{x} \hlstd{= Survey,} \hlkwc{y} \hlstd{= Species))} \hlopt{+} \hlkwd{geom_point}\hlstd{(}\hlkwd{aes}\hlstd{(}\hlkwc{size} \hlstd{=} \hlkwd{sqrt}\hlstd{(wt)))} \hlopt{+}
+    \hlkwd{theme_classic}\hlstd{()} \hlopt{+} \hlkwd{ggtitle}\hlstd{(}\hlstr{"Catches of each species per survey"}\hlstd{))}
+\end{alltt}
+\end{kframe}
 \includegraphics[width=1\linewidth]{figure/CPUE-3} 
 
 \end{knitrout}
@@ -1029,29 +1792,29 @@ knot locations generated by the VAST model. \\
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{HabAssignFunc} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{Kmeans} \hlstd{=} \hlkwa{NULL}\hlstd{,} \hlkwc{zone} \hlstd{=} \hlnum{29}\hlstd{,} \hlkwc{locationHabMap} \hlstd{=} \hlkwa{NULL}\hlstd{,}
-                          \hlkwc{nameHabMap} \hlstd{=} \hlkwa{NULL}\hlstd{) \{}
-\hlkwd{library}\hlstd{(rgdal)}
-\hlkwd{library}\hlstd{(VAST)}
-\hlcom{# Create a dataframe of the knots}
-\hlstd{DF} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{X} \hlstd{= Kmeans}\hlopt{$}\hlstd{centers[,}\hlstr{'E_km'}\hlstd{],} \hlkwc{Y} \hlstd{= Kmeans}\hlopt{$}\hlstd{centers[,}\hlstr{'N_km'}\hlstd{])}
-\hlkwd{attr}\hlstd{(DF,} \hlstr{'projection'}\hlstd{)} \hlkwb{=} \hlstr{'UTM'}
-\hlkwd{attr}\hlstd{(DF,} \hlstr{"zone"}\hlstd{)} \hlkwb{<-} \hlstd{zone}
+    \hlkwc{nameHabMap} \hlstd{=} \hlkwa{NULL}\hlstd{) \{}
+    \hlkwd{library}\hlstd{(rgdal)}
+    \hlkwd{library}\hlstd{(VAST)}
+    \hlcom{# Create a dataframe of the knots}
+    \hlstd{DF} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{X} \hlstd{= Kmeans}\hlopt{$}\hlstd{centers[,} \hlstr{"E_km"}\hlstd{],} \hlkwc{Y} \hlstd{= Kmeans}\hlopt{$}\hlstd{centers[,}
+        \hlstr{"N_km"}\hlstd{])}
+    \hlkwd{attr}\hlstd{(DF,} \hlstr{"projection"}\hlstd{)} \hlkwb{=} \hlstr{"UTM"}
+    \hlkwd{attr}\hlstd{(DF,} \hlstr{"zone"}\hlstd{)} \hlkwb{<-} \hlstd{zone}
 
-\hlstd{LLs} \hlkwb{<-} \hlstd{PBSmapping}\hlopt{::}\hlkwd{convUL}\hlstd{(DF)}
+    \hlstd{LLs} \hlkwb{<-} \hlstd{PBSmapping}\hlopt{::}\hlkwd{convUL}\hlstd{(DF)}
 
-\hlstd{HabMap} \hlkwb{<-} \hlkwd{readOGR}\hlstd{(}\hlkwc{dsn} \hlstd{=} \hlkwd{file.path}\hlstd{(locationHabMap),} \hlkwc{layer} \hlstd{= nameHabMap)}
+    \hlstd{HabMap} \hlkwb{<-} \hlkwd{readOGR}\hlstd{(}\hlkwc{dsn} \hlstd{=} \hlkwd{file.path}\hlstd{(locationHabMap),} \hlkwc{layer} \hlstd{= nameHabMap)}
 
-\hlcom{# joint the spatial points..}
-\hlstd{LLs} \hlkwb{<-} \hlkwd{SpatialPoints}\hlstd{(LLs)}
-\hlkwd{proj4string}\hlstd{(LLs)} \hlkwb{<-}
-        \hlkwd{CRS}\hlstd{(}\hlstr{'+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0'}\hlstd{)}
+    \hlcom{# joint the spatial points..}
+    \hlstd{LLs} \hlkwb{<-} \hlkwd{SpatialPoints}\hlstd{(LLs)}
+    \hlkwd{proj4string}\hlstd{(LLs)} \hlkwb{<-} \hlkwd{CRS}\hlstd{(}\hlstr{"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"}\hlstd{)}
 
-\hlstd{join} \hlkwb{<-} \hlkwd{over}\hlstd{(}\hlkwc{x} \hlstd{= LLs,} \hlkwc{y} \hlstd{= HabMap)}
+    \hlstd{join} \hlkwb{<-} \hlkwd{over}\hlstd{(}\hlkwc{x} \hlstd{= LLs,} \hlkwc{y} \hlstd{= HabMap)}
 
-\hlstd{LLs} \hlkwb{<-} \hlkwd{SpatialPointsDataFrame}\hlstd{(LLs, join)}
-\hlstd{KmeanHab} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{Habitat} \hlstd{= LLs}\hlopt{$}\hlstd{substrate)}
+    \hlstd{LLs} \hlkwb{<-} \hlkwd{SpatialPointsDataFrame}\hlstd{(LLs, join)}
+    \hlstd{KmeanHab} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{Habitat} \hlstd{= LLs}\hlopt{$}\hlstd{substrate)}
 
-\hlkwd{return}\hlstd{(KmeanHab)}
+    \hlkwd{return}\hlstd{(KmeanHab)}
 
 \hlstd{\}}
 \end{alltt}

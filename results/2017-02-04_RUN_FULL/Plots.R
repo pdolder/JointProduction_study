@@ -120,7 +120,7 @@ if(diag.plots == T) {
   Enc_prob <- SpatialDeltaGLMM::Check_encounter_prob(Report = Save$Report, Data_Geostat = Data_Geostat, DirName = DateFile)
 
  # Positive catch rate Q-Q plot
-  Q = SpatialDeltaGLMM::QQ_Fn( TmbData=Save$TmbData, Report=Save$Report, FileName_PP=paste0(DateFile,"Posterior_Predictive.jpg"), FileName_Phist=paste0(DateFile,"Posterior_Predictive-Histogram.jpg"), FileName_QQ=paste0(DateFile,"Q-Q_plot.jpg"), FileName_Qhist=paste0(DateFile,"Q-Q_hist.jpg"))
+  Q = SpatialDeltaGLMM::QQ_Fn( TmbData=Save$TmbData, Report=Save$Report, FileName_PP=paste0(DateFile,"Posterior_Predictive2.jpg"), FileName_Phist=paste0(DateFile,"Posterior_Predictive-Histogram2.jpg"), FileName_QQ=paste0(DateFile,"Q-Q_plot2.jpg"), FileName_Qhist=paste0(DateFile,"Q-Q_hist2.jpg"))
 
 # Get region-specific settings for plots
   MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn("Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List" = Extrapolation_List)
