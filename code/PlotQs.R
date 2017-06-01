@@ -29,7 +29,7 @@ spp <- paste(rep(c('cod','meg','bud','pisc','had','whg','hke','ple','sol'), each
 #Qs <- dplyr::filter(Qs, Param %in% c('lambda1_k', 'lambda2_k'),Survey == 'CARLHELMAR', spp %in% c('cod_juv', 'bud_juv'))
 
 ## Now extract the model estimates
-load('Save.RData')
+load(file.path('','Save.RData'))
 
 sd.sum <- summary(Save$Opt$SD, p.value = T)
 sd.sum <- as.data.frame(sd.sum)
@@ -74,7 +74,7 @@ dplyr::filter(Qs_all, Survey == 'CARLHELMAR', spp %in% c('cod_juv','cod_adu', 'b
 head(Qs_all)  ## check params in right positions 
 ## YES
 
-
+save(Qs_all, file = file.path('..','results','Qs_with_labels.RData'))
 
 library(ggplot2)
 library(dplyr)

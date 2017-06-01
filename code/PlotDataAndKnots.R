@@ -107,6 +107,6 @@ p2 <-  ggplot() + geom_rect(aes(xmin = xlim[1], xmax = xlim[2],  ymin =  ylim[1]
                                                                    legend.title = element_blank()) +
   geom_point(data = knotsP, aes(x = X, y = Y), colour = 'red', size = 0.8)
 
-  plot_grid(p1,p2, labels = c('(a) data','(b) knots'), ncol = 1)
-  ggsave(file = file.path('..', 'plots', 'SpatialDataAndKnots.png'), width = 6, height = 12)
+  plot_grid(p1,p2, labels = c('(a) data','(b) knots'), ncol = 1, vjust = c(1.5, -1))
+  ggsave(file = file.path('..', 'plots', 'SpatialDataAndKnots.png'), width = 8, height = 12)
   

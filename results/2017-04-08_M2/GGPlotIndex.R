@@ -4,10 +4,10 @@ In <- read.csv('Table_for_SS3.csv')
 
 library(ggplot2)
 
-ggplot(In, aes(x = Year, y = Estimate_metric_tons)) + geom_line() + facet_wrap(~Category, scale = 'free_y', ncol = 4) +
+ggplot(In, aes(x = Year, y = Estimate_metric_tons)) + geom_line() + facet_wrap(~Category, scale = 'free_y', ncol = 3) +
   geom_ribbon(aes(ymin = Estimate_metric_tons - 1.96 * SD_mt, ymax = Estimate_metric_tons  + 1.96 * SD_mt), alpha = 0.4) +
   theme_classic()
-ggsave(file = 'IndexGGplot.png', width = 10, height = 12)
+ggsave(file = 'IndexGGplot.png', width = 16, height = 13)
 
 IndSc <- apply(In$Estimate_metric_tons, In$Category, scale)
 

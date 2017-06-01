@@ -74,6 +74,7 @@ dplyr::filter(Qs_all, Survey == 'CARLHELMAR', spp %in% c('cod_juv','cod_adu', 'b
 head(Qs_all)  ## check params in right positions 
 ## YES
 
+save(Qs_all, file = file.path('..','Qs_with_labels.RData'))
 
 
 library(ggplot2)

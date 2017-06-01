@@ -135,6 +135,15 @@ ggsave(file = 'PCAstyle_Plots_Spatial.png', width = 16, height = 8)
 }
 
 
+## Now try with images
+library(png)
+library(gridGraphics)
+
+img1 <- readPNG("plaice-1.png")
+g1 <- rasterGrob(img1, interpolate=T, width = 2.5, height = 2)
+p1 +  annotation_custom(g1, xmin=-0.7, xmax=-0.6, ymin=0.2, ymax=0.3) 
+
+
 #SpatialDeltaGLMM::Plot_data_and_knots(Data_Extrap = Spatial_List$NN_Extrap, 
 #				      Extrap_Area_km2 = Spatial_List$a_xl, 
 #				      loc_x = Spatial_List$loc_x,
