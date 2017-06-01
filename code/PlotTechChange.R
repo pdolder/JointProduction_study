@@ -58,7 +58,7 @@ yr <- 1:length(1990:2015)
 
 
 # Now run for locations 66 and 79
-PredDF <- expand.grid(location = 1:250, spp = c("cod_adu", "had_adu"),
+PredDF <- expand.grid(location = 1:250, spp = c("cod_adu", "had_adu", "whg_adu", "ple_adu", "sol_adu"),
             gear = c('THA2','NWGFS'), year = 22:26, EncProb = NA, PosCatch = NA, PredCatchKg = NA)
 
 
@@ -91,13 +91,21 @@ library(reshape2); library(dplyr)
 
 TechPlotDF <- dcast(PredDF, location + gear + year ~ spp, value.var = "PredCatchKg")
 
+TechPlotDF$year[TechPlotDF$year==22] <- 2011
+TechPlotDF$year[TechPlotDF$year==23] <- 2012
+TechPlotDF$year[TechPlotDF$year==24] <- 2013
+TechPlotDF$year[TechPlotDF$year==25] <- 2014
+TechPlotDF$year[TechPlotDF$year==26] <- 2015
+TechPlotDF$year  <- as.factor(TechPlotDF$year)
 ## Getting the convex hull
 # https://stats.stackexchange.com/questions/22805/how-to-draw-neat-polygons-around-scatterplot-regions-in-ggplot2
 library(plyr)
+library(ggplot2)
+
+## Cod:Haddock
 find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$cod_adu, TechPlotDF$had_adu), ]
 hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
 
-library(ggplot2)
 
 ggplot(filter(TechPlotDF, gear == 'THA2'), aes(x = cod_adu, y = had_adu)) + geom_point() +
 	facet_wrap(~year) + geom_polygon(data = filter(hulls,gear=="THA2"), alpha = 0.2) +
@@ -107,7 +115,24 @@ ggplot(filter(TechPlotDF, gear == 'NWGFS'), aes(x = cod_adu, y = had_adu)) + geo
 	facet_wrap(~year) + geom_polygon(data = filter(hulls,gear=="NWGFS"), alpha = 0.2) +
 	theme_classic()
 
-ggplot(TechPlotDF, aes(x = cod_adu, y = had_adu)) + geom_point(aes(colour = factor(year))) +
-	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = factor(year), fill = factor(year))) +
+ggplot(TechPlotDF, aes(x = cod_adu, y = had_adu)) + geom_point(aes(colour = year)) +
+	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
+	theme_classic()
+ggsave(file = file.path('..','results','2017-04-08_M2','TechnicalEfficiency.png'), width = 12, height = 6)
+
+#Haddock:Whiting
+find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$had_adu, TechPlotDF$whg_adu), ]
+hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
+
+ggplot(TechPlotDF, aes(x = had_adu, y = whg_adu)) + geom_point(aes(colour = year)) +
+	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
+	theme_classic()
+
+#Plaice:Sole
+find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$ple_adu, TechPlotDF$sol_adu), ]
+hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
+
+ggplot(TechPlotDF, aes(x = ple_adu, y = sol_adu)) + geom_point(aes(colour = year)) +
+	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
 	theme_classic()
 
