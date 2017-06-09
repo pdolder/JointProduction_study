@@ -46,10 +46,14 @@ dir.create(DateFile)
 #### Model settings ####
 ########################
 
-  FieldConfig = c("Omega1"= 2, "Epsilon1"= 2, "Omega2"= 2, "Epsilon2"= 2) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
+  FieldConfig = c("Omega1"= 4, "Epsilon1"= 4, "Omega2"= 4, "Epsilon2"= 4) # 1=Presence-absence; 2=Density given presence; #Epsilon=Spatio-temporal; #Omega=Spatial
   RhoConfig = c("Beta1"=0, "Beta2"=0, "Epsilon1"=0, "Epsilon2"=0) # Structure for beta or epsilon over time: 0=None (default); 1=WhiteNoise; 2=RandomWalk; 3=Constant
   ObsModel = c(2,0)  # 0=normal (log-link); 1=lognormal; 2=gamma; 4=ZANB; 5=ZINB; 11=lognormal-mixture; 12=gamma-mixture
   OverdispersionConfig = c("eta1" = 0,"eta2" = 0) # 0 - number of factors
+  
+  Options = c(SD_site_density = 1, SD_site_logdensity = 1, Calculate_Range = 1, Calculate_evenness = 1, Calculate_effective_area = 1, Calculate_Cov_SE = 1, Calculate_Synchrony = 0, Calculate_Coherence = 0)
+
+
   BiasCorr = FALSE 
 #######################
 ##### Save options ####
@@ -88,7 +92,7 @@ dir.create(DateFile)
 
  species <- sort(unique(DF$spp)) 
 
- DF <- DF[DF$spp %in% species[15:16],]  # Plaice only
+ DF <- DF[DF$spp %in% species[13:16],]  # Plaice only
 
   DF$SpeciesName <- factor(DF$spp) # drop empty factors
   DF$Ship        <- factor(DF$Survey)
@@ -104,12 +108,12 @@ dir.create(DateFile)
 		       "Lon"=DF[,"Lon"] )
 
 ## Prepare the fixed vessel covariates, Q_ik
-
-## 1. Vessel and species concatenated 
+## Vessel and species concatenated 
 Vess_Cov <- vector_to_design_matrix(paste(Data_Geostat[,'Vessel'],Data_Geostat[,'spp'], sep = '_'))
 
-# 1a. Drop only single vessel-species combo
- Vess_Cov  <- Vess_Cov[,-c(1:2)]
+# Drop set of vessel-species combos
+Vess_Cov <- Vess_Cov[,-grep('CEXP', colnames(Vess_Cov))]  ## All spp relative to the Celtic Explorer 
+
 
 ##############################
 ##### Extrapolation grid #####

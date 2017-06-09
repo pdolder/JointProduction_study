@@ -1,0 +1,133 @@
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up 
+\documentclass{nature}
+\usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
+% more content on each page 
+\usepackage{lineno} % add some line nos to aid reading
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[hyphens]{url} % for breaking url's in the bib
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+% cite is loaded from nature class
+\setlist{itemsep=1pt} % This controls spacing between items in the lists
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+% change references to parenthesis (from square brackets)
+\renewcommand\citeleft{(}
+\renewcommand\citeright{)}
+
+% figures here	
+\graphicspath{figures/}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Using joint species distribution models to inform mixed fishery
+management}
+
+\author{Paul J. Dolder$^1$ \& James T. Thorson$^2$ \& Cóilín Minto$^1$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+\begin{affiliations}
+\item Galway-Mayo Institute of Technology (GMIT) 
+\item North West Fisheries Science Center, NOAA
+\end{affiliations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{linenumbers}
+
+\begin{abstract}
+Mixed fisheries are where more than one species are caught together in the same
+fishing operation. Mixed fishery interactions are the pre-eminent management
+issue in fisheries managed by landing quotas, as over-quota catches of weaker
+stocks leads to overexploitation when pursuing landings of healthy stocks.
+Decoupling exploitation of weaker stocks from healthy stocks is vital if mixed
+fisheries are to be managed efficiently, yet remains a challenge due to
+co-occurrence at fine spatial and temporal scales. We apply a joint species
+distribution model (VAST) to the nine most important demersal fish species
+caught in the Celtic Sea fisheries, each separated into juvenile and adult size
+classes. The model integrates data from seven fisheries independent surveys,
+takes account of correlations among species-group spatio-temporal distributions
+and abundances and makes use of habitat and depth covariates to predict spatial
+density estimates consistent with the resolution of the data. Model outputs are
+consistent with stock-level trends abundances over time from international
+assessments, yet also provide detailed insight into species co-occurrence and
+the strength of associations in space and time. We use the outputs to draw
+inference on the challenges in separating catches of key commercial demersal
+fish in moving to the EU landing obligation.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Text}
+
+
+
+\section*{Methods}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{linenumbers}
+\newpage
+\Urlmuskip=0mu plus 1mu\relax
+%\bibliographystyle{apalike}
+%\small{\bibliography{fleet_dynamics}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Here is the endmatter stuff: Supplementary Info, etc.
+%% Use \item's to separate, default label is "Acknowledgements"
+
+%\begin{addendum}
+% \item Put acknowledgements here.
+% \item[Competing Interests] The authors declare that they have no
+% competing financial interests.
+% \item[Correspondence] Correspondence and requests for materials
+% should be addressed to A.B.C.~(email: myaddress@nowhere.edu).
+% \end{addendum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width = \linewidth]{Omega1Epsilon2_Correlations}
+	\label{fig:1}
+	\caption{Inter-species correlations for (a) spatial encounter
+		probability over all years and (b) Spatio-temporal density.
+		Species-groups are clustered into three groups based on a
+		hierarchical clustering method with NOTE: Final figure will
+		have non-sig correlations blanked}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width = \linewidth]{DensityFigureswithCCRevised2}
+	\label{fig:2}
+	\caption{Differences in spatial density for pairs of species and
+		expected catch rates for two different gears at three different
+	locations}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\linewidth]{PCAstyle_Plots_Spatial_FishPics_Leg}
+	\label{fig:3}
+	\caption{Position of each species-group on the first two loading axes from the
+	factor analysis}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width=\linewidth]{SpatialFactorLoadingsOmega1}
+	\label{fig:4}
+	\caption{Spatial Factor loadings}
+\end{center}
+\end{figure}
+
+\end{document}
