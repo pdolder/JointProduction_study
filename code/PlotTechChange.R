@@ -84,7 +84,26 @@ for (loc in unique(PredDF$location)) {
         }
 }
 
+
+
 PredDF$PredCatchKg <- PredDF$EncProb * PredDF$PosCatch
+
+## First pass guestimate of raising factor
+# maximum biomass in global index
+# maximum landings in STECF data
+
+Raise <- TRUE
+if(Raise == T) {
+RaisingFactor <- data.frame(species = c('cod_adu','had_adu','whg_adu','ple_adu','sol_adu','hke_adu', 'bud_adu', 'pisc_adu', 'meg_adu'), 
+	   MaxB = c(2000, 21000, 20000, 5000, 400, 10000, 0.4, 2, 1500),
+	   MaxL = c(7000, 17000, 13000, 2000, 2300, 43000, 7700, 25500, 15000))
+
+# Assume biomass 2 X Landings
+RaisingFactor$RF <- (RaisingFactor$MaxL * 2) / RaisingFactor$MaxB
+
+PredDF$RF <- RaisingFactor$RF[match(PredDF$spp, RaisingFactor$species)]
+PredDF$PredCatchKg <- PredDF$PredCatchKg * PredDF$RF
+}
 
 # Want to plot as scatter plot, spp1 v spp2
 library(reshape2); library(dplyr)
@@ -106,33 +125,31 @@ library(ggplot2)
 find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$cod_adu, TechPlotDF$had_adu), ]
 hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
 
+TechPlot_Otter <- filter(TechPlotDF, gear == 'THA2')
 
-ggplot(filter(TechPlotDF, gear == 'THA2'), aes(x = cod_adu, y = had_adu)) + geom_point() +
-	facet_wrap(~year) + geom_polygon(data = filter(hulls,gear=="THA2"), alpha = 0.2) +
-	theme_classic()
+p1 <- ggplot(TechPlot_Otter, aes(x = cod_adu, y = had_adu)) + geom_point(aes(colour = year)) +
+	geom_polygon(data = filter(hulls,gear=="THA2"), aes(colour = year, fill = year), alpha = 0.1) +
+	theme_bw() + expand_limits(x = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu))), 
+				   y = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu)))) +
+xlab("cod") + ylab("haddock")
 
-ggplot(filter(TechPlotDF, gear == 'NWGFS'), aes(x = cod_adu, y = had_adu)) + geom_point() +
-	facet_wrap(~year) + geom_polygon(data = filter(hulls,gear=="NWGFS"), alpha = 0.2) +
-	theme_classic()
 
-ggplot(TechPlotDF, aes(x = cod_adu, y = had_adu)) + geom_point(aes(colour = year)) +
-	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
-	theme_classic()
-ggsave(file = file.path('..','results','2017-04-08_M2','TechnicalEfficiency.png'), width = 12, height = 6)
-
-#Haddock:Whiting
-find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$had_adu, TechPlotDF$whg_adu), ]
-hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
-
-ggplot(TechPlotDF, aes(x = had_adu, y = whg_adu)) + geom_point(aes(colour = year)) +
-	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
-	theme_classic()
-
-#Plaice:Sole
 find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$ple_adu, TechPlotDF$sol_adu), ]
 hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
 
-ggplot(TechPlotDF, aes(x = ple_adu, y = sol_adu)) + geom_point(aes(colour = year)) +
-	facet_wrap(~gear) + geom_polygon(data = hulls, alpha = 0.2, aes(colour = year, fill = year)) +
-	theme_classic()
+
+TechPlot_Beam <- filter(TechPlotDF, gear == 'NWGFS')
+p2 <- ggplot(TechPlot_Beam, aes(x = ple_adu, y = sol_adu)) + geom_point(aes(colour = year)) +
+	geom_polygon(data = filter(hulls,gear=="NWGFS"), aes(colour = year, fill = year), alpha = 0.1) +
+	theme_bw() + expand_limits(x = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu))), 
+				   y = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu)))) +
+xlab("plaice") + ylab("sole")
+
+
+library(cowplot)
+plot_grid(p1,p2, labels = c("(a) cod v haddock using otter trawl",
+			    "(b) plaice v sole using beam trawl"), hjust = -0.25, vjust = 2)
+
+ggsave(file = file.path('..','results','2017-04-08_M2','TechnicalEfficiency.png'), width = 12, height = 6)
+
 

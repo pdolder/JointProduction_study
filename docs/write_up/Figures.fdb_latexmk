@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1496937950 "Figures.tex" "Figures.pdf" "Figures" 1496937950
+["pdflatex"] 1497551291 "Figures.tex" "Figures.pdf" "Figures" 1497551291
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -43,12 +43,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "Figures.aux" 1496937950 913 6315498e3a5ec170f231ca0163d6e9af ""
-  "Figures.tex" 1496937948 1649 c07b61579c463957fa0c911a93d3733a ""
-  "figures/DensityFigureswithCCRevised2.png" 1496927529 548086 fbb788c035558080e1b8465a796a3b30 ""
-  "figures/Omega1Epsilon2_Correlations.png" 1496933638 413770 99903847345b0bc84742d5842fa8d024 ""
+  "Figures.aux" 1497551291 1190 74ed724a29da818b604d4921d6a57120 ""
+  "Figures.tex" 1497551289 1966 feea57c46849320f942dbd74c11c6377 ""
+  "figures/DensityFigureswithCCRevised2.png" 1497022260 1678796 c0753037b2b0e5232522b888573e1c34 ""
+  "figures/Omega1Omega2_Correlations.png" 1497551227 413319 f95d0e4c68526b4c14277467be9e707c ""
   "figures/PCAstyle_Plots_Spatial_FishPics_Leg.png" 1496927503 1878365 b5cd504c3bfbce375c9077484c29189a ""
   "figures/SpatialFactorLoadingsOmega1.png" 1496937910 456218 1c5ce61e6f5516692b028ff420e1dc14 ""
+  "figures/TechnicalEfficiency.png" 1497023836 428595 4335b0f37e6f846005c2eff5a21de5cf ""
   (generated)
   "Figures.log"
   "Figures.aux"

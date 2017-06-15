@@ -90,12 +90,12 @@ dev.off()
 # correlations, e.g. insig = 'blank'
 
 ## As a pair of plots
-png(file = file.path("..", 'plots', "Omega1Epsilon2_Correlations.png"), width = 1600, height = 800)
+png(file = file.path("..", 'plots', "Omega1Omega2_Correlations.png"), width = 1600, height = 800)
 par(mfrow= c(1,2))
 corrplot(COR_O1,  order="hclust",addCoef.col = 'grey20',
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" ,
 		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
-corrplot(COR_E2,  order="hclust",addCoef.col = 'grey20',
+corrplot(COR_O2,  order="hclust",addCoef.col = 'grey20',
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' ,
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatio-temporal Density')
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
 dev.off()

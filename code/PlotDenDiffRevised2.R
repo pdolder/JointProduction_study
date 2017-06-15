@@ -266,6 +266,24 @@ for (loc in unique(PredDF$location)) {
 
 PredDF$PredCatchKg <- PredDF$EncProb * PredDF$PosCatch
 
+
+## First pass guestimate of raising factor
+# maximum biomass in global index
+# maximum landings in STECF data
+
+Raise <- TRUE
+if(Raise == T) {
+RaisingFactor <- data.frame(species = c('cod_adu','had_adu','whg_adu','ple_adu','sol_adu','hke_adu', 'bud_adu', 'pisc_adu', 'meg_adu'), 
+	   MaxB = c(2000, 21000, 20000, 5000, 400, 10000, 0.4, 2, 1500),
+	   MaxL = c(7000, 17000, 13000, 2000, 2300, 43000, 7700, 25500, 15000))
+
+# Assume biomass 2 X Landings
+RaisingFactor$RF <- (RaisingFactor$MaxL * 2) / RaisingFactor$MaxB
+
+PredDF$RF <- RaisingFactor$RF[match(PredDF$spp, RaisingFactor$species)]
+PredDF$PredCatchKg <- PredDF$PredCatchKg * PredDF$RF
+}
+
 # As a catch composition
 library(dplyr)
 TotCatch <- PredDF %>% 
