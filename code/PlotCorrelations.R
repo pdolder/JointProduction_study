@@ -89,7 +89,7 @@ dev.off()
 # can feed p.mat and significance level to cross out non-significant
 # correlations, e.g. insig = 'blank'
 
-## As a pair of plots
+## As a pair of plots - omegas
 png(file = file.path("..", 'plots', "Omega1Omega2_Correlations.png"), width = 1600, height = 800)
 par(mfrow= c(1,2))
 corrplot(COR_O1,  order="hclust",addCoef.col = 'grey20',
@@ -98,4 +98,16 @@ corrplot(COR_O1,  order="hclust",addCoef.col = 'grey20',
 corrplot(COR_O2,  order="hclust",addCoef.col = 'grey20',
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' ,
 		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
+dev.off()
+
+
+## As a pair of plots - epsilons
+png(file = file.path("..", 'plots', "Epsilon1Epsilon2_Correlations.png"), width = 1600, height = 800)
+par(mfrow= c(1,2))
+corrplot(COR_E1,  order="hclust",addCoef.col = 'grey20',
+	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" ,
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatio-temporal Encounter probability')
+corrplot(COR_E2,  order="hclust",addCoef.col = 'grey20',
+	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' ,
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatio-temporal Density')
 dev.off()

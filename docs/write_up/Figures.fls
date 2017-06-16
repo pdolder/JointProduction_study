@@ -86,12 +86,12 @@ INPUT figures/Omega1Omega2_Correlations.png
 INPUT ./figures/Omega1Omega2_Correlations.png
 OUTPUT Figures.pdf
 INPUT ./figures/Omega1Omega2_Correlations.png
+INPUT figures/SpatialFactorLoadingsOmega1Omega2.png
+INPUT ./figures/SpatialFactorLoadingsOmega1Omega2.png
+INPUT ./figures/SpatialFactorLoadingsOmega1Omega2.png
 INPUT figures/PCAstyle_Plots_Spatial_FishPics_Leg.png
 INPUT ./figures/PCAstyle_Plots_Spatial_FishPics_Leg.png
 INPUT ./figures/PCAstyle_Plots_Spatial_FishPics_Leg.png
-INPUT figures/SpatialFactorLoadingsOmega1.png
-INPUT ./figures/SpatialFactorLoadingsOmega1.png
-INPUT ./figures/SpatialFactorLoadingsOmega1.png
 INPUT figures/DensityFigureswithCCRevised2.png
 INPUT ./figures/DensityFigureswithCCRevised2.png
 INPUT ./figures/DensityFigureswithCCRevised2.png
