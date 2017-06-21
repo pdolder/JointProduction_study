@@ -1,9 +1,9 @@
 library(VAST)
 
-load(file = file.path('..','results', '2017-04-08_M2', 'Save.RData'))
+run <- '2017-06-16_M1'
+load(file = file.path('..', '..', '..','results', run, 'Save.RData'))
 
 an <- as.numeric
-
 DF <- Save$Data_Geostat
 
   Year_Set = seq(min(an(as.character(DF[,'Year']))),max(an(as.character(DF[,'Year']))))
@@ -39,7 +39,7 @@ Epsilon2_sf <- apply(Var_list$"Epsilon2"$Psi_rot, 1:2, FUN = mean)
 
 ## The map 
 
-load(file.path('..', 'results', 'CovariatesAtKnot.RData'))
+load(file.path('..', '..', '..','results', 'CovariatesAtKnot.RData'))
 
 MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List"=Extrapolation_List )
 
@@ -148,17 +148,6 @@ ggplot() + geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
   facet_grid(factor~parameter)
 
-ggsave(file = file.path('..', 'plots', 'SpatialFactorLoadingsOmega1Omega2.png'), width = 8, height = 12)
+ggsave(file = file.path('..', 'figures', 'Figure 2 - SpatialFactorLoadingsOmega1Omega2.png'), width = 8, height = 12)
 
 
-DF6 <- merge(DF4_E1, DF4_E2)
-DF6 <- melt(DF6, id = c("x2i", "Lat", "Lon", "Include","variable"))
-colnames(DF6)[c(5,6)] <- c("factor", "parameter")
-
-ggplot() + geom_point(data = filter(DF6, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-  facet_grid(factor~parameter)
-
-ggsave(file = file.path('..', 'plots', 'SpatialFactorLoadingsEpsilon1Epsilon2.png'), width = 8, height = 12)

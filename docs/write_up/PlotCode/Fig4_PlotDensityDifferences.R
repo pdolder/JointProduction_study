@@ -333,7 +333,7 @@ p6 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = La
 p7 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = ple_sol), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
   coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[4], mid = 'white', high = cols[5], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") + #, limits = lim) +
-  geom_text(data = LLs[c(66,79,216),], aes(x = X, y = Y), label = c('66','79','216'), size = 3)
+  geom_text(data = LLs[c(66,79,216),], aes(x = X, y = Y), label = c('66','79','216'), size = 3) + geom_point(data = LLs[c(66,79, 216),], aes(x = X, y = Y), shape = 'o', colour = 'red', size = 14)
   
 p8  <- ggplot(filter(PredDF,gear %in% c('THA2','NWGFS')), 
             aes(x = factor(gear), y = perc)) + geom_bar(stat= 'identity',aes(fill = spp), colour = 'black') + facet_wrap(~location) +
@@ -355,7 +355,7 @@ ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3) + # cod:hadd
                   x = c(0.05, 0.05, 0.05, 0.35, 0.35, 0.35, 0.65, 0.65), y = c(0.92, 0.62, 0.32,0.92,0.62,0.32, 0.92, 0.62), 
                   size = 15, hjust = 0)
 
-ggsave(file.path('..','figures','Fig_4 - DensityFigureswithCCRevised2.png'), width = 16, height = 12)
+ggsave(file.path('..','figures','Figure 4 - DensityDifferencesFigureswithCC.png'), width = 16, height = 12)
 
 
 

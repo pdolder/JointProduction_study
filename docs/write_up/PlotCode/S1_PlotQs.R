@@ -6,6 +6,8 @@ library(TMB)
 library(RColorBrewer)
 library(ggthemes)
 
+run <- '2017-06-16_M1'
+
 #display.brewer.all(colorblindFriendly = T)
 pal <- brewer.pal(6, 'Dark2')
 
@@ -29,7 +31,7 @@ spp <- paste(rep(c('cod','meg','bud','pisc','had','whg','hke','ple','sol'), each
 #Qs <- dplyr::filter(Qs, Param %in% c('lambda1_k', 'lambda2_k'),Survey == 'CARLHELMAR', spp %in% c('cod_juv', 'bud_juv'))
 
 ## Now extract the model estimates
-load(file.path('','Save.RData'))
+load(file.path('..', '..', '..', 'results',run,  'Save.RData'))
 
 sd.sum <- summary(Save$Opt$SD, p.value = T)
 sd.sum <- as.data.frame(sd.sum)
@@ -74,7 +76,7 @@ dplyr::filter(Qs_all, Survey == 'CARLHELMAR', spp %in% c('cod_juv','cod_adu', 'b
 head(Qs_all)  ## check params in right positions 
 ## YES
 
-save(Qs_all, file = file.path('..','results','Qs_with_labels.RData'))
+save(Qs_all, file = file.path('..', '..', '..', 'results','Qs_with_labels.RData'))
 
 library(ggplot2)
 library(dplyr)
@@ -87,20 +89,6 @@ ggplot(filter(Qs_all, Param %in% c('lambda1_k','lambda2_k')), aes(x = spp, y = E
 	geom_point(data = filter(Qs_all, Survey =='CARLHELMAR', spp %in% c('cod_juv','bud_juv')), aes(y = Estimate), colour = 'red', shape = 2) +
 	theme_bw() + geom_hline(aes(yintercept = 0), linetype = 'dotdash') + theme(legend.position = 'top')
 
-ggsave('QEstimatesALL.png', width = 9, height = 12)
+ggsave(file.path('..', 'figures', 'QEstimatesALL.png'), width = 9, height = 12)
 
-ggplot(filter(Qs_all, Param %in% c('lambda1_k')), aes(x = Survey, y = Estimate)) +
-	 facet_wrap(~spp, scale = 'free_y', nrow = 6) + scale_color_manual(values = pal) +
-	geom_pointrange(aes(y = Estimate, ymin = Estimate - 1.96 * Std.Error, ymax = Estimate + 1.96 * Std.Error, colour = Survey)) +
-	geom_point(data = filter(Qs_all, Survey =='CARLHELMAR', Param == 'lambda1_k', spp %in% c('cod_juv','bud_juv')), aes(y = Estimate), colour = 'red', shape = 2) +
-	theme_bw() + ggtitle('Encounter Prob') + theme(axis.text.x = element_text(angle = -90, hjust = 0)) + geom_hline(aes(yintercept = 0), linetype = 'dotdash')
-ggsave('QEstimatesGridEnc.png', width = 12, height = 15)
-
-ggplot(filter(Qs_all, Param %in% c('lambda2_k')), aes(x = Survey, y = Estimate)) +
-	 facet_wrap(~spp, scale = 'free_y', nrow = 6) + scale_color_manual(values = pal) +
-	geom_pointrange(aes(y = Estimate, ymin = Estimate - 1.96 * Std.Error, ymax = Estimate + 1.96 * Std.Error, colour = Survey)) +
-	geom_point(data = filter(Qs_all, Survey =='CARLHELMAR', Param == 'lambda2_k', spp %in% c('cod_juv','bud_juv')), aes(y = Estimate), colour = 'red', shape = 2) +
-	theme_bw() + ggtitle('Positive catch rates') + theme(axis.text.x = element_text(angle = -90, hjust = 0))+ geom_hline(aes(yintercept = 0), linetype = 'dotdash')
-
-ggsave('QEstimatesGridPos.png', width = 12, height = 15)
 

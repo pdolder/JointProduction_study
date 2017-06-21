@@ -3,7 +3,7 @@
 library(VAST)
 
 # This is where all runs will be located
-run <- '2016-06-16_M1'
+run <- '2017-06-16_M1'
 
 load(file.path('..', '..', '..', 'results', run, 'Save.RData'))
 load(file.path('..', '..', '..', 'results', 'CovariatesAtKnot.RData'))
@@ -90,7 +90,7 @@ grps <- data.frame(Factor_1 = rep(-1.1,3), Factor_2 = c(-0.9, -0.95, -1), group 
 library(png)
 library(gridGraphics)
 
-fish_pics <- file.path('..','..','docs','fish_pics')
+fish_pics <- file.path('..','..','fish_pics')
 
 img1 <- readPNG(file.path(fish_pics, "plaice-col.png"))
 ple <- rasterGrob(img1, interpolate=T, width = 1)
@@ -353,7 +353,7 @@ leg <- ggplot(data.frame(x = rep(0,1), y = rep(0,1)), aes(x= x, y = y))  + xlim(
 
 plot_grid(g1,g2,leg, ncol = 3, rel_widths =c(8,8,3),  labels = c('(a) Factor loading for spatio-temporal encounter probability',
 			    '(b) Factor loading for spatio-temporal catch rates',''), hjust = -0.15, vjust = 2)
-ggsave(file = 'Fig4_PCAstyle_Plots_SpatioTemp.png', width = 16, height = 8)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTemp.png'), width = 16, height = 8)
 
 
 #### END ###

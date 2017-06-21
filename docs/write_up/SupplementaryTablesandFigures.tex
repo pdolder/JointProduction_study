@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up 
+\documentclass{nature}
+\usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
+% more content on each page 
+\usepackage{lineno} % add some line nos to aid reading
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[hyphens]{url} % for breaking url's in the bib
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+% cite is loaded from nature class
+\setlist{itemsep=1pt} % This controls spacing between items in the lists
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+% figures here	
+\graphicspath{figures/}
+
+%% To allow supplementary table and figure numbering
+%% http://bytesizebio.net/2013/03/11/adding-supplementary-tables-and-figures-in-latex/
+
+\newcommand{\beginsupplement}{%
+		        \setcounter{table}{0}
+			        \renewcommand{\thetable}{S\arabic{table}}%
+				        \setcounter{figure}{0}
+					        \renewcommand{\thefigure}{S\arabic{figure}}%
+						     }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\beginsupplement
+
+\begin{table}
+	\caption{List of survey codes, names and brief description}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{4cm} p{3cm} }
+		\hline
+		Survey code    & Name 	& Gear & Temporal extent \\
+		\hline
+		CEXP           & Celtic Explorer (IE)   & Otter trawl & 2003 - 2015 \\
+		CARLHELMAR     & Carlhelmar (UK)	& Commercial beam trawl & 1989 - 2013 \\
+		NWGFS          & North West groundfish survey (UK) & Beam trawl & 1988 - 2015 \\
+		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
+		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
+		THA2           & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
+		WCGFS          & Wstern channel groundfish survey (UK) & Otter
+		trawl (Portugese high headline) & 1982 - 2004 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}
+	\caption{List of species codes, names and minimum conservation
+		reference size used to separate juvenile and adult fish}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{6cm} p{2cm} }
+		\hline
+		Species code & Common name              & Species & MCRS (cm) \\
+		\hline
+		juv          & Juvenile                 & \\
+		adu          & Adult                    & \\
+		\hline
+		bud          & Black bellied anglerfish & \textit{Lophius
+			budgessa} &  32* \\
+		cod          & Atlantic cod             & \textit{Gadus morhua}
+		& 35 \\
+		had          & Atlatic haddock          & \textit{Melanogrammus
+			aeglefinus} & 30 \\
+		hke          & Atlantic hake            & \textit{Merluccius
+			merluccius} & 27 \\
+		meg          & Megrim                   & \textit{Lepidorhombus
+			whiffiagonis} & 20 \\
+		pisc         & White bellied anglerfish & \textit{Lophius
+			piscatorius}	& 32* \\
+		ple          & European Plaice          & \textit{Pleuronectes
+			platessa} & 27 \\
+		sol          & Common sole              & \textit{Solea solea}
+		& 24 \\
+		whg          & Atlantic whiting         & \textit{Merlangius
+			merlangus} & 27 \\
+		\hline
+	\end{tabular}
+	*Anglerfish species estimated based on a 500g minimum marketing weight
+
+\end{table}
+
+
+
+\end{document}

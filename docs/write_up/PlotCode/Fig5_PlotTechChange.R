@@ -1,8 +1,10 @@
 rm(list = ls())
 
-load(file.path('..', 'results', 'CovariatesAtKnot.RData'))
-load(file.path('..', 'results', '2017-04-08_M2', 'Save.RData'))
-load(file.path('..','results','Qs_with_labels.RData'))
+run <- '2017-06-16_M1'
+
+load(file.path('..', '..', '..','results', 'CovariatesAtKnot.RData'))
+load(file.path('..', '..', '..','results', run, 'Save.RData'))
+load(file.path('..', '..', '..', 'results','Qs_with_labels.RData'))
 
 
 MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List"=Extrapolation_List )
@@ -150,6 +152,6 @@ library(cowplot)
 plot_grid(p1,p2, labels = c("(a) cod v haddock using otter trawl",
 			    "(b) plaice v sole using beam trawl"), hjust = -0.25, vjust = 2)
 
-ggsave(file = file.path('..','results','2017-04-08_M2','TechnicalEfficiency.png'), width = 12, height = 6)
+ggsave(file = file.path('..','figures','Figure 5 - TechnicalEfficiency.png'), width = 12, height = 6)
 
 
