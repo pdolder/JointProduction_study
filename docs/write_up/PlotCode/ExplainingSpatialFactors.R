@@ -136,4 +136,40 @@ print(fit3) # view results
 importance(fit3)
 
 
+###########################################################
+
+## Spatio-temporal factor loadings
+
+Epsilon1_sf   <- as.data.frame.table(Var_list$"Epsilon1"$Psi_rot)
+Epsilon1_sf$Var1 <- 1:266
+Epsilon1_sf$Var2 <- rep(1:9, each = 266)
+Epsilon1_sf$Var3 <- rep(1990:2015, each  = 266 * 9)
+colnames(Epsilon1_sf) <- c("knot", "factor", "year", "value")
+
+Epsilon1_sf <- Epsilon1_sf[Epsilon1_sf$knot %in% 1:250,]
+
+## Load in the temperature data
+load(file.path('..', '..', '..','data', 'Covariates' , 'YearlyMeanandCumSumSSTatKnot.RData'))
+
+
+ggplot(Temps, aes(x = Year, y = TempCumSum)) + geom_line(aes(colour = factor(knot))) + ylim(2000,4000)
+
+Epsilon1_sf$TempMean <- Temps$TempMean[match(paste(Epsilon1_sf$knot, Epsilon1_sf$year),
+					     paste(Temps$knot, Temps$Year))]
+
+Epsilon1_sf$TempCumSum <- Temps$TempCumSum[match(paste(Epsilon1_sf$knot, Epsilon1_sf$year),
+					     paste(Temps$knot, Temps$Year))]
+
+library(ggplot2)
+
+ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point() 
+
+EpF1 <- Epsilon1_sf[Epsilon1_sf$factor == 1,]
+EpF1 <- EpF1[!is.na(EpF1$TempMean),]
+
+fit1 <- randomForest(EpF1$value ~ log(EpF1$TempCumSum))
+print(fit1) # view results 
+importance(fit1)
+
+
 

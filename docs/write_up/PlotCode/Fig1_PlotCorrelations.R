@@ -179,10 +179,41 @@ png(file = file.path("..", 'figures', "Epsilon1Epsilon2_Correlations_blank.png")
 par(mfrow= c(1,2))
 corrplot(COR_E1,  order="hclust" ,addCoef.col = cols_e1,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" , p.mat = P_E1, insig = 'blank',
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatio-temporal Encounter probability')
 corrplot(COR_E2,  order="hclust", addCoef.col = cols_e2,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' , p.mat = P_E2, insig = 'blank', 
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatio-temporal Density')
 dev.off()
 
+#####################################
+
+## Comparing the average vs the spatio-temporal correlations
+
+##
+
+## Encounter probability::
+O1E1 <- reshape2::melt(COR_O1)
+colnames(O1E1) <- c("spp1", "spp2", "O1")
+E1 <- reshape2::melt(COR_E1)
+
+O1E1$E1 <- E1$value
+
+plot(O1E1$O1, O1E1$E1)
+summary(lm(O1E1$E1 ~ O1E1$O1))
+abline(lm(O1E1$E1 ~ O1E1$O1))
+
+cor.test(O1E1$O1, O1E1$E1)
+
+## Density::
+O2E2 <- reshape2::melt(COR_O2)
+colnames(O2E2) <- c("spp1", "spp2", "O2")
+E2 <- reshape2::melt(COR_E2)
+
+O2E2$E2 <- E2$value
+
+plot(O2E2$O2, O2E2$E2)
+summary(lm(O2E2$E2 ~ O2E2$O2))
+anbline(lm(O2E2$E2 ~ O2E2$O2))
+
+cor.test(O2E2$O2, O2E2$E2)
 

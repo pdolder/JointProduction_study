@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set up 
-\documentclass{nature}
+\documentclass{article}
 \usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
 % more content on each page 
 \usepackage{lineno} % add some line nos to aid reading
@@ -22,10 +22,10 @@
 
 \newcommand{\beginsupplement}{%
 		        \setcounter{table}{0}
-			        \renewcommand{\thetable}{S\arabic{table}}%
-				        \setcounter{figure}{0}
-					        \renewcommand{\thefigure}{S\arabic{figure}}%
-						     }
+		        \renewcommand{\thetable}{S\arabic{table}}%
+		        \setcounter{figure}{0}
+		        \renewcommand{\thefigure}{S\arabic{figure}}%
+			     }
 
 
 
@@ -34,6 +34,19 @@
 \begin{document}
 
 \beginsupplement
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width = \linewidth]{figures/Epsilon1Epsilon2_Correlations_blank}
+	\label{fig:S1}
+	\caption{Inter-species correlations for (a) spatio-temporal encounter
+		probability and b) spatio-temporal density.  Species-groups are
+		clustered into three groups based on a hierarchical clustering
+		method with non-significant correlations (those where the
+		Confidence Interval spanned zero) left blank}
+	\end{center}
+\end{figure}
+
 
 \begin{table}
 	\caption{List of survey codes, names and brief description}
@@ -48,7 +61,7 @@
 		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
 		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
 		THA2           & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
-		WCGFS          & Wstern channel groundfish survey (UK) & Otter
+		WCGFS          & Western channel groundfish survey (UK) & Otter
 		trawl (Portugese high headline) & 1982 - 2004 \\
 		\hline
 	\end{tabular}
