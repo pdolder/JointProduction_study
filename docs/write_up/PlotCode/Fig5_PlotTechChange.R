@@ -131,9 +131,9 @@ TechPlot_Otter <- filter(TechPlotDF, gear == 'THA2')
 
 p1 <- ggplot(TechPlot_Otter, aes(x = cod_adu, y = had_adu)) + geom_point(aes(colour = year)) +
 	geom_polygon(data = filter(hulls,gear=="THA2"), aes(colour = year, fill = year), alpha = 0.1) +
-	theme_bw() + expand_limits(x = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu))), 
-				   y = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu)))) +
-xlab("cod") + ylab("haddock")
+	theme_bw() + xlab("cod") + ylab("haddock")# + expand_limits(x = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu))), 
+#				   y = c(0,max(c(TechPlot_Otter$cod_adu, TechPlot_Otter$had_adu)))) 
+
 
 
 find_hull <- function(TechPlotDF) TechPlotDF[chull(TechPlotDF$ple_adu, TechPlotDF$sol_adu), ]
@@ -143,9 +143,9 @@ hulls <- ddply(TechPlotDF, c("year","gear"), find_hull)
 TechPlot_Beam <- filter(TechPlotDF, gear == 'NWGFS')
 p2 <- ggplot(TechPlot_Beam, aes(x = ple_adu, y = sol_adu)) + geom_point(aes(colour = year)) +
 	geom_polygon(data = filter(hulls,gear=="NWGFS"), aes(colour = year, fill = year), alpha = 0.1) +
-	theme_bw() + expand_limits(x = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu))), 
-				   y = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu)))) +
-xlab("plaice") + ylab("sole")
+	theme_bw() +
+xlab("plaice") + ylab("sole")#+ expand_limits(x = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu))), 
+		#		   y = c(0,max(c(TechPlot_Beam$ple_adu, TechPlot_Beam$sol_adu)))) 
 
 
 library(cowplot)
