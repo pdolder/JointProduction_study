@@ -82,10 +82,19 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT figures/Epsilon1Epsilon2_Correlations_blank.png
-INPUT ./figures/Epsilon1Epsilon2_Correlations_blank.png
+INPUT figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
+INPUT ./figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
 OUTPUT SupplementaryTablesandFigures.pdf
-INPUT ./figures/Epsilon1Epsilon2_Correlations_blank.png
+INPUT ./figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
+INPUT figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT figures/Suppl - SpatioTempLoadingsEpsilon2.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon2.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon2.png
+INPUT figures/Suppl - QEstimatesALL.png
+INPUT ./figures/Suppl - QEstimatesALL.png
+INPUT ./figures/Suppl - QEstimatesALL.png
 INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm

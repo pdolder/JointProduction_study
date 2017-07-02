@@ -1,7 +1,7 @@
 library(VAST)
 
 run <- '2017-06-16_M1'
-load(file = file.path('..', '..', '..','results', run, 'Save.RData'))
+load(file = file.path('..', '..', '..','..','results', run, 'Save.RData'))
 
 an <- as.numeric
 DF <- Save$Data_Geostat
@@ -38,7 +38,7 @@ Epsilon2_sf <- Var_list$"Epsilon2"$Psi_rot
 ##############
 ## The map  ##
 ##############
-load(file.path('..', '..', '..','results', 'CovariatesAtKnot.RData'))
+load(file.path('..','..', '..', '..','results', 'CovariatesAtKnot.RData'))
 
 MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List"=Extrapolation_List )
 
@@ -129,48 +129,28 @@ DF4_E2 <- DF3_E2; colnames(DF4_E2)[7] <- 'Spatio-temporal Density'
 
 cols <- brewer.pal(8, 'Set1')
 
-#p1 <- ggplot() + geom_point(data = filter(DF4_O1, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-#			    geom_point(data = filter(DF4_O1, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-#    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-#  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-#  facet_grid(variable ~.)
-
-#p2 <- ggplot() + geom_point(data = filter(DF4_O2, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-#			    geom_point(data = filter(DF4_O2, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-#    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-#  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-#  facet_wrap(~variable, ncol = 1)
-
-
 DF5 <- merge(DF4_O1, DF4_O2)
 DF5 <- melt(DF5, id = c("x2i", "Lat", "Lon", "Include","variable"))
 colnames(DF5)[c(5,6)] <- c("factor", "parameter")
 
-ggplot() + geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+## 1
+
+ggplot() + geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_"), parameter == 'Spatial Encounter Prob'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
 			    geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-  facet_grid(factor~parameter)
+  facet_wrap(~factor, nrow = 1)
 
-ggsave(file = file.path('..', 'figures', 'Figure 2 - SpatialFactorLoadingsOmega1Omega2.png'), width = 8, height = 12)
+ggsave(file = file.path('..', 'figures', 'Figure 2 - SpatialFactorLoadingsOmega1.png'), width = 12, height = 4)
 
-DF6 <- merge(DF4_E1, DF4_E2)
-DF6 <- melt(DF6, id = c("x2i", "Lat", "Lon", "Include","factor","year"))
-colnames(DF6)[c(7)] <- c("parameter")
+### 2
 
-
-ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+ggplot() + geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_"), parameter == 'Spatial Density'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+			    geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +   facet_grid(year ~ factor)
+  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
+  facet_wrap(~factor, nrow = 1)
 
-ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon1.png'), width = 8, height = 12)
-
-ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +   facet_grid(year ~ factor)
-
-ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon2.png'), width = 8, height = 12)
+ggsave(file = file.path('..', 'figures', 'Figure 2 - SpatialFactorLoadingsOmega2.png'), width = 12, height = 4)
 
 

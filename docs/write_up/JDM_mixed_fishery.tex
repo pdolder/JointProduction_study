@@ -48,14 +48,14 @@ where all fish caught are counted against the quota from 2019 (the 'Landings
 obligation') this burden is reversed. The risk instead is that mixed fisheries
 will have lower productivity as quota for healthier stocks remains uncaught in
 order to protect the weaker stocks unless management can decouple exploitation
-their exploitation, an objective fast becoming an important goal for fisheries
-sustainability.  A potential mechanism for decoupling exploitation is spatial
-management, but this has remained technically challenging due to co-occurrence
-of species at fine spatial and temporal scales and a lack of understanding of
-how this is driven by community dynamics.  We sought to understanding community
-dynamics in the Celtic Sea by applying a joint species distribution model
-(VAST) to the nine most important demersal fish species, each separated into
-juvenile and adult size classes.  \\
+their exploitation, an important goal for fisheries sustainability.  A
+potential mechanism for decoupling exploitation is spatial management, but this
+has remained technically challenging due to co-occurrence of species at fine
+spatial and temporal scales and a lack of understanding of how this is driven
+by community dynamics.  We sought to understanding community dynamics in the
+Celtic Sea by applying a joint species distribution model (VAST) to the nine
+most important demersal fish species, each separated into juvenile and adult
+size classes.  \\
 
 Clear common drivers for spatial distribution patterns emerge for three species
 groups (roundfish flatfish and shelf species) and, while abundance varies from
@@ -81,10 +81,10 @@ be expected (Hilborn et al). [expand]
 
 Fisheries management has the goal of maximising food production from capture
 fisheries (known as 'maximum sustainable yield (MSY)) while protecting all
-components of the ecosystem from over-exploitation. In mixed fisheries, the
-predominant type of fishery worldwide, several fish species are caught together
-in the same net or fishing operation; if managed by individual quotas and
-species have divergent conservation goals, overexploitation of the weaker
+components of the ecosystem from over-exploitation (ref). In mixed fisheries,
+the predominant type of fishery worldwide, several fish species are caught
+together in the same net or fishing operation; if managed by individual quotas
+and species have divergent conservation goals, overexploitation of the weaker
 species can result while fishers continue to catch more healthy species and
 throw back ('discard') the species for which they have no quota.
 
@@ -142,10 +142,12 @@ of the species groups and densities upon encounter \cite{Thorson2015a}, iii)
 Gaussian Markov Random Fields (GMRFs) are used to capture spatial and temporal
 correlations within and among species for both encounter probability and catch
 rates \cite{Thorson2013}, iv) the approach is set in a mixed modelling
-framework to allow estimation of fixed effects, such as gear catch rate
-differences, while integrating across random effects.
+framework to allow estimation of fixed effects to account for systematic
+differences driving encounter and catches, such as gear catch rate differences,
+while integrating across random effects which capture the spatio-temporal
+properties of the fish community.
 
-[164 words]
+[182 words]
 
 \subsection{Dynamics of Celtic Sea fisheries}
 
@@ -156,7 +158,7 @@ Celtic Sea is a temperate sea where a large number of species make up the
 commercial catches (MORE SPECIFIC - details of landings, key species, how much
 do our species contribute to overall landings?).
 
-We parameterise our spatio-temporal model using catch data from seven fisheries
+We parametrise our spatio-temporal model using catch data from seven fisheries
 independent surveys undertaken over the period 1990 - 2015 (Table S1) and
 include nine of the main commercial species: Atlantic cod (\textit{Gadus
 	morhua}), Atlantic haddock (\textit{Melanogrammus aeglefinus}),
@@ -238,7 +240,7 @@ of the factors, respectively.
 
 It is evident that depth and to a lesser extent habitat are important
 predictors of similarities and differences in species distributions and
-abundances. However,....
+abundances. However,.... [context, link to other studies]
 
 [316 words]
 
@@ -253,9 +255,7 @@ shows high variance (R\textsuperscript{2} = 0.36 and 0.22 respectively)
 indicating that the inter-year variations in the inter-species group
 correlations drive some differences in species compositions from one-year to
 the next.  This can be seen in the spatial factor loadings which show subtle
-differences in spatial patterns from one year to the next for both
-spatio-temporal encounter probability or spatio-temporal densities (Figure not
-shown)\footnote{should be in a supplementary}. 
+differences in spatial patterns from one year to the next (Figures S2 and S3). 
 
 However, the first two axes of the factor loadings for the spatio-temporal
 encounter probability and densities show clear associations among species
@@ -266,6 +266,7 @@ roundfish and flatfish on the other. For spatio-temporal density (Figure 3b)
 cod, haddock and whiting (the roundfish species) are separated from plaice,
 sole (the flatfish) and deeper water species. As such, higher catches the other
 roundfish species group would be expected when catching one species group.
+[more explanation of significance]
 
 [230 words]
 
@@ -278,7 +279,7 @@ characteristics of gear (refs) and spatio-temporal avoidance. Both are likely
 to play a role but the extent to which they can contribute to fisheries
 sustainability is unknown. While here we demonstrate the separation of three
 distinct species groupings (roundfish, flatfish and deeper water species)
-separating catches within groups is also likely to be important. Figure 4 shows
+separating catches within groups is likely to be equally as important. Figure 4 shows
 the difference in spatial distribution within a group for each of the species
 groupings for a single year (2015). 
 
@@ -287,7 +288,7 @@ haddock while cod had more westerly distribution than whiting roughly
 delineated by the 7$^{\circ}$ W line. Whiting appeared particularly
 concentrated in an area between 51 and 52 $^{\circ}$ N and 5 and 7 $^{\circ}$
 W, which can be seen by comparing the whiting distribution with both cod
-(Figure 4b) and cod (Figure 4c). For the deeper water species Figures 4d and 4e
+(Figure 4b) and haddock (Figure 4c). For the deeper water species Figures 4d and 4e
 indicate that hake are particularly concentrated in two areas compared to
 anglerfishes\footnote{two species combined as they are managed as one} and
 megrim (though for megrim, a fairly even relative distribution elsewhere is
@@ -311,17 +312,27 @@ cod, hake and anglerfishes in the catch with the Otter trawl catching a greater
 proportion of the roundfish, haddock, whiting and cod. The offshore area has a
 higher contribution of megrim, anglerfishes and hake with the Otter trawl
 catching a greater share of hake and the Beam trawl a greater proportion of
-megrim. Megrim dominates the catch for both gears reflecting its relative
-abundance in the area.
+megrim. Megrim dominates the catch for both gears in area 216, reflecting its
+relative abundance in the area.
 
-Figure 5 shows the joint production function for all locations in the model
-giving the global production sets for the years 2011 - 2015. The plots
-illustrate the scope for vessels to change the relative composition of each
-species in the catch as a function of changing location fished only.
+Figure 5 shows the joint production function for the entire spatial domain,
+giving the global production sets for the years 2011 - 2015. It gives the space
+in which vessels have to operate where they can change the relative composition
+of each species in the catch as a function of changing location fished only.
+The convex hull of the space is the flexibility vessels have in order to adapt
+to the changing fishing opportunities given the association of species with
+each other\cite{Reimer2017}. As can be seen from Figure 5a which shows the
+trade-off between cod and haddock for an Otter trawler....
 
-[459 words]
+Figure 5b shows the same for plaice and sole for a Beam trawler...
+STRUGGLING TO DEFINE WHAT IS 'LOTS' AND WHAT IS 'LITTLE' SPACE OBJECTIVELY...?
 
-\subsection{Future methods for designing spatio-temporal management approaches}
+[573 words]
+
+\subsection{Implications for mixed fishery management under the EU landing
+	obligation}
+
+
 
 Real time?  Commercial data ?  Hotspots \& Notspots ??
 
@@ -329,6 +340,8 @@ How far can spatial changes in targeting bring you towards achieving the right
 balance of catch in mixed fisheries to maintain productivity. FOOD SECURITY!!
 
 \section*{Methods}
+
+
 
 The model integrates data from seven fisheries independent surveys taking
 account of correlations among species-group spatio-temporal distributions and

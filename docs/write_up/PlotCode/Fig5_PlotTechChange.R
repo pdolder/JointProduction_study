@@ -155,3 +155,9 @@ plot_grid(p1,p2, labels = c("(a) cod v haddock using otter trawl",
 ggsave(file = file.path('..','figures','Figure 5 - TechnicalEfficiency.png'), width = 12, height = 6)
 
 
+DF <- TechPlotDF[TechPlotDF$gear == 'THA2',]
+
+ggplot(DF, aes(x = had_adu, y = whg_adu)) + geom_point() + 
+	facet_wrap(~ year)# + geom_density2d()
+
+
