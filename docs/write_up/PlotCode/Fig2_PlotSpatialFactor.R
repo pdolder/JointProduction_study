@@ -159,12 +159,12 @@ DF6 <- melt(DF6, id = c("x2i", "Lat", "Lon", "Include","factor","year"))
 colnames(DF6)[c(7)] <- c("parameter")
 
 
-ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob', year %in% c(2000,2005,2010,2015)), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob', year %in% c(2000,2005,2010,2015)), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +   facet_grid(year ~ factor)
 
-ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon1.png'), width = 8, height = 12)
+ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon1Pres.png'), width = 6, height = 6)
 
 ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
 			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 

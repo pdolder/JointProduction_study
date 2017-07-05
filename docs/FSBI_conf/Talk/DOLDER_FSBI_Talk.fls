@@ -459,15 +459,15 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
 INPUT figures/AreaMap.png
 INPUT ./figures/AreaMap.png
 INPUT ./figures/AreaMap.png
-INPUT Survey_locations-1.pdf
-INPUT ./Survey_locations-1.pdf
-INPUT ./Survey_locations-1.pdf
 INPUT figures/Survey_effort_by_year-1.pdf
 INPUT ./figures/Survey_effort_by_year-1.pdf
 INPUT ./figures/Survey_effort_by_year-1.pdf
 INPUT figures/cefas_endeavour.jpg
 INPUT ./figures/cefas_endeavour.jpg
 INPUT ./figures/cefas_endeavour.jpg
+INPUT Survey_locations-1.pdf
+INPUT ./Survey_locations-1.pdf
+INPUT ./Survey_locations-1.pdf
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
 INPUT ./figures/Legend.png
@@ -477,6 +477,16 @@ INPUT ./figures/SpatialDataAndKnotsLand.png
 INPUT figures/time.jpg
 INPUT ./figures/time.jpg
 INPUT ./figures/time.jpg
+INPUT figures/Field_Dens--Gadus morhua_Adu.png
+INPUT ./figures/Field_Dens--Gadus morhua_Adu.png
+INPUT ./figures/Field_Dens--Gadus morhua_Adu.png
+INPUT figures/Field_Dens--Gadus morhua_Juv.png
+INPUT ./figures/Field_Dens--Gadus morhua_Juv.png
+INPUT ./figures/Field_Dens--Gadus morhua_Juv.png
+INPUT figures/Field_Dens--Gadus morhua_Adu.png
+INPUT ./figures/Field_Dens--Gadus morhua_Adu.png
+INPUT figures/Field_Dens--Gadus morhua_Juv.png
+INPUT ./figures/Field_Dens--Gadus morhua_Juv.png
 INPUT figures/Figure 2 - SpatialFactorLoadingsOmega1.png
 INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
 INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
@@ -495,9 +505,28 @@ INPUT ./figures/Factor1_HabitatO1.png
 INPUT figures/Substrate.png
 INPUT ./figures/Substrate.png
 INPUT ./figures/Substrate.png
-INPUT figures/Suppl - SpatioTempLoadingsEpsilon1.png
-INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
-INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT figures/Factor1_DepthO1.png
+INPUT ./figures/Factor1_DepthO1.png
+INPUT figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT figures/Substrate.png
+INPUT ./figures/Substrate.png
+INPUT figures/Factor1_DepthO1.png
+INPUT ./figures/Factor1_DepthO1.png
+INPUT figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT figures/Substrate.png
+INPUT ./figures/Substrate.png
+INPUT figures/Suppl - SpatioTempLoadingsEpsilon1Pres.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1Pres.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1Pres.png
+INPUT figures/Temp.png
+INPUT ./figures/Temp.png
+INPUT ./figures/Temp.png
 INPUT figures/Factor1_Temp.eps
 INPUT ./figures/Factor1_Temp.eps
 INPUT ./figures/Factor1_Temp.eps
@@ -505,6 +534,16 @@ INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
 INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
 INPUT ./figures/Factor1_Temp.eps
 INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT figures/Temp.png
+INPUT ./figures/Temp.png
+INPUT figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp.eps
 INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
 INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
@@ -515,23 +554,63 @@ INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
@@ -540,23 +619,63 @@ INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
 INPUT figures/Figure 1 - Omega1_Correlations_norect.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
@@ -577,8 +696,24 @@ INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
+INPUT figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
+INPUT figures/Figure 1 - Omega1_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
 INPUT figures/Figure 1 - Omega2_Correlations_norect.eps
 INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
 INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
@@ -599,11 +734,101 @@ INPUT ./figures/Figure 1 - Omega2_Correlations_blank.eps
 INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
+INPUT figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
+INPUT figures/Figure 1 - Omega2_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
 INPUT figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png
+INPUT figures/Coilin_Minto.jpg
+INPUT ./figures/Coilin_Minto.jpg
+INPUT ./figures/Coilin_Minto.jpg
+INPUT figures/Jim_Thorson.jpg
+INPUT ./figures/Jim_Thorson.jpg
+INPUT ./figures/Jim_Thorson.jpg
+INPUT figures/seedcorn_logo_white_navy_bkgd.eps
+INPUT ./figures/seedcorn_logo_white_navy_bkgd.eps
+INPUT ./figures/seedcorn_logo_white_navy_bkgd.eps
+INPUT ./figures/seedcorn_logo_white_navy_bkgd-eps-converted-to.pdf
+INPUT ./figures/seedcorn_logo_white_navy_bkgd-eps-converted-to.pdf
+INPUT ./figures/seedcorn_logo_white_navy_bkgd.eps
+INPUT ./figures/seedcorn_logo_white_navy_bkgd-eps-converted-to.pdf
+INPUT ./figures/seedcorn_logo_white_navy_bkgd-eps-converted-to.pdf
+INPUT figures/MARES.png
+INPUT ./figures/MARES.png
+INPUT figures/ichec_logo.png
+INPUT ./figures/ichec_logo.png
+INPUT ./figures/ichec_logo.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
+INPUT /home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm

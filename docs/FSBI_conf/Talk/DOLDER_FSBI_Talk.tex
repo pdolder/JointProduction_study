@@ -47,7 +47,6 @@
 \renewcommand{\)}{\end{columns}}
 \newcommand{\<}[1]{\begin{column}{#1}}
 \renewcommand{\>}{\end{column}}
-
 \graphicspath{{figures/}}
 
 %%%%%%%%%
@@ -63,6 +62,10 @@
 
 %%\AtBeginSection{\frame{\sectionpage}}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+									      
 \begin{document}
 
 \addtocounter{framenumber}{-1}
@@ -239,16 +242,8 @@ Modelling framework:
 \subsection{Blah}
 
 \begin{frame}{}
-
 \centering
 \includegraphics[width=\linewidth]{AreaMap}
-
-\end{frame}
-
-\begin{frame}{Survey data}
-
-\centering
-\includegraphics[width=1\linewidth]{Survey_locations-1}
 
 \end{frame}
 
@@ -278,6 +273,14 @@ Modelling framework:
 \includegraphics[width=0.4\linewidth]{cefas_endeavour}
 
 \end{frame}
+
+\begin{frame}{Spatial coverage}
+
+\centering
+\includegraphics[width=1\linewidth]{Survey_locations-1}
+
+\end{frame}
+
 
 \begin{frame}
 
@@ -327,14 +330,26 @@ Modelling framework:
 
 \end{frame}
 
-\section{Findings}
+\section{Some findings}
 \subsection{Blah}
 
+%%% cod - adult and juvenile 
 \begin{frame}
-	What is driving these associations ?
+\begin{tikzpicture}
+	\centering
+  \node (img1) at (1,1) {\includegraphics[height=8cm]{"Field_Dens--Gadus morhua_Adu"}};
+       \pause
+  \node (img3) at (1,1) {\includegraphics[height=8cm]{"Field_Dens--Gadus morhua_Juv"}};
+\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Spatial factor analysis}
+
+\begin{frame}
+	What about the fish as a community; what common spatial trends do we observe?
+\end{frame}
+
+
+\begin{frame}{Spatial patterns driving distributions and density}
 
 \centering
 \includegraphics[width = \linewidth]{"Figure 2 - SpatialFactorLoadingsOmega1"}
@@ -343,147 +358,119 @@ Modelling framework:
 	
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{What drives these patterns}
 \centering
 \includegraphics[width = 0.4\linewidth]{"Factor1_DepthO1"}
 \includegraphics[width = 0.5\linewidth]{"Depth"} \\
+\pause
 \includegraphics[width = 0.4\linewidth]{"Factor1_HabitatO1"}
 \includegraphics[width = 0.5\linewidth]{"Substrate"}
-
-\begin{table}
-	\begin{tabular}{p{1.5cm} p{1cm} p{1cm} p{2cm}}
-		\hline
-		Parameter & Variable & Factor & Correlation \\
-		\hline
-		Encounter prob & Depth  & 1 & -0.85 (-0.88 to -0.81) \\
-		Density & Depth & 1 & -0.71 (-0.77 to -0.65) \\
-		\hline
-	\end{tabular}
-\end{table}
-
 \tiny
-Random forest assigned encounter prob variance 80 \% to depth and habitat, 86 \% of this to
-depth. 62 \% of density variability....81 \% to depth.
+\hspace{2cm} Data: EUSeapMap; EMODnet bathymetry portal. \\
+\pause
+\tiny
+\textcolor{red}{First factor shows strong correlation with depth for encounter probability
+(-0.85, -0.88 to -0.81) and density (-0.71, -0.77 to -0.65). 80 \% of variance
+explained by depth and habitat: 9/10 of that by depth.}
 
 \end{frame}
 
 \begin{frame}
-        What happens when we consider how they change over time ?	
+        How stable are the spatial patterns over time ?	
 \end{frame}
 
-\begin{frame}{Spatial factor analysis}
+\begin{frame}{Temporal changes in common trends}
 \centering
-\includegraphics[width = 0.6\linewidth]{"Suppl - SpatioTempLoadingsEpsilon1"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.6\linewidth]{"Factor1_Temp"}
-\end{frame}
-
-
-\begin{frame}{}
-
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEncBase"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-
-\end{frame}
-
-\begin{frame}{}
-
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc1"} 
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc2"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc3"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
+\includegraphics[width = 0.8\linewidth]{"Suppl - SpatioTempLoadingsEpsilon1Pres"}
 \end{frame}
 
 \begin{frame}{}
 \centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDenBase"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
+\includegraphics[width = 0.6\linewidth]{"Temp"} \\
+\pause
+\includegraphics[width = 0.6\linewidth]{"Factor1_Temp"} \\
+\tiny
+Data: NOAA High Resolution SST data. 
 \end{frame}
 
+\begin{frame}
+Are the same factors driving all or some of the species distributions, when
+taking account of the yearly variation?
+\end{frame}
+
+%%% PCA type plots - encounter
+\begin{frame}
+\begin{tikzpicture}
+  \node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempEncBase"}};
+     \node (img2) at (7,1) {\includegraphics[height=7cm]{"Legend"}};
+       \pause
+	  \node (img3) at (1,1) {\includegraphics[height=7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc1"}};
+	  \pause
+	  \node (img4) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc2"}};
+	  \pause
+	  \node (img5) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc3"}};
+	  \pause
+	  \node (img6) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc"}};
+	  \end{tikzpicture}
+\end{frame}
+
+%%% PCA type plots - density 
+\begin{frame}
+\begin{tikzpicture}
+  \node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempDenBase"}};
+     \node (img2) at (7,1) {\includegraphics[height=7cm]{"Legend"}};
+       \pause
+	  \node (img3) at (1,1) {\includegraphics[height=7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempDen1"}};
+	  \pause
+	  \node (img4) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempDen2"}};
+	  \pause
+	  \node (img5) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempDen3"}};
+	  \pause
+	  \node (img6) at (1,1) {\includegraphics[height = 7cm]{"Figure 3 - PCAstyle_Plots_SpatioTempDen"}};
+	  \end{tikzpicture}
+\end{frame}
+
+%%% Correlations
 
 \begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen1"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
+\begin{tikzpicture}
+  \node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 1 - Omega1_Correlations_norect"}};
+  \node (img2) at (7,1) {\includegraphics[height=7cm]{"Legend"}};
+       \pause
+	\node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 1 -	Omega1_Correlations_blank"}};
+\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen2"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen3"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega1_Correlations_norect"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega1_Correlations_blank"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega2_Correlations_norect"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-\end{frame}
-
-\begin{frame}{}
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega2_Correlations_blank"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
+\begin{tikzpicture}
+  \node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 1 - Omega2_Correlations_norect"}};
+  \node (img2) at (7,1) {\includegraphics[height=7cm]{"Legend"}};
+       \pause
+	\node (img1) at (1,1) {\includegraphics[height=7cm]{"Figure 1 -	Omega2_Correlations_blank"}};
+\end{tikzpicture}
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implications}
+\section{Implications for mixed fishery mgmt}
 \subsection{Blah}
 
-\begin{frame}{Mixed fisheries}
-	
-Come back to my original point about implications for mixed fisheries!!!
+\begin{frame}{So what does this mean for mixed fisheries management ?}
+
+	\begin{itemize}
+		\item Method for reducing dimensionality of the 'mixed fishery
+			problem': identifies the associations among species;
+		\item Clear separation among 3 groups of species indicating
+			that spatial avoidance is possible;
+		\item More challenging within a group where strong association
+			in both distribution and density exists;
+		\item However,...
+	\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Mixed fisheries}
+\begin{frame}{Species density overlaps}
 	
 \centering
 \includegraphics[width = \linewidth]{"Figure 4 - DensityDifferencesFigureswithCC"}
@@ -495,14 +482,65 @@ Come back to my original point about implications for mixed fisheries!!!
 \subsection{Blah}
 
 \begin{frame}
-	Key take home messages
-	Whats next etc...
+\begin{itemize}
+\small	
+\setlength\itemsep{1em}
+	\item Method for identifying common trends in distribution and density
+		of species at a scale consistent with the data, robust and
+		takes account of covariance structure;
+	\item Applied to main Celtic Sea commercial fish species indicates
+		spatial separation among three broad species groups: demersal
+		roundfish, flatfish and deeper water species;
+	\item Latent variables from the factor analysis shows the dynamics are
+		driven common spatial trends - indicates the strong
+		associations among species groups are driven by the
+		environment; 
+	\item Implications for spatial avoidance under the EU landings
+		obligation: how far can space be used to match catch to
+		available quota?
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Acknowledgements}
+\centering
+\includegraphics[height=3cm]{"Coilin_Minto"} \hspace{1cm}
+%% \includegraphics[height=3cm, angle = -90]{"Paul_Dolder"} \hspace{0.1cm}
+\includegraphics[height=3cm]{"Jim_Thorson"} \\
+\vspace{1cm}
+\includegraphics[width = 4cm]{seedcorn_logo_white_navy_bkgd} 
+\hspace{0.5cm}
+\includegraphics[width = 4cm]{MARES} 
+\hspace{0.5cm}
+\includegraphics[width = 4cm]{ichec_logo} 
+
+
+\end{frame}
+
+
+\begin{frame}{} 
+
+\begin{tikzpicture}
+\node (img1) {\includegraphics[width = 10cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_012}};
+\pause
+\node (img2) at (img1.south) {\includegraphics[width = 10cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_013}};
+\pause
+\node (img3) at (img2.north) {\includegraphics[width = 10cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_011}};
+\pause
+\node (img4) at (img3.south) {\includegraphics[width = 10cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_014}};
+\pause
+\node (img5) at (img4.north) {\includegraphics[width = 10cm]{/home/paul/Dropbox/MARES_PhD/jointprod_study/docs/paper_headers/Selection_010}};
+
+\end{tikzpicture}
+
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% Back up slides: equations etc...
 
+\appendix
 \section{Add. slides}
 \subsection{Blah}
 \begin{frame}{Methodology summary}
@@ -651,11 +689,6 @@ Come back to my original point about implications for mixed fisheries!!!
 \begin{frame}{Spatial correlation}
 	\centering
 \includegraphics[width=0.5\linewidth]{Aniso}
-\end{frame}
-
-\begin{frame}{Spatial correlation}
-Slide of references!
-Include link to Jim's github
 \end{frame}
 
 
