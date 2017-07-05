@@ -416,33 +416,158 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
-INPUT DOLDER_FSBI_Talk.toc
-INPUT DOLDER_FSBI_Talk.toc
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplrc8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplrc8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
-INPUT figures/AreaMap.png
-INPUT ./figures/AreaMap.png
-INPUT ./figures/AreaMap.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
-INPUT figures/SpatialDataAndKnots.png
-INPUT ./figures/SpatialDataAndKnots.png
-INPUT ./figures/SpatialDataAndKnots.png
-INPUT figures/Suppl - QEstimatesALL.png
-INPUT ./figures/Suppl - QEstimatesALL.png
-INPUT ./figures/Suppl - QEstimatesALL.png
-INPUT figures/AreaMap.png
-INPUT ./figures/AreaMap.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
-INPUT ./figures/Legend.png
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT figures/techInteractions.png
+INPUT ./figures/techInteractions.png
+INPUT figures/discarding.png
+INPUT ./figures/discarding.png
+INPUT figures/Irish_catch_comp.png
+INPUT ./figures/Irish_catch_comp.png
+INPUT ./figures/Irish_catch_comp.png
+INPUT figures/All_species_finescale.png
+INPUT ./figures/All_species_finescale.png
+INPUT ./figures/All_species_finescale.png
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplri8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT figures/AreaMap.png
+INPUT ./figures/AreaMap.png
+INPUT ./figures/AreaMap.png
+INPUT Survey_locations-1.pdf
+INPUT ./Survey_locations-1.pdf
+INPUT ./Survey_locations-1.pdf
 INPUT figures/Survey_effort_by_year-1.pdf
 INPUT ./figures/Survey_effort_by_year-1.pdf
 INPUT ./figures/Survey_effort_by_year-1.pdf
+INPUT figures/cefas_endeavour.jpg
+INPUT ./figures/cefas_endeavour.jpg
+INPUT ./figures/cefas_endeavour.jpg
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/SpatialDataAndKnotsLand.png
+INPUT ./figures/SpatialDataAndKnotsLand.png
+INPUT ./figures/SpatialDataAndKnotsLand.png
+INPUT figures/time.jpg
+INPUT ./figures/time.jpg
+INPUT ./figures/time.jpg
+INPUT figures/Figure 2 - SpatialFactorLoadingsOmega1.png
+INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
+INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
+INPUT figures/Figure 2 - SpatialFactorLoadingsOmega2.png
+INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega2.png
+INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega2.png
+INPUT figures/Factor1_DepthO1.png
+INPUT ./figures/Factor1_DepthO1.png
+INPUT ./figures/Factor1_DepthO1.png
+INPUT figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT figures/Substrate.png
+INPUT ./figures/Substrate.png
+INPUT ./figures/Substrate.png
+INPUT figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
+INPUT figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp.eps
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT ./figures/Factor1_Temp-eps-converted-to.pdf
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen1.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen2.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen3.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega1_Correlations_norect-eps-converted-to.pdf
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
 INPUT figures/Figure 1 - Omega1_Correlations_blank.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
@@ -452,6 +577,17 @@ INPUT ./figures/Figure 1 - Omega1_Correlations_blank.eps
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega1_Correlations_blank-eps-converted-to.pdf
+INPUT figures/Legend.png
+INPUT ./figures/Legend.png
+INPUT figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect.eps
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
+INPUT ./figures/Figure 1 - Omega2_Correlations_norect-eps-converted-to.pdf
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
 INPUT figures/Figure 1 - Omega2_Correlations_blank.eps
@@ -465,28 +601,47 @@ INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
 INPUT ./figures/Figure 1 - Omega2_Correlations_blank-eps-converted-to.pdf
 INPUT figures/Legend.png
 INPUT ./figures/Legend.png
-INPUT figures/Figure 2 - SpatialFactorLoadingsOmega1.png
-INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
-INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1.png
-INPUT figures/Figure 2 - SpatialFactorLoadingsOmega2.png
-INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega2.png
-INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega2.png
-INPUT figures/Suppl - SpatioTempLoadingsEpsilon1.png
-INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
-INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
-INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
-INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
-INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempEnc.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
-INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
-INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
-INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTempDen.png
-INPUT figures/Legend.png
-INPUT ./figures/Legend.png
 INPUT figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT figures/Matern.png
+INPUT ./figures/Matern.png
+INPUT ./figures/Matern.png
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplb8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8t.tfm
+INPUT figures/Suppl - QEstimatesALL.png
+INPUT ./figures/Suppl - QEstimatesALL.png
+INPUT ./figures/Suppl - QEstimatesALL.png
+INPUT figures/Diag--Encounter_prob.png
+INPUT ./figures/Diag--Encounter_prob.png
+INPUT ./figures/Diag--Encounter_prob.png
+INPUT figures/Q-Q_plot.jpg
+INPUT ./figures/Q-Q_plot.jpg
+INPUT ./figures/Q-Q_plot.jpg
+INPUT figures/Aniso.png
+INPUT ./figures/Aniso.png
+INPUT ./figures/Aniso.png
 OUTPUT DOLDER_FSBI_Talk.nav
 OUTPUT DOLDER_FSBI_Talk.toc
 OUTPUT DOLDER_FSBI_Talk.snm
@@ -494,7 +649,15 @@ INPUT DOLDER_FSBI_Talk.aux
 INPUT ./DOLDER_FSBI_Talk.out
 INPUT ./DOLDER_FSBI_Talk.out
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb

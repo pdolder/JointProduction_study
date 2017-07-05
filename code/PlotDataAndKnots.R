@@ -3,7 +3,6 @@
 ## the data and knots ##
 #####################################
 
-
 library(ggplot2); library(cowplot)
 library(mapplots)
 library(rworldmap)
@@ -107,6 +106,6 @@ p2 <-  ggplot() + geom_rect(aes(xmin = xlim[1], xmax = xlim[2],  ymin =  ylim[1]
                                                                    legend.title = element_blank()) +
   geom_point(data = knotsP, aes(x = X, y = Y), colour = 'red', size = 0.8)
 
-  plot_grid(p1,p2, labels = c('(a) data','(b) knots'), ncol = 1, vjust = c(1.5, -1))
-  ggsave(file = file.path('..', 'plots', 'SpatialDataAndKnots.png'), width = 8, height = 12)
-  
+  plot_grid(p1,p2, labels = c('(a) data','(b) knots'), ncol = 2, vjust = c(1.5, 1.5))
+  ggsave(file = file.path('..', 'plots', 'SpatialDataAndKnotsLand.png'), width = 12, height = 6)
+ 	 

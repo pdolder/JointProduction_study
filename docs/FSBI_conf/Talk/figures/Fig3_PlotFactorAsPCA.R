@@ -130,7 +130,7 @@ b1 <- ggplot(PCA.DFs[['Epsilon1']], aes(x = Factor_1, y = Factor_2)) + geom_poin
 	expand_limits(y = c(-1,0.5), x = c(-1,0.5)) + 	geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + theme_bw() + 
 	xlab('Factor 1 (39.8 % variance explained)') + ylab('Factor 2 (16.7 % variance explained)') 
 
-g1 <- b1  + geom_segment(data = LinesDFEp1, aes(x = x1, xend = x2, y = y1, yend = y2)) +
+g1a <- b1  + geom_segment(data = LinesDFEp1[rownames(LinesDFEp1) %in% dem,], aes(x = x1, xend = x2, y = y1, yend = y2)) +
 #	geom_label(aes(label = rownames(LinesDFEp1)))# +
 # cod adult
 annotation_custom(cod, xmin = -0.32, xmax = -0.32 + xsize_adu, 
@@ -149,8 +149,65 @@ annotation_custom(whg, xmin = -0.85, xmax = -0.85 + xsize_adu,
 		      ymin = 0.08, ymax = 0.08 + ysize_adu) +
 # whiting juvenile
 annotation_custom(whg, xmin = -0.95, xmax = -0.95 + xsize_juv, 
-		      ymin =0.22, ymax = 0.22 + ysize_juv) +
+		      ymin =0.22, ymax = 0.22 + ysize_juv) #+
 # hake adult
+#annotation_custom(hke, xmin = -0.28, xmax = -0.28 + xsize_adu, 
+#		      ymin = -0.54, ymax = -0.54 + ysize_adu) +
+# hake juvenile
+#annotation_custom(hke, xmin = -0.25, xmax = -0.25 + xsize_juv,
+#		      ymin = -0.67, ymax = -0.67 + ysize_juv) +
+# megrim adult
+#annotation_custom(meg, xmin = -0.65, xmax = -0.65 + xsize_adu, 
+#		      ymin = -0.70, ymax = -0.70 + ysize_adu) +
+# megrim juvenile
+#annotation_custom(meg, xmin = -0.26, xmax= -0.26 + xsize_juv, 
+#		      ymin = -0.17, ymax= -0.17 + ysize_juv) +
+# bud adult
+#annotation_custom(bud, xmin = -0.1, xmax = -0.1 + xsize_adu, 
+#		      ymin = -0.65, ymax = -0.65 + ysize_adu) +
+# bud juvenile
+#annotation_custom(bud, xmin = -0.09, xmax = -0.09 + xsize_juv, 
+#		      ymin = -0.7, ymax = -0.7 + ysize_juv) +
+# pis adult
+#annotation_custom(pisc, xmin = -0.4, xmax = -0.4 + xsize_adu,
+#		      ymin = -0.45, ymax = -0.45 + ysize_adu) +
+# pis juvenile
+#annotation_custom(pisc, xmin = -0.33, xmax = -0.33 + xsize_juv, 
+#		      ymin = -0.71, ymax = -0.71 + ysize_juv) +
+# plaice adult
+#annotation_custom(ple, xmin = -0.53, xmax = -0.53 + xsize_adu, 
+#		      ymin = -0.01, ymax = -0.01 + ysize_adu) + 
+# plaice juvenile
+#annotation_custom(ple, xmin = -0.56, xmax = -0.56 + xsize_juv, 
+#		      ymin = 0.07, ymax = 0.07 + ysize_juv) + 
+# sole adult
+#annotation_custom(sol, xmin = -0.47, xmax = -0.47 + xsize_adu, 
+#		      ymin = -0.15, ymax = -0.15 + ysize_adu) + 
+# sole juvenile
+#annotation_custom(sol, xmin = -0.4, xmax = -0.4 + xsize_juv, 
+#		      ymin = 0.22, ymax = 0.22 + ysize_juv)  
+
+g1b <- b1  + geom_segment(data = LinesDFEp1[rownames(LinesDFEp1) %in% dep,], aes(x = x1, xend = x2, y = y1, yend = y2)) +
+#	geom_label(aes(label = rownames(LinesDFEp1)))# +
+# cod adult
+#annotation_custom(cod, xmin = -0.32, xmax = -0.32 + xsize_adu, 
+#		      ymin = 0.1, ymax = 0.1 + ysize_adu) + 
+# cod juvenile
+#annotation_custom(cod, xmin = -0.9, xmax = -0.9 + xsize_juv, 
+#		      ymin = 0.38, ymax = 0.38 + ysize_juv) +
+# haddock adult
+#annotation_custom(had, xmin = -0.7, xmax = -0.7 + xsize_adu, 
+#		      ymin = -0.2, ymax = -0.2 + ysize_adu) + 
+# haddock juvenile
+#annotation_custom(had, xmin = -1.05, xmax=-1.05 + xsize_juv, 
+#		      ymin = 0.25, ymax=0.25 + ysize_juv) + 
+# whiting adult 
+#annotation_custom(whg, xmin = -0.85, xmax = -0.85 + xsize_adu, 
+#		      ymin = 0.08, ymax = 0.08 + ysize_adu) +
+# whiting juvenile
+#annotation_custom(whg, xmin = -0.95, xmax = -0.95 + xsize_juv, 
+#		      ymin =0.22, ymax = 0.22 + ysize_juv) +
+## hake adult
 annotation_custom(hke, xmin = -0.28, xmax = -0.28 + xsize_adu, 
 		      ymin = -0.54, ymax = -0.54 + ysize_adu) +
 # hake juvenile
@@ -173,7 +230,64 @@ annotation_custom(pisc, xmin = -0.4, xmax = -0.4 + xsize_adu,
 		      ymin = -0.45, ymax = -0.45 + ysize_adu) +
 # pis juvenile
 annotation_custom(pisc, xmin = -0.33, xmax = -0.33 + xsize_juv, 
-		      ymin = -0.71, ymax = -0.71 + ysize_juv) +
+		      ymin = -0.71, ymax = -0.71 + ysize_juv) #+
+# plaice adult
+#annotation_custom(ple, xmin = -0.53, xmax = -0.53 + xsize_adu, 
+#		      ymin = -0.01, ymax = -0.01 + ysize_adu) + 
+# plaice juvenile
+#annotation_custom(ple, xmin = -0.56, xmax = -0.56 + xsize_juv, 
+#		      ymin = 0.07, ymax = 0.07 + ysize_juv) + 
+# sole adult
+#annotation_custom(sol, xmin = -0.47, xmax = -0.47 + xsize_adu, 
+#		      ymin = -0.15, ymax = -0.15 + ysize_adu) + 
+# sole juvenile
+#annotation_custom(sol, xmin = -0.4, xmax = -0.4 + xsize_juv, 
+#		      ymin = 0.22, ymax = 0.22 + ysize_juv)  
+
+g1c <- b1  + geom_segment(data = LinesDFEp1[rownames(LinesDFEp1) %in% fla,], aes(x = x1, xend = x2, y = y1, yend = y2)) +
+#	geom_label(aes(label = rownames(LinesDFEp1)))# +
+# cod adult
+#annotation_custom(cod, xmin = -0.32, xmax = -0.32 + xsize_adu, 
+#		      ymin = 0.1, ymax = 0.1 + ysize_adu) + 
+# cod juvenile
+#annotation_custom(cod, xmin = -0.9, xmax = -0.9 + xsize_juv, 
+#		      ymin = 0.38, ymax = 0.38 + ysize_juv) +
+# haddock adult
+#annotation_custom(had, xmin = -0.7, xmax = -0.7 + xsize_adu, 
+#		      ymin = -0.2, ymax = -0.2 + ysize_adu) + 
+# haddock juvenile
+#annotation_custom(had, xmin = -1.05, xmax=-1.05 + xsize_juv, 
+#		      ymin = 0.25, ymax=0.25 + ysize_juv) + 
+# whiting adult 
+#annotation_custom(whg, xmin = -0.85, xmax = -0.85 + xsize_adu, 
+#		      ymin = 0.08, ymax = 0.08 + ysize_adu) +
+# whiting juvenile
+#annotation_custom(whg, xmin = -0.95, xmax = -0.95 + xsize_juv, 
+#		      ymin =0.22, ymax = 0.22 + ysize_juv) +
+# hake adult
+#annotation_custom(hke, xmin = -0.28, xmax = -0.28 + xsize_adu, 
+#		      ymin = -0.54, ymax = -0.54 + ysize_adu) +
+# hake juvenile
+#annotation_custom(hke, xmin = -0.25, xmax = -0.25 + xsize_juv,
+#		      ymin = -0.67, ymax = -0.67 + ysize_juv) +
+# megrim adult
+#annotation_custom(meg, xmin = -0.65, xmax = -0.65 + xsize_adu, 
+#		      ymin = -0.70, ymax = -0.70 + ysize_adu) +
+# megrim juvenile
+#annotation_custom(meg, xmin = -0.26, xmax= -0.26 + xsize_juv, 
+#		      ymin = -0.17, ymax= -0.17 + ysize_juv) +
+# bud adult
+#annotation_custom(bud, xmin = -0.1, xmax = -0.1 + xsize_adu, 
+#		      ymin = -0.65, ymax = -0.65 + ysize_adu) +
+# bud juvenile
+#annotation_custom(bud, xmin = -0.09, xmax = -0.09 + xsize_juv, 
+#		      ymin = -0.7, ymax = -0.7 + ysize_juv) +
+# pis adult
+#annotation_custom(pisc, xmin = -0.4, xmax = -0.4 + xsize_adu,
+#		      ymin = -0.45, ymax = -0.45 + ysize_adu) +
+# pis juvenile
+#annotation_custom(pisc, xmin = -0.33, xmax = -0.33 + xsize_juv, 
+#		      ymin = -0.71, ymax = -0.71 + ysize_juv) +
 # plaice adult
 annotation_custom(ple, xmin = -0.53, xmax = -0.53 + xsize_adu, 
 		      ymin = -0.01, ymax = -0.01 + ysize_adu) + 
@@ -186,6 +300,7 @@ annotation_custom(sol, xmin = -0.47, xmax = -0.47 + xsize_adu,
 # sole juvenile
 annotation_custom(sol, xmin = -0.4, xmax = -0.4 + xsize_juv, 
 		      ymin = 0.22, ymax = 0.22 + ysize_juv)  
+
 
 
 #################################
@@ -232,7 +347,8 @@ b2 <- ggplot(PCA.DFs[['Epsilon2']], aes(x = Factor_1, y = Factor_2)) + geom_poin
 	expand_limits(y = c(-1,0.5), x = c(-1,0.5)) + 	geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + theme_bw() + 
 	xlab('Factor 1 (43.3 % variance explained)') + ylab('Factor 2 (13.9 % variance explained)')
 
-g2 <-  b2  + geom_segment(data = LinesDFEp2, aes(x = x1, xend = x2, y = y1, yend = y2)) + 
+
+g2a <-  b2  + geom_segment(data = LinesDFEp2[rownames(LinesDFEp2) %in% dem,], aes(x = x1, xend = x2, y = y1, yend = y2)) + 
 #	geom_text(aes(label = rownames(LinesDFEp1))) #+
 # cod adult
 annotation_custom(cod, xmin = -0.18, xmax = -0.18  + xsize_adu, 
@@ -251,10 +367,68 @@ annotation_custom(whg, xmin = -0.8 , xmax = -0.8 + xsize_adu,
 		      ymin = -0.2, ymax = -0.2 + ysize_adu) +
 # whiting juvenile
 annotation_custom(whg, xmin = -0.7 , xmax = -0.7 + xsize_juv, 
-		      ymin = 0.03, ymax = 0.03 + ysize_juv) +
+		      ymin = 0.03, ymax = 0.03 + ysize_juv) #+
 # hake adult
-annotation_custom(hke, xmin = -0.12, xmax = -0.12 + xsize_adu, 
-		      ymin = -0.02, ymax = -0.02 + ysize_adu) +
+#annotation_custom(hke, xmin = -0.12, xmax = -0.12 + xsize_adu, 
+#		      ymin = -0.02, ymax = -0.02 + ysize_adu) +
+# hake juvenile
+#annotation_custom(hke, xmin = -0.09, xmax = -0.09 + xsize_juv,
+#		      ymin = 0.07, ymax = 0.07 + ysize_juv) +
+# megrim adult
+#annotation_custom(meg, xmin = -0.08, xmax = -0.08 + xsize_adu, 
+#		      ymin = 0.3, ymax = 0.3 + ysize_adu) +
+# megrim juvenile
+#annotation_custom(meg, xmin = -0.1, xmax=  -0.1 + xsize_juv, 
+#		      ymin = 0.4 , ymax= 0.4 + ysize_juv) +
+# bud adult
+#annotation_custom(bud, xmin = 0.09, xmax = 0.09 + xsize_adu, 
+#		      ymin = 0.15, ymax = 0.15 + ysize_adu) +
+# bud juvenile
+#annotation_custom(bud, xmin = 0.07, xmax = 0.07 + xsize_juv, 
+#		      ymin = 0.28, ymax = 0.28 + ysize_juv) +
+# pis adult
+#annotation_custom(pisc, xmin = 0.05, xmax = 0.05 + xsize_adu,
+#		      ymin = 0.07, ymax = 0.07 + ysize_adu) +
+# pis juvenile
+#annotation_custom(pisc, xmin = -0.12, xmax = -0.12 + xsize_juv, 
+#		      ymin = 0.12, ymax = 0.12 + ysize_juv) +
+# plaice adult
+#annotation_custom(ple, xmin = -0.4, xmax = -0.4  + xsize_adu, 
+#		      ymin = 0.3, ymax = 0.3 + ysize_adu) + 
+# plaice juvenile
+#annotation_custom(ple, xmin = -0.5, xmax = -0.5 + xsize_juv, 
+#		      ymin = 0.45, ymax = 0.4 + ysize_juv) + 
+# sole adult
+#annotation_custom(sol, xmin = -0.4, xmax = -0.4 + xsize_adu, 
+#		      ymin = 0.1, ymax = 0.1 + ysize_adu) + 
+# sole juvenile
+#annotation_custom(sol, xmin = -0.3, xmax = -0.3 + xsize_juv, 
+#		      ymin = 0.08, ymax = 0.08 + ysize_juv)  
+
+#plot_grid(g1,g2, label
+g2b <-  b2  + geom_segment(data = LinesDFEp2[rownames(LinesDFEp2) %in% dep,], aes(x = x1, xend = x2, y = y1, yend = y2)) + 
+#	geom_text(aes(label = rownames(LinesDFEp1))) #+
+# cod adult
+#annotation_custom(cod, xmin = -0.18, xmax = -0.18  + xsize_adu, 
+#		      ymin = -0.15, ymax = -0.15 + ysize_adu) + 
+# cod juvenile
+#annotation_custom(cod, xmin = -0.26, xmax = -0.26 + xsize_juv, 
+#		      ymin = -0.16, ymax = -0.16 + ysize_juv) +
+# haddock adult
+#annotation_custom(had, xmin = -0.6, xmax = -0.6 + xsize_adu, 
+#		      ymin = -0.28, ymax = -0.28 + ysize_adu) + 
+# haddock juvenile
+#annotation_custom(had, xmin = -0.82, xmax= -0.82 + xsize_juv, 
+#		      ymin = -0.05, ymax= -0.05 + ysize_juv) + 
+# whiting adult 
+#annotation_custom(whg, xmin = -0.8 , xmax = -0.8 + xsize_adu, 
+#		      ymin = -0.2, ymax = -0.2 + ysize_adu) +
+# whiting juvenile
+#annotation_custom(whg, xmin = -0.7 , xmax = -0.7 + xsize_juv, 
+#		      ymin = 0.03, ymax = 0.03 + ysize_juv) +
+# hake adult
+#annotation_custom(hke, xmin = -0.12, xmax = -0.12 + xsize_adu, 
+#		      ymin = -0.02, ymax = -0.02 + ysize_adu) +
 # hake juvenile
 annotation_custom(hke, xmin = -0.09, xmax = -0.09 + xsize_juv,
 		      ymin = 0.07, ymax = 0.07 + ysize_juv) +
@@ -275,7 +449,65 @@ annotation_custom(pisc, xmin = 0.05, xmax = 0.05 + xsize_adu,
 		      ymin = 0.07, ymax = 0.07 + ysize_adu) +
 # pis juvenile
 annotation_custom(pisc, xmin = -0.12, xmax = -0.12 + xsize_juv, 
-		      ymin = 0.12, ymax = 0.12 + ysize_juv) +
+		      ymin = 0.12, ymax = 0.12 + ysize_juv)# +
+# plaice adult
+#annotation_custom(ple, xmin = -0.4, xmax = -0.4  + xsize_adu, 
+#		      ymin = 0.3, ymax = 0.3 + ysize_adu) + 
+## plaice juvenile
+#annotation_custom(ple, xmin = -0.5, xmax = -0.5 + xsize_juv, 
+#		      ymin = 0.45, ymax = 0.4 + ysize_juv) + 
+# sole adult
+#annotation_custom(sol, xmin = -0.4, xmax = -0.4 + xsize_adu, 
+#		      ymin = 0.1, ymax = 0.1 + ysize_adu) + 
+# sole juvenile
+#annotation_custom(sol, xmin = -0.3, xmax = -0.3 + xsize_juv, 
+#		      ymin = 0.08, ymax = 0.08 + ysize_juv)  
+
+#plot_grid(g1,g2, label
+g2c <-  b2  + geom_segment(data = LinesDFEp2[rownames(LinesDFEp2) %in% fla,], aes(x = x1, xend = x2, y = y1, yend = y2)) + 
+#	geom_text(aes(label = rownames(LinesDFEp1))) #+
+# cod adult
+#annotation_custom(cod, xmin = -0.18, xmax = -0.18  + xsize_adu, 
+#		      ymin = -0.15, ymax = -0.15 + ysize_adu) + 
+# cod juvenile
+#annotation_custom(cod, xmin = -0.26, xmax = -0.26 + xsize_juv, 
+#		      ymin = -0.16, ymax = -0.16 + ysize_juv) +
+# haddock adult
+#annotation_custom(had, xmin = -0.6, xmax = -0.6 + xsize_adu, 
+#		      ymin = -0.28, ymax = -0.28 + ysize_adu) + 
+# haddock juvenile
+#annotation_custom(had, xmin = -0.82, xmax= -0.82 + xsize_juv, 
+#		      ymin = -0.05, ymax= -0.05 + ysize_juv) + 
+# whiting adult 
+#annotation_custom(whg, xmin = -0.8 , xmax = -0.8 + xsize_adu, 
+#		      ymin = -0.2, ymax = -0.2 + ysize_adu) +
+# whiting juvenile
+#annotation_custom(whg, xmin = -0.7 , xmax = -0.7 + xsize_juv, 
+#		      ymin = 0.03, ymax = 0.03 + ysize_juv) +
+# hake adult
+#annotation_custom(hke, xmin = -0.12, xmax = -0.12 + xsize_adu, 
+#		      ymin = -0.02, ymax = -0.02 + ysize_adu) +
+# hake juvenile
+#annotation_custom(hke, xmin = -0.09, xmax = -0.09 + xsize_juv,
+#		      ymin = 0.07, ymax = 0.07 + ysize_juv) +
+# megrim adult
+#annotation_custom(meg, xmin = -0.08, xmax = -0.08 + xsize_adu, 
+#		      ymin = 0.3, ymax = 0.3 + ysize_adu) +
+# megrim juvenile
+#annotation_custom(meg, xmin = -0.1, xmax=  -0.1 + xsize_juv, 
+#		      ymin = 0.4 , ymax= 0.4 + ysize_juv) +
+# bud adult
+#annotation_custom(bud, xmin = 0.09, xmax = 0.09 + xsize_adu, 
+#		      ymin = 0.15, ymax = 0.15 + ysize_adu) +
+# bud juvenile
+#annotation_custom(bud, xmin = 0.07, xmax = 0.07 + xsize_juv, 
+#		      ymin = 0.28, ymax = 0.28 + ysize_juv) +
+# pis adult
+#annotation_custom(pisc, xmin = 0.05, xmax = 0.05 + xsize_adu,
+#		      ymin = 0.07, ymax = 0.07 + ysize_adu) +
+# pis juvenile
+#annotation_custom(pisc, xmin = -0.12, xmax = -0.12 + xsize_juv, 
+#		      ymin = 0.12, ymax = 0.12 + ysize_juv) +
 # plaice adult
 annotation_custom(ple, xmin = -0.4, xmax = -0.4  + xsize_adu, 
 		      ymin = 0.3, ymax = 0.3 + ysize_adu) + 
@@ -316,18 +548,34 @@ leg <- ggplot(data.frame(x = rep(0,1), y = rep(0,1)), aes(x= x, y = y))  + xlim(
 			  ymin = 0.01, ymax = 0.01 + ysize_adu) + geom_text(x = 0.2, y = 0.1, label = "sole", size = 4)  +
 	      xlab("") + ylab("") + theme_void()
 
-plot_grid(g1,g2,leg, ncol = 3, rel_widths =c(8,8,3),  labels = c('(a) Factor loading for spatio-temporal encounter probability',
-			    '(b) Factor loading for spatio-temporal catch rates',''), hjust = -0.15, vjust = 2)
+#plot_grid(g1,g2,leg, ncol = 3, rel_widths =c(8,8,3),  labels = c('(a) Factor loading for spatio-temporal encounter probability',
+#			    '(b) Factor loading for spatio-temporal catch rates',''), hjust = -0.15, vjust = 2)
 #ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTemp.png'), width = 16, height = 8)
 
 
 #### END ###
+print(b1)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempEncBase.png'), width = 8, height = 8)
 
-print(g1)
-ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempEnc.png'), width = 8, height = 8)
+print(g1a)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempEnc1.png'), width = 8, height = 8)
+print(g1b)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempEnc2.png'), width = 8, height = 8)
+print(g1c)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempEnc3.png'), width = 8, height = 8)
 
-print(g2)
-ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempDen.png'), width = 8, height = 8)
+
+print(b2)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempDenBase.png'), width = 8, height = 8)
+
+print(g2a)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempDen1.png'), width = 8, height = 8)
+print(g2b)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempDen2.png'), width = 8, height = 8)
+print(g2c)
+ggsave(file =  file.path('..', 'figures', 'Figure 3 - PCAstyle_Plots_SpatioTempDen3.png'), width = 8, height = 8)
+
+
 
 leg
 ggsave(file =  file.path('..', 'figures', 'Legend.png'), width = 4, height = 10)

@@ -8,7 +8,7 @@
 library(VAST)
 
 run <- '2017-06-16_M1'
-load(file = file.path('..', '..', '..','results', run, 'Save.RData'))
+load(file = file.path('..','..', '..', '..','results', run, 'Save.RData'))
 
 an <- as.numeric
 DF <- Save$Data_Geostat
@@ -56,7 +56,7 @@ colnames(Omega1_sf)[1:9] <- colnames(Omega2_sf)[1:9] <- paste("factor",1:9, sep 
 ######################
 
 ## Read in Spatial List
-load(file.path('..', '..', '..','results', 'CovariatesAtKnot.RData'))
+load(file.path('..','..', '..', '..','results', 'CovariatesAtKnot.RData'))
 
 MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List"=Extrapolation_List )
 
@@ -96,13 +96,25 @@ cor(O1$factor_3, log(abs(O1$Depth)))
 
 # Relationship with habitat type
 library(ggplot2); library(cowplot)
-p1 <- ggplot(data = O1, aes(x = Habitat, y = factor_1)) + geom_boxplot()
-p2 <- ggplot(data = O1, aes(x = Habitat, y = log(abs(Depth)))) + geom_boxplot()
+library(ggthemes)
+p1 <- ggplot(data = O1, aes(x = log(abs(Depth)), y = factor_1)) + geom_point() + 
+	geom_smooth(method = 'lm') + xlab("log(Depth)") + ylab("factor 1 score") +
+	ggtitle('Spatial encounter probability adjusted R2 = 0.72') 
+p2 <- ggplot(data = O1, aes(x = Habitat, y = factor_1)) + geom_boxplot() + 
+	xlab("Substrate type") + ylab("factor 1 score") + theme(axis.text.x = element_text(angle = -45, hjust = 0)) +
+	ggtitle('Spatial encounter probability') 
 
-plot_grid(p1, p2, ncol = 1)
+print(p1)
+ggsave(file = 'Factor1_DepthO1.png', width = 12, height = 8)
 
-summary(aov(O1$factor_1 ~ O1$Habitat))
-coefficients(aov(O1$factor_1 ~ O1$Habitat))
+print(p2)
+ggsave(file = 'Factor1_HabitatO1.png', width = 12, height = 8)
+
+
+#plot_grid(p1, p2, ncol = 1)
+
+#summary(aov(O1$factor_1 ~ O1$Habitat))
+#coefficients(aov(O1$factor_1 ~ O1$Habitat))
 
 ## Hows about a Random Forest classification tree to look at covariate
 ## contribution to variance
@@ -125,6 +137,22 @@ cor(O2$factor_1, log(abs(O2$Depth)))
 cor.test(O2$factor_1, log(abs(O2$Depth)))
 cor(O2$factor_2, log(abs(O2$Depth)))
 cor(O2$factor_3, log(abs(O2$Depth)))
+
+# Relationship with habitat type
+p1 <- ggplot(data = O2, aes(x = log(abs(Depth)), y = factor_1)) + geom_point() + 
+	geom_smooth(method = 'lm') + xlab("log(Depth)") + ylab("factor 1 score") +
+	ggtitle("Spatial densit adjusted R2 = 0.51") 
+p2 <- ggplot(data = O2, aes(x = Habitat, y = factor_1)) + geom_boxplot() + 
+	xlab("Substrate type") + ylab("factor 1 score") + theme(axis.text.x = element_text(angle = -45, hjust = 0)) +
+	ggtitle("Spatial density") 
+
+print(p1)
+ggsave(file = 'Factor1_DepthO2.png', width = 12, height = 8)
+
+print(p2)
+ggsave(file = 'Factor1_HabitatO2.png', width = 12, height = 8)
+
+
 
 fit1 <- randomForest(O2$factor_1 ~ log(abs(O2$Depth)) + O2$Habitat)
 print(fit1) # view results 
@@ -150,10 +178,12 @@ colnames(Epsilon1_sf) <- c("knot", "factor", "year", "value")
 Epsilon1_sf <- Epsilon1_sf[Epsilon1_sf$knot %in% 1:250,]
 
 ## Load in the temperature data
-load(file.path('..', '..', '..','data', 'Covariates' , 'YearlyMeanandCumSumSSTatKnot.RData'))
+load(file.path('..','..', '..', '..','data', 'Covariates' , 'YearlyMeanandCumSumSSTatKnot.RData'))
 
 
-ggplot(Temps, aes(x = Year, y = TempCumSum)) + geom_line(aes(colour = factor(knot))) + ylim(2000,4000)
+print(ggplot(Temps, aes(x = Year, y = TempMean)) + geom_line(aes(colour = factor(knot)))  +
+	theme(legend.position = "none") + ylab("T degrees C") + xlab(""))
+ggsave('Temp.png', width = 12, height = 4)
 
 Epsilon1_sf$TempMean <- Temps$TempMean[match(paste(Epsilon1_sf$knot, Epsilon1_sf$year),
 					     paste(Temps$knot, Temps$Year))]
@@ -163,7 +193,12 @@ Epsilon1_sf$TempCumSum <- Temps$TempCumSum[match(paste(Epsilon1_sf$knot, Epsilon
 
 library(ggplot2)
 
-ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point() 
+p3 <- ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point() +
+	geom_smooth(method = 'lm') + xlab("Mean temperature") + ylab("factor 1 score")
+
+print(p3)
+ggsave(file = 'Factor1_Temp.eps', height = 8, width = 12)
+
 
 EpF1 <- Epsilon1_sf[Epsilon1_sf$factor == 1,]
 EpF1 <- EpF1[!is.na(EpF1$TempMean),]

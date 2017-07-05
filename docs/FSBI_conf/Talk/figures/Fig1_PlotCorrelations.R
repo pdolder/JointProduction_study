@@ -76,18 +76,29 @@ cols_o2[rownames(cols_o2) == r, colnames(cols_o2)== c]  <- P_O2[rownames(P_O2) =
 cols_o2 <- ifelse(cols_o2 < 0.05, "grey20", "grey90")
 cols_o2 <- as.vector(cols_o2)
 
-
 setEPS()
-postscript(file = file.path("Figure 1 - Omega1_Correlations_blank.eps"), width = 16, height = 16)
+postscript(file = file.path("Figure 1 - Omega1_Correlations_norect.eps"), width = 8, height = 8)
 corrplot(COR_O1,  order="hclust" ,addCoef.col = cols_o1,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" , p.mat = P_O1, insig = 'blank',
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
+		  cl.pos = 'n', tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
 dev.off()
 
 
+setEPS()
+postscript(file = file.path("Figure 1 - Omega1_Correlations_blank.eps"), width = 8, height = 8)
+corrplot(COR_O1,  order="hclust" ,addCoef.col = cols_o1,
+	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" , p.mat = P_O1, insig = 'blank',
+		  cl.pos = 'n', addrect = 3, rect.col = 'purple',tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
+dev.off()
 
-postscript(file = file.path("Figure 1 - Omega2_Correlations_blank.eps"), width = 16, height = 16)
+postscript(file = file.path("Figure 1 - Omega2_Correlations_norect.eps"), width = 8, height = 8)
 corrplot(COR_O2,  order="hclust", addCoef.col = cols_o2,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' , p.mat = P_O2, insig = 'blank', 
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
+		  cl.pos = 'n', tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
+dev.off()
+
+postscript(file = file.path("Figure 1 - Omega2_Correlations_blank.eps"), width = 8, height = 8)
+corrplot(COR_O2,  order="hclust", addCoef.col = cols_o2,
+	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' , p.mat = P_O2, insig = 'blank', 
+		  cl.pos = 'n', addrect = 3, rect.col = 'purple',tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
 dev.off()

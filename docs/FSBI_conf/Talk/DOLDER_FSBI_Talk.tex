@@ -50,9 +50,8 @@
 
 \graphicspath{{figures/}}
 
+%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\AtBeginSection{\frame{\sectionpage}}
-
  
 \titlegraphic{
 	\includegraphics[width = 1.5cm]{MRFC_Bubble} \hspace*{4.6cm}
@@ -62,6 +61,8 @@
 	\includegraphics[width = 2.5cm]{cefas_fish_white_dark_blue_bkgd}
 	}
 
+%%\AtBeginSection{\frame{\sectionpage}}
+
 \begin{document}
 
 \addtocounter{framenumber}{-1}
@@ -70,7 +71,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \title{Using spatio-temporal population models to inform mixed-fishery management}
-
 
 \author{Paul Dolder}
 \author[shortname]{Paul J. Dolder, \inst{1,2} \and 
@@ -93,38 +93,74 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\tableofcontents
-\end{frame}
 
 \section{Background}
 \subsection{Blah}
 \begin{frame}{Scene setting}
 
-	\begin{itemize}
-		\item Most of the worlds fisheries are mixed-fisheries (i.e more
-			than one species together).
-		\item Fish populations are heterogeneously distributed in space
-			and time.
-		\item Problem for fisheries management if...
-		\item Increased interest is spatio-temporal avoidance and
-			dynamics and the fisheries
-	\end{itemize}
+\begin{columns}
 	
+	
+\column{0.3\paperwidth}
+\vspace{-2cm}
+\includegraphics[height=3cm, width=4cm]{techInteractions}\\ 
+\includegraphics[height=3cm, width=4cm]{discarding} 
+
+\column{0.7\paperwidth}
+
+\begin{itemize}
+	\small	
+	\setlength\itemsep{1em}
+	\pause
+	\item Mixed fisheries, where more than one species are caught together,
+		are the main type of marine fishery worldwide. \pause
+	\item In the EU where fisheries are managed by single 'stock' quotas,
+		mixed fisheries have led to the overexploitation of weaker
+		stocks, where fishing continues for healthier fisheries. \pause
+	\item As the EU moves towards a 'landings obligation' - all fish will
+		caught count against quota. \pause
+	\item Fish populations are heterogeneously distributed in space and
+		time.  \pause
+	\item Increased interest is spatio-temporal dynamics to see how spatial
+		measures can contribute to sustainable fisheries. 
+\end{itemize}
+	
+\end{columns}
+
 \end{frame}
 
-\begin{frame}{Motive}
-	\begin{itemize}
-		\item Want to understand how space can be used to separate
-			catches in highly mixed fisheries.
-		\item Developments in geostatistical methods for analysing
-			catch data which is often...problems 
-		\item Provide insight into how far spatial measures and
-			avoidance can go to improving sustainability of mixed
-			fisheries.
-	\end{itemize}
+\begin{frame}{Motivation behind work}
+
+\begin{columns}
+\column{0.4\paperwidth}
+\includegraphics[width  = \linewidth]{Irish_catch_comp}
+\\
+\tiny
+\hspace{0.2cm}
+\textit{Gerritsen et al 129-130 (2012). Fisheries Research} 
+\column{0.6\paperwidth}
+\includegraphics[width  = \linewidth]{All_species_finescale}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Motivation behind work}
 	
-	\includegraphics[width=0.5\linewidth]{AreaMap}
+\begin{itemize}
+\small	
+\setlength\itemsep{1em}
+
+	\item We wanted to understand how space can be used to separate catches
+		of different stocks in highly mixed fisheries. \pause
+	\item There are difficulties in combining different sources of data in
+		fisheries modelling: collected for different purposes,
+		different temporal and spatial coverage. \pause
+	\item Needed a coherent framework: looked to developments in
+		geostatistical methods, particularly applied to the types of
+		data we have. \pause
+	\item Provide insight into how far spatial measures and avoidance can
+		go to improving sustainability of mixed fisheries.
+\end{itemize}
 
 \end{frame}
 
@@ -136,7 +172,8 @@
 
 \begin{frame}
 
-Four key components:
+Modelling framework:
+\pause
 
 \begin{enumerate}
 	\small
@@ -144,13 +181,13 @@ Four key components:
 
 	\item Joint Dynamic Species Distribution Model (JDSDM) able to take
 		account of latent (unobserved) drivers which affect species
-		distribution and density for one or more species, 
-	\item separate modelling of encounter probability and positive catch
-		rates (so called 'delta' and 'hurdle' models), 
+		distribution and density for one or more species, \pause
 	\item the use of Gaussian Markov Random Fields (GMRFs) to model the
 		variation in probability of occurrence and density as a
 		three-dimensional multivariate process (latitude, longitude and
-		time) 
+		time) \pause
+	\item separate modelling of encounter probability and positive catch
+		rates (so called 'delta' and 'hurdle' models),  \pause
 	\item set in a mixed modelling framework allowing the incorporation of
 		both systematic (fixed) effects and random effects. 
 
@@ -159,54 +196,96 @@ Four key components:
 \end{frame}
 
 
-\begin{frame}{Factor analysis}
+%\begin{frame}{Factor analysis}
 
-	Simple explanation - use simple figures / diagrams
+%	Simple explanation - use simple figures / diagrams
 	
-	Reduces complexity of the problem - explain trends as a combination of
-	factors (latent variables)
+%	Reduces complexity of the problem - explain trends as a combination of
+%factors (latent variables)
 
-	Can provide insight to the community dynamics
-
-	
-\end{frame}
-
-\begin{frame}{Gaussian Random Fields}
-
-	Tobler's law - things closer together are more similar.
-
-	Such relationships can provide information for poorly sampled species
-	through inference of their relationships
-
-\centering
-\includegraphics[width=0.5\linewidth]{SpatialDataAndKnots}
-
-\end{frame}
-
-\begin{frame}{delta-GLMM and covariates}
-
-Surveys often are not coordinated, inconsistent design - need to take account
-of these differences.
-
-Can take account of both fixed effects (e.g. gear) and random effects in a
-mixed modelling framework.
-
-\centering
-\includegraphics[width=0.5\linewidth]{"Suppl - QEstimatesALL"}
+%Can provide insight to the community dynamics
 
 	
-\end{frame}
+%\end{frame}
+
+%\begin{frame}{Gaussian Random Fields}
+
+%	Tobler's law - "Everything is related to everything else, but near
+%	things are more related than distant things (Tobler, 1970).
+
+%	Such relationships can provide information for poorly sampled species
+%	through inference of their relationships
+
+%	Again, include simple diagrammatic example - take people through it!
+
+
+%\end{frame}
+
+%\begin{frame}{delta-GLMM and covariates}
+
+%Surveys often are not coordinated, inconsistent design - need to take account
+%of these differences.
+
+%Can take account of both fixed effects (e.g. gear) and random effects in a
+%mixed modelling framework.
+
+	
+%\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Data}
 \subsection{Blah}
-\begin{frame}
-	
-\includegraphics[width=0.5\linewidth]{AreaMap}
-\includegraphics[width = 0.1\linewidth]{"Legend"}
 
+\begin{frame}{}
+
+\centering
+\includegraphics[width=\linewidth]{AreaMap}
+
+\end{frame}
+
+\begin{frame}{Survey data}
+
+\centering
+\includegraphics[width=1\linewidth]{Survey_locations-1}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{table}[!htb]
+	\tiny
+	\center
+	\begin{tabular}{ p{1.5cm} p{3cm} p{2cm} p{1.5cm} }
+		\hline
+		Survey code    & Name 	& Gear & Temporal extent \\
+		\hline
+		CEXP / IE-IGFS & Celtic Explorer (IE)   & Otter trawl & 2003 - 2015 \\
+		CARLHELMAR     & Carlhelmar (UK)	& Commercial beam trawl & 1989 - 2013 \\
+		NWGFS          & North West groundfish survey (UK) & Beam trawl & 1988 - 2015 \\
+		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
+		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
+		THA2 / EVHOE    & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
+		WCGFS          & Wstern channel groundfish survey (UK) & Otter
+		trawl (Portuguese high headline) & 1982 - 2004 \\
+		\hline
+	\end{tabular}
+	
+\end{table}
+
+\includegraphics[width=0.6\linewidth]{Survey_effort_by_year-1}
+\includegraphics[width=0.4\linewidth]{cefas_endeavour}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{columns}
+\column{0.3\linewidth}
+\includegraphics[width = \linewidth]{"Legend"}
+
+\column{0.8\linewidth}
 \begin{table}[!htb]
 	\tiny
 	\center
@@ -228,60 +307,28 @@ mixed modelling framework.
 		whg          & Atlantic whiting         & \textit{Merlangius merlangus} & 27 \\
 		\hline
 		\end{tabular}
+		*Monkfish species estimated based on a 500g minimum marketing weight
+
 
 \end{table}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Spatial fields}
+\centering
+\includegraphics[width=0.9\paperwidth]{SpatialDataAndKnotsLand}
 \end{frame}
 
 
 \begin{frame}
-
-\begin{table}[!htb]
-	\tiny
-	\center
-	\begin{tabular}{ p{1.5cm} p{3cm} p{2cm} p{1.5cm} }
-		\hline
-		Survey code    & Name 	& Gear & Temporal extent \\
-		\hline
-		CEXP / IE-IGFS & Celtic Explorer (IE)   & Otter trawl & 2003 - 2015 \\
-		CARLHELMAR     & Carlhelmar (UK)	& Commercial beam trawl & 1989 - 2013 \\
-		NWGFS          & North West groundfish survey (UK) & Beam trawl & 1988 - 2015 \\
-		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
-		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
-		THA2 / EVHOE    & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
-		WCGFS          & Wstern channel groundfish survey (UK) & Otter
-		trawl (Portuguese high headline) & 1982 - 2004 \\
-		\hline
-	\end{tabular}
-\end{table}
-
 \centering
-\includegraphics[width=0.5\linewidth]{Survey_effort_by_year-1}
+\includegraphics[width = \linewidth]{"time"}
 
 \end{frame}
-
-
-
-
 
 \section{Findings}
 \subsection{Blah}
-
-\begin{frame}{Spatial Encounter correlations}
-
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega1_Correlations_blank"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-
-	
-\end{frame}
-
-\begin{frame}{Spatial density correlations}
-
-\centering
-\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega2_Correlations_blank"}
-\includegraphics[width = 0.2\linewidth]{"Legend"}
-
-\end{frame}
 
 \begin{frame}
 	What is driving these associations ?
@@ -296,39 +343,145 @@ mixed modelling framework.
 	
 \end{frame}
 
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.4\linewidth]{"Factor1_DepthO1"}
+\includegraphics[width = 0.5\linewidth]{"Depth"} \\
+\includegraphics[width = 0.4\linewidth]{"Factor1_HabitatO1"}
+\includegraphics[width = 0.5\linewidth]{"Substrate"}
+
+\begin{table}
+	\begin{tabular}{p{1.5cm} p{1cm} p{1cm} p{2cm}}
+		\hline
+		Parameter & Variable & Factor & Correlation \\
+		\hline
+		Encounter prob & Depth  & 1 & -0.85 (-0.88 to -0.81) \\
+		Density & Depth & 1 & -0.71 (-0.77 to -0.65) \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\tiny
+Random forest assigned encounter prob variance 80 \% to depth and habitat, 86 \% of this to
+depth. 62 \% of density variability....81 \% to depth.
+
+\end{frame}
+
 \begin{frame}
         What happens when we consider how they change over time ?	
 \end{frame}
 
 \begin{frame}{Spatial factor analysis}
-
 \centering
 \includegraphics[width = 0.6\linewidth]{"Suppl - SpatioTempLoadingsEpsilon1"}
-	
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.6\linewidth]{"Factor1_Temp"}
 \end{frame}
 
 
-\begin{frame}{Spatio-temporal factor loadings - encounter}
+\begin{frame}{}
 
 \centering
-\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc"}
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEncBase"}
 \includegraphics[width = 0.2\linewidth]{"Legend"}
 
 \end{frame}
 
-\begin{frame}{Spatio-temporal factor loadings - density}
+\begin{frame}{}
+
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc1"} 
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc2"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc3"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempEnc"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDenBase"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen1"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen2"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen3"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
 
 \centering
 \includegraphics[width = 0.7\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTempDen"}
 \includegraphics[width = 0.2\linewidth]{"Legend"}
-
-
 \end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega1_Correlations_norect"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega1_Correlations_blank"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega2_Correlations_norect"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
+\begin{frame}{}
+\centering
+\includegraphics[width = 0.7\linewidth]{"Figure 1 - Omega2_Correlations_blank"}
+\includegraphics[width = 0.2\linewidth]{"Legend"}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implications}
 \subsection{Blah}
+
+\begin{frame}{Mixed fisheries}
+	
+Come back to my original point about implications for mixed fisheries!!!
+
+\end{frame}
 
 \begin{frame}{Mixed fisheries}
 	
@@ -338,10 +491,173 @@ mixed modelling framework.
 \end{frame}
 
 
+\section{Conclusions}
+\subsection{Blah}
+
 \begin{frame}
 	Key take home messages
 	Whats next etc...
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Back up slides: equations etc...
+
+\section{Add. slides}
+\subsection{Blah}
+\begin{frame}{Methodology summary}
+
+\begin{itemize}
+	\small
+	\setlength\itemsep{2em}
+
+	\item Mesh construction: A spatial grid is constructed based on optimal
+		clustering of the available point data using a k-means
+		algorithm to provide \textit{n} knots representing the gaussian
+		random fields used to derive spatial encounter probability and
+		density estimates.
+
+	\item  Associations among species / species-groups are modelled through
+		implementing a factor analysis decomposition to define a
+		function for each factor that returns a positive or negative
+		association of one or more species with any location. Thus
+		log-density of any species can then be described as a linear
+		combination of factors:
+		\begin{equation}
+			\theta_{p}(s,t) = \sum_{j=1}^{n_{j}}
+			L_{p,j}\psi_{j}(s,t) +\sum_{k=1}^{n_{k}}
+			\gamma_{k,p}\chi_{k}(s,t)
+		\end{equation}
+	
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Methodology summary}
+	\begin{itemize}
+	\setlength\itemsep{2em}
+	\small
+
+	\item Spatio-temporal encounter probability and positive catch rates
+		are modelled separately with spatio-temporal encounter
+		probability modelled using a logit-link linear predictor;
+		\begin{equation}
+			logit[p(s_{i},p_{i},t_{i})] = \gamma_{p}(p_{i},t_{i}) +
+			\varepsilon_{p}(s_{i},p_{i},t_{i}) + \delta_{p}(p_{i},
+			v_{i})
+		\end{equation}
+
+		and positive catch rates modelling using a gamma- distribution
+		\begin{equation}
+			gamma[r(s_{i},p_{i},t_{i})] = \gamma_{p}(p_{i},t_{i}) +
+			\varepsilon_{p}(s_{i},p_{i},t_{i}) + \delta_{p}(p_{i},
+			v_{i})
+		\end{equation}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Methodology summary}
+	\begin{itemize}
+	\setlength\itemsep{2em}
+	\small
+
+	\item The spatio-temporal variation is modelled using a Gaussian
+		Markov Random Field (GMRF) where catch data in nearby locations
+		can be correlated, allowing inference about poorly sampled
+		locations. 
+	\item Specify a probability distribution for spatio-temporal
+		variation in both encounter probability and positive catch rate, 
+		$\varepsilon_{*}(s,p,t)$, with a three-dimensional multivariate 
+		normal distribution so that:
+		\begin{equation}
+			vec[\mathbf{E}_{*}(t)] \sim MVN(0,\mathbf{R}_{*} \otimes
+			\mathbf{V}_{{\varepsilon}{*}})
+		\end{equation}
+	\end{itemize}
+	\centering
+	\includegraphics[width=0.5\linewidth]{Matern}
+
+\end{frame}
+
+\begin{frame}{Methodology summary}
+	\begin{itemize}
+	\setlength\itemsep{2em}
+	\small
+
+	\item Vessels as either fixed or random effect, as well as predictive
+		covariates (e.g. habitat quality, depth, temperature etc..) 
+	\item Parameter estimation through Laplace approximation of the
+		marginal likelihood using Template Model Builder (TMB).
+
+	\item The index of abundance for species $p$ can then be derived from
+		the summation of the spatio-temporal density estimates. 
+		
+		\begin{equation} I(p,t) =
+			\sum_{s=1}^{n_{s}} a(s) \cdot
+			logit^{-1}[\gamma_{p}(p,t) + \varepsilon_{p}(s,p,t)]
+			\cdot exp[\gamma_{r}(p,t) + \varepsilon_{r}(s,p,t)]
+		\end{equation}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Setup}
+
+\begin{itemize}
+	\setlength\itemsep{2em}
+	\small
+	\item The data was constrained to 1990 - 2015, reflecting the period
+		during which the most spatially consistent data were available.
+	\item The GMRF was set to 250 knots based on a compromise between
+		spatial disaggregation and computational efficiency.
+	\item The number of factors for the factor analysis decomposition set
+		at nine (which explained \textgreater 95 \% of the variance in
+		the encounter probability and density).
+\end{itemize}
+
+\begin{table}[!htb]
+	\tiny
+	\center
+	\begin{tabular}{ p{1cm} p{2cm} p{2cm} p{1cm} p{1cm} }
+		\hline
+		Model & Catchability covariates & Density covariates & No Fixed
+		effects & No Random effects \\
+		\hline
+		M0 & Vessel as Random effect & None  & 1462 & 129276 \\
+		M1 & Vessel*Species group as fixed effect & None & 1674 & 129276   \\
+		M2 & Vessel*Species group as fixed effect & Habitat and depth
+		as fixed covariates & 1688 & 129276 \\ 
+		\hline
+	\end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}
+\centering
+\includegraphics[width=0.5\paperwidth]{"Suppl - QEstimatesALL"}
+
+\end{frame}
+
+\begin{frame}{Q-Q plots}
+\centering
+\includegraphics[width=0.47\linewidth]{Diag--Encounter_prob}
+\includegraphics[width=0.5\linewidth]{Q-Q_plot}
+
+\end{frame}
+
+\begin{frame}{Spatial correlation}
+	\centering
+\includegraphics[width=0.5\linewidth]{Aniso}
+\end{frame}
+
+\begin{frame}{Spatial correlation}
+Slide of references!
+Include link to Jim's github
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
