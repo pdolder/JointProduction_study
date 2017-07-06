@@ -97,10 +97,10 @@ cor(O1$factor_3, log(abs(O1$Depth)))
 # Relationship with habitat type
 library(ggplot2); library(cowplot)
 library(ggthemes)
-p1 <- ggplot(data = O1, aes(x = log(abs(Depth)), y = factor_1)) + geom_point() + 
-	geom_smooth(method = 'lm') + xlab("log(Depth)") + ylab("factor 1 score") +
+p1 <- ggplot(data = O1, aes(x = log(abs(Depth)), y = factor_1)) + geom_point(size = 2) + 
+	geom_smooth(method = 'lm', size = 2) + xlab("log(Depth)") + ylab("factor 1 score") +
 	ggtitle('Spatial encounter probability adjusted R2 = 0.72') 
-p2 <- ggplot(data = O1, aes(x = Habitat, y = factor_1)) + geom_boxplot() + 
+p2 <- ggplot(data = O1, aes(x = Habitat, y = factor_1)) + geom_boxplot(size = 2) + 
 	xlab("Substrate type") + ylab("factor 1 score") + theme(axis.text.x = element_text(angle = -45, hjust = 0)) +
 	ggtitle('Spatial encounter probability') 
 
@@ -193,8 +193,8 @@ Epsilon1_sf$TempCumSum <- Temps$TempCumSum[match(paste(Epsilon1_sf$knot, Epsilon
 
 library(ggplot2)
 
-p3 <- ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point() +
-	geom_smooth(method = 'lm') + xlab("Mean temperature") + ylab("factor 1 score")
+p3 <- ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point(size = 2) +
+	geom_smooth(method = 'lm', size = 2) + xlab("Mean temperature") + ylab("factor 1 score")
 
 print(p3)
 ggsave(file = 'Factor1_Temp.eps', height = 8, width = 12)
