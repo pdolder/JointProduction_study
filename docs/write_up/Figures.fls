@@ -82,16 +82,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT figures/Figure 1 - Omega1Omega2_Correlations_blank.png
-INPUT ./figures/Figure 1 - Omega1Omega2_Correlations_blank.png
-OUTPUT Figures.pdf
-INPUT ./figures/Figure 1 - Omega1Omega2_Correlations_blank.png
 INPUT figures/Figure 2 - SpatialFactorLoadingsOmega1Omega2.png
 INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1Omega2.png
+OUTPUT Figures.pdf
 INPUT ./figures/Figure 2 - SpatialFactorLoadingsOmega1Omega2.png
 INPUT figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png
 INPUT ./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png
+INPUT figures/Figure 1 - Omega1Omega2_Correlations_blank.png
+INPUT ./figures/Figure 1 - Omega1Omega2_Correlations_blank.png
+INPUT ./figures/Figure 1 - Omega1Omega2_Correlations_blank.png
 INPUT figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png
 INPUT ./figures/Figure 4 - DensityDifferencesFigureswithCC.png

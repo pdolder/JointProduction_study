@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1498476179 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1498476179
+["pdflatex"] 1499962312 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1499962502
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -29,6 +29,9 @@
   "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1454284088 9179 4cd3c5f593e63512893b8ac0123f1bd7 ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu" 1454284088 10900 d4e94223e6330199a3b8e8abe87fe6e1 ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def" 1454284088 7786 ea3c60942da10fcdcdb0bcbd1671de4e ""
+  "/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty" 1456094605 66233 8b81cfab95a1f8fc2f0f6c89415b087a ""
+  "/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty" 1456094605 64437 7aae26f62358cb5be7cae9d865fab5b8 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty" 1456094605 4562 7c66baa8431efe6fc61c7371f5691815 ""
   "/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty" 1317339792 42666 6fa770e3485520a6a5f2ea7d259c8f8d ""
   "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty" 1284422013 40502 e003406220954b0716679d7928aedd8a ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty" 1454284088 14337 b66dff1d80f6c21e70858a2b3c2d327d ""
@@ -47,8 +50,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "SupplementaryTablesandFigures.aux" 1498476179 1346 ca07b96a9ea1bcb0e439fe0d909fb471 ""
-  "SupplementaryTablesandFigures.tex" 1498476178 4532 da9dec04a87ceaa7ae1368d090a8f3b8 ""
+  "SupplementaryTablesandFigures.aux" 1499962313 2323 41c932a95af6a1acf6c6537629a6d98c ""
+  "SupplementaryTablesandFigures.tex" 1499962312 5689 4f62605dc8a08e4ccfe75bba292f4c21 ""
+  "figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
+  "figures/Factor1_DepthO1.png" 1499960449 260114 44cb00362964ec4e8633937a75edc2e7 ""
+  "figures/Factor1_DepthO2.png" 1499960449 253923 b7927e9e593518854b5936467af960ac ""
+  "figures/Factor1_HabitatO1.png" 1499960523 83478 6bab4eaf6797e52d0de5f8c773b18e48 ""
+  "figures/Factor1_HabitatO2.png" 1499960523 82909 bb22aaad084138656a3dfe7c9af016fa ""
+  "figures/Substrate.png" 1499960631 4168073 2831fd1b2701ed8208a493377f55f51e ""
   "figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png" 1498214566 296969 58a8f6ef67eb23022bff6d0f46c9d69a ""
   "figures/Suppl - QEstimatesALL.png" 1497900592 309162 2a5e66197442c6ba8566772713ce4f33 ""
   "figures/Suppl - SpatioTempLoadingsEpsilon1.png" 1498475530 1950479 de73eb8763d0c7a605334226b8231d20 ""

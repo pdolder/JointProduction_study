@@ -59,6 +59,12 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 INPUT SupplementaryTablesandFigures.aux
 INPUT SupplementaryTablesandFigures.aux
 OUTPUT SupplementaryTablesandFigures.aux
@@ -82,9 +88,30 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT figures/Factor1_DepthO1.png
+INPUT ./figures/Factor1_DepthO1.png
+OUTPUT SupplementaryTablesandFigures.pdf
+INPUT ./figures/Factor1_DepthO1.png
+INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT ./figures/Factor1_HabitatO1.png
+INPUT figures/Factor1_DepthO2.png
+INPUT ./figures/Factor1_DepthO2.png
+INPUT ./figures/Factor1_DepthO2.png
+INPUT figures/Factor1_HabitatO2.png
+INPUT ./figures/Factor1_HabitatO2.png
+INPUT ./figures/Factor1_HabitatO2.png
+INPUT figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT ./figures/Depth.png
+INPUT figures/Substrate.png
+INPUT ./figures/Substrate.png
+INPUT ./figures/Substrate.png
 INPUT figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
 INPUT ./figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
-OUTPUT SupplementaryTablesandFigures.pdf
 INPUT ./figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png
 INPUT figures/Suppl - SpatioTempLoadingsEpsilon1.png
 INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon1.png
@@ -95,9 +122,6 @@ INPUT ./figures/Suppl - SpatioTempLoadingsEpsilon2.png
 INPUT figures/Suppl - QEstimatesALL.png
 INPUT ./figures/Suppl - QEstimatesALL.png
 INPUT ./figures/Suppl - QEstimatesALL.png
-INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT SupplementaryTablesandFigures.aux

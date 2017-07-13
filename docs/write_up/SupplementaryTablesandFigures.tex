@@ -9,6 +9,7 @@
 \usepackage[hyphens]{url} % for breaking url's in the bib
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{subcaption}
 
 % cite is loaded from nature class
 \setlist{itemsep=1pt} % This controls spacing between items in the lists
@@ -39,9 +40,56 @@
 %% Figures %%
 
 \begin{figure}[!ht]
+	\label{fig:S1}
+	\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO1"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO1"}
+\end{subfigure}
+\caption{Left: Spatial Omega 1 correlated against Depth, Right: Omega 1
+	correlated against substrate type}
+
+\end{figure}
+
+%%
+
+\begin{figure}[!ht]
+	\label{fig:S2}
+	
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO2"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO2"}
+\end{subfigure}
+\caption{Left: Spatial Omega 2 correlated against Depth, Right: Omega 2
+	correlated against substrate type}
+
+\end{figure}
+
+
+\begin{figure}[!ht]
+	\label{fig:S3}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width = \linewidth]{"figures/Depth"}
+\end{subfigure}	
+	
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width = \linewidth]{"figures/Substrate"}
+\end{subfigure}
+\caption{Left: Depth, Right: Substrate assigned to each spatial knot}
+
+\end{figure}
+
+%%%%%%%%
+
+	
+
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[width = \linewidth]{"figures/Suppl - Epsilon1Epsilon2_Correlations_blank"}
-	\label{fig:S1}
+	\label{fig:S4}
 	\caption{Inter-species correlations for (a) spatio-temporal encounter
 		probability and b) spatio-temporal density.  Species-groups are
 		clustered into three groups based on a hierarchical clustering
@@ -53,7 +101,7 @@
 \begin{figure}
 \begin{center}
 	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon1"}
-	\label{fig:S2}
+	\label{fig:S5}
 	\caption{Spatial Loadings for first three factors every five years for
 	spatio-temporal encounter probability}
 	\end{center}
@@ -62,7 +110,7 @@
 \begin{figure}
 \begin{center}
 	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon2"}
-	\label{fig:S3}
+	\label{fig:S6}
 	\caption{Spatial Loadings for first three factors every five years for
 	spatio-temporal density probability}
 	\end{center}
@@ -71,7 +119,7 @@
 \begin{figure}
 \begin{center}
 	\includegraphics[width = 0.9\linewidth]{"figures/Suppl - QEstimatesALL"}
-	\label{fig:S4}
+	\label{fig:S7}
 	\caption{Fixed effect estimates for surveys for each species-group. Note
 	all values within a species-group are relative to the CEXP survey}
 	\end{center}
