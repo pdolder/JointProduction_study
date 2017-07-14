@@ -9,3 +9,7 @@
 *.png
 *.jpg
 *.pdf
+
+## re-include the pdfs from the write-up
+
+!/docs/write_up/*.pdf
