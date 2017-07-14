@@ -153,7 +153,8 @@ Epsilon1_sf <- Epsilon1_sf[Epsilon1_sf$knot %in% 1:250,]
 load(file.path('..', '..', '..','data', 'Covariates' , 'YearlyMeanandCumSumSSTatKnot.RData'))
 
 
-ggplot(Temps, aes(x = Year, y = TempCumSum)) + geom_line(aes(colour = factor(knot))) + ylim(2000,4000)
+p1 <- ggplot(Temps, aes(x = Year, y = TempCumSum)) + geom_line(aes(colour = factor(knot))) + ylim(2500,3500) + theme_classic()  + theme(legend.position = "none") +
+	ylab("Cumulative Temperature (May - November)") + xlab("Year" ) 
 
 Epsilon1_sf$TempMean <- Temps$TempMean[match(paste(Epsilon1_sf$knot, Epsilon1_sf$year),
 					     paste(Temps$knot, Temps$Year))]
@@ -161,9 +162,9 @@ Epsilon1_sf$TempMean <- Temps$TempMean[match(paste(Epsilon1_sf$knot, Epsilon1_sf
 Epsilon1_sf$TempCumSum <- Temps$TempCumSum[match(paste(Epsilon1_sf$knot, Epsilon1_sf$year),
 					     paste(Temps$knot, Temps$Year))]
 
-library(ggplot2)
 
-ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point() 
+p2 <- ggplot(Epsilon1_sf[Epsilon1_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point()  + geom_smooth(method = 'lm') + theme_classic() +
+	xlab("Mean Temp (Celsius)") + ylab("Factor loading") 
 
 EpF1 <- Epsilon1_sf[Epsilon1_sf$factor == 1,]
 EpF1 <- EpF1[!is.na(EpF1$TempMean),]
@@ -172,5 +173,34 @@ fit1 <- randomForest(EpF1$value ~ log(EpF1$TempCumSum))
 print(fit1) # view results 
 importance(fit1)
 
+##########################
+Epsilon2_sf   <- as.data.frame.table(Var_list$"Epsilon2"$Psi_rot)
+Epsilon2_sf$Var1 <- 1:266
+Epsilon2_sf$Var2 <- rep(1:9, each = 266)
+Epsilon2_sf$Var3 <- rep(1990:2015, each  = 266 * 9)
+colnames(Epsilon2_sf) <- c("knot", "factor", "year", "value")
 
+Epsilon2_sf <- Epsilon2_sf[Epsilon2_sf$knot %in% 1:250,]
+
+Epsilon2_sf$TempMean <- Temps$TempMean[match(paste(Epsilon2_sf$knot, Epsilon2_sf$year),
+					     paste(Temps$knot, Temps$Year))]
+
+Epsilon2_sf$TempCumSum <- Temps$TempCumSum[match(paste(Epsilon2_sf$knot, Epsilon2_sf$year),
+					     paste(Temps$knot, Temps$Year))]
+
+
+p3 <- ggplot(Epsilon2_sf[Epsilon2_sf$factor == 1,], aes(x = TempMean, y = value)) + geom_point()  + geom_smooth(method = 'lm') + theme_classic() +
+	xlab("Mean Temp (Celsius)") + ylab("Factor loading") 
+
+
+library(cowplot)
+plot_grid(p1,p2,p3, ncol = 1, 
+	  labels = c("(a) Temperature", 
+		     "(b) Enc prob", 
+		     "(c) Density" ))
+ggsave(file = file.path("..","figures","Suppl - TempAndFactors.png"), width = 6, height = 12)
+
+
+cor.test(Epsilon1_sf$value, Epsilon1_sf$TempMean)
+cor.test(Epsilon2_sf$value, Epsilon2_sf$TempMean)
 

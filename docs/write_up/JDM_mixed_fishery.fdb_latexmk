@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex JDM_mixed_fishery"] 1499962843 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1499963102
+["bibtex JDM_mixed_fishery"] 1500047244 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1500047245
   "/usr/share/texlive/texmf-dist/bibtex/bst/nature/naturemag.bst" 1136766823 34867 ae05936b307e5838449d1bb5fdbb2c19 ""
-  "JDM_mixed_fishery.aux" 1499963102 1403 b1ce2c97efadd443cfdf969b921dd8b9 ""
+  "JDM_mixed_fishery.aux" 1500047244 1684 f01becde874873b08843c24cb8bf5fb5 ""
   "JDM_mixed_fishery.bcf" 1497536026 89671 9ff848901bc9060916b9d6b209d301bb ""
-  "JSDM.bib" 1499955658 78938 44184cd456c9fc6e7508203d6529b42a ""
+  "JSDM.bib" 1500046764 99393 573795141147e691bb8a78b29f6ac106 ""
   (generated)
-  "JDM_mixed_fishery.blg"
   "JDM_mixed_fishery.bbl"
-["pdflatex"] 1499963102 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1499963102
+  "JDM_mixed_fishery.blg"
+["pdflatex"] 1500047244 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1500047245
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -41,6 +41,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb" 1136849748 35941 f27169cc74234d5bd5e4cca5abafaabb ""
@@ -105,12 +106,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "JDM_mixed_fishery.aux" 1499963102 1403 b1ce2c97efadd443cfdf969b921dd8b9 ""
-  "JDM_mixed_fishery.bbl" 1499962843 11132 7d62507a45f3e958b527f2839d4fd103 "bibtex JDM_mixed_fishery"
-  "JDM_mixed_fishery.tex" 1499963101 23322 bd6a91da8681037bf98fccf349e013c6 ""
+  "JDM_mixed_fishery.aux" 1500047244 1684 f01becde874873b08843c24cb8bf5fb5 ""
+  "JDM_mixed_fishery.bbl" 1500047244 13593 c47420ef234022187fc1f38a3d6b278e "bibtex JDM_mixed_fishery"
+  "JDM_mixed_fishery.tex" 1500047243 24531 6f34ec9e7be56be9e63630e74613b64a ""
   (generated)
-  "JDM_mixed_fishery.aux"
-  "JDM_mixed_fishery.pdf"
+  "JDM_mixed_fishery.run.xml"
   "JDM_mixed_fishery.bcf"
   "JDM_mixed_fishery.log"
-  "JDM_mixed_fishery.run.xml"
+  "JDM_mixed_fishery.pdf"
+  "JDM_mixed_fishery.aux"

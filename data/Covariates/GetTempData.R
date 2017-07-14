@@ -11,7 +11,7 @@ dat.type <- 'dec.dat'  ## Option for data type ##
 #################################################
 
 # file with multi-decadal aggregated data 
-decades <- c('1870-1900', '1901-1930', '1931-1960', '1961-1990', '1991-2003')
+decades <- c('1870-1900', '1901-1930', '1931-1960', '1961-1990', '1991-2003')[1]
 # files with month/yearly data 
 yrs     <- c(2004:2016)
 
@@ -120,14 +120,14 @@ save(flat, file = 'YearlyTempData.RData')
 if(dat.type == 'dec.dat') {
 
 #urls <-  urls[5] # 1991 - 2003 
-urls <-  urls[4] # 1961 - 1990 
+urls <-  urls[1] # 1961 - 1990 
 
 # number of rows to skip for each month records
 nrows   <- 180
 nmonths <- 12
 #nyears <-  length(1991:2003) 
 nyears <-  length(1961:1990) 
-start<-1
+start <-1
 skips <- seq(start, nrows * nmonths * nyears - nrows + start, l = nmonths * nyears) 
 
 ## Each year as a list
@@ -161,7 +161,7 @@ return(monthLst) # return the years data
 
 })
 
-yrs <- 1961:1990
+yrs <- substr(decades,1,4):c(as.numeric(substr(decades,6,9))-1)
 mnths <- 1:12
 names(HadDat[[1]]) <- paste(rep(yrs, each = 12), mnths, sep = '_')
 
@@ -196,7 +196,7 @@ save(flat, file = 'DecTempData1.RData')
 # -12,  2 Lon
 #  48, 52 Lat
 library(dplyr)
-flat <- filter(flat, Lat > -13, Lat < 3, Lon > 47, Lon < 53)
+flat2 <- filter(flat, Lat > -13, Lat < 3, Lon > 47, Lon < 53)
 
 #Dec1 <- flat
 #Dec2 <- flat
