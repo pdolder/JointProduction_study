@@ -35,6 +35,9 @@ Omega2_sf   <- apply(Var_list$"Omega2"$Psi_rot, 1:2, FUN = mean)
 Epsilon1_sf <- Var_list$"Epsilon1"$Psi_rot
 Epsilon2_sf <- Var_list$"Epsilon2"$Psi_rot
 
+
+
+
 ##############
 ## The map  ##
 ##############
@@ -100,6 +103,10 @@ Epsilon1_sf$Var2 <- Epsilon2_sf$Var2 <- rep(paste("factor", 1:9, sep = "_"), eac
 Epsilon1_sf$Var3 <- Epsilon2_sf$Var3 <- rep(1990:2015, each = 250 * 9)
 
 colnames(Epsilon1_sf) <- colnames(Epsilon2_sf) <- c('x2i','factor','year','value')
+
+## Save all spatio-temp
+Ep1 <- Epsilon1_sf
+Ep2 <- Epsilon2_sf
 
 ## Just the first 3 factors for the Epsilons and every 5 years, otherwise files are huge
 Epsilon1_sf <- filter(Epsilon1_sf, factor %in% paste("factor", 1:3, sep = "_"), year %in% seq(1990,2015, 5))
@@ -173,4 +180,13 @@ ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density')
 
 ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon2.png'), width = 8, height = 12)
 
+### Plot the temporal trends
+
+Ep1 <- filter(Ep1, factor %in% c(paste('factor', 1:3, sep = "_")))
+
+Ep1med <- Ep1 %>% group_by(factor, year) %>% summarise(value = median(value))
+
+ggplot(Ep1,aes(x = year, y = value)) + geom_line(colour = 'grey90', aes(group = x2i)) +
+	facet_wrap(~factor, ncol = 1) + geom_point(data = Ep1med, aes(x = year, y = value)) +
+	geom_line(data = Ep1med, aes(x = year, y = value))
 

@@ -86,6 +86,66 @@ grps <- data.frame(Factor_1 = rep(-1.1,3), Factor_2 = c(-0.9, -0.95, -1), group 
 #}
 
 
+## 3d scatterplot
+
+library(plot3D)
+
+
+## Omega1
+
+png(file.path('..','figures', 'test3dscatter.png'), width = 1600, height = 1600)
+scatter3D(x = PCA.DFs[['Omega1']][,'Factor_1'], 
+	  y = PCA.DFs[['Omega1']][,'Factor_2'], 
+	  z = PCA.DFs[['Omega1']][,'Factor_3'], 
+	  xlab = "Factor 1 (39.8 % of variance explained)", 
+	  ylab = "Factor 2 (16.7% of variance explained)", 
+	  zlab = "Factor 3 (xx % of variance explained)", col = 'grey', colkey = F, pch = 19)
+text3D(x = PCA.DFs[['Omega1']][,'Factor_1'], 
+       y = PCA.DFs[['Omega1']][,'Factor_2'], 
+       z = PCA.DFs[['Omega1']][,'Factor_3'], labels  = rownames(PCA.DFs[['Omega1']]), add = T, cex = 0.8)
+dev.off()
+
+
+## Omega2
+scatter3D(x = PCA.DFs[['Omega2']][,'Factor_1'], 
+	  y = PCA.DFs[['Omega2']][,'Factor_2'], 
+	  z = PCA.DFs[['Omega2']][,'Factor_3'], 
+	  xlab = "Factor 1", ylab = "Factor 2", zlab = "Factor 3", col = 'grey', colkey = F)
+text3D(x = PCA.DFs[['Omega2']][,'Factor_1'], 
+       y = PCA.DFs[['Omega2']][,'Factor_2'], 
+       z = PCA.DFs[['Omega2']][,'Factor_3'], labels  = rownames(PCA.DFs[['Omega2']]), add = T)
+
+
+## Epsilon1
+scatter3D(x = PCA.DFs[['Epsilon1']][,'Factor_1'], 
+	  y = PCA.DFs[['Epsilon1']][,'Factor_2'], 
+	  z = PCA.DFs[['Epsilon1']][,'Factor_3'],
+	  xlab = "Factor 1 (39.8 % of variance explained)", 
+	  ylab = "Factor 2 (16.7 % of variance explained)", 
+	  zlab = "Factor 3 (13.9 % of variance explained)", 
+	  col = 'grey', colkey = F)
+text3D(x = PCA.DFs[['Epsilon1']][,'Factor_1'], 
+       y = PCA.DFs[['Epsilon1']][,'Factor_2'], 
+       z = PCA.DFs[['Epsilon1']][,'Factor_3'], labels  = rownames(PCA.DFs[['Epsilon1']]), add = T)
+
+## Epsilon2
+
+png(file.path('..','figures', 'Epsilon2_3d.png'), width = 1600, height = 1600)
+scatter3D(x = PCA.DFs[['Epsilon2']][,'Factor_1'], 
+	  y = PCA.DFs[['Epsilon2']][,'Factor_2'], 
+	  z = PCA.DFs[['Epsilon2']][,'Factor_3'],  
+	  xlab = "Factor 1 (43.3 % of variance explained)", 
+	  ylab = "Factor 2 (13.9 % of variance explained)", 
+	  zlab = "Factor 3 (10.8 % of variance explained)",
+	  xlim = c(-1,0.5),
+	  ylim = c(-1,0.5),
+	  zlim = c(-1,0.5),
+	  col = 'grey', colkey = F, cex.lab = 2)
+text3D(x = PCA.DFs[['Epsilon2']][,'Factor_1'], 
+       y = PCA.DFs[['Epsilon2']][,'Factor_2'], 
+       z = PCA.DFs[['Epsilon2']][,'Factor_3'], labels  = rownames(PCA.DFs[['Epsilon2']]), add = T)
+dev.off()
+
 ## Now try with images
 library(png)
 library(gridGraphics)
@@ -163,7 +223,7 @@ LinesDFEp1$y2[rownames(LinesDFEp1) %in% c("bud_adu")] <- LinesDFEp1$y2[rownames(
 # Base plot with points
 b1 <- ggplot(PCA.DFs[['Epsilon1']], aes(x = Factor_1, y = Factor_2)) + geom_point()  +
 	expand_limits(y = c(-1,0.5), x = c(-1,0.5)) + 	geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + theme_bw() + 
-	xlab('Factor 1 (39.8 % variance explained)') + ylab('Factor 2 (16.7 % variance explained)') 
+	xlab('Factor 1 (39.8 % variance explained)') + ylab('Factor 2 (16.6 % variance explained)') 
 
 g1 <- b1  + geom_segment(data = LinesDFEp1, aes(x = x1, xend = x2, y = y1, yend = y2)) +
 #	geom_label(aes(label = rownames(LinesDFEp1)))# +
@@ -265,7 +325,7 @@ LinesDFEp2$y2[rownames(LinesDFEp2) %in% c("sol_juv")] <- LinesDFEp2$y2[rownames(
 # Base plot with points
 b2 <- ggplot(PCA.DFs[['Epsilon2']], aes(x = Factor_1, y = Factor_2)) + geom_point()  +
 	expand_limits(y = c(-1,0.5), x = c(-1,0.5)) + 	geom_vline(xintercept = 0) + geom_hline(yintercept = 0) + theme_bw() + 
-	xlab('Factor 1 (43.3 % variance explained)') + ylab('Factor 2 (13.9 % variance explained)')
+	xlab('Factor 1 (43.2 % variance explained)') + ylab('Factor 2 (14 % variance explained)')
 
 g2 <-  b2  + geom_segment(data = LinesDFEp2, aes(x = x1, xend = x2, y = y1, yend = y2)) + 
 #	geom_text(aes(label = rownames(LinesDFEp1))) #+
