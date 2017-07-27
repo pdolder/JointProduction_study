@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex JDM_mixed_fishery"] 1501080217 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1501087221
+["bibtex JDM_mixed_fishery"] 1501171236 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1501175835
   "/usr/share/texlive/texmf-dist/bibtex/bst/nature/naturemag.bst" 1136766823 34867 ae05936b307e5838449d1bb5fdbb2c19 ""
-  "JDM_mixed_fishery.aux" 1501087220 2005 ae7a262b17c62d6af70d26f0bc507b1f ""
+  "JDM_mixed_fishery.aux" 1501175835 2071 4fff72ebf4b24b6880ab755012abf29d ""
   "JDM_mixed_fishery.bcf" 1497536026 89671 9ff848901bc9060916b9d6b209d301bb ""
-  "JSDM.bib" 1500046764 99393 573795141147e691bb8a78b29f6ac106 ""
+  "JSDM.bib" 1501154618 101542 cbf75359d1efdd13e0ae97e7ac8dd25e ""
   (generated)
-  "JDM_mixed_fishery.blg"
   "JDM_mixed_fishery.bbl"
-["pdflatex"] 1501087220 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1501087221
+  "JDM_mixed_fishery.blg"
+["pdflatex"] 1501175834 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1501175835
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -119,12 +119,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "JDM_mixed_fishery.aux" 1501087220 2005 ae7a262b17c62d6af70d26f0bc507b1f ""
-  "JDM_mixed_fishery.bbl" 1501080217 15408 c0398196843ccdc815873a0db41e4cdb "bibtex JDM_mixed_fishery"
-  "JDM_mixed_fishery.tex" 1501087218 31162 5cfa05431387f51a27ce7881e293e088 ""
+  "JDM_mixed_fishery.aux" 1501175835 2071 4fff72ebf4b24b6880ab755012abf29d ""
+  "JDM_mixed_fishery.bbl" 1501171236 15872 252f84c8d59a412a18ec67cb9e3b5deb "bibtex JDM_mixed_fishery"
+  "JDM_mixed_fishery.tex" 1501175834 34950 09abcad9410a7397a96db3b8c7e0da39 ""
   (generated)
   "JDM_mixed_fishery.run.xml"
-  "JDM_mixed_fishery.pdf"
-  "JDM_mixed_fishery.log"
-  "JDM_mixed_fishery.aux"
   "JDM_mixed_fishery.bcf"
+  "JDM_mixed_fishery.log"
+  "JDM_mixed_fishery.pdf"
+  "JDM_mixed_fishery.aux"

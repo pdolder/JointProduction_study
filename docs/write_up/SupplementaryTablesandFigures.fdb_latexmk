@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1501079289 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1501079291
+["pdflatex"] 1501175462 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1501175464
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -50,8 +50,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "SupplementaryTablesandFigures.aux" 1501079291 2802 05ad263709b26e9745fc3539ba8a6f6d ""
-  "SupplementaryTablesandFigures.tex" 1501079281 6206 e3cb71a3efde04627111cb55900bb37a ""
+  "SupplementaryTablesandFigures.aux" 1501175463 3224 01eb0f02d436e604b7d462fc0b6a197d ""
+  "SupplementaryTablesandFigures.tex" 1501175461 7055 03b0f0996c66324f6d876e6a17033b34 ""
+  "figures/Aniso.png" 1501151616 83359 406208d7589197b1b16d7bf10c3fa70e ""
   "figures/AreaMap.png" 1501079240 113066 8bc7c5c8bfd6688b2d5b293b77d0e606 ""
   "figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
   "figures/Factor1_DepthO1.png" 1499960449 260114 44cb00362964ec4e8633937a75edc2e7 ""

@@ -389,27 +389,39 @@ balance of catch in mixed fisheries to maintain productivity. FOOD SECURITY!!
 
 \subsection{Model structure:} 
 
-VAST (\url{www.github.com/james-thorson/VAST}) implements a delta-generalised
-linear mixed modelling (GLMM) framework that takes account of spatio-temporal
-correlations among species / size classes through implementation of a spatial
-dynamic factor analysis.  Spatio-temporal variation is represented through a
-three-dimensional Gaussian Random Field, based on a user-constructed mesh. 
+VAST\footnote{software in the R statistical programming language can be found
+	here: \url{www.github.com/james-thorson/VAST}} implements a
+delta-generalised linear mixed modelling (GLMM) framework that takes account of
+spatio-temporal correlations among species-groups through implementation of a
+spatial dynamic factor analysis (SDFA).  In the model, spatio-temporal
+variation is represented through three-dimensional Gaussian Random Fields while
+covariates affecting catchability (to account for differences between fishing
+surveys) and density (to account for environmental preferences) can be
+incorporated for predictions of presence and density. The following briefly
+summarises the key methods implemented in the VAST framework. For full details
+of the model the reader is invited directed to Thorson \textit{et al} 2017
+\cite{Thorson2017}.
 
-\textbf{\textit{SDFA:}} Associations among species / species-groups are
-modelled using developments in JDSDMs \cite{Thorson2017}. This involves
-implementing a factor analysis decomposition to define a function for each
-factor that returns a positive or negative association of one or more species
-with any location. Thus log-density of any species can then be described as a
-linear combination of factors:
+\textbf{\textit{SDFA:}} A spatial dynamic factor analysis incorporates
+developments in joint dynamic species models \cite{Thorson2017} to take account
+of associations among species / species-groups by modelling response variables
+as a multivariate process. This is achieved through implementing a factor
+analysis decomposition where common latent trends are estimated so that the
+number of common trends (M) is less than the number of species-groups (N)
+modelled ($1 \leq N \leq M$). The species group trends are then associated
+through a function for each factor that returns a positive or negative
+association of one or more species with any location. Log-density of any
+species is then be described as a linear combination of factors:
 	\begin{equation}
 		\theta_{p}(s,t) = \sum_{j=1}^{n_{j}}
 		L_{p,j}\psi_{j}(s,t) +\sum_{k=1}^{n_{k}}
 		\gamma_{k,p}\chi_{k}(s,t)
 	\end{equation}
 Where $\theta_{p}(s,t)$ represents log-density for species $p$ at site $s$ at
-time $t$, $\psi_{j}$ is factor $j$, $L_{p,j}$ the loading matrix representing
-association of species $p$ with factor $j$ and $\gamma_{k,p}\chi_{k}(s,t)$ the
-linear effect of covariates at each site and time \cite{Thorson2016b}. 
+time $t$, $\psi_{j}$ is the coefficient for factor $j$, $L_{p,j}$ the loading
+matrix representing association of species $p$ with factor $j$ and
+$\gamma_{k,p}\chi_{k}(s,t)$ the linear effect of covariates at each site and
+time \cite{Thorson2016b}. 
 
 The factor analysis can identify community dynamics and where species have
 similar spatio-temporal patterns, allowing inference of species distributions
@@ -440,10 +452,21 @@ and a vessel effect ($v$) respectively for for either probability of encounter,
 $p$ or density $r$.
 
 \textbf{\textit{Spatio-temporal variation:}} The spatio-temporal variation is
-modelled using a Gaussian Markov Random Field (GMRF) where catch data in nearby
-locations can be correlated, allowing inference about poorly sampled locations.
+modelled using Gaussian Markov Random Fields (GMRF) where data is associated to
+nearby locations through a Matérn covariance function with the parameters
+estimated within the model. Here, the correlation decays smoothly over
+space/time the further from the location and includes geometric anisotropy to
+reflect the fact that correlations may decline in one direction faster than
+another (e.g. moving offshore) \cite{Thorson2013}.  The best fit estimated an
+anisotropic covariance where the correlations were stronger in a North-East -
+South-West direction, extending approximately 97 km and 140 km before
+correlations for encounter probability and density reduced to \textless 10 \%,
+respectively (Figure S10).  Incorporating the spatio-temporal correlations
+among and within species provides more efficient use of the data as inference
+can be made about poorly sampled locations from the covariance structure.
+
 A probability distribution for spatio-temporal variation in both encounter
-probability and positive catch rate is specified, $\varepsilon_{*}(s,p,t)$,
+probability and positive catch rate was specified, $\varepsilon_{*}(s,p,t)$,
 with a three-dimensional multivariate normal distribution so that:
 	\begin{equation}
 		vec[\mathbf{E}_{*}(t)] \sim MVN(0,\mathbf{R}_{*} \otimes
@@ -458,26 +481,28 @@ encounter probability or positive catch rate among species (modelled within the
 factor analysis). $\otimes$ represents the Kronecker product so that the
 correlation among any location and species can be computed \cite{Thorson2017}.
 		
-Correlations are estimated based on a Matérn covariance function where
-correlation decays smoothly over space/time the further from the location
-sample. This may include geometric anisotropy to reflect the fact that
-correlations may decline in one direction faster than another (e.g. moving
-offshore) \cite{Thorson2013}.
+\textbf{\textit{Incorporating covariates}} Survey catchability (the relative
+efficiency of a gear catching a species-group) was estimated as a fixed effect
+in the model, $\delta_{s}(v)$, to account for differences in spatial fishing
+patterns and gear characteristics which affect encounter and capture
+probability of the sampling gear \cite{Thorson2014}. Parameter estimates
+(Figure S11) showed clear differential effects of surveys using otter trawl
+gears (more effective for round fish species) and beam trawl gears (more
+effective for flatfish species).
 
-\textbf{\textit{Incorporating covariates}} A factor analysis can also be
-undertaken to incorporate covariance of vessels as a random effect, or as done
-here, vessel catchability can be estimated as a fixed effect $\delta_{s}(v)$
-\cite{Thorson2014}. Fixed covariates for habitat quality or other predictors of
-encounter probability / density can be incorporated to improve the spatial
-predictive performance \cite{Thorson2017}.
+No fixed covariates for habitat quality or other predictors of encounter
+probability or density were include. While incorporation may improve the
+spatial predictive performance \cite{Thorson2017}, it was not found to be the
+case here based on model selection with Akaike Information Criterion (AIC) and
+Bayesian Information Criterion (BIC).
 
-\textbf{\textit{Parameter estimation}} Parameter estimation is undertaken
+\textbf{\textit{Parameter estimation}} Parameter estimation was undertaken
 through Laplace approximation of the marginal likelihood for fixed effects
 while integrating the joint likelihood (which includes the probability of the
-random effects) with respect to random effects, using Template Model Builder
-(TMB; \cite{Kristensen2015}). Computation was done with support of the Irish
-Centre for High End Computing (ICHEC; \url{https://www.ichec.ie}) facility.  \\
-
+random effects) with respect to random effects. This was implemented using
+Template Model Builder (TMB; \cite{Kristensen2015}) with computation through
+support by the Irish Centre for High End Computing (ICHEC;
+\url{https://www.ichec.ie}) facility.  
 
 \subsection{Data}
 
@@ -486,27 +511,71 @@ account of correlations among species-group spatio-temporal distributions and
 abundances to predict spatial density estimates consistent with the resolution
 of the data. 
 
-The model has been fit to nine species separated into adult and juvenile size
+The model was been fit to nine species separated into adult and juvenile size
 classes (Table S2) to seven survey series (Table S1) in the Celtic Sea bound by
 48$^{\circ}$ N to 52 $^{\circ}$ N latitude and 12 $^{\circ}$ W to 2$^{\circ}$ W
-longitude (Figure S9) for the years 1990 - 2015 inclusive.  Application has
-been on a \textit{geographical basis} (i.e.  encompassing more than a single
-stock for some species). However, indices for stock boundaries could be derived
-from the spatial density estimates. \\
+longitude (Figure S9) for the years 1990 - 2015 inclusive. 
 
+The following steps were undertaken for data processing: i) data for survey
+stations and catches were downloaded from ICES Datras
+(\url{www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx}) or obtained
+directly from the Cefas Fishing Survey System (FSS); ii) data were checked and
+any tows with missing or erroneously recorded station information (e.g. tow
+duration or distance infeasible) removed; iii) swept area for each of the
+survey tows was estimated based on fitting a GAM to gear variables so that
+Doorspread = s(Depth) + DoorWt + WarpLength + WarpDiameter + SweepLength and a
+gear specific correction factor taken from the literature \cite{Piet2009}; iii)
+fish lengths were converted to biomass (Kg) through estimating a von
+bertalanffy length weight relationship, $Wt = a \cdot L^{b}$, fit to sampled
+length and weight of fish obtained in the EVHOE survey and aggregated within
+size classes (adult and juvenile). 
+
+The final dataset comprised of estimates of catches (including zeros) for each
+station and species-group and estimated swept area for the tow.
+
+[1019 words]
 
 \subsection{Model setup}
 
+The spatial domain was setup to include 250 knots representing the Gaussian
+Random Fields. The model was configured to estimate nine factors to describe
+the spatial and spatio-temporal encounter probability and density parameters,
+with a log-link between the logit encounter probability and assumed gamma
+distribution on positive catches.
+
+Three candidate models were identified, i) a base model where the vessel
+interaction was a random effect, ii) the base but where the vessel x species
+effect was estimated as a fixed covariate, iii) as in ii) but with the addition
+of estimating fixed density covariates for both predominant habitat type at a
+knot and depth. AIC and BIC model selection favoured the second model (Table
+S3). The final model included estimating 130,950 parameters (1,674 fixed and
+129,276 random effects).
+
 \subsection{Model validation}
 
-
-[[Model outputs are consistent with stock-level trends abundances over time
+Q-Q plots show good fit between the derived estimates and the data for positive
+catch rates and between the predicted and observed encounter probability.
+Further, model outputs are consistent with stock-level trends abundances over time
 from international assessments, yet also provide detailed insight into species
-co-occurrence and the strength of associations in space and time.  We use the
-outputs to draw inference on the challenges in separating catches of key
-commercial demersal fish in moving to the EU landing obligation.]]
+co-occurrence and the strength of associations in space and time. 
 
-[words: 732]
+Total words: \\
+Abstract:	 	  245  / 150 \\
+Intro:   		  577  \\
+Outline:		  203 \\
+Case study desc:	  217 \\
+Results 1:		  397 \\
+Results 2:		  178 \\
+Results 3:		  291 \\
+Discussion:	          573 \\
+Conclusions:	              \\
+Methods:		 1019 1237 \\
+\\
+TOTAL:			 3918 \\
+Total - abstract         3673 / 3500 \\
+
+Figures: 5 / 6 \\
+References: 37 / 50 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{linenumbers}

@@ -133,13 +133,21 @@
 	\end{center}
 \end{figure}
 
-
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/Aniso"}
+	\label{fig:S10}
+	\caption{Estimates of distances at 10 \% correlation from the Matérn
+		covariance function for encounter probability and positive
+		catch rates}
+	\end{center}
+\end{figure}
 
 
 \begin{figure}[!ht]
 \begin{center}
 	\includegraphics[width = 0.9\linewidth]{"figures/Suppl - QEstimatesALL"}
-	\label{fig:S10}
+	\label{fig:S11}
 	\caption{Fixed effect estimates for surveys for each species-group. Note
 	all values within a species-group are relative to the CEXP survey}
 	\end{center}
@@ -203,6 +211,24 @@
 
 \end{table}
 
+
+\begin{table}[!ht]
+	\caption{Description of model variants and AIC / BIC }
+	\begin{tabular} { {p}{1cm} p{4cm} p{2cm} p{2cm} p{2cm} p{2cm} }
+		\hline
+		Model & Description & No fixed parameters & No random
+		parameters & AIC & BIC \\
+		\hline
+		H0 & Vessel random effects, no covariates & 1462 & 129276 &
+		125954 & 140187 \\
+		H1 & With fixed gear effect, no density covariates & 1674 &
+		129276 & 116012 & 132309 \\
+		
+		H2 & With fixed gear effect, substrate and depth density
+		covariates & 1688 & 129276 & 116013 & 132446 \\
+		\hline
+	\end{tabular}
+\end{table}
 
 
 \end{document}
