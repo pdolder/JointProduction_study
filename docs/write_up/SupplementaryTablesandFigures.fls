@@ -131,6 +131,15 @@ INPUT ./figures/Aniso.png
 INPUT figures/Suppl - QEstimatesALL.png
 INPUT ./figures/Suppl - QEstimatesALL.png
 INPUT ./figures/Suppl - QEstimatesALL.png
+INPUT figures/Diag--Encounter_prob.png
+INPUT ./figures/Diag--Encounter_prob.png
+INPUT ./figures/Diag--Encounter_prob.png
+INPUT figures/Q-Q_plot.jpg
+INPUT ./figures/Q-Q_plot.jpg
+INPUT ./figures/Q-Q_plot.jpg
+INPUT figures/RealativeIndexVRelativeAssessSSB.png
+INPUT ./figures/RealativeIndexVRelativeAssessSSB.png
+INPUT ./figures/RealativeIndexVRelativeAssessSSB.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT SupplementaryTablesandFigures.aux

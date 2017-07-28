@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1501175462 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1501175464
+["pdflatex"] 1501251065 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1501271497
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -50,15 +50,18 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "SupplementaryTablesandFigures.aux" 1501175463 3224 01eb0f02d436e604b7d462fc0b6a197d ""
-  "SupplementaryTablesandFigures.tex" 1501175461 7055 03b0f0996c66324f6d876e6a17033b34 ""
+  "SupplementaryTablesandFigures.aux" 1501251067 4031 4663e60b5dce349fe355ea9da836ee08 ""
+  "SupplementaryTablesandFigures.tex" 1501251061 7891 4ef2e3c59d5fcfb87e71fe788dc8e170 ""
   "figures/Aniso.png" 1501151616 83359 406208d7589197b1b16d7bf10c3fa70e ""
   "figures/AreaMap.png" 1501079240 113066 8bc7c5c8bfd6688b2d5b293b77d0e606 ""
   "figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
+  "figures/Diag--Encounter_prob.png" 1501250832 66108 074fb5e5df5347e4922a983f6babdf0f ""
   "figures/Factor1_DepthO1.png" 1499960449 260114 44cb00362964ec4e8633937a75edc2e7 ""
   "figures/Factor1_DepthO2.png" 1499960449 253923 b7927e9e593518854b5936467af960ac ""
   "figures/Factor1_HabitatO1.png" 1499960523 83478 6bab4eaf6797e52d0de5f8c773b18e48 ""
   "figures/Factor1_HabitatO2.png" 1499960523 82909 bb22aaad084138656a3dfe7c9af016fa ""
+  "figures/Q-Q_plot.jpg" 1501250825 40774 b9f939150a404fc0f9c891fbb3f537f3 ""
+  "figures/RealativeIndexVRelativeAssessSSB.png" 1501250969 268322 b6a5322807d339a39ad2d771d53f77dc ""
   "figures/Substrate.png" 1499960631 4168073 2831fd1b2701ed8208a493377f55f51e ""
   "figures/Suppl - Epsilon1Epsilon2_Correlations_blank.png" 1498214566 296969 58a8f6ef67eb23022bff6d0f46c9d69a ""
   "figures/Suppl - QEstimatesALL.png" 1497900592 309162 2a5e66197442c6ba8566772713ce4f33 ""
@@ -66,6 +69,6 @@
   "figures/Suppl - SpatioTempLoadingsEpsilon2.png" 1498475647 1918367 45428ba23841c5b0d700a3f0cb7ab309 ""
   "figures/Suppl - TempAndFactors.png" 1500041845 1332083 3b18635891ba1169ac7b2976e03f8630 ""
   (generated)
-  "SupplementaryTablesandFigures.log"
   "SupplementaryTablesandFigures.aux"
   "SupplementaryTablesandFigures.pdf"
+  "SupplementaryTablesandFigures.log"
