@@ -1,20 +1,15 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.27)  15 AUG 2017 00:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.27)  14 AUG 2017 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**JDM_mixed_fishery.tex --shell-escape
-(./JDM_mixed_fishery.tex
+**Figures.tex --shell-escape
+(./Figures.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
-(./nature.cls
-Document Class: nature 24/2/2004 v1.0
-A class for writing preprints for the journal Nature
-Written by Peter Czoschke
- 
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -28,21 +23,6 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
-)
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
-Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
-)
-(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
-Package: fullpage 1999/02/23 1.1 (PWD)
-\FP@margin=\skip43
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-))
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
@@ -404,7 +384,7 @@ Now handling font encoding U ...
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip44
+\labelindent=\skip43
 \enit@outerparindent=\dimen116
 \enit@toks=\toks19
 \enit@inbox=\box27
@@ -416,7 +396,7 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/03/03 v2.15a AMS math features
-\@mathmargin=\skip45
+\@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -466,8 +446,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \totwidth@=\dimen124
 \lineht@=\dimen125
 \@envbody=\toks23
-\multlinegap=\skip46
-\multlinetaggap=\skip47
+\multlinegap=\skip45
+\multlinetaggap=\skip46
 \mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
@@ -500,26 +480,22 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen126
 \Gin@req@width=\dimen127
 )
-(./JDM_mixed_fishery.aux)
-\openout1 = `JDM_mixed_fishery.aux'.
+(./Figures.aux)
+\openout1 = `Figures.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-)
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -536,15 +512,15 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 * \textheight=650.43001pt
 * \oddsidemargin=0.0pt
 * \evensidemargin=0.0pt
-* \topmargin=0.0pt
-* \headheight=0.0pt
-* \headsep=0.0pt
-* \topskip=12.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -611,257 +587,92 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 29.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 29.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
-File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
-)
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 29.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
-
-
-LaTeX Warning: Citation `Worm2009' on page 2 undefined on input line 76.
-
-
-LaTeX Warning: Citation `FAO2016' on page 2 undefined on input line 79.
-
-
-LaTeX Warning: Citation `B??n??2016' on page 2 undefined on input line 80.
-
-
-LaTeX Warning: Citation `Mcclanahan2015' on page 2 undefined on input line 81.
-
-
-LaTeX Warning: Citation `Branch2008' on page 2 undefined on input line 86.
-
-
-LaTeX Warning: Citation `Kuriyama2016' on page 2 undefined on input line 86.
-
-
-LaTeX Warning: Citation `Ulrich2016' on page 2 undefined on input line 86.
-
-[2]
-
-LaTeX Warning: Citation `Borges2015' on page 3 undefined on input line 97.
-
-
-LaTeX Warning: Citation `Uhlmann2014' on page 3 undefined on input line 97.
-
-
-LaTeX Warning: Citation `EuropeanParliamentandCounciloftheEuropeanUnion2013' on
- page 3 undefined on input line 102.
-
-
-LaTeX Warning: Citation `EuropeanParliament2008' on page 3 undefined on input l
-ine 105.
-
-
-LaTeX Warning: Citation `Garcia2003' on page 3 undefined on input line 106.
-
-
-LaTeX Warning: Citation `Hoff2010a' on page 3 undefined on input line 109.
-
-
-LaTeX Warning: Citation `Ulrich2016' on page 3 undefined on input line 109.
-
-
-LaTeX Warning: Citation `Condie2013' on page 3 undefined on input line 110.
-
-
-LaTeX Warning: Citation `Condie2013a' on page 3 undefined on input line 110.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--111
-
- []
-
-
-LaTeX Warning: Citation `Fulton2011b' on page 3 undefined on input line 117.
-
-
-LaTeX Warning: Citation `vanPutten2012a' on page 3 undefined on input line 117.
-
-
-
-LaTeX Warning: Citation `Needle2011' on page 3 undefined on input line 121.
-
-
-LaTeX Warning: Citation `Holmes2011' on page 3 undefined on input line 121.
-
-
-LaTeX Warning: Citation `Beare2010' on page 3 undefined on input line 121.
-
-
-LaTeX Warning: Citation `Dinmore2003' on page 3 undefined on input line 121.
-
-
-LaTeX Warning: Citation `Gardner2008' on page 3 undefined on input line 124.
-
-
-LaTeX Warning: Citation `Dunn2011' on page 3 undefined on input line 124.
-
-
-LaTeX Warning: Citation `Dunn2014a' on page 3 undefined on input line 124.
-
-[3]
-
-LaTeX Warning: Citation `Thorson2015' on page 4 undefined on input line 147.
-
-
-LaTeX Warning: Citation `Thorson2015a' on page 4 undefined on input line 150.
-
-
-LaTeX Warning: Citation `Thorson2013' on page 4 undefined on input line 153.
-
-[4]
-
-LaTeX Warning: Citation `Ellis2000' on page 5 undefined on input line 165.
-
-
-LaTeX Warning: Citation `Gerritsen2012' on page 5 undefined on input line 165.
-
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 177.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
-File: omlptm.fd 
-)
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 177.
- [5] [6]
-
-LaTeX Warning: Citation `Robinson2011' on page 7 undefined on input line 224.
-
-[7] [8] [9] [10] [11]
-
-LaTeX Warning: Citation `Reimer2017' on page 12 undefined on input line 353.
-
-[12]
-
-LaTeX Warning: Citation `Santos2016' on page 13 undefined on input line 384.
-
-[13]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 410.
-
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \hbox (badness 1194) in paragraph at lines 410--410
-[][]\OT1/ptm/m/n/10 software in the R sta-tis-ti-cal pro-gram-ming lan-guage ca
-n be found here: $\OT1/pcr/m/n/10 www . github . com / james -[]
- []
-
-
-LaTeX Warning: Citation `Thorson2017' on page 14 undefined on input line 420.
-
-
-Overfull \hbox (1.15456pt too wide) in paragraph at lines 409--421
- \OT1/ptm/b/n/12 Model struc-ture: \OT1/ptm/m/n/12 VAST[] im-ple-ments a delta-
-generalised lin-ear mixed mod-elling (GLMM) frame-
- []
-
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 422.
-
-LaTeX Warning: Citation `Thorson2017' on page 14 undefined on input line 423.
-
-[14]
-
-LaTeX Warning: Citation `Thorson2016b' on page 15 undefined on input line 441.
-
-
-LaTeX Warning: Citation `Thorson2016b' on page 15 undefined on input line 447.
-
-
-LaTeX Warning: Citation `Thorson2015a' on page 15 undefined on input line 459.
-
-[15]
-
-LaTeX Warning: Citation `Thorson2013' on page 16 undefined on input line 477.
-
-
-LaTeX Warning: Citation `Thorson2017' on page 16 undefined on input line 499.
-
-
-LaTeX Warning: Citation `Thorson2014' on page 16 undefined on input line 505.
-
-[16]
-
-LaTeX Warning: Citation `Thorson2017' on page 17 undefined on input line 512.
-
-
-LaTeX Warning: Citation `Kristensen2015' on page 17 undefined on input line 520
-.
-
-[17]
-
-LaTeX Warning: Citation `Piet2009' on page 18 undefined on input line 544.
-
-
-Overfull \hbox (18.56276pt too wide) in paragraph at lines 536--549
-\OT1/ptm/m/n/12 were down-loaded from ICES Da-tras ($\OT1/pcr/m/n/12 www . ices
- . dk / marine -[] data / data -[] portals / Pages /
- []
-
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 580--594
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--594
-
- []
-
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 595--597
-
- []
-
-[20] (./JDM_mixed_fishery.bbl) [21]
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 680.
- [22] (./JDM_mixed_fishery.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+! LaTeX Error: File `"Figure 2 - SpatialFactorLoadingsOmega1Omega2"' not found.
+
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 ...re 2 - SpatialFactorLoadingsOmega1Omega2"}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `"Figure 3 - PCAstyle_Plots_SpatioTemp"' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 ...h]{"Figure 3 - PCAstyle_Plots_SpatioTemp"}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `"Figure 1 - Omega1Omega2_Correlations_blank"' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 ...gure 1 - Omega1Omega2_Correlations_blank"}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `"Figure 4 - DensityDifferencesFigureswithCC"' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.59 ...gure 4 - DensityDifferencesFigureswithCC"}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `"Figure 5 - TechnicalEfficiency"' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.69 ...newidth]{"Figure 5 - TechnicalEfficiency"}
+                                                  
+I could not locate the file with any of these extensions:
+.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Figures.aux) ) 
 Here is how much of TeX's memory you used:
- 3822 strings out of 494953
- 51556 string characters out of 6180977
- 118237 words of memory out of 5000000
- 7009 multiletter control sequences out of 15000+600000
- 33640 words of font info for 67 fonts, out of 8000000 for 9000
+ 3408 strings out of 494953
+ 45941 string characters out of 6180977
+ 112034 words of memory out of 5000000
+ 6643 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,8n,32p,412b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
-s/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on JDM_mixed_fishery.pdf (22 pages, 213082 bytes).
+ 37i,4n,32p,416b,207s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on Figures.pdf (1 page, 22460 bytes).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

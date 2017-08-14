@@ -37,7 +37,7 @@ Others}
 \begin{linenumbers}
 
 \begin{abstract} 
-Mixed fisheries have resulted in overexploitation of weaker stocks as
+[INCLUDE REFERENCES] Mixed fisheries have resulted in overexploitation of weaker stocks as
 over-quota catches continue in fisheries pursuing available quota of healthy
 stocks. As EU fisheries management moves to a system where all fish caught are
 counted against the quota (the `Landings obligation'), from 2019 the challenge
@@ -49,7 +49,7 @@ major goal for fisheries sustainability.
 A potential mechanism for decoupling exploitation is spatial targeting, but this remains
 challenging due to complex fishery dynamics and a lack of understanding of community dynamics at
 fine spatial and temporal scales.  We develop a joint species distribution model to understand how spatial
-community and fishery dynamics interact to determine species composition in the highly mixed fisheries of the Celtic Sea. 
+community and fishery dynamics interact to determine species and size composition in the highly mixed fisheries of the Celtic Sea. 
 
 Clear common patterns for spatial distribution patterns emerge for three
 species groups commonly targeted (roundfish(gadoids??), flatfish and shelf species) and,
@@ -139,22 +139,18 @@ catches in mixed fisheries.
 \subsection{Framework for analysing spatio-temporal mixed fisheries
 	interactions}
 
-We present a framework for analysing how far spatio-temporal avoidance can go
-towards mitigating imbalances in quota in mixed fisheries. We use fisheries
-independent survey data to characterise the spatio-temporal dynamics of key
+We present a framework for analysing how far spatio-temporal avoidance can contribute
+towards mitigating imbalances in quota in mixed fisheries. We use fisheries-independent survey data to characterise the spatio-temporal dynamics of key
 components of a fish community by employing a geostatistical Vector
-Autoregressive Spatio-temporal model (VAST). VAST includes i) a factor analysis
+Autoregressive Spatio-temporal model (VAST). We implement a factor analysis
 decomposition to describe trends in spatio-temporal dynamics of the different
-species as a function of \textit{n} latent variables\cite{Thorson2015} to
-identify community dynamics and drivers common among species groups. This
-allows for inference of the distribution and density of poorly sampled species
-through association with the modelled factors. In addition, VAST ii) separately
-models spatio-temporal encounter probability and catch rates to allow
+species as a function of \textit{n} latent variables \cite{Thorson2015} to
+identify community dynamics and drivers common among species groups. Of particular importance for mixed fisheries is the ability to separate species by underlying factors, which can then be investigated for what spatio-temporal separation they pertain to. We separately model spatio-temporal encounter probability and catch rates to allow
 identification of differences in associations for distribution of the species
-groups and densities upon encounter \cite{Thorson2015a}, it employs iii)
+groups and densities upon encounter \cite{Thorson2015a}, by employing 
 Gaussian Markov Random Fields (GMRFs) to capture spatial and temporal
 dependence within and among species groups for both encounter probability and
-catch rates \cite{Thorson2013}, and iv) is set in a mixed modelling framework
+catch rates \cite{Thorson2013}. VAST is set in a mixed modelling framework
 to allow estimation of fixed effects to account for systematic differences
 driving encounter and catches, such as survey catch rate differences while
 random effects capture the spatio-temporal dynamics of the fish community.
@@ -163,12 +159,11 @@ random effects capture the spatio-temporal dynamics of the fish community.
 
 \subsection{Dynamics of Celtic Sea fisheries}
 
-We use the fisheries in the Celtic Sea as a case study. The Celtic Sea is a
+We use the highly mixed demersal fisheries of the Celtic Sea as a case study. The Celtic Sea is a
 temperate sea where a large number of species make up the commercial catches.
 Fisheries are spatially and temporally complex with mixed fisheries undertaken
-by several nations using different gear types \cite{Ellis2000, Gerritsen2012}.
-(MORE SPECIFIC - details of number of species in typical landings, key
-species).
+by several nations using different gear types \cite{Ellis2000, Gerritsen2012}. Close to 150 species have been identified in the 
+  commercial catches of the Celtic Sea, with approximately 30 species dominating the catch [Mateo Maria, Pawlowski Lionel, Robert Marianne (2017). Highly mixed fisheries: fine-scale spatial patterns in retained catches of French fisheries in the Celtic Sea . ICES Journal of Marine Science, 74(1), 91-101.].
 
 We parametrise our spatio-temporal model using catch data from seven fisheries
 independent surveys undertaken in the Celtic Sea over the period 1990 - 2015
@@ -180,15 +175,15 @@ Atlantic whiting (\textit{Merlangius merlangus}), European Hake
 megrim (\textit{Lepidorhombus whiffiagonis}), European Plaice
 (\textit{Pleuronectes platessa}) and Common Sole (\textit{Solea solea}). These
 species make up \textgreater 60 \% of landings by towed fishing gears for the
-area (average 2011 - 2015, STECF data). Each species was separated into
+area (average 2011 - 2015, STECF data [INCLUDE REF]). Each species was separated into
 juvenile and adult size classes based on their legal minimum conservation
 reference size (Table S2).
 
-We analyse the data to understand how the different associations among
+We analyse the data to understand how the different associations among emergent
 species-groups (combination of species and size class) and their potential
 drivers affect catch compositions in mixed fisheries. We consider how these
 have changed over time, and the implications for mixed fisheries in managing
-catches of quota species under the EU's landings obligation.
+catches of quota species under the EU landing obligation.
 
 [223 words]
 
@@ -196,20 +191,20 @@ catches of quota species under the EU's landings obligation.
 dynamic factor analysis decomposes the dominant spatial patterns driving
 differences in encounter probability and abundance. Figure 1 shows the first
 three factors for (a) average spatial encounter probability and (b) average
-density. The first three factors account of 83.7 \% of the variance in
+density [AVOID SENTENCES SAYING WHAT THE FIGURE/TABLE IS, USE THE SPACE TO SAY SOMETHING ABOUT THE RESULTS - CAPTION DOES THE REST]. The first three factors account of 83.7 \% of the variance in
 encounter probability and 69 \% of the variance in density, respectively. A
 clear spatial pattern can been seen both for encounter probability and density,
 with a positive association with the first factor in the inshore North Easterly
 part of the Celtic Sea into the Bristol Channel and Western English Channel,
-moving to a negative association offshore in the south-westerly waters. On the
+moving to a negative association offshore in the south-westerly waters (Figure 1). On the
 second factor a North / South split can be seen for encounter probability at
-approximately the 49$^{\circ}$ N while density is more driven by a positive
+approximately 49$^{\circ}$ N while density is more driven by a positive
 association in the deeper westerly waters.  The opposite is evident on the
 third factor, with a positive association with the Easterly waters for
 encounter probability and negative with the westerly waters, while density is
 driven by a North / South split.
 
-The first factor was highly correlated with log(depth) for both encounter
+[NEXT TWO PARAGRAPHS CAN BE MOVED LOWER OR SUPPLEMENTARY. DISCUSS HERE TO WHICH SPECIES WERE ASSOCIATED WITH WHICH FACTORS INTRODUCED ABOVE, I.E., FIGURE 2.]In a preliminary investigation of the main observed covariates influencing the factors, the first factor was highly correlated with log(depth) for both encounter
 probability (-0.85, CI = -0.88 to -0.81; Figure S1) and density (-0.71, CI =
 -0.77 to -0.65; Figure S2). A random forest classification tree assigned 80 \%
 of the variance in the first factor for encounter probability to depth and
@@ -236,7 +231,7 @@ analysis can adequately characterise these influences.
 	dynamics}
 
 While there are clear patterns in the factor coefficients describing spatial
-differences average encounter probability and density, the inter-annual
+differences in average encounter probability and density (Figure 1), the inter-annual
 differences in factor coefficients show less structure (Figures S4, S5).
 Temperature is often included as a covariate in species distribution models,
 but was found not to contribute to the variance in the factor coefficients

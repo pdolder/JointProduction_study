@@ -22,8 +22,10 @@
 \begin{center}
 	\includegraphics[width=0.8\linewidth]{"Figure 2 - SpatialFactorLoadingsOmega1Omega2"}
 	\label{fig:1}
-	\caption{Spatial factor coefficients illustrating the three main separating components for: (a [LABEL]) the average spatial encounter
-		probability and (b [LABEL]) the average density [LABEL ROWS `Factor 1' ETC.]. Scale goes from red (positive association to the factor) to white (no association) to blue (negative association)}
+	\caption{Spatial Factor coefficients for (a [LABEL]) the average spatial encounter
+		probability and (b [LABEL]) the average density,  on the first 3
+		factors [LABEL ROWS `Factor 1' ETC.]. Red: positive association to the factor, Blue:
+		negative association}
 \end{center}
 \end{figure}
 
