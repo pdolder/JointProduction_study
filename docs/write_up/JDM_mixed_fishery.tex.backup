@@ -37,7 +37,7 @@ Others}
 \begin{linenumbers}
 
 \begin{abstract} 
-[INCLUDE REFERENCES] Mixed fisheries have resulted in overexploitation of weaker stocks as
+Mixed fisheries have resulted in overexploitation of weaker stocks as
 over-quota catches continue in fisheries pursuing available quota of healthy
 stocks. As EU fisheries management moves to a system where all fish caught are
 counted against the quota (the `Landings obligation'), from 2019 the challenge
@@ -139,8 +139,9 @@ catches in mixed fisheries.
 \subsection{Framework for analysing spatio-temporal mixed fisheries
 	interactions}
 
-We present a framework for analysing how far spatio-temporal avoidance can contribute
-towards mitigating imbalances in quota in mixed fisheries. We use fisheries-independent survey data to characterise the spatio-temporal dynamics of key
+We present a framework for analysing how far spatio-temporal avoidance can go
+towards mitigating imbalances in quota in mixed fisheries. We use fisheries
+independent survey data to characterise the spatio-temporal dynamics of key
 components of a fish community by employing a geostatistical Vector
 Autoregressive Spatio-temporal model (VAST). VAST includes i) a factor analysis
 decomposition to describe trends in spatio-temporal dynamics of the different
