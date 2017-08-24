@@ -275,6 +275,16 @@
   \textbf{\bibinfo{volume}{129-130}}, \bibinfo{pages}{127--136}
   (\bibinfo{year}{2012}).
 
+\bibitem{Mateo2016}
+\bibinfo{author}{Mateo, M.}, \bibinfo{author}{Pawlowski, L.} \&
+  \bibinfo{author}{Robert, M.}
+\newblock \bibinfo{title}{{Highly mixed fisheries: fine-scale spatial patterns
+  in retained catches of French fisheries in the Celtic Sea}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science: Journal du
+  Conseil}} \bibinfo{pages}{fsw129} (\bibinfo{year}{2016}).
+\newblock
+  \urlprefix\url{http://icesjms.oxfordjournals.org/lookup/doi/10.1093/icesjms/fsw129}.
+
 \bibitem{Robinson2011}
 \bibinfo{author}{Robinson, L.~M.} \emph{et~al.}
 \newblock \bibinfo{title}{{Pushing the limits in marine species distribution

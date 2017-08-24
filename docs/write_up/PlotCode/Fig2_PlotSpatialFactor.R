@@ -99,7 +99,7 @@ Epsilon1_sf <- as.data.frame.table(Epsilon1_sf)
 Epsilon2_sf <- as.data.frame.table(Epsilon2_sf)
 
 Epsilon1_sf$Var1 <- Epsilon2_sf$Var1 <- 1:250
-Epsilon1_sf$Var2 <- Epsilon2_sf$Var2 <- rep(paste("factor", 1:9, sep = "_"), each = 250)
+Epsilon1_sf$Var2 <- Epsilon2_sf$Var2 <- rep(paste("Factor", 1:9, sep = " "), each = 250)
 Epsilon1_sf$Var3 <- Epsilon2_sf$Var3 <- rep(1990:2015, each = 250 * 9)
 
 colnames(Epsilon1_sf) <- colnames(Epsilon2_sf) <- c('x2i','factor','year','value')
@@ -109,8 +109,8 @@ Ep1 <- Epsilon1_sf
 Ep2 <- Epsilon2_sf
 
 ## Just the first 3 factors for the Epsilons and every 5 years, otherwise files are huge
-Epsilon1_sf <- filter(Epsilon1_sf, factor %in% paste("factor", 1:3, sep = "_"), year %in% seq(1990,2015, 5))
-Epsilon2_sf <- filter(Epsilon2_sf, factor %in% paste("factor", 1:3, sep = "_"), year %in% seq(1990,2015, 5))
+Epsilon1_sf <- filter(Epsilon1_sf, factor %in% paste("Factor", 1:3, sep = " "), year %in% seq(1990,2015, 5))
+Epsilon2_sf <- filter(Epsilon2_sf, factor %in% paste("Factor", 1:3, sep = " "), year %in% seq(1990,2015, 5))
 
 Omega1_sf$x2i <- 1:250
 Omega2_sf$x2i <- 1:250
@@ -127,33 +127,20 @@ DF3_O2 <- DF3_O2[DF3_O2$Include==T,]
 DF3_E1 <- DF3_E1[DF3_E1$Include==T,]
 DF3_E2 <- DF3_E2[DF3_E2$Include==T,]
 
-colnames(DF3_O1)[5:13] <- colnames(DF3_O2)[5:13] <- paste("factor",1:9, sep = '_')
+colnames(DF3_O1)[5:13] <- colnames(DF3_O2)[5:13] <- paste("Factor",1:9, sep = ' ')
 
-DF4_O1 <- melt(DF3_O1, id = c("x2i", "Lat","Lon","Include")); colnames(DF4_O1)[6] <- "Spatial Encounter Prob"
-DF4_O2 <- melt(DF3_O2, id = c("x2i", "Lat","Lon","Include")); colnames(DF4_O2)[6] <- "Spatial Density"
-DF4_E1 <- DF3_E1; colnames(DF4_E1)[7] <- 'Spatio-temporal Encounter Prob'
-DF4_E2 <- DF3_E2; colnames(DF4_E2)[7] <- 'Spatio-temporal Density'
+DF4_O1 <- melt(DF3_O1, id = c("x2i", "Lat","Lon","Include")); colnames(DF4_O1)[6] <- "(a) average spatial encounter probability"
+DF4_O2 <- melt(DF3_O2, id = c("x2i", "Lat","Lon","Include")); colnames(DF4_O2)[6] <- "(b) average spatial density"
+DF4_E1 <- DF3_E1; colnames(DF4_E1)[7] <- '(a) Spatiotemporal encounter probability'
+DF4_E2 <- DF3_E2; colnames(DF4_E2)[7] <- '(b) Spatiotemporal density'
 
 cols <- brewer.pal(8, 'Set1')
-
-#p1 <- ggplot() + geom_point(data = filter(DF4_O1, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-#			    geom_point(data = filter(DF4_O1, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-#    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-#  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-#  facet_grid(variable ~.)
-
-#p2 <- ggplot() + geom_point(data = filter(DF4_O2, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-#			    geom_point(data = filter(DF4_O2, variable %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-#    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-#  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
-#  facet_wrap(~variable, ncol = 1)
-
 
 DF5 <- merge(DF4_O1, DF4_O2)
 DF5 <- melt(DF5, id = c("x2i", "Lat", "Lon", "Include","variable"))
 colnames(DF5)[c(5,6)] <- c("factor", "parameter")
 
-ggplot() + geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+ggplot() + geom_point(data = filter(DF5, factor %in% paste("Factor", 1:3, sep=" ")), aes(x = Lon, y =  Lat, colour = value), size = 1) +
 			    geom_point(data = filter(DF5, factor %in% paste("factor", 1:3, sep="_")), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +
@@ -166,15 +153,15 @@ DF6 <- melt(DF6, id = c("x2i", "Lat", "Lon", "Include","factor","year"))
 colnames(DF6)[c(7)] <- c("parameter")
 
 
-ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob', year %in% c(2000,2005,2010,2015)), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Encounter Prob', year %in% c(2000,2005,2010,2015)), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+ggplot() + geom_point(data = filter(DF6, parameter == '(a) Spatiotemporal encounter probability', year %in% c(2000,2005,2010,2015)), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+			    geom_point(data = filter(DF6, parameter == '(a) Spatiotemporal encounter probability', year %in% c(2000,2005,2010,2015)), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +   facet_grid(year ~ factor)
 
 ggsave(file = file.path('..', 'figures', 'Suppl - SpatioTempLoadingsEpsilon1Pres.png'), width = 6, height = 6)
 
-ggplot() + geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
-			    geom_point(data = filter(DF6, parameter == 'Spatio-temporal Density'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+ggplot() + geom_point(data = filter(DF6, parameter == '(b) Spatiotemporal density'), aes(x = Lon, y =  Lat, colour = value), size = 1) +
+			    geom_point(data = filter(DF6, parameter == '(b) Spatiotemporal density'), aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
     coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") +   facet_grid(year ~ factor)
 
