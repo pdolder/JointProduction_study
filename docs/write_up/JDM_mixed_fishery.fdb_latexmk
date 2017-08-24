@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex JDM_mixed_fishery"] 1501270498 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1501271478
+["bibtex JDM_mixed_fishery"] 1503566509 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1503566510
   "/usr/share/texlive/texmf-dist/bibtex/bst/nature/naturemag.bst" 1136766823 34867 ae05936b307e5838449d1bb5fdbb2c19 ""
-  "JDM_mixed_fishery.aux" 1501271478 2071 84e1662e47f9430f5debc0f1964e3bc6 ""
+  "JDM_mixed_fishery.aux" 1503566510 2046 57a5bbbac13d982b1492f65d5bfb282e ""
   "JDM_mixed_fishery.bcf" 1497536026 89671 9ff848901bc9060916b9d6b209d301bb ""
   "JSDM.bib" 1501154618 101542 cbf75359d1efdd13e0ae97e7ac8dd25e ""
   (generated)
   "JDM_mixed_fishery.blg"
   "JDM_mixed_fishery.bbl"
-["pdflatex"] 1501271477 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1501271478
+["pdflatex"] 1503566510 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1503566510
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -103,7 +103,6 @@
   "/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg" 1279039959 678 4792914a8f45be57bb98413425e4c7af ""
   "/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg" 1278958963 3563 d35e897cae3b8c6848f6677b73370b54 ""
   "/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty" 1159951381 151738 8cd767481920f0eb785302dacfc87057 ""
-  "/usr/share/texlive/texmf-dist/tex/latex/nature/nature.cls" 1487764330 5015 e3346ea9775521c10310b25199496eb2 ""
   "/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty" 1303254447 12029 04d7fdf76e0464c23b5aa3a727952d7c ""
   "/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty" 1335995445 7075 bd0c34fbf1ae8fd1debd2a554e41b2d5 ""
   "/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
@@ -115,16 +114,17 @@
   "/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd" 1137110629 961 15056f4a61917ceed3a44e4ac11fcc52 ""
   "/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty" 1156702453 857 6c716f26c5eadfb81029fcd6ce2d45e6 ""
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
-  "/usr/share/texmf/web2c/texmf.cnf" 1458942643 31351 b32c45dce4a01cb7b53ed90c546614ca ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1461344916 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1461342839 3873544 f060f4e7416ae5baaf15fbb556512dd9 ""
-  "JDM_mixed_fishery.aux" 1501271478 2071 84e1662e47f9430f5debc0f1964e3bc6 ""
-  "JDM_mixed_fishery.bbl" 1501270498 15872 a4240fac0f1d4a342a29be5f5e2b805c "bibtex JDM_mixed_fishery"
-  "JDM_mixed_fishery.tex" 1501271477 37174 8c405842b4270d8a9cccbbb2c0011ca3 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1503478936 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1503478974 3854907 d1a0e17960728ead39eae1b7780bb183 ""
+  "JDM_mixed_fishery.aux" 1503566510 2046 57a5bbbac13d982b1492f65d5bfb282e ""
+  "JDM_mixed_fishery.bbl" 1503566510 15872 252f84c8d59a412a18ec67cb9e3b5deb "bibtex JDM_mixed_fishery"
+  "JDM_mixed_fishery.tex" 1503566483 38194 e4de5bacf77a8d70f7728a22340c05b2 ""
+  "nature.cls" 1502724197 4959 8f464302b0ec2c18bf8d2b631d4f5916 ""
   (generated)
-  "JDM_mixed_fishery.run.xml"
-  "JDM_mixed_fishery.bcf"
   "JDM_mixed_fishery.log"
   "JDM_mixed_fishery.aux"
   "JDM_mixed_fishery.pdf"
+  "JDM_mixed_fishery.bcf"
+  "JDM_mixed_fishery.run.xml"

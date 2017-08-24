@@ -333,12 +333,18 @@ p6 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = La
 p7 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = ple_sol), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
   coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[5], mid = 'white', high = cols[4], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") + #, limits = lim) +
-  geom_text(data = LLs[c(66,79,216),], aes(x = X, y = Y), label = c('66','79','216'), size = 3) + geom_point(data = LLs[c(66,79, 216),], aes(x = X, y = Y), shape = 'o', colour = 'red', size = 14)
+  geom_text(data = LLs[c(66,79,216),], aes(x = X, y = Y), label = c('A','B','C'), size = 3) + geom_point(data = LLs[c(66,79, 216),], aes(x = X, y = Y), shape = 'o', colour = 'red', size = 14)
 
 ## Change the gear names
 
 levels(PredDF$gear)[levels(PredDF$gear) == "THA2"]  <- "Otter"
 levels(PredDF$gear)[levels(PredDF$gear) == "NWGFS"] <- "Beam"
+
+## convert the catch composition locations
+
+PredDF$location[PredDF$location == 66]  <- 'A'
+PredDF$location[PredDF$location == 79]  <- 'B'
+PredDF$location[PredDF$location == 216] <- 'C'
 
 p8  <- ggplot(filter(PredDF,gear %in% c('Otter','Beam')), 
             aes(x = factor(gear), y = perc)) + geom_bar(stat= 'identity',aes(fill = spp), colour = 'black') + facet_wrap(~location) +

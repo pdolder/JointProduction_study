@@ -37,33 +37,33 @@ Others}
 \begin{linenumbers}
 
 \begin{abstract} 
-[INCLUDE REFERENCES] Mixed fisheries have resulted in overexploitation of weaker stocks as
-over-quota catches continue in fisheries pursuing available quota of healthy
-stocks. As EU fisheries management moves to a system where all fish caught are
-counted against the quota (the `Landings obligation'), from 2019 the challenge
-will be to catch available quota within the new constraints. Failure to achieve this
-will result in lower production as quota for healthier stocks remains
-uncaught in order to protect the weaker stocks. Consequently, decoupling
-exploitation of species caught together in mixed fisheries has become a
-major goal for fisheries sustainability. 
-A potential mechanism for decoupling exploitation is spatial targeting, but this remains
-challenging due to complex fishery dynamics and a lack of understanding of community dynamics at
-fine spatial and temporal scales.  We develop a joint species distribution model to understand how spatial
-community and fishery dynamics interact to determine species and size composition in the highly mixed fisheries of the Celtic Sea. 
+Overexploitation of weaker stocks in mixed fisheries results when catches
+continue in fisheries pursuing quota for healthy stocks. As EU fisheries
+management moves to a system where all fish caught are counted against the
+quota (the `Landings obligation'), the challenge will be to catch available
+quota within new constraints else suffer reduced productivity.  A mechanism for
+decoupling exploitation of species caught together is spatial targeting, but
+this remains challenging due to complex fishery dynamics and lack of
+understanding of spatiotemporal community dynamics.  
 
-Clear common patterns for spatial distribution patterns emerge for three
-species groups commonly targeted (roundfish(gadoids??), flatfish and shelf species) and,
-while abundance varies inter-annually, the same species groups are commonly
-found in higher densities together driven by the same environmental factors (e.g. ??).
-More subtle differences in distribution are found within a species group, which
-suggest more limited scope to adjust catch to species composition. Here we highlight the importance of dimension reduction techniques to focus management discussion on axes of maximal separation in space and time.\\
-Common environmental drivers of distribution for groups of species highlights the
-scale of the challenge in separating catches within the species-groups using
-spatial management measures, having important implications for management of
-the mixed fisheries under the EU landings obligation. [FINAL PARAGRAPH NEEDS WORK. Perhaps something like commented section below?]
-%% We propose that spatiotemporal modelling of available data is a scientific requirement to addressing the challenges of the landings obligation. The framework we propose reduces the complexity of the system to it's major components and thus allows informed management discussion over more traditional anecdotal knowledge of single-species distribution in space and time. 
+We develop a joint species distribution model to understand how spatial
+community and fishery dynamics interact to determine species and size
+composition in the highly mixed fisheries of the Celtic Sea. Clear common
+patterns for spatial distribution emerge for three species groups commonly
+targeted and, while abundance varies inter-annually, the same species groups
+are found in higher densities together correlating with depth and substrate.
+Subtle differences within a species group suggest limited scope to adjust catch
+to species composition. 
 
-[296 words]
+Here we highlight the importance of dimension reduction techniques to focus
+management discussion on axes of maximal separation in space and time. We
+propose that spatiotemporal modelling of available data is a scientific
+requirement to addressing the challenges of managing mixed fisheries. \\ 
+
+[INCLUDE REFERENCES - comment: guidance for articles says not. I have reduced
+to fit the 150 word limit, but its still over..]
+
+[203 words]
 
 \end{abstract}
 
@@ -72,14 +72,15 @@ the mixed fisheries under the EU landings obligation. [FINAL PARAGRAPH NEEDS WOR
 
 \subsection{Mixed fisheries and the EU landings obligation} 
 
-Relatively recent efforts to reduce exploitation rates in industrial fisheries has begun the process of 
-rebuilding depleted fish populations \cite{Worm2009}.
-Improved management of fisheries has the potential to increase population sizes
-and allow increased sustainable catches, yet fisheries catch globally remains stagnant
-\cite{FAO2016}. In light of projected increased demand for fish protein
-\cite{B??n??2016} there is an important role for well managed fisheries to play
-in supporting future food security \cite{Mcclanahan2015} and so there remains a
-need to ensure fisheries are managed efficiently to maximise productivity.
+Recent efforts to reduce exploitation rates in commercial fisheries has begun
+the process of rebuilding depleted fish populations \cite{Worm2009}.  Improved
+management of fisheries has the potential to increase population sizes and
+allow increased sustainable catches, yet fisheries catch globally remains
+stagnant \cite{FAO2016}. In light of projected increased demand for fish
+protein \cite{B??n??2016} there is an important role for well managed fisheries
+to play in supporting future food security \cite{Mcclanahan2015} and so there
+remains a need to ensure fisheries are managed efficiently to maximise
+productivity.
 
 A particular challenge in realising increased catches from rebuilt populations
 is maximising yields from mixed fisheries \cite{Branch2008, Kuriyama2016,
@@ -92,16 +93,16 @@ or overexploitation of the weaker species occurs while fishers continue to
 catch more healthy species and throw back (`discard') the fish for which they
 have no quota.
 
-Sustainability of European fisheries has been hampered by this `mixed
-fishery problem' for decades with large-scale discarding resulting \cite{Borges2015,
-Uhlmann2014}.  However, a paradigm shift is being introduced under the
+Sustainability of European fisheries has been hampered by this `mixed fishery
+problem' for decades with large-scale discarding resulting \cite{Borges2015,
+	Uhlmann2014}.  However, a paradigm shift is being introduced under the
 EU Common Fisheries Policy (CFP) reform of 2012 through two significant
 management changes.  First, by 2019 all fish that are caught are due to be
 counted against the respective stock quota; second, by 2020 all fish stocks
 must be fished so as to be able to produce their Maximum Sustainable Yield
 (MSY)\cite{EuropeanParliamentandCounciloftheEuropeanUnion2013}. The changes are
-expected to contribute to attainment of the goals of Good Environmental Status (GES) under
-the European Marine Strategy Framework Directive (MSFD;
+expected to contribute to attainment of the goals of Good Environmental Status
+(GES) under the European Marine Strategy Framework Directive (MSFD;
 \cite{EuropeanParliament2008}) and move Europe towards an ecosystem based
 approach to fisheries management \cite{Garcia2003}. Unless fishers can avoid
 catch of unwanted species they will have to stop fishing when reaching their
@@ -117,53 +118,60 @@ method (e.g. trawling to netting), changing technical gear characteristics
 fishing activity \cite{Fulton2011b, vanPutten2012a}.
 
 Spatio-temporal management measures (such as time-limited fishery closures)
-have been applied to reduce unwanted catch with varying degrees of
-success (e.g.  \cite{Needle2011, Holmes2011, Beare2010, Dinmore2003}) while
-move-on rules have also been proposed or implemented to influence catch rates
-of particular vulnerable species in order to reduce or eliminate discards
+have been applied to reduce unwanted catch with varying degrees of success
+(e.g.  \cite{Needle2011, Holmes2011, Beare2010, Dinmore2003}) while move-on
+rules have also been proposed or implemented to influence catch rates of
+particular vulnerable species in order to reduce or eliminate discards
 (e.g.\cite{Gardner2008, Dunn2011, Dunn2014a}). However, such measures have
 generally been targeted at individual species without considering associations
 and interactions among several species. Highly mixed fisheries are complex with
 spatial, technological and community interactions combining. The design of
 spatio-temporal management measures which aim to allow exploitation of healthy
 stocks while protecting weaker stocks requires understanding of these
-interactions at a meaningful scale to managers and fishers. Here, our goal is to develop a
-framework for understanding these complexities. We do so by implementing a
-spatio-temporal dimension reduction method and use the results to draw
-inference and create a framework to identify trends common among species groups
-to describe where spatial measures can contribute to mitigating unwanted
-catches in mixed fisheries.
+interactions at a meaningful scale to managers and fishers. Here, our goal is
+to develop a framework for understanding these complexities. We do so by
+implementing a spatio-temporal dimension reduction method and use the results
+to draw inference and create a framework to identify trends common among
+species groups to describe where spatial measures can contribute to mitigating
+unwanted catches in mixed fisheries.
 
 [580 words]
 
 \subsection{Framework for analysing spatio-temporal mixed fisheries
 	interactions}
 
-We present a framework for analysing how far spatio-temporal avoidance can contribute
-towards mitigating imbalances in quota in mixed fisheries. We use fisheries-independent survey data to characterise the spatio-temporal dynamics of key
-components of a fish community by employing a geostatistical Vector
+We present a framework for analysing how far spatio-temporal avoidance can
+contribute towards mitigating imbalances in quota in mixed fisheries. We use
+fisheries-independent survey data to characterise the spatio-temporal dynamics
+of key components of a fish community by employing a geostatistical Vector
 Autoregressive Spatio-temporal model (VAST). We implement a factor analysis
 decomposition to describe trends in spatio-temporal dynamics of the different
 species as a function of \textit{n} latent variables \cite{Thorson2015} to
-identify community dynamics and drivers common among species groups. Of particular importance for mixed fisheries is the ability to separate species by underlying factors, which can then be investigated for what spatio-temporal separation they pertain to. We separately model spatio-temporal encounter probability and catch rates to allow
-identification of differences in associations for distribution of the species
-groups and densities upon encounter \cite{Thorson2015a}, by employing 
-Gaussian Markov Random Fields (GMRFs) to capture spatial and temporal
-dependence within and among species groups for both encounter probability and
-catch rates \cite{Thorson2013}. VAST is set in a mixed modelling framework
-to allow estimation of fixed effects to account for systematic differences
-driving encounter and catches, such as survey catch rate differences while
-random effects capture the spatio-temporal dynamics of the fish community.
+identify community dynamics and drivers common among species groups. Of
+particular importance for mixed fisheries is the ability to separate species by
+underlying factors, which can then be investigated for what spatio-temporal
+separation they pertain to. We separately model spatio-temporal encounter
+probability and catch rates to allow identification of differences in
+associations for distribution of the species groups and densities upon
+encounter \cite{Thorson2015a}, by employing Gaussian Markov Random Fields
+(GMRFs) to capture spatial and temporal dependence within and among species
+groups for both encounter probability and catch rates \cite{Thorson2013}. VAST
+is set in a mixed modelling framework to allow estimation of fixed effects to
+account for systematic differences driving encounter and catches, such as
+survey catch rate differences while random effects capture the spatio-temporal
+dynamics of the fish community.
 
 [200 words]
 
 \subsection{Dynamics of Celtic Sea fisheries}
 
-We use the highly mixed demersal fisheries of the Celtic Sea as a case study. The Celtic Sea is a
-temperate sea where a large number of species make up the commercial catches.
-Fisheries are spatially and temporally complex with mixed fisheries undertaken
-by several nations using different gear types \cite{Ellis2000, Gerritsen2012}. Close to 150 species have been identified in the 
-  commercial catches of the Celtic Sea, with approximately 30 species dominating the catch [Mateo Maria, Pawlowski Lionel, Robert Marianne (2017). Highly mixed fisheries: fine-scale spatial patterns in retained catches of French fisheries in the Celtic Sea . ICES Journal of Marine Science, 74(1), 91-101.].
+We use the highly mixed demersal fisheries of the Celtic Sea as a case study.
+The Celtic Sea is a temperate sea where a large number of species make up the
+commercial catches.  Fisheries are spatially and temporally complex with mixed
+fisheries undertaken by several nations using different gear types
+\cite{Ellis2000, Gerritsen2012}. Close to 150 species have been identified in
+the commercial catches of the Celtic Sea, with approximately 30 species
+dominating the catch \cite{Mateo2016}.
 
 We parametrise our spatio-temporal model using catch data from seven fisheries
 independent surveys undertaken in the Celtic Sea over the period 1990 - 2015
@@ -175,9 +183,9 @@ Atlantic whiting (\textit{Merlangius merlangus}), European Hake
 megrim (\textit{Lepidorhombus whiffiagonis}), European Plaice
 (\textit{Pleuronectes platessa}) and Common Sole (\textit{Solea solea}). These
 species make up \textgreater 60 \% of landings by towed fishing gears for the
-area (average 2011 - 2015, STECF data [INCLUDE REF]). Each species was separated into
-juvenile and adult size classes based on their legal minimum conservation
-reference size (Table S2).
+area (average 2011 - 2015, STECF data [INCLUDE REF]). Each species was
+separated into juvenile and adult size classes based on their legal minimum
+conservation reference size (Table S2).
 
 We analyse the data to understand how the different associations among emergent
 species-groups (combination of species and size class) and their potential
@@ -189,28 +197,30 @@ catches of quota species under the EU landing obligation.
 
 \subsection{Common spatial patterns driving species associations} A spatial
 dynamic factor analysis decomposes the dominant spatial patterns driving
-differences in encounter probability and abundance. Figure 1 shows the first
-three factors for (a) average spatial encounter probability and (b) average
-density [AVOID SENTENCES SAYING WHAT THE FIGURE/TABLE IS, USE THE SPACE TO SAY SOMETHING ABOUT THE RESULTS - CAPTION DOES THE REST]. The first three factors account of 83.7 \% of the variance in
-encounter probability and 69 \% of the variance in density, respectively. A
-clear spatial pattern can been seen both for encounter probability and density,
-with a positive association with the first factor in the inshore North Easterly
-part of the Celtic Sea into the Bristol Channel and Western English Channel,
-moving to a negative association offshore in the south-westerly waters (Figure 1). On the
-second factor a North / South split can be seen for encounter probability at
-approximately 49$^{\circ}$ N while density is more driven by a positive
-association in the deeper westerly waters.  The opposite is evident on the
-third factor, with a positive association with the Easterly waters for
-encounter probability and negative with the westerly waters, while density is
-driven by a North / South split.
+differences in encounter probability and abundance. The first three factors
+account of 83.7 \% of the variance in encounter probability and 69 \% of the
+variance in density, respectively. A clear spatial pattern can been seen both
+for encounter probability and density, with a positive association with the
+first factor in the inshore North Easterly part of the Celtic Sea into the
+Bristol Channel and Western English Channel, moving to a negative association
+offshore in the south-westerly waters (Figure 1). On the second factor a North
+/ South split can be seen for encounter probability at approximately
+49$^{\circ}$ N while density is more driven by a positive association in the
+deeper westerly waters.  The opposite is evident on the third factor, with a
+positive association with the Easterly waters for encounter probability and
+negative with the westerly waters, while density is driven by a North / South
+split.
 
-[NEXT TWO PARAGRAPHS CAN BE MOVED LOWER OR SUPPLEMENTARY. DISCUSS HERE TO WHICH SPECIES WERE ASSOCIATED WITH WHICH FACTORS INTRODUCED ABOVE, I.E., FIGURE 2.]In a preliminary investigation of the main observed covariates influencing the factors, the first factor was highly correlated with log(depth) for both encounter
-probability (-0.85, CI = -0.88 to -0.81; Figure S1) and density (-0.71, CI =
--0.77 to -0.65; Figure S2). A random forest classification tree assigned 80 \%
-of the variance in the first factor for encounter probability to depth and
-predominant substrate type, with the majority (86 \%) of the variance explained
-by depth. The variance explained by these variables dropped to 25 \% on the
-second factor with a more even split between depth and substrate, while
+[NEXT TWO PARAGRAPHS CAN BE MOVED LOWER OR SUPPLEMENTARY. DISCUSS HERE TO WHICH
+SPECIES WERE ASSOCIATED WITH WHICH FACTORS INTRODUCED ABOVE, I.E., FIGURE 2.]In
+a preliminary investigation of the main observed covariates influencing the
+factors, the first factor was highly correlated with log(depth) for both
+encounter probability (-0.85, CI = -0.88 to -0.81; Figure S1) and density
+(-0.71, CI = -0.77 to -0.65; Figure S2). A random forest classification tree
+assigned 80 \% of the variance in the first factor for encounter probability to
+depth and predominant substrate type, with the majority (86 \%) of the variance
+explained by depth. The variance explained by these variables dropped to 25 \%
+on the second factor with a more even split between depth and substrate, while
 explaining 60 \% of the variance on the third factor.  For density, the
 variables explained less of the variance with 62 \%, 35 \%, and 31 \% for each
 of the factors, respectively.
@@ -231,39 +241,44 @@ analysis can adequately characterise these influences.
 	dynamics}
 
 While there are clear patterns in the factor coefficients describing spatial
-differences in average encounter probability and density (Figure 1), the inter-annual
-differences in factor coefficients show less structure (Figures S4, S5).
-Temperature is often included as a covariate in species distribution models,
-but was found not to contribute to the variance in the factor coefficients
-(Figure S6, correlations for either encounter probability or density $\sim$ 0).
+differences in average encounter probability and density (Figure 1), the
+inter-annual differences in factor coefficients show less structure (Figures
+S4, S5).  Temperature is often included as a covariate in species distribution
+models, but was found not to contribute to the variance in the factor
+coefficients (Figure S6, correlations for either encounter probability or
+density $\sim$ 0).
 
 While spatio-temporal factor coefficients did not show consistent trends from
-year to year, among species groups there were clear relationships (Figure 2). The same factors appear to drive spatio-temporal distributions of
-megrim, anglerfish species and hake (the deeper water species, species grouping
-negatively associated with the second axes of Figure 2a) and the roundfish
-and flatfish (species grouping more positively associated with the second axes of Figure 2a). For spatio-temporal density (Figure 2b) cod, haddock
-and whiting (the roundfish species) are separated from plaice, sole (the
-flatfish) and deeper water species. As such, higher catches of a species within
-a group would be expected when catching another species within that group. This
-suggests that a common environmental driver is influencing the distributions of
-the species groups, and that driver differentially affects the species groups.  
+year to year, among species groups there were clear relationships (Figure 2).
+The same factors appear to drive spatio-temporal distributions of megrim,
+anglerfish species and hake (the deeper water species, species grouping
+negatively associated with the second axes of Figure 2a) and the roundfish and
+flatfish (species grouping more positively associated with the second axes of
+Figure 2a). For spatio-temporal density (Figure 2b) cod, haddock and whiting
+(the roundfish species) are separated from plaice, sole (the flatfish) and
+deeper water species. As such, higher catches of a species within a group would
+be expected when catching another species within that group. This suggests that
+a common environmental driver is influencing the distributions of the species
+groups, and that driver differentially affects the species groups.  
 
 [178 words]
 
-\subsection{Spatial correlations show three distinct species-group associations}
-Pearson correlation coefficients for the modelled average spatial encounter
-probability (Figure 3a) show clear strong associations between adult and
-juvenile size classes for all species (\textgreater 0.75 for all species except
-hake, 0.56).  Among species groups, hierarchical clustering identified the same
-three common groups as above, with roundfish (cod, haddock, whiting) closely
-grouped in their association, with correlations for adult cod with adult
-haddock and adult whiting of 0.73 and 0.5 respectively, while adult haddock
-with adult whiting was 0.63. Flatfish (plaice and sole) are also strongly
-correlated with adult plaice and sole having a coefficient of 0.75.  The final
-group are principally the species found in the deeper waters (hake, megrim and
-both anglerfish species) with the megrim strongly associated with the budegassa
-anglerfish species (0.88). Negative relationships were found between plaice-sole and the monkfish species (-0.27, -0.26 for the adult size class with
-budegassa adults respectively) and hake (-0.33, -0.37) indicating spatial separation in distributions.
+\subsection{Spatial correlations show three distinct species-group
+	associations} Pearson correlation coefficients for the modelled average
+spatial encounter probability (Figure 3a) show clear strong associations
+between adult and juvenile size classes for all species (\textgreater 0.75 for
+all species except hake, 0.56).  Among species groups, hierarchical clustering
+identified the same three common groups as above, with roundfish (cod, haddock,
+whiting) closely grouped in their association, with correlations for adult cod
+with adult haddock and adult whiting of 0.73 and 0.5 respectively, while adult
+haddock with adult whiting was 0.63. Flatfish (plaice and sole) are also
+strongly correlated with adult plaice and sole having a coefficient of 0.75.
+The final group are principally the species found in the deeper waters (hake,
+megrim and both anglerfish species) with the megrim strongly associated with
+the budegassa anglerfish species (0.88). Negative relationships were found
+between plaice-sole and the monkfish species (-0.27, -0.26 for the adult size
+class with budegassa adults respectively) and hake (-0.33, -0.37) indicating
+spatial separation in distributions.
 
 Correlation coefficients for the average density (Figure 3b) show less
 significant positive or negative relationships among species groups then for
@@ -281,36 +296,39 @@ the other successfully.
 
 In addition to the average spatial correlations, we also estimate
 spatio-temporal correlations.  The spatial correlations (representing the
-average correlations across all years) from the population correlations [DEFINE WHAT IS MEANT BY POPULATION CORRELATION] are
-linearly associated with the spatio-temporal population correlations
-(representing how correlations change from year to year), indicating generally
-predictable relationships between species groups from one year to the next,
-i.e. a positive or negative association between two species groups is likely be
-persist from one year to the next. The correlation coefficients were 0.59 (0.52
-- 0.66) and 0.47 (0.38 - 0.55) for encounter probability and density
-respectively.  However, a linear regression between the spatial correlations
-and the spatio-temporal correlations shows high variance (R\textsuperscript{2}
-= 0.36 and 0.22 respectively), indicating that the scale of these relationships
-does change from one-year to the next. This would have implications for the
-predictability of the relationship between catches of one species group and
-another when trying to balance catch with quotas in mixed fisheries. It can
-also be seen in the spatial factor scores that there are subtle differences in
-spatial patterns in factor coefficients from one year to the next (Figures S5
-and S6) indicating changes may be driven by temporally changing environmental
-factors.
+average correlations across all years) from the population correlations [DEFINE
+WHAT IS MEANT BY POPULATION CORRELATION] are linearly associated with the
+spatio-temporal population correlations (representing how correlations change
+from year to year), indicating generally predictable relationships between
+species groups from one year to the next, i.e. a positive or negative
+association between two species groups is likely be persist from one year to
+the next. The correlation coefficients were 0.59 (0.52 - 0.66) and 0.47 (0.38 -
+0.55) for encounter probability and density respectively.  However, a linear
+regression between the spatial correlations and the spatio-temporal
+correlations shows high variance (R\textsuperscript{2} = 0.36 and 0.22
+respectively), indicating that the scale of these relationships does change
+from one-year to the next. This would have implications for the predictability
+of the relationship between catches of one species group and another when
+trying to balance catch with quotas in mixed fisheries. It can also be seen in
+the spatial factor scores that there are subtle differences in spatial patterns
+in factor coefficients from one year to the next (Figures S5 and S6) indicating
+changes may be driven by temporally changing environmental factors.
 
 [459 words]
 
 
 \subsection{Subtle differences in distributions may be important to separate
-	catches within groups under the landing obligation} 
-The analysis shows the interdependence within species groups (roundfish,
-flatfish and deeper water species) where catching one species within the group
-indicates a high probability of catching the other species, which has important
-implications for how spatial avoidance can be used to support implementation of
-the EU's landings obligation. If production from mixed fisheries is to be maximised,
-decoupling catches of species between and within the groups will be key. For example, asking where he maximal separation in the densities of two coupled species is likely to occur? To address this requirement, we map the difference in spatial distribution within a group for each
-of the species groupings for a single year (2015) (Figure 4). 
+	catches within groups under the landing obligation} The analysis shows
+the interdependence within species groups (roundfish, flatfish and deeper water
+species) where catching one species within the group indicates a high
+probability of catching the other species, which has important implications for
+how spatial avoidance can be used to support implementation of the EU's
+landings obligation. If production from mixed fisheries is to be maximised,
+decoupling catches of species between and within the groups will be key. For
+example, asking where he maximal separation in the densities of two coupled
+species is likely to occur? To address this requirement, we map the difference
+in spatial distribution within a group for each of the species groupings for a
+single year (2015) (Figure 4). 
 
 Figure 4a indicates that cod had a more North-westerly distribution than
 haddock, while cod was more westerly distributed than whiting roughly
@@ -331,48 +349,31 @@ the coast of France.
 Figure 4h shows the predicted catch distribution from a "typical" Otter trawl
 gear and Beam trawl gear fishing at three different locations. As can be seen,
 both the gear selectivity and area fished play important contributions to the
-catch compositions; in the inshore area (66 [WHY NOT LOCATION `A'?]) plaice and sole are the two main
-species in catch reflecting their distribution and abundance, though the otter
-trawl gear catches a greater proportion of plaice to sole than the beam trawl.
-The area between the UK and Ireland (79) has a greater contribution of whiting,
-haddock, cod, hake and anglerfishes in the catch with the Otter trawl catching
-a greater proportion of the roundfish, haddock, whiting and cod. The offshore
-area has a higher contribution of megrim, anglerfishes and hake with the Otter
-trawl catching a greater share of hake and the Beam trawl a greater proportion
-of megrim. Megrim dominates the catch for both gears in area 216, reflecting
-its relative abundance in the area.
-
-[[WORK IN PROGRESS, NOT SURE WHETHER TO KEEP OR DEVELOP...	
-[SUGGEST WE JUST CITE THE REFERENCE TO THIS IN THE DISCUSSION PAUL AS WE NEED TO KEEP THE MESSAGE SIMPLE - `SPATIOTEMPORAL COMPLEXITY REDUCED']
-Figure 5 shows the joint production function for the entire spatial domain,
-giving the global production sets for the years 2011 - 2015. It gives the space
-in which vessels have to operate where they can change the relative composition
-of each species in the catch as a function of changing location fished only.
-The convex hull of the space is the flexibility vessels have in order to adapt
-to the changing fishing opportunities given the association of species with
-each other\cite{Reimer2017}. As can be seen from Figure 5a which shows the
-trade-off between cod and haddock for an Otter trawler....
-
-Figure 5b shows the same for plaice and sole for a Beam trawler...
-STRUGGLING TO DEFINE WHAT IS 'LOTS' AND WHAT IS 'LITTLE' SPACE
-OBJECTIVELY...?]]
-
+catch compositions; in the inshore area (location 'A') plaice and sole are the
+two main species in catch reflecting their distribution and abundance, though
+the otter trawl gear catches a greater proportion of plaice to sole than the
+beam trawl.  The area between the UK and Ireland (location 'B') has a greater
+contribution of whiting, haddock, cod, hake and anglerfishes in the catch with
+the Otter trawl catching a greater proportion of the roundfish, haddock,
+whiting and cod. The offshore area has a higher contribution of megrim,
+anglerfishes and hake with the Otter trawl catching a greater share of hake and
+the Beam trawl a greater proportion of megrim. Megrim dominates the catch for
+both gears in location 'C', reflecting its relative abundance in the area.
 [489 words]
 
 \subsection{Application of framework to support implementation landing
-	obligation in mixed fisheries}
-In application to the
-Celtic Sea we have identified spatial separation of three distinct species
-groupings (roundfish, flatfish and deeper water species) while showing that
-only subtle differences in distributions within species groups. The differences
-in catch compositions between gears at the same location in Figure 4h show that
-changing fishing methods can go some way to affecting catch, yet that
-differences in catches between locations are likely to be more important. For
-example, beam trawls fishing at the inshore locations (e.g. site 66 in Figure
-4) are likely to predominately catch plaice and sole, yet switching to the
-offshore locations (e.g. site 216) would likely yield greater catches of megrim
-and anglerfishes. Such changes in spatial fishing patterns are likely to play
-an important role in supporting implementation of the landings obligation.
+	obligation in mixed fisheries} In application to the Celtic Sea we have
+identified spatial separation of three distinct species groupings (roundfish,
+flatfish and deeper water species) while showing that only subtle differences
+in distributions within species groups. The differences in catch compositions
+between gears at the same location in Figure 4h show that changing fishing
+methods can go some way to affecting catch, yet that differences in catches
+between locations are likely to be more important. For example, beam trawls
+fishing at the inshore locations (e.g. location 'A' in Figure 4) are likely to
+predominately catch plaice and sole, yet switching to the offshore locations
+(e.g. location 'C') would likely yield greater catches of megrim and
+anglerfishes.  Such changes in spatial fishing patterns are likely to play an
+important role in supporting implementation of the landings obligation.
 
 More challenging is within-group spatial separation due to significant overlap
 in spatial distributions for the species, driven by common environmental
@@ -387,8 +388,10 @@ A role that science can play in supporting effectiveness of spatio-temporal
 avoidance could be to provide probabilistic advice on likely hotspots for high
 probability of species occurrence and high species density which can inform
 fishing decisions. Such advice could be based also on data obtained directly
-from commercial fishing vessels at a higher temporal resolution, providing real-time forecasts to inform fishing choices that also captures seasonal
-differences in distributions. The framework we develop here could be extended to include commercial data and real-time updates.
+from commercial fishing vessels at a higher temporal resolution, providing
+real-time forecasts to inform fishing choices that also captures seasonal
+differences in distributions. The framework we develop here could be extended
+to include commercial data and real-time updates.
 
 An important question for the implementation of the EU's landing obligation is
 how far spatial avoidance can go to achieving catch balancing in fisheries.
@@ -399,6 +402,25 @@ scenarios. Such results could inform what additional measures are needed to
 support transition to the new management system, in order to ensure mixed
 fisheries can sustainably increased catches consistent with rebuilding fish
 populations and help support future food security.
+
+[[Figure 5 shows the joint production function for the entire spatial domain,
+giving the global production sets for the years 2011 - 2015. It gives the space
+in which vessels have to operate where they can change the relative composition
+of each species in the catch as a function of changing location fished only.
+The convex hull of the space is the flexibility vessels have in order to adapt
+to the changing fishing opportunities given the association of species with
+each other\cite{Reimer2017}. As can be seen from Figure 5a which shows the
+trade-off between cod and haddock for an Otter trawler....]]
+
+[[Common environmental drivers of distribution for groups of species highlights
+the scale of the challenge in separating catches within the species-groups
+using spatial management measures, having important implications for management
+of the mixed fisheries under the EU landings obligation. [FINAL PARAGRAPH NEEDS
+WORK. Perhaps something like commented section below?] The framework we propose
+reduces the complexity of the system to it's major components and thus allows
+informed management discussion over more traditional anecdotal knowledge of
+single-species distribution in space and time. ]]
+
 
 [words 416]
 
@@ -665,16 +687,6 @@ References: 37 / 50 \\
 	locations in 2015}
 \end{center}
 \end{figure}
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=\linewidth]{"Figure 5 - TechnicalEfficiency"}
-	\label{fig:5}
-	\caption{Example of technical efficiency space}
-\end{center}
-\end{figure}
-
-
 
 
 \end{document}
