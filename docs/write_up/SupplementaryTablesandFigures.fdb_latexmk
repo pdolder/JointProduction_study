@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1503587201 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1503587203
+["pdflatex"] 1504012348 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1504012351
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -50,8 +50,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1503478936 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1503478974 3854907 d1a0e17960728ead39eae1b7780bb183 ""
-  "SupplementaryTablesandFigures.aux" 1503587203 4341 a01c15d81a73658390f1845a1f1dd69b ""
-  "SupplementaryTablesandFigures.tex" 1503587197 8355 d46acef186dec351b0d621e3f7f2c7db ""
+  "SupplementaryTablesandFigures.aux" 1504012351 4341 a01c15d81a73658390f1845a1f1dd69b ""
+  "SupplementaryTablesandFigures.tex" 1503587247 8355 d46acef186dec351b0d621e3f7f2c7db ""
   "figures/Aniso.png" 1501151616 83359 406208d7589197b1b16d7bf10c3fa70e ""
   "figures/AreaMap.png" 1501079240 113066 8bc7c5c8bfd6688b2d5b293b77d0e606 ""
   "figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
@@ -68,9 +68,9 @@
   "figures/Suppl - SpatioTempLoadingsEpsilon1.png" 1498475530 1950479 de73eb8763d0c7a605334226b8231d20 ""
   "figures/Suppl - SpatioTempLoadingsEpsilon2.png" 1503582620 1918157 6a54e3c4d6294492f6510b1234a30769 ""
   "figures/Suppl - TempAndFactors.png" 1500041845 1332083 3b18635891ba1169ac7b2976e03f8630 ""
-  "figures/Suppl_FactorLoading_Omega1.png" 1503586761 82303 15a1e33493e1ff69b7b4521230347103 ""
-  "figures/Suppl_FactorLoading_Omega2.png" 1503586765 83064 2affccd149f34687da351726b8df0c3b ""
+  "figures/Suppl_FactorLoading_Omega1.png" 1504012271 93178 0af4ec41c2b65aafef3b912eef0d98e7 ""
+  "figures/Suppl_FactorLoading_Omega2.png" 1504012273 87992 8220a97c9afd18ee9b4303ea6d1d6c57 ""
   (generated)
+  "SupplementaryTablesandFigures.pdf"
   "SupplementaryTablesandFigures.aux"
   "SupplementaryTablesandFigures.log"
-  "SupplementaryTablesandFigures.pdf"

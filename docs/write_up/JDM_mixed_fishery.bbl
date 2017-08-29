@@ -285,6 +285,14 @@
 \newblock
   \urlprefix\url{http://icesjms.oxfordjournals.org/lookup/doi/10.1093/icesjms/fsw129}.
 
+\bibitem{STECF2017}
+\bibinfo{author}{STECF}.
+\newblock \bibinfo{title}{{EU's Scientific, Technical and Economic Committee on
+  Fisheries (STECF): Fisheries Dependent Information Database}}
+  (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{https://stecf.jrc.ec.europa.eu/dd/effort/graphs-annex}.
+
 \bibitem{Robinson2011}
 \bibinfo{author}{Robinson, L.~M.} \emph{et~al.}
 \newblock \bibinfo{title}{{Pushing the limits in marine species distribution

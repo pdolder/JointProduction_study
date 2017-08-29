@@ -34,12 +34,26 @@ rownames(Var_list[[Par_name]]$L_pj_rot) <- category_names
 }
 }
 
-
 PCA.DFs <- lapply(Var_list, function(x) {
 			  DF <- as.data.frame(x$L_pj_rot)
 			  colnames(DF) <- paste('Factor',1:9, sep = ' ')
 			  return(DF)
 	     })
+
+## explained variance
+## sum(L_pj_rot[f]^2)/sum(L_pj_rot^2)
+
+params <- names(Var_list)
+
+var.DF <- lapply(params, function(y) {
+DF <- data.frame(variable = y, 
+		 factor = paste("Factor", 1:9, sep = " "),
+		 values = sapply(1:9, function(x) {round(100 * sum(Var_list[[y]]$L_pj_rot[,x]^2) / sum(Var_list[[y]]$L_pj_rot^2),1)})
+)
+		 return(DF)
+})
+
+var.DF <- do.call(rbind, var.DF)
 
 ## Plots
 library(ggplot2)
@@ -50,14 +64,16 @@ library(ggthemes)
 ## Omega 1
 
 O1 <- data.frame(species = rownames(PCA.DFs[["Omega1"]]), reshape2::melt(PCA.DFs[["Omega1"]]))
+colnames(O1)[2] <- "factor"
 
 # Colour for the labels and bars
 O1$col <- ifelse(O1$value > 0, "blue", "red")
 
-ggplot(filter(O1, variable %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
-	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ variable) +
+ggplot(filter(O1, factor %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
+	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ factor) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none") +
-	ggtitle("average spatial encounter probability") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("")
+	ggtitle("average spatial encounter probability") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + 
+	geom_text(data = filter(var.DF, variable == "Omega1", factor %in% paste("Factor", 1:3, sep = " ")), aes(x = 7, y = 3,label = paste("Variance explained = ", values, "%")), inherit.aes  =F, size = 3)
 
 ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Omega1.png'), width = 12, height = 4)
 
@@ -65,16 +81,18 @@ ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Omega1.png'), widt
 
 ## Omega 2
 
-
 O2 <- data.frame(species = rownames(PCA.DFs[["Omega2"]]), reshape2::melt(PCA.DFs[["Omega2"]]))
+colnames(O2)[2] <- "factor"
 
 # Colour for the labels and bars
 O2$col <- ifelse(O2$value > 0, "blue", "red")
 
-ggplot(filter(O2, variable %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
-	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ variable) +
+ggplot(filter(O2, factor %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
+	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ factor ) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none") + 
-	ggtitle("average spatial density") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("")
+	ggtitle("average spatial density") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + 
+	geom_text(data = filter(var.DF, variable == "Omega2", factor %in% paste("Factor", 1:3, sep = " ")), aes(x = 7, y = 3,label = paste("Variance explained = ", values, "%")), inherit.aes  =F, size = 3)
+
 
 ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Omega2.png'), width = 12, height = 4)
 
@@ -82,30 +100,36 @@ ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Omega2.png'), widt
 ## Epsilon 1
 
 E1 <- data.frame(species = rownames(PCA.DFs[["Epsilon1"]]), reshape2::melt(PCA.DFs[["Epsilon1"]]))
+colnames(E1)[2] <- "factor"
 
 # Colour for the labels and bars
 E1$col <- ifelse(E1$value > 0, "blue", "red")
 
-ggplot(filter(E1, variable %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
-	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ variable) +
+ggplot(filter(E1, factor %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
+	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ factor ) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none") +
-	ggtitle("spatiotemporal encounter probability") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("")
+	ggtitle("spatiotemporal encounter probability") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + 
+	geom_text(data = filter(var.DF, variable == "Epsilon1", factor %in% paste("Factor", 1:3, sep = " ")), aes(x = 7, y = 3,label = paste("Variance explained = ", values, "%")), inherit.aes  =F, size = 3)
 
-ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Epsilon1.png'), width = 12, height = 4)
+
+Ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Epsilon1.png'), width = 12, height = 4)
 
 
 
 ## Epsilon 2
 
 E2 <- data.frame(species = rownames(PCA.DFs[["Epsilon2"]]), reshape2::melt(PCA.DFs[["Epsilon2"]]))
+colnames(E2)[2] <- "factor"
 
 # Colour for the labels and bars
 E2$col <- ifelse(E2$value > 0, "blue", "red")
 
-ggplot(filter(E2, variable %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
-	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ variable) +
+ggplot(filter(E2, factor %in% paste("Factor", 1:3, sep = " ")), aes(x = species, y = value)) +
+	geom_bar(stat = 'identity', aes(fill = col), colour = "black") + facet_wrap(~ factor ) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none") + 
-	ggtitle("spatiotemporal density") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("")
+	ggtitle("spatiotemporal density") + scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + 
+	geom_text(data = filter(var.DF, variable == "Epsilon2", factor %in% paste("Factor", 1:3, sep = " ")), aes(x = 7, y = 3,label = paste("Variance explained = ", values, "%")), inherit.aes  =F, size = 3)
+
 
 ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Epsilon2.png'), width = 12, height = 4)
 
