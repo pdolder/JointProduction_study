@@ -112,7 +112,7 @@ ggplot(filter(E1, factor %in% paste("Factor", 1:3, sep = " ")), aes(x = species,
 	geom_text(data = filter(var.DF, variable == "Epsilon1", factor %in% paste("Factor", 1:3, sep = " ")), aes(x = 7, y = 3,label = paste("Variance explained = ", values, "%")), inherit.aes  =F, size = 3)
 
 
-Ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Epsilon1.png'), width = 12, height = 4)
+ggsave(file = file.path('..', 'figures', 'Suppl_FactorLoading_Epsilon1.png'), width = 12, height = 4)
 
 
 

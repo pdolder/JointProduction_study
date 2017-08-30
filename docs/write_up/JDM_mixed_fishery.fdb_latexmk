@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex JDM_mixed_fishery"] 1504030534 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1504030535
+["bibtex JDM_mixed_fishery"] 1504030534 "JDM_mixed_fishery.aux" "JDM_mixed_fishery.bbl" "JDM_mixed_fishery" 1504113396
   "/usr/share/texlive/texmf-dist/bibtex/bst/nature/naturemag.bst" 1136766823 34867 ae05936b307e5838449d1bb5fdbb2c19 ""
-  "JDM_mixed_fishery.aux" 1504030535 2182 56df17cd0c905fa16a0e24c8c51e176b ""
+  "JDM_mixed_fishery.aux" 1504113395 2182 56df17cd0c905fa16a0e24c8c51e176b ""
   "JDM_mixed_fishery.bcf" 1497536026 89671 9ff848901bc9060916b9d6b209d301bb ""
   "JSDM.bib" 1504029941 102587 b05535eff002acad786f85b99e2cd9a3 ""
   (generated)
-  "JDM_mixed_fishery.bbl"
   "JDM_mixed_fishery.blg"
-["pdflatex"] 1504030534 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1504030535
+  "JDM_mixed_fishery.bbl"
+["pdflatex"] 1504113395 "JDM_mixed_fishery.tex" "JDM_mixed_fishery.pdf" "JDM_mixed_fishery" 1504113396
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -118,13 +118,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1503478936 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1503478974 3854907 d1a0e17960728ead39eae1b7780bb183 ""
-  "JDM_mixed_fishery.aux" 1504030535 2182 56df17cd0c905fa16a0e24c8c51e176b ""
+  "JDM_mixed_fishery.aux" 1504113395 2182 56df17cd0c905fa16a0e24c8c51e176b ""
   "JDM_mixed_fishery.bbl" 1504030534 16663 0e5c226732bfaf335859eedadffc5b30 "bibtex JDM_mixed_fishery"
-  "JDM_mixed_fishery.tex" 1504030507 39662 c26819e6702700194b3635c2f17bc7bf ""
+  "JDM_mixed_fishery.tex" 1504113394 39600 ef79471d1b13faf98191ef14daa912d9 ""
   "nature.cls" 1502724197 4959 8f464302b0ec2c18bf8d2b631d4f5916 ""
   (generated)
+  "JDM_mixed_fishery.run.xml"
+  "JDM_mixed_fishery.pdf"
   "JDM_mixed_fishery.bcf"
   "JDM_mixed_fishery.log"
   "JDM_mixed_fishery.aux"
-  "JDM_mixed_fishery.pdf"
-  "JDM_mixed_fishery.run.xml"

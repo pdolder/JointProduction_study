@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  24 AUG 2017 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  30 AUG 2017 18:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -549,37 +549,37 @@ Package grfext Info: Graphics extension search list:
 (grfext)             \AppendGraphicsExtensions on input line 452.
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-)) <figures/"Figure 2 - SpatialFactorLoadingsOmega1Omega2".png, id=1, 578.16pt x 867.24pt>
-File: figures/"Figure 2 - SpatialFactorLoadingsOmega1Omega2".png Graphic file (type png)
-<use figures/"Figure 2 - SpatialFactorLoadingsOmega1Omega2".png>
-Package pdftex.def Info: figures/"Figure 2 - SpatialFactorLoadingsOmega1Omega2".png used on input line 23.
-(pdftex.def)             Requested size: 375.80544pt x 563.69934pt.
+)) <figures/"Fig1_Combined".png, id=1, 1589.94pt x 867.24pt>
+File: figures/"Fig1_Combined".png Graphic file (type png)
+<use figures/"Fig1_Combined".png>
+Package pdftex.def Info: figures/"Fig1_Combined".png used on input line 22.
+(pdftex.def)             Requested size: 469.75502pt x 256.23058pt.
 <figures/"Figure 3 - PCAstyle_Plots_SpatioTemp".png, id=2, 1156.32pt x 578.16pt>
 File: figures/"Figure 3 - PCAstyle_Plots_SpatioTemp".png Graphic file (type png)
 <use figures/"Figure 3 - PCAstyle_Plots_SpatioTemp".png>
-Package pdftex.def Info: figures/"Figure 3 - PCAstyle_Plots_SpatioTemp".png used on input line 34.
+Package pdftex.def Info: figures/"Figure 3 - PCAstyle_Plots_SpatioTemp".png used on input line 37.
 (pdftex.def)             Requested size: 469.75502pt x 234.87692pt.
 <figures/"Figure 1 - Omega1Omega2_Correlations_blank".png, id=3, 1606.0pt x 803.0pt>
 File: figures/"Figure 1 - Omega1Omega2_Correlations_blank".png Graphic file (type png)
 <use figures/"Figure 1 - Omega1Omega2_Correlations_blank".png>
-Package pdftex.def Info: figures/"Figure 1 - Omega1Omega2_Correlations_blank".png used on input line 44.
+Package pdftex.def Info: figures/"Figure 1 - Omega1Omega2_Correlations_blank".png used on input line 47.
 (pdftex.def)             Requested size: 469.75502pt x 234.87349pt.
 <figures/"Figure 4 - DensityDifferencesFigureswithCC".png, id=4, 1156.32pt x 867.24pt>
 File: figures/"Figure 4 - DensityDifferencesFigureswithCC".png Graphic file (type png)
 <use figures/"Figure 4 - DensityDifferencesFigureswithCC".png>
-Package pdftex.def Info: figures/"Figure 4 - DensityDifferencesFigureswithCC".png used on input line 57.
+Package pdftex.def Info: figures/"Figure 4 - DensityDifferencesFigureswithCC".png used on input line 60.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/Figure 2 - SpatialFactorLoadingsOmega1Omega2.png (PNG copy)>] [2 <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)> <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [3 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./Figures.aux) ) 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/Fig1_Combined.png (PNG copy)> <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)>] [2 <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [3 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./Figures.aux) ) 
 Here is how much of TeX's memory you used:
  3410 strings out of 493029
- 46820 string characters out of 6136234
+ 46663 string characters out of 6136234
  116867 words of memory out of 5000000
  6909 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,5n,32p,401b,269s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on Figures.pdf (3 pages, 5017617 bytes).
+Output written on Figures.pdf (3 pages, 6794514 bytes).
 PDF statistics:
  22 PDF objects out of 1000 (max. 8388607)
  11 compressed objects within 1 object stream
