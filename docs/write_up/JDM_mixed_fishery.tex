@@ -146,33 +146,39 @@ fisheries-independent survey data to characterise the spatiotemporal dynamics
 of key components of a fish community by employing a geostatistical Vector
 Autoregressive Spatiotemporal model (VAST). We implement a factor analysis
 decomposition to describe trends in spatiotemporal dynamics of the different
-species as a function of \textit{n} latent variables \cite{Thorson2015} to
-identify community dynamics and drivers common among species-groups. Of
-particular importance for mixed fisheries is the ability to analyse
-species-groups by underlying contributory factors, which can then be
-investigated for what spatio-temporal drivers to which they pertain and how
-these jointly affect species-groups. We separately model spatio-temporal
-encounter probability and catch rates to allow identification of differences in
-associations for distribution of the species-groups and densities upon
-encounter \cite{Thorson2015a}, by employing Gaussian Markov Random Fields
-(GMRFs) to capture spatial and temporal dependence within and among species
-groups for both encounter probability and catch rates \cite{Thorson2013}. VAST
-is set in a mixed modelling framework to allow estimation of fixed effects to
-account for systematic differences driving encounter and catches, such as
-survey catch rate differences, while random effects capture the spatio-temporal
-dynamics of the fish community.
+species as a function of latent variables \cite{Thorson2015} representing
+spatial variation (9 factors; which we call 'average' spatial variation) and
+spatio-temporal variation (9 factors) for encounter probability and positive
+catch rates (which we describe as 'positive density') separately. We use the
+resultant exploratory factor analysis to identify community dynamics and
+drivers common among 18 species-groups by presenting results through
+transformation of the loading matrices through a PCA rotation. 
+
+Of particular
+importance for mixed fisheries is the ability to analyse species-groups by
+underlying contributory factors, which can then be investigated for what
+spatiotemporal drivers to which they pertain and how these jointly affect
+species-groups. We separately model spatiotemporal encounter probability and
+catch rates to allow identification of differences in associations for
+distribution of the species-groups and densities upon encounter
+\cite{Thorson2015a}, by employing Gaussian Markov Random Fields (GMRFs) to
+capture spatial and temporal dependence within and among species groups for
+both encounter probability and catch rates \cite{Thorson2013}. VAST is set in a
+mixed modelling framework to allow estimation of fixed effects to account for
+systematic differences driving encounter and catches, such as differences in
+sampling efficiency (a.k.a.  catchability), while random effects capture the
+spatio-temporal dynamics of the fish community.
 
 [206 words]
 
 \subsection{Dynamics of Celtic Sea fisheries}
 
 We use the highly mixed demersal fisheries of the Celtic Sea as a case study.
-The Celtic Sea is a temperate sea where a large number of species make up the
-commercial catches.  Fisheries are spatially and temporally complex with mixed
-fisheries undertaken by several nations using different gear types
-\cite{Ellis2000, Gerritsen2012}. Close to 150 species have been identified in
-the commercial catches of the Celtic Sea, with approximately 30 species
-dominating the catch \cite{Mateo2016}.
+The Celtic Sea is a temperate sea where fisheries are spatially and temporally
+complex; mixed fisheries are undertaken by several nations using different gear
+types \cite{Ellis2000, Gerritsen2012}. Close to 150 species have been
+identified in the commercial catches of the Celtic Sea, with approximately 30
+species dominating the catch \cite{Mateo2016}.
 
 We parametrise our spatiotemporal model using catch data from seven fisheries
 independent surveys undertaken in the Celtic Sea over the period 1990 - 2015
@@ -199,53 +205,54 @@ catches of quota species under the EU landing obligation.
 \subsection{Common average spatial patterns driving species associations} A
 spatial dynamic factor analysis decomposes the dominant spatial patterns
 driving differences in encounter probability and abundance. The first three
-factors account for 83.7 \% of the between species-group variance in average
-encounter probability and 69 \% of the between species-group variance in
-average density, respectively. A clear spatial pattern can been seen both for
-encounter probability and density, with a positive coefficient associated with
-the first factor in the inshore North Easterly part of the Celtic Sea into the
-Bristol Channel and Western English Channel, moving to a negative association
-offshore in the south-westerly waters (Figure 1). The species-group loadings
-coefficients show plaice, sole and whiting to be positively associated with the
-first factor for encounter probability while the other species-groups are
-negatively associated. For average density, positive associations are
-also found for haddock and juvenile cod. This is indicative of a more inshore
-distribution for these species-groups. 
+factors (after PCA rotation) account for 83.7 \% of the between species-group
+variance in average encounter probability and 69 \% of the between
+species-group variance in average positive density, respectively. A clear
+spatial pattern can been seen both for encounter probability and positive
+density, with a positive value associated with the first factor in the inshore
+North Easterly part of the Celtic Sea into the Bristol Channel and Western
+English Channel, moving to a negative value offshore in the south-westerly
+waters (Figure 1). The species-group loadings coefficients show plaice, sole
+and whiting to be positively associated with the first factor for encounter
+probability while the other species-groups are negatively associated. For
+average positive density, positive associations are also found for haddock and
+juvenile cod. This is indicative of a more inshore distribution for these
+species-groups. 
 
-On the second factor a North / South split can be seen for encounter
-probability at approximately 49$^{\circ}$ N while density is more driven by a
-positive association in the deeper westerly waters as well as some inshore
-areas. Species-group associations with the second factor indicate there are
+On the second spatial factor for encounter probability a North / South split
+can be seen at approximately 49$^{\circ}$ N while positive density is more
+driven by a positive value in the deeper westerly waters as well as some
+inshore areas. Species-group values for the second factor indicate there are
 positive associations for juvenile monkfish (piscatorius), juvenile hake,
-juvenile megrim, plaice and juvenile whiting for average density, which may
-reflect two different spatial distributions in the more offshore and in the
-inshore areas (Figure 1).
+juvenile megrim, plaice and juvenile whiting with average positive density,
+which may reflect two different spatial distributions in the more offshore and
+in the inshore areas (Figure 1).
 
 On the third factor, there is a positive association with the Easterly waters
 for encounter probability and negative with the westerly waters. This manifests
 in the species associations as splitting the roundfish species cod, haddock and
 whiting which all have a positive association with the third factor for average
 encounter probability from the rest of the species-groups which have a negative
-association (Figure S1). Density is driven by a North / South split (Figure 1),
-with the positive coefficients in the Northerly areas. Juvenile monkfish
-(budgessa and piscatorius), cod, juvenile haddock, hake, adult plaice and
-whiting are also positively associated with the third factor towards the North
-while adult monkfish (budegassa and piscatorius), adult haddock, megrims,
-juvenile plaice and sole are negatively associated reflecting their more
-southerly distribution (Figure 1).
+association. Positive density is driven by a North / South split (Figure 1),
+with positive values in the Northerly areas. Juvenile monkfish (budgessa and
+piscatorius), cod, juvenile haddock, hake, adult plaice and whiting are also
+positively associated with the third factor towards the North while adult
+monkfish (budegassa and piscatorius), adult haddock, megrims, juvenile plaice
+and sole are negatively associated reflecting their more southerly distribution
+(Figure 1).
 
-While a factor composition is modelling unobserved drivers of distribution, we
-considered what might be driving the differences seen in the spatial factor
-loadings. The first factor was highly correlated with log(depth) for both
-encounter probability (-0.85, CI = -0.88 to -0.81; Figure S2) and density
-(-0.71, CI = -0.77 to -0.65; Figure S4). A random forest classification tree
-assigned 80 \% of the variance in the first factor for encounter probability to
-depth and predominant substrate type, with the majority (86 \%) of the variance
-explained by depth. The variance explained by these variables dropped to 25 \%
-on the second factor with a more even split between depth and substrate, while
-explaining 60 \% of the variance on the third factor.  For density, the
-variables explained less of the variance with 62 \%, 35 \%, and 31 \% for each
-of the factors, respectively.
+While this exploratory factor analysis is modelling unobserved drivers of
+distribution, we considered what might be driving the differences seen in the
+spatial factor loadings. The first factor was highly correlated with log(depth)
+for both encounter probability (-0.85, CI = -0.88 to -0.81; Figure S2) and
+positive density (-0.71, CI = -0.77 to -0.65; Figure S4). A random forest
+classification tree assigned 80 \% of the variance in the first factor for
+encounter probability to depth and predominant substrate type, with the
+majority (86 \%) of the variance explained by depth. The variance explained by
+these variables dropped to 25 \% on the second factor with a more even split
+between depth and substrate, while explaining 60 \% of the variance on the
+third factor.  For positive density, the variables explained less of the
+variance with 62 \%, 35 \%, and 31 \% for each of the factors, respectively.
 
 It is clear that depth and to a lesser extent substrate are important
 predictors for the main driver of similarities and differences in distributions
@@ -263,11 +270,11 @@ analysis can adequately characterise these influences.
 	dynamics}
 
 While there are clear spatial patterns in the factor coefficients describing
-differences in average encounter probability and density (Figure 1), the
-inter-annual differences in factor coefficients show less structure (Figures
-S5, S6). These inter-annual differences are important as they reflect the
-ability of fishers to predict where they can target species from one year to
-the next, without which it may be difficult to avoid unwanted catch.
+differences in average encounter probability and positive density (Figure 1),
+the inter-annual differences in factor coefficients show less structure
+(Figures S5, S6). These inter-annual differences are important as they reflect
+the ability of fishers to predict where they can target species from one year
+to the next, without which it may be difficult to avoid unwanted catch.
 
 While spatio-temporal factor coefficients did not show consistent trends from
 year to year, among species-groups there were clear relationships (Figure 2).
@@ -275,16 +282,16 @@ The same factors appear to drive spatio-temporal distributions of megrim,
 anglerfish species and hake (the deeper water species, species-grouping
 negatively associated with the second axes of Figure 2a) and the roundfish and
 flatfish (species-grouping more positively associated with the second axes of
-Figure 2a). For spatio-temporal density (Figure 2b) cod, haddock and whiting
-(the roundfish species) are separated from plaice, sole (the flatfish) and
-deeper water species. As such, it can be predicted that higher catches of a
+Figure 2a). For spatio-temporal positive density (Figure 2b) cod, haddock and
+whiting (the roundfish species) are separated from plaice, sole (the flatfish)
+and deeper water species. As such, it can be predicted that higher catches of a
 species within a group would be expected when catching another species within
-that group. This suggests that a common environmental driver is influencing the
-distributions of the species groups, and that driver differentially affects the
-species groups. Temperature is often included as a covariate in species
-distribution models, but was found not to contribute to the variance in the
-factor coefficients (Figure S7, correlations for either encounter probability
-or density $\sim$ 0).
+that group. This suggests that one or more common environmental drivers are
+influencing the distributions of the species groups, and that driver
+differentially affects the species groups. Temperature is often included as a
+covariate in species distribution models, but was found not to contribute to
+the variance in the factor coefficients (Figure S7, correlations for either
+encounter probability or positive density $\sim$ 0).
 
 [178 words]
 
@@ -309,7 +316,7 @@ relationships were found between plaice-sole and the monkfish species (-0.27,
 the associations among species seen in the factor loadings, with three distinct
 species-group assemblages being present.
 
-Correlation coefficients for the average density (Figure 3b) show less
+Correlation coefficients for the average positive density (Figure 3b) show less
 significant positive or negative relationships among species-groups then for
 encounter probability, but still evident are the strong association among the
 roundfish with higher catches of cod are associated with higher catches of
@@ -334,16 +341,17 @@ from one year to the next. This suggests that a positive or negative
 association between two species-groups is likely be persist from one year to
 the next, and that species-groups are consistently associated with each other
 in the catch. The correlation coefficients were 0.59 (0.52 - 0.66) and 0.47
-(0.38 - 0.55) for encounter probability and density respectively.  However, a
-linear regression between the spatial correlations and the spatio-temporal
-correlations shows high variance (R\textsuperscript{2} = 0.36 and 0.22
-respectively), indicating that the scale of these relationships does change
-from one-year to the next. This would have implications for the predictability
-of the relationship between catches of one species-group and another when
-trying to balance catch with quotas in mixed fisheries. It can also be seen in
-the spatial factor scores that there are subtle differences in spatial patterns
-in factor coefficients from one year to the next (Figures S5 and S6) indicating
-changes may be driven by temporally changing environmental factors.
+(0.38 - 0.55) for encounter probability and positive density respectively.
+However, a linear regression between the spatial correlations and the
+spatio-temporal correlations shows high variance (R\textsuperscript{2} = 0.36
+and 0.22 respectively), indicating that the scale of these relationships does
+change from one-year to the next. This would have implications for the
+predictability of the relationship between catches of one species-group and
+another when trying to balance catch with quotas in mixed fisheries. It can
+also be seen in the spatial factor scores that there are subtle differences in
+spatial patterns in factor coefficients from one year to the next (Figures S5
+and S6) indicating changes may be driven by temporally changing environmental
+factors.
 
 [560 words]
 
@@ -369,7 +377,7 @@ W, which can be seen by comparing the whiting distribution with both cod
 (Figure 4b) and haddock (Figure 4c). For the deeper water species Figures 4d
 and 4e indicate that hake are more densely distributed in two areas compared to
 anglerfishes\footnote{two species combined as they are managed as one} and
-megrim (though for megrim, a fairly even relative distribution elsewhere is
+megrim (though megrim has a stable density across the modelled area as
 indicated by the large amount of white space). For anglerfishes and megrim
 (Figure 4f), anglerfishes have a more easterly distribution than megrim. For
 the flatfish species plaice and sole (Figure 4g), plaice appear to be more
@@ -470,10 +478,10 @@ spatial dynamic factor analysis (SDFA).  In the model, spatio-temporal
 variation is represented through three-dimensional Gaussian Random Fields while
 covariates affecting catchability (to account for differences between fishing
 surveys) and density (to account for environmental preferences) can be
-incorporated for predictions of presence and density. The following briefly
-summarises the key methods implemented in the VAST framework. For full details
-of the model the reader is invited directed to Thorson \textit{et al} 2017
-\cite{Thorson2017}.
+incorporated for predictions of presence and positive density. The following
+briefly summarises the key methods implemented in the VAST framework. For full
+details of the model the reader is invited directed to Thorson \textit{et al}
+2017 \cite{Thorson2017}.
 
 \textbf{\textit{SDFA:}} A spatial dynamic factor analysis incorporates
 advances in joint dynamic species models \cite{Thorson2017} to take account
@@ -522,7 +530,7 @@ and positive catch rates modelling using a gamma- distribution \cite{Thorson2015
 With $\gamma_{*}(p_{i},t_{i})$, $\varepsilon_{*}(s_{i},p_{i},t_{i})$ and
 $\delta_{*}(p_{i}, v_{i})$ representing an intercept, spatio-temporal variation
 and a vessel effect ($v$) respectively for for either probability of encounter,
-$* = p$ or density $* = r$.
+$* = p$ or positive density $* = r$.
 
 \textbf{\textit{Spatio-temporal variation:}} The spatio-temporal variation is
 modelled using Gaussian Markov Random Fields (GMRF) where data is associated to
@@ -533,10 +541,11 @@ reflect the fact that correlations may decline in one direction faster than
 another (e.g. moving offshore) \cite{Thorson2013}.  The best fit estimated an
 anisotropic covariance where the correlations were stronger in a North-East -
 South-West direction, extending approximately 97 km and 140 km before
-correlations for encounter probability and density reduced to \textless 10 \%,
-respectively (Figure S10).  Incorporating the spatio-temporal correlations
-among and within species provides more efficient use of the data as inference
-can be made about poorly sampled locations from the covariance structure.
+correlations for encounter probability and positive density reduced to
+\textless 10 \%, respectively (Figure S10).  Incorporating the spatio-temporal
+correlations among and within species provides more efficient use of the data
+as inference can be made about poorly sampled locations from the covariance
+structure.
 
 A probability distribution for spatio-temporal variation in both encounter
 probability and positive catch rate was specified, $\varepsilon_{*}(s,p,t)$,
@@ -565,10 +574,10 @@ gears (more effective for round fish species) and beam trawl gears (more
 effective for flatfish species).
 
 No fixed covariates for habitat quality or other predictors of encounter
-probability or density were include. While incorporation may improve the
-spatial predictive performance \cite{Thorson2017}, it was not found to be the
-case here based on model selection with Akaike Information Criterion (AIC) and
-Bayesian Information Criterion (BIC).
+probability or positive density were include. While incorporation may improve
+the spatial predictive performance \cite{Thorson2017}, it was not found to be
+the case here based on model selection with Akaike Information Criterion (AIC)
+and Bayesian Information Criterion (BIC).
 
 \textbf{\textit{Parameter estimation}} Parameter estimation was undertaken
 through Laplace approximation of the marginal likelihood for fixed effects
@@ -613,9 +622,9 @@ station and species-group and estimated swept area for the tow.
 
 The spatial domain was setup to include 250 knots representing the Gaussian
 Random Fields. The model was configured to estimate nine factors to describe
-the spatial and spatio-temporal encounter probability and density parameters,
-with a log-link between the logit encounter probability and assumed gamma
-distribution on positive catches.
+the spatial and spatio-temporal encounter probability and positive density
+parameters, with a log-link between the logit encounter probability and assumed
+gamma distribution on positive catches.
 
 Three candidate models were identified, i) a base model where the vessel
 interaction was a random effect, ii) the base but where the vessel x species
@@ -682,10 +691,10 @@ References: 39 / 50 \\
 	\includegraphics[width=0.8\linewidth]{"Fig1_Combined"}
 	\label{fig:1}
 	\caption{Factor coefficients for the first three factors for (a) the
-		average encounter probability and (b) the average density for
-		the species-groups (outer figures) and spatially (inner
-		figures).  Red: positive association to the factor, Blue:
-		negative association}
+		average encounter probability and (b) the average positive
+		density for the species-groups (outer figures) and spatially
+		(inner figures).  Red: positive association to the factor,
+		Blue: negative association}
 \end{center}
 \end{figure}
 
@@ -697,7 +706,7 @@ References: 39 / 50 \\
 	\label{fig:2}
 	\caption{Position of each species-group on the first two axes from the
 		factor analysis for (a) spatio-temporal encounter probability
-		and (b) spatio-temporal density}
+		and (b) spatio-temporal positive density}
 \end{center}
 \end{figure}
 
@@ -706,11 +715,11 @@ References: 39 / 50 \\
 	\includegraphics[width = \linewidth]{"Figure 1 - Omega1Omega2_Correlations_blank"}
 	\label{fig:3}
 	\caption{Inter-species correlations for (a) spatial encounter
-		probability over all years and (b) spatial density.
+		probability over all years and (b) spatial positive density.
 		Species-groups are clustered into three groups based on a
 		hierarchical clustering method with non-significant
-		correlations (those where the Confidence Interval spanned zero)
-		left blank}
+		correlations (the Confidence Interval [+- 1.96 * SEs] spanned
+		zero) left blank}
 	\end{center}
 \end{figure}
 
@@ -718,9 +727,9 @@ References: 39 / 50 \\
 \begin{center}
 	\includegraphics[width = \linewidth]{"Figure 4 - DensityDifferencesFigureswithCC"}
 	\label{fig:4}
-	\caption{Differences in spatial density for pairs of species and
-		expected catch rates for two different gears at three different
-	locations in 2015}
+	\caption{Differences in the standardised spatial density for pairs of
+		species and expected catch rates for two different gears at
+		three different locations in 2015}
 \end{center}
 \end{figure}
 

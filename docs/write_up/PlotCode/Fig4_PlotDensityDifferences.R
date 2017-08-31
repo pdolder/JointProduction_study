@@ -305,33 +305,34 @@ PredDF$perc <- PredDF$PredCatchKg / PredDF$TotalCatch * 100
 cols <- brewer.pal(8, 'Set1')
 lim <- range(DF2[,5:11])
 ## The plots
-p1 <- ggplot() + geom_point(data = filter(DF2, Include == T), aes(x = Lon, y =  Lat, colour = cod_had), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
-  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)
+p1 <-  ggplot() + geom_point(data = filter(DF2, Include == T), aes(x = Lon, y =  Lat, colour = cod_had), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) + 
+    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal", plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+  scale_colour_gradient2(low = cols[2], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") 
+
 
 p2 <- ggplot() + geom_point(data = filter(DF2, Include == T), aes(x = Lon, y = Lat, colour = cod_whg), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[3], mid = 'white', high = cols[1], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)  
 
 p3 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = had_whg), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[3], mid = 'white', high = cols[2], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)
 
 p4 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = hke_pis), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[7], mid = 'white', high = cols[6], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)
 
 p5 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = hke_meg), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+    coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[8], mid = 'white', high = cols[6], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)
 
 p6 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = pis_meg), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-  coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+  coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[8], mid = 'white', high = cols[7], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar")#, limits = lim)
 
 
 p7 <- ggplot() + geom_point(data = filter(DF2, Include ==T), aes(x = Lon, y = Lat, colour = ple_sol), size = 1) + geom_point(data = DF2, aes(x = Lat, y = Lon), size = 0.5, shape = 3) +
-  coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = 'none',plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
+  coast.poly + coast.outline  + coord_quickmap(xlim, ylim) + theme(legend.position = c(0.1,1), legend.justification = c(0,0), legend.title = element_blank(), legend.text = element_text(size = 8), legend.direction = "horizontal",plot.margin=unit(c(0,0,0,0),"mm")) + xlab('') + ylab('') +
   scale_colour_gradient2(low = cols[5], mid = 'white', high = cols[4], midpoint = 0, space = "Lab", na.value = "grey50", guide = "colourbar") + #, limits = lim) +
   geom_text(data = LLs[c(66,79,216),], aes(x = X, y = Y), label = c('A','B','C'), size = 3) + geom_point(data = LLs[c(66,79, 216),], aes(x = X, y = Y), shape = 'o', colour = 'red', size = 14)
 
@@ -352,7 +353,7 @@ p8  <- ggplot(filter(PredDF,gear %in% c('Otter','Beam')),
   theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.title = element_blank(),plot.margin=unit(c(0,0,0,0),"mm"))
 
 
-ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3) + # cod:haddock
+comb_plot <- ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3) + # cod:haddock
   draw_plot(p2, x = 0, y = 0.3, width = 0.3, height = 0.3) + # cod:whiting
   draw_plot(p3, x = 0, y =  0, width = 0.3, height = 0.3) + # haddock:whiting
   draw_plot(p4, x = 0.3, y = 0.6, width = 0.3, height = 0.3)  + # hake:monk
@@ -361,12 +362,12 @@ ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3) + # cod:hadd
   draw_plot(p7, x = 0.6, y = 0.6, width = 0.3, height = 0.3) + # # plaice:sole
   
   draw_plot(p8, x = 0.65, y = 0, width = 0.3, height = 0.55) + # catch composition
-  draw_plot_label(c("(A) cod:haddock", "(B) cod:whiting", "(C) haddock:whiting", '(D) hake:anglerfishes','(E) hake:megrim',
-                    '(F) anglerfishes:megrim','(G) plaice:sole','(H) Catch composition'), 
+  draw_plot_label(c("(A) haddock : cod", "(B) whiting : cod", "(C) whiting : haddock", '(D) anglerfishes : hake','(E) megrim : hake',
+                    '(F) megrim : anglerfishes','(G) sole : plaice','(H) Catch composition'), 
                   x = c(0.05, 0.05, 0.05, 0.35, 0.35, 0.35, 0.65, 0.65), y = c(0.92, 0.62, 0.32,0.92,0.62,0.32, 0.92, 0.62), 
                   size = 15, hjust = 0)
 
-ggsave(file.path('..','figures','Figure 4 - DensityDifferencesFigureswithCC.png'), width = 16, height = 12)
+save_plot(file.path('..','figures','Figure 4 - DensityDifferencesFigureswithCC.png'), comb_plot,ncol = 3, nrow = 3)
 
 
 

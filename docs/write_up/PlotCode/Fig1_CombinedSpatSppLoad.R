@@ -293,7 +293,7 @@ ggplot(filter(O2, factor == paste("Factor", i, sep = " ")), aes(x = species, y =
 	geom_bar(stat = 'identity', aes(fill = col, alpha = abs(value)), colour = "black") + ylim(mins, maxs) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none", plot.margin = unit(c(0,0,0,0),"mm")) +
 	 scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + #coord_flip() +
-	 ggtitle(paste("Variance explained = ", filter(var.DF, variable == "Omega1", factor == paste("Factor", i, sep = " "))$values, "%")) + theme_void() + theme(legend.position=  "none", plot.title = element_text(size = 12))
+	 ggtitle(paste("Variance explained = ", filter(var.DF, variable == "Omega2", factor == paste("Factor", i, sep = " "))$values, "%")) + theme_void() + theme(legend.position=  "none", plot.title = element_text(size = 12))
 
 
 )
@@ -309,7 +309,7 @@ ggplot(filter(O2, factor == paste("Factor", i, sep = " ")), aes(x = species, y =
 	geom_bar(stat = 'identity', aes(fill = col, alpha = abs(value)), colour = "black") + ylim(mins, maxs) +
  	theme_tufte() + theme(axis.text.x = element_text(angle = -90, hjust = 0), legend.position = "none", plot.margin = unit(c(0,0,0,0),"mm")) +
 	 scale_fill_manual(values = c("red", "blue")) + ylab("") + xlab("") + #coord_flip() +
-	 ggtitle(paste("Variance explained = ", filter(var.DF, variable == "Omega1", factor == paste("Factor", i, sep = " "))$values, "%")) + theme(legend.position=  "none", plot.title = element_text(size = 14, face = "bold"), axis.ticks = element_blank(), axis.text.y = element_blank(), axis.text.x = element_text(size = 14, face = "bold"))
+	 ggtitle(paste("Variance explained = ", filter(var.DF, variable == "Omega2", factor == paste("Factor", i, sep = " "))$values, "%")) + theme(legend.position=  "none", plot.title = element_text(size = 14, face = "bold"), axis.ticks = element_blank(), axis.text.y = element_blank(), axis.text.x = element_text(size = 14, face = "bold"))
 
 
 )
