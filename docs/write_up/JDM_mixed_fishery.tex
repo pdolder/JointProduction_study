@@ -107,14 +107,18 @@ approach to fisheries management \cite{Garcia2003}. Unless fishers can avoid
 catch of unwanted species they will have to stop fishing when reaching their
 first restrictive quota. This introduces a potential significant cost to
 fishers of under-utilised quota\cite{Hoff2010a, Ulrich2016} and provides a
-strong incentive to mitigate such losses \cite{Condie2013, Condie2013a}. \\
+strong incentive to mitigate such losses \cite{Condie2013, Condie2013a}. 
 
 The ability of fishers to align their catch with available quota depends on
 being able to exploit target species while avoiding unwanted catch. Methods by
 which fishers can alter their fishing patterns include by switching fishing
 method (e.g. trawling to netting), changing technical gear characteristics
 (e.g.  introducing escapement panels in nets), or the timing and location of
-fishing activity \cite{Fulton2011b, vanPutten2012a}.
+fishing activity \cite{Fulton2011b, vanPutten2012a}. Otter trawl gears are
+known to have higher catch rates of roundfish due to the higher headline and
+wider sweeps which herd demersal fish into the net. Conversely, beam trawls,
+which employ chain mesh to 'dig' benthic flatfish species, have higher catch
+rates for these species \cite{Fraser2008}.
 
 Spatio-temporal management measures (such as time-limited fishery closures)
 have been applied to reduce unwanted catch with varying degrees of success
@@ -149,25 +153,20 @@ decomposition to describe trends in spatiotemporal dynamics of the different
 species as a function of latent variables \cite{Thorson2015} representing
 spatial variation (9 factors; which we call 'average' spatial variation) and
 spatio-temporal variation (9 factors) for encounter probability and positive
-catch rates (which we describe as 'positive density') separately. We use the
-resultant exploratory factor analysis to identify community dynamics and
-drivers common among 18 species-groups by presenting results through
-transformation of the loading matrices through a PCA rotation. 
-
-Of particular
-importance for mixed fisheries is the ability to analyse species-groups by
-underlying contributory factors, which can then be investigated for what
-spatiotemporal drivers to which they pertain and how these jointly affect
-species-groups. We separately model spatiotemporal encounter probability and
-catch rates to allow identification of differences in associations for
-distribution of the species-groups and densities upon encounter
-\cite{Thorson2015a}, by employing Gaussian Markov Random Fields (GMRFs) to
-capture spatial and temporal dependence within and among species groups for
-both encounter probability and catch rates \cite{Thorson2013}. VAST is set in a
-mixed modelling framework to allow estimation of fixed effects to account for
-systematic differences driving encounter and catches, such as differences in
-sampling efficiency (a.k.a.  catchability), while random effects capture the
-spatio-temporal dynamics of the fish community.
+catch rates (which we describe as 'positive density') separately
+\cite{Thorson2015a}. We use the resultant exploratory factor analysis to
+identify community dynamics and drivers common among 18 species-groups and
+present results through transformation of the loading matrices through PCA
+rotation. By describing the species-groups dynamics through underlying
+contributory spatiotemporal factors we can take account of how the factors
+contribute to affect catches of the species-groups in mixed fisheries. We use
+Gaussian Markov Random Fields (GMRFs) to capture spatial and temporal
+dependence within and among species groups for both encounter probability and
+catch rates \cite{Thorson2013}. VAST is set in a mixed modelling framework to
+allow estimation of fixed effects to account for systematic differences driving
+encounter and catches, such as differences in sampling efficiency (a.k.a.
+catchability), while random effects capture the spatio-temporal dynamics of the
+fish community.
 
 [206 words]
 
@@ -258,11 +257,13 @@ It is clear that depth and to a lesser extent substrate are important
 predictors for the main driver of similarities and differences in distributions
 and abundances for the different species-groups. The first factor correlates
 strongly with these variables, despite them not explicitly being incorporated
-in the model. The utility of these variables as predictors of species
-distributions has been identified in other marine species distribution models
-\cite{Robinson2011}; the advantage to the approach taken here is that, where
-such data is unavailable at appropriate spatial resolution, the spatial factor
-analysis can adequately characterise these influences.
+in the model. While depth was incorporated as a covariate in an alternative
+model formulation (see Methods), it was found not to improve predictions. The
+utility of these variables as predictors of species distributions has been
+identified in other marine species distribution models \cite{Robinson2011}; the
+advantage to the approach taken here is that, where such data is unavailable at
+appropriate spatial resolution, the spatial factor analysis can adequately
+characterise these influences on species dynamics.
 
 [617 words]
 
