@@ -427,31 +427,36 @@ and likely to need to be supported by other measures such as changes to the
 selectivity characteristics of gear (e.g. \cite{Santos2016}). 
 
 A role that science can play in supporting effectiveness of spatio-temporal
-avoidance could be to provide probabilistic advice on likely hotspots for high
-probability of species occurrence and high species density which can inform
-fishing decisions. Such advice could be supported by data obtained directly
-from commercial fishing vessels at a higher temporal resolution, providing
-real-time forecasts to inform fishing choices that also captures seasonal
-differences in distributions. The framework we develop here could be extended
-to include commercial data and real-time updates.
+avoidance could be to provide probabilistic advice on likely hotspots for
+species occurrence and high species density which can inform fishing decisions.
+Previous modelling studies have shown how spatiotemporal models could improve
+predictions of high ratios of bycatch species to target species \cite{Ward2015,
+	Cosandey-Godin2015, Breivik2016}, and geostatistical models are well
+suited to this as they incorporate spatial dependency while providing for
+probabilities to be drawn from posterior distributions of the parameter
+estimates.  We posit that such advice could be enhanced by integrating data
+obtained directly from commercial fishing vessels at a higher temporal
+resolution, providing real-time forecasts to inform fishing choices that also
+captures seasonal differences in distributions.
 
 An important question for the implementation of the EU's landing obligation is
 how far spatial avoidance can go to achieving catch balancing in fisheries.
-While this is likely to be fishery and even fisher specific with differing
-results observed elsewhere (e.g. in the British Columbia trawl
-fishery\cite{Branch2008} and the West US coast\cite{Kuriyama2016}) here we
-provide a framework that could be used to simulate different management and/or
-fishing effort scenarios. A supporting analysis could be to identify the joint
-production function for the entire spatial domain for each pair of species, as
-a way of identifying optimum fishing locations to meet a given target or
-avoidance objective\cite{Reimer2017}. In conjunction such analysis could
-identify the limits of spatial targeting and avoidance in contributing to
-meeting the goal of maximising catches in mixed fisheries under single stock
-quota constraints. It may also inform what additional measures are needed (e.g.
-gear changes, time-area closures) to support transition to the new management
-system, in order to ensure mixed fisheries can sustainably increased catches
-consistent with rebuilding fish populations and help support future food
-security.
+Our model captures differences between location fished for two gear types and
+their broad scale effect on catch composition; information which could be used
+to inform decisions on the contribution spatial avoidance can make in
+implementing the landing obligation. However, it likely the analysis reflects a
+lower bound on the utility of spatial avoidance as fine scale behavioural
+decisions which such as time-of-day, gear configuration and location choices
+also be used to affect catch\cite{Abbott2015, Thorson2016}. Results observed
+elsewhere\cite{Branch2008, Kuriyama2016} suggest limits to their effectiveness
+and our framework could be used to simulate different fishing effort scenarios
+to identify optimum fishery production\cite{Reimer2017} for what such a lower
+bound might be when making management decisions\cite{Ulrich2016}. Identifying
+the limits of spatial targeting and avoidance could then contribute to meeting
+the goal of maximising catches in mixed fisheries within single stock quota
+constraints.  It may also inform the extent to which measures such as  gear
+changes and time-area closures are needed to support transition to the new
+management system.
 
 Complex environmental, fishery and community drivers of distribution for groups
 of species highlights the scale of the challenge in separating catches within
@@ -475,10 +480,10 @@ VAST\footnote{software in the R statistical programming language can be found
 	here: \url{www.github.com/james-thorson/VAST}} implements a
 delta-generalised linear mixed modelling (GLMM) framework that takes account of
 spatio-temporal correlations among species-groups through implementation of a
-spatial dynamic factor analysis (SDFA).  In the model, spatio-temporal
-variation is represented through three-dimensional Gaussian Random Fields while
-covariates affecting catchability (to account for differences between fishing
-surveys) and density (to account for environmental preferences) can be
+spatial dynamic factor analysis (SDFA). Spatial variation is captured through a
+Gaussian Markov Random Field, while we model random variation among species and
+years. Covariates affecting catchability (to account for differences between
+fishing surveys) and density (to account for environmental preferences) can be
 incorporated for predictions of presence and positive density. The following
 briefly summarises the key methods implemented in the VAST framework. For full
 details of the model the reader is invited directed to Thorson \textit{et al}
@@ -559,7 +564,7 @@ with a three-dimensional multivariate normal distribution so that:
 Here, $vec[\mathbf{E}_{*}(t)]$ is the stacked columns of the matrices
 describing $\varepsilon{*}(s,p,t)$ at every location, species and time,
 $\mathbf{R}_{*}$ is a correlation matrix for encounter probability or positive
-catch rates among locations and $\mathbf{V}_{*}$ a correlation matrix for
+catch rates among locations and $\mathbf{V}_{*}$ a covariance matrix for
 encounter probability or positive catch rate among species-groups (modelled
 within the factor analysis). $\otimes$ represents the Kronecker product so that
 the correlation among any location and species can be computed
@@ -624,8 +629,9 @@ station and species-group and estimated swept area for the tow.
 The spatial domain was setup to include 250 knots representing the Gaussian
 Random Fields. The model was configured to estimate nine factors to describe
 the spatial and spatio-temporal encounter probability and positive density
-parameters, with a log-link between the logit encounter probability and assumed
-gamma distribution on positive catches.
+parameters, with a logit-link for the linear predictor for encounter
+probability and log-link for the linear predictor for positive density, with an
+assumed gamma distribution.
 
 Three candidate models were identified, i) a base model where the vessel
 interaction was a random effect, ii) the base but where the vessel x species
@@ -633,7 +639,7 @@ effect was estimated as a fixed covariate, iii) with vessel x species effect
 estimated, but with the addition of estimating fixed density covariates for
 both predominant habitat type at a knot and depth. AIC and BIC model selection
 favoured the second model (Table S3). The final model included estimating
-130,950 parameters (1,674 fixed and 129,276 random effects).
+130,950 coefficients (1,674 fixed parameters and 129,276 random effect values).
 
 \subsection{Model validation}
 

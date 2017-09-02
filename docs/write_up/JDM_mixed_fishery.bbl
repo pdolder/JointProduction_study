@@ -161,6 +161,16 @@
 \newblock
   \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2011.00430.x}.
 
+\bibitem{Fraser2008}
+\bibinfo{author}{Fraser, H.~M.}, \bibinfo{author}{Greenstreet, S. P.~R.},
+  \bibinfo{author}{Fryer, R.~J.} \& \bibinfo{author}{Piet, G.~J.}
+\newblock \bibinfo{title}{{Mapping spatial variation in demersal fish species
+  diversity and composition in the North Sea: Accounting for species- and
+  size-related catchability in survey trawls}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{531--538}
+  (\bibinfo{year}{2008}).
+
 \bibitem{Needle2011}
 \bibinfo{author}{Needle, C.~L.} \& \bibinfo{author}{Catarino, R.}
 \newblock \bibinfo{title}{{Evaluating the effect of real-time closures on cod
@@ -307,6 +317,55 @@
 \newblock \emph{\bibinfo{journal}{Fisheries Research}}
   \textbf{\bibinfo{volume}{184}}, \bibinfo{pages}{64--73}
   (\bibinfo{year}{2016}).
+
+\bibitem{Ward2015}
+\bibinfo{author}{Ward, E.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{{Using spatiotemporal species distribution models to
+  identify temporally evolving hotspots of species co-occurrence}}.
+\newblock \emph{\bibinfo{journal}{Ecological Applications}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{2198--2209}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Cosandey-Godin2015}
+\bibinfo{author}{Cosandey-Godin, A.}, \bibinfo{author}{Krainski, E.~T.},
+  \bibinfo{author}{Worm, B.} \& \bibinfo{author}{Flemming, J.~M.}
+\newblock \bibinfo{title}{{Applying Bayesian spatiotemporal models to fisheries
+  bycatch in the Canadian Arctic}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{186--197}
+  (\bibinfo{year}{2015}).
+\newblock
+  \urlprefix\url{http://www.nrcresearchpress.com/doi/abs/10.1139/cjfas-2014-0159}.
+
+\bibitem{Breivik2016}
+\bibinfo{author}{Breivik, O.~N.}, \bibinfo{author}{Storvik, G.} \&
+  \bibinfo{author}{Nedreaas, K.}
+\newblock \bibinfo{title}{{Latent Gaussian models to decide on spatial closures
+  for bycatch management in the Barents Sea shrimp fishery}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{73}}, \bibinfo{pages}{1271--1280}
+  (\bibinfo{year}{2016}).
+\newblock
+  \urlprefix\url{http://www.nrcresearchpress.com/doi/10.1139/cjfas-2015-0322}.
+
+\bibitem{Abbott2015}
+\bibinfo{author}{Abbott, J.~K.}, \bibinfo{author}{Haynie, A.~C.} \&
+  \bibinfo{author}{Reimer, M.~N.}
+\newblock \bibinfo{title}{{Hidden Flexibility: Institutions, Incentives, and
+  the Margins of Selectivity in Fishing}}.
+\newblock \emph{\bibinfo{journal}{Land Economics}}
+  \textbf{\bibinfo{volume}{91}}, \bibinfo{pages}{169--195}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Thorson2016}
+\bibinfo{author}{Thorson, J.~T.} \& \bibinfo{author}{Kristensen, K.}
+\newblock \bibinfo{title}{{Implementing a generic method for bias correction in
+  statistical models using random effects, with spatial and population dynamics
+  examples}}.
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{175}}, \bibinfo{pages}{66--74}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.fishres.2015.11.016}.
 
 \bibitem{Reimer2017}
 \bibinfo{author}{Reimer, M.~N.}, \bibinfo{author}{Abbott, J.~K.} \&
