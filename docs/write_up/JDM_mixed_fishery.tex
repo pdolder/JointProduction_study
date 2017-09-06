@@ -500,14 +500,14 @@ through a function for each factor that returns a positive or negative
 association of one or more species with any location. Log-density of any
 species is then be described as a linear combination of factors and loadings:
 	\begin{equation}
-		\theta_{p}(s,t) = \sum_{j=1}^{n_{j}}
-		L_{p,j}\psi_{j}(s,t) +\sum_{k=1}^{n_{k}}
-		\gamma_{k,p}\chi_{k}(s,t)
+		\theta_{c}(s,t) = \sum_{j=1}^{n_{j}}
+		L_{c,j}\psi_{j}(s,t) +\sum_{k=1}^{n_{k}}
+		\gamma_{k,c}\chi_{k}(s,t)
 	\end{equation}
-Where $\theta_{p}(s,t)$ represents log-density for species $p$ at site $s$ at
-time $t$, $\psi_{j}$ is the coefficient for factor $j$, $L_{p,j}$ the loading
-matrix representing association of species $p$ with factor $j$ and
-$\gamma_{k,p}\chi_{k}(s,t)$ the linear effect of covariates at each site and
+Where $\theta_{c}(s,t)$ represents log-density for species $c$ at site $s$ at
+time $t$, $\psi_{j}$ is the coefficient for factor $j$, $L_{c,j}$ the loading
+matrix representing association of species $c$ with factor $j$ and
+$\gamma_{k,c}\chi_{k}(s,t)$ the linear effect of covariates at each site and
 time \cite{Thorson2016b}. 
 
 The factor analysis can identify community dynamics and where species have
@@ -521,22 +521,34 @@ probability and positive catch rates are modelled separately with
 spatio-temporal encounter probability modelled using a logit-link linear
 predictor;
 		\begin{equation}
-			logit[p(s_{i},p_{i},t_{i})] = \gamma_{p}(p_{i},t_{i}) +
-			\varepsilon_{p}(s_{i},p_{i},t_{i}) + \delta_{p}(p_{i},
-			v_{i})
+			logit[p(s_{i},c_{i},t_{i})] = \gamma_{p}(c_{i},t_{i}) +
+			\omega_{p}(s_{i},c_{i}) + \varepsilon_{p}(s_{i},c_{i},t_{i}) + 
+			\delta_{p}(c_{i}, v_{i})
 		\end{equation}
 
-and positive catch rates modelling using a gamma- distribution \cite{Thorson2015a}.  
+and positive catch rates modelling using a gamma- distribution \cite{Thorson2015a}. 
 		\begin{equation}
-			gamma[r(s_{i},p_{i},t_{i})] = \gamma_{p}(p_{i},t_{i}) +
-			\varepsilon_{p}(s_{i},p_{i},t_{i}) + \delta_{p}(p_{i},
-			v_{i})
+			log[r(s_{i},c_{i},t_{i})] = \gamma_{r}(c_{i},t_{i}) +
+			\omega_{r}(s_{i},c_{i}) + \varepsilon_{r}(s_{i},c_{i},t_{i}) + 
+			\delta_{r}(c_{i},v_{i})
 		\end{equation}
 
-With $\gamma_{*}(p_{i},t_{i})$, $\varepsilon_{*}(s_{i},p_{i},t_{i})$ and
-$\delta_{*}(p_{i}, v_{i})$ representing an intercept, spatio-temporal variation
-and a vessel effect ($v$) respectively for for either probability of encounter,
-$* = p$ or positive density $* = r$.
+With $\gamma_{*}(p_{i},t_{i})$, $\omega_{r}(s_{i},c_{i})$,
+$\varepsilon_{*}(s_{i},p_{i},t_{i})$ and $\delta_{*}(p_{i}, v_{i})$
+representing an intercept, spatial variation, spatio-temporal variation and a
+vessel effect ($v$) respectively for for either probability of encounter, $* =
+p$ or positive density $* = r$.
+
+The Delta-Gamma formulation is then:
+\begin{equation}
+	\begin{split}
+	& Pr(C = 0) = 1 - p \\
+	& Pr(C = c | c > 0) = p \cdot \frac{\lambda^{k}c^{k-1} \cdot exp(-\lambda c)}{\Gamma_{k}}
+	\end{split}
+\end{equation}
+
+for the probability $p$ of a non-zero catch $C$ given a gamma distribution for
+for the positive catch with a rate parameter $\lambda$ and shape parameter $k$.
 
 \textbf{\textit{Spatio-temporal variation:}} The spatio-temporal variation is
 modelled using Gaussian Markov Random Fields (GMRF) where data is associated to
