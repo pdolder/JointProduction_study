@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  6 SEP 2017 18:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  14 SEP 2017 13:49
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -474,19 +474,19 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ) (./JDM_mixed_fishery.aux)
 \openout1 = `JDM_mixed_fishery.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 27.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -571,62 +571,63 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 29.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 29.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 28.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 28.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 28.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
-
-Underfull \hbox (badness 10000) in paragraph at lines 56--60
-
- []
-
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 191.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 179.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 191.
-[5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 480.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 179.
+[5] [6] [7] [8] [9] [10] [11] [12] [13]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 457.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 1194) in paragraph at lines 480--480
+Underfull \hbox (badness 1194) in paragraph at lines 457--457
 [][]\OT1/ptm/m/n/10 software in the R sta-tis-ti-cal pro-gram-ming lan-guage can be found here: $\OT1/pcr/m/n/10 www . github . com / james -[]
  []
 
 
-Overfull \hbox (1.15456pt too wide) in paragraph at lines 479--491
+Overfull \hbox (1.15456pt too wide) in paragraph at lines 456--468
  \OT1/ptm/b/n/12 Model struc-ture: \OT1/ptm/m/n/12 VAST[] im-ple-ments a delta-generalised lin-ear mixed mod-elling (GLMM) frame-
  []
 
+[14]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 492.
-[15] [16] [17] [18]
-Overfull \hbox (18.56276pt too wide) in paragraph at lines 620--633
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 469.
+[15]
+Overfull \hbox (1.4872pt too wide) in paragraph at lines 521--534
+\OT1/ptm/m/n/12 species-group $\OML/cmm/m/it/12 c$ \OT1/ptm/m/n/12 and time $\OML/cmm/m/it/12 t$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 r\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[]; c[]; t[]\OT1/cmr/m/n/12 )$ \OT1/ptm/m/n/12 is sim-i-larly the pre-dic-tor for the pos-i-tive den-sity. $\OML/cmm/m/it/12 ^^L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c[]; t[]\OT1/cmr/m/n/12 )$
+ []
+
+[16] [17] [18]
+Overfull \hbox (18.56276pt too wide) in paragraph at lines 612--625
 \OT1/ptm/m/n/12 were down-loaded from ICES Da-tras ($\OT1/pcr/m/n/12 www . ices . dk / marine -[] data / data -[] portals / Pages /
  []
 
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 665--679
+[19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 657--671
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--679
+Underfull \hbox (badness 10000) in paragraph at lines 657--671
 
  []
 
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 680--682
+
+Underfull \hbox (badness 10000) in paragraph at lines 672--674
 
  []
 
@@ -635,18 +636,18 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 [22] [23] [24] [25] [26]) [27] [28]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 756.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 767.
 [29] (./JDM_mixed_fishery.aux) ) 
 Here is how much of TeX's memory you used:
- 3845 strings out of 493029
- 51845 string characters out of 6136234
- 122240 words of memory out of 5000000
- 7279 multiletter control sequences out of 15000+600000
+ 3846 strings out of 493029
+ 51863 string characters out of 6136234
+ 122230 words of memory out of 5000000
+ 7280 multiletter control sequences out of 15000+600000
  38365 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,16n,32p,243b,310s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on JDM_mixed_fishery.pdf (29 pages, 239537 bytes).
+Output written on JDM_mixed_fishery.pdf (29 pages, 244718 bytes).
 PDF statistics:
  167 PDF objects out of 1000 (max. 8388607)
  117 compressed objects within 2 object streams
