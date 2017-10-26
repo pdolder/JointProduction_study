@@ -70,6 +70,17 @@
 \newblock
   \urlprefix\url{https://academic.oup.com/icesjms/article-lookup/doi/10.1093/icesjms/fsw126}.
 
+\bibitem{Batsleer2015}
+\bibinfo{author}{Batsleer, J.}, \bibinfo{author}{Hamon, K.~G.},
+  \bibinfo{author}{Overzee, H. M.~J.}, \bibinfo{author}{Rijnsdorp, A.~D.} \&
+  \bibinfo{author}{Poos, J.~J.}
+\newblock \bibinfo{title}{{High-grading and over-quota discarding in mixed
+  fisheries}}.
+\newblock \emph{\bibinfo{journal}{Reviews in Fish Biology and Fisheries}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{715--736}
+  (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{"http://dx.doi.org/10.1007/s11160-015-9403-0}.
+
 \bibitem{Borges2015}
 \bibinfo{author}{Borges, L.}
 \newblock \bibinfo{title}{{The evolution of a discard policy in Europe}}.
@@ -366,6 +377,16 @@
   \textbf{\bibinfo{volume}{175}}, \bibinfo{pages}{66--74}
   (\bibinfo{year}{2016}).
 \newblock \urlprefix\url{http://dx.doi.org/10.1016/j.fishres.2015.11.016}.
+
+\bibitem{Pascoe2007}
+\bibinfo{author}{Pascoe, S.}, \bibinfo{author}{Koundouri, P.} \&
+  \bibinfo{author}{Bj{\o}rndal, T.}
+\newblock \bibinfo{title}{{Estimating targeting ability in multi-species
+  fisheries: a primal multi-output distance function approach}}.
+\newblock \emph{\bibinfo{journal}{Land Economics}}
+  \textbf{\bibinfo{volume}{83}}, \bibinfo{pages}{382--397}
+  (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{http://le.uwpress.org/content/83/3/382.short}.
 
 \bibitem{Reimer2017}
 \bibinfo{author}{Reimer, M.~N.}, \bibinfo{author}{Abbott, J.~K.} \&

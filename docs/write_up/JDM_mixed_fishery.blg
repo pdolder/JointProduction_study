@@ -4,45 +4,45 @@ The top-level auxiliary file: JDM_mixed_fishery.aux
 The style file: naturemag.bst
 Database file #1: JSDM.bib
 Warning--empty journal in Beare2010
-You've used 45 entries,
+You've used 47 entries,
             2348 wiz_defined-function locations,
-            1295 strings with 21259 characters,
-and the built_in function-call counts, 19117 in all, are:
-= -- 1458
-> -- 472
+            1312 strings with 21791 characters,
+and the built_in function-call counts, 20073 in all, are:
+= -- 1528
+> -- 504
 < -- 0
-+ -- 236
-- -- 118
-* -- 2357
-:= -- 2124
-add.period$ -- 159
-call.type$ -- 45
-change.case$ -- 45
++ -- 252
+- -- 126
+* -- 2485
+:= -- 2228
+add.period$ -- 167
+call.type$ -- 47
+change.case$ -- 47
 chr.to.int$ -- 0
-cite$ -- 46
-duplicate$ -- 1656
-empty$ -- 1698
-format.name$ -- 158
-if$ -- 3817
+cite$ -- 48
+duplicate$ -- 1734
+empty$ -- 1776
+format.name$ -- 168
+if$ -- 4003
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 378
-newline$ -- 257
-num.names$ -- 45
-pop$ -- 244
+int.to.str$ -- 47
+missing$ -- 398
+newline$ -- 269
+num.names$ -- 47
+pop$ -- 256
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 318
+skip$ -- 332
 stack$ -- 0
-substring$ -- 1046
-swap$ -- 1669
+substring$ -- 1096
+swap$ -- 1755
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 129
-width$ -- 47
-write$ -- 548
+while$ -- 135
+width$ -- 49
+write$ -- 574
 (There was 1 warning)
