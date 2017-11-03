@@ -9,6 +9,8 @@
 *.png
 *.jpg
 *.pdf
+*.RData
+*.Rhistory
 
 ## re-include the pdfs from the write-up
 
