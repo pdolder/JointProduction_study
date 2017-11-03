@@ -1,12 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  27 OCT 2017 12:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.24)  3 NOV 2017 11:59
 entering extended mode
- \write18 enabled.
- file:line:error style messages enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**JDM_mixed_fishery.tex
+**JDM_mixed_fishery.tex --shell-escape
 (./JDM_mixed_fishery.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (./nature.cls
 Document Class: nature 24/2/2004 v1.0
 A class for writing preprints for the journal Nature
@@ -28,29 +27,38 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
-) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
-) (/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
-) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-)) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
+
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
-) (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -65,7 +73,8 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
-) (/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count90
 \output=\toks16
@@ -82,16 +91,19 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \bframesep=\dimen115
 \bframebox=\box26
 LaTeX Info: Redefining \\ on input line 3056.
-) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
@@ -324,6 +336,7 @@ File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
@@ -364,6 +377,7 @@ File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
@@ -387,30 +401,37 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-)) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip44
 \enit@outerparindent=\dimen116
 \enit@toks=\toks19
 \enit@inbox=\box27
 \enitdp@description=\count97
-) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/03/03 v2.15a AMS math features
 \@mathmargin=\skip45
+
 For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
+
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks20
 \ex@=\dimen117
-)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen118
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count98
@@ -450,28 +471,36 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 95.
+
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count110
 ))
 \Gin@req@height=\dimen126
 \Gin@req@width=\dimen127
-) (./JDM_mixed_fishery.aux)
+)
+(./JDM_mixed_fishery.aux)
 \openout1 = `JDM_mixed_fishery.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
@@ -487,6 +516,7 @@ LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
 LaTeX Font Info:    ... okay on input line 27.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 27.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -538,7 +568,9 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 \makeMPintoPDFobject=\count116
 \everyMPtoPDFconversion=\toks26
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
@@ -547,16 +579,22 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-)) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
@@ -565,14 +603,18 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
+
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 28.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 28.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
@@ -580,40 +622,240 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 28.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
-[1
+ [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 188.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 69.
+
+
+LaTeX Warning: Citation `Worm2009' on page 2 undefined on input line 69.
+
+
+LaTeX Warning: Citation `FAO2016' on page 2 undefined on input line 72.
+
+
+LaTeX Warning: Citation `B??n??2016' on page 2 undefined on input line 73.
+
+
+LaTeX Warning: Citation `Mcclanahan2015' on page 2 undefined on input line 74.
+
+
+LaTeX Warning: Citation `Branch2008' on page 2 undefined on input line 80.
+
+
+LaTeX Warning: Citation `Kuriyama2016' on page 2 undefined on input line 80.
+
+
+LaTeX Warning: Citation `Ulrich2016' on page 2 undefined on input line 80.
+
+
+LaTeX Warning: Citation `Batsleer2015' on page 2 undefined on input line 87.
+
+[2]
+
+LaTeX Warning: Citation `Borges2015' on page 3 undefined on input line 93.
+
+
+LaTeX Warning: Citation `Uhlmann2014' on page 3 undefined on input line 93.
+
+
+LaTeX Warning: Citation `EuropeanParliamentandCounciloftheEuropeanUnion2013' on
+ page 3 undefined on input line 98.
+
+
+LaTeX Warning: Citation `EuropeanParliament2008' on page 3 undefined on input l
+ine 101.
+
+
+LaTeX Warning: Citation `Garcia2003' on page 3 undefined on input line 102.
+
+
+LaTeX Warning: Citation `Hoff2010a' on page 3 undefined on input line 110.
+
+
+LaTeX Warning: Citation `Ulrich2016' on page 3 undefined on input line 110.
+
+
+LaTeX Warning: Citation `Condie2013' on page 3 undefined on input line 111.
+
+
+LaTeX Warning: Citation `Condie2013a' on page 3 undefined on input line 111.
+
+
+LaTeX Warning: Citation `Fulton2011b' on page 3 undefined on input line 117.
+
+
+LaTeX Warning: Citation `vanPutten2012a' on page 3 undefined on input line 117.
+
+
+
+LaTeX Warning: Citation `Fraser2008' on page 3 undefined on input line 121.
+
+[3]
+
+LaTeX Warning: Citation `Needle2011' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `Holmes2011' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `Beare2010' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `Dinmore2003' on page 4 undefined on input line 125.
+
+
+LaTeX Warning: Citation `Gardner2008' on page 4 undefined on input line 128.
+
+
+LaTeX Warning: Citation `Dunn2011' on page 4 undefined on input line 128.
+
+
+LaTeX Warning: Citation `Dunn2014a' on page 4 undefined on input line 128.
+
+
+LaTeX Warning: Citation `Thorson2015' on page 4 undefined on input line 152.
+
+
+LaTeX Warning: Citation `Thorson2015a' on page 4 undefined on input line 155.
+
+
+LaTeX Warning: Citation `Thorson2013' on page 4 undefined on input line 163.
+
+[4]
+
+LaTeX Warning: Citation `Ellis2000' on page 5 undefined on input line 174.
+
+
+LaTeX Warning: Citation `Gerritsen2012' on page 5 undefined on input line 174.
+
+
+LaTeX Warning: Citation `Mateo2016' on page 5 undefined on input line 176.
+
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 186.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 188.
-[5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 186.
+
+
+LaTeX Warning: Citation `STECF2017' on page 5 undefined on input line 187.
+
+[5] [6] [7]
+
+LaTeX Warning: Citation `Robinson2011' on page 8 undefined on input line 256.
+
+[8] [9] [10] [11] [12]
+
+LaTeX Warning: Citation `Santos2016' on page 13 undefined on input line 413.
+
+
+LaTeX Warning: Citation `Ward2015' on page 13 undefined on input line 420.
+
+
+LaTeX Warning: Citation `Cosandey-Godin2015' on page 13 undefined on input line
+ 420.
+
+
+LaTeX Warning: Citation `Breivik2016' on page 13 undefined on input line 420.
+
+[13]
+
+LaTeX Warning: Citation `Abbott2015' on page 14 undefined on input line 440.
+
+
+LaTeX Warning: Citation `Thorson2016' on page 14 undefined on input line 440.
+
+
+LaTeX Warning: Citation `Branch2008' on page 14 undefined on input line 441.
+
+
+LaTeX Warning: Citation `Kuriyama2016' on page 14 undefined on input line 441.
+
+
+LaTeX Warning: Citation `Pascoe2007' on page 14 undefined on input line 445.
+
+
+LaTeX Warning: Citation `Reimer2017' on page 14 undefined on input line 448.
+
+
+LaTeX Warning: Citation `Ulrich2016' on page 14 undefined on input line 457.
+
+[14]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 482.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 1194) in paragraph at lines 482--482
-[][]\OT1/ptm/m/n/10 software in the R sta-tis-ti-cal pro-gram-ming lan-guage can be found here: $\OT1/pcr/m/n/10 www . github . com / james -[]
+Underfull \hbox (badness 1057) in paragraph at lines 482--482
+[][]\OT1/ptm/m/n/10 Software in the R sta-tis-ti-cal pro-gram-ming lan-guage ca
+n be found here: $\OT1/pcr/m/n/10 www . github . com / james -[]
  []
 
 
+LaTeX Warning: Citation `Thorson2017' on page 15 undefined on input line 492.
+
+
 Overfull \hbox (1.15456pt too wide) in paragraph at lines 481--493
- \OT1/ptm/b/n/12 Model struc-ture: \OT1/ptm/m/n/12 VAST[] im-ple-ments a delta-generalised lin-ear mixed mod-elling (GLMM) frame-
+ \OT1/ptm/b/n/12 Model struc-ture: \OT1/ptm/m/n/12 VAST[] im-ple-ments a delta-
+generalised lin-ear mixed mod-elling (GLMM) frame-
  []
 
 [15]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 494.
+
+
+LaTeX Warning: Citation `Thorson2017' on page 16 undefined on input line 495.
+
+
+LaTeX Warning: Citation `Thorson2016b' on page 16 undefined on input line 513.
+
 [16]
+
+LaTeX Warning: Citation `Thorson2016b' on page 17 undefined on input line 519.
+
+
+LaTeX Warning: Citation `Thorson2015a' on page 17 undefined on input line 535.
+
+
 Overfull \hbox (1.4872pt too wide) in paragraph at lines 546--559
-\OT1/ptm/m/n/12 species-group $\OML/cmm/m/it/12 c$ \OT1/ptm/m/n/12 and time $\OML/cmm/m/it/12 t$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 r\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[]; c[]; t[]\OT1/cmr/m/n/12 )$ \OT1/ptm/m/n/12 is sim-i-larly the pre-dic-tor for the pos-i-tive den-sity. $\OML/cmm/m/it/12 ^^L[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c[]; t[]\OT1/cmr/m/n/12 )$
+\OT1/ptm/m/n/12 species-group $\OML/cmm/m/it/12 c$ \OT1/ptm/m/n/12 and time $\O
+ML/cmm/m/it/12 t$ \OT1/ptm/m/n/12 and $\OML/cmm/m/it/12 r\OT1/cmr/m/n/12 (\OML/
+cmm/m/it/12 s[]; c[]; t[]\OT1/cmr/m/n/12 )$ \OT1/ptm/m/n/12 is sim-i-larly the 
+pre-dic-tor for the pos-i-tive den-sity. $\OML/cmm/m/it/12 ^^L[]\OT1/cmr/m/n/12
+ (\OML/cmm/m/it/12 c[]; t[]\OT1/cmr/m/n/12 )$
  []
 
-[17] [18] [19]
+[17]
+
+LaTeX Warning: Citation `Thorson2013' on page 18 undefined on input line 577.
+
+[18]
+
+LaTeX Warning: Citation `Thorson2017' on page 19 undefined on input line 600.
+
+
+LaTeX Warning: Citation `Thorson2014' on page 19 undefined on input line 606.
+
+
+LaTeX Warning: Citation `Thorson2017' on page 19 undefined on input line 613.
+
+
+LaTeX Warning: Citation `Kristensen2015' on page 19 undefined on input line 621
+.
+
+[19]
+
+LaTeX Warning: Citation `Piet2009' on page 20 undefined on input line 645.
+
+
 Overfull \hbox (18.56276pt too wide) in paragraph at lines 637--650
-\OT1/ptm/m/n/12 were down-loaded from ICES Da-tras ($\OT1/pcr/m/n/12 www . ices . dk / marine -[] data / data -[] portals / Pages /
+\OT1/ptm/m/n/12 were down-loaded from ICES Da-tras ($\OT1/pcr/m/n/12 www . ices
+ . dk / marine -[] data / data -[] portals / Pages /
  []
 
 [20] [21]
@@ -631,26 +873,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 697--699
 
  []
 
-[22] (./JDM_mixed_fishery.bbl
+[22] (./JDM_mixed_fishery.bbl)
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
-[23] [24] [25] [26] [27] [28]) [29] [30]
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 715.
+ [23]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 792.
-[31] (./JDM_mixed_fishery.aux) ) 
+ [24] (./JDM_mixed_fishery.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3848 strings out of 493029
- 51889 string characters out of 6136234
- 123238 words of memory out of 5000000
- 7282 multiletter control sequences out of 15000+600000
- 38365 words of font info for 77 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 37i,16n,32p,243b,310s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on JDM_mixed_fishery.pdf (31 pages, 250639 bytes).
+ 3836 strings out of 494953
+ 51742 string characters out of 6180977
+ 118219 words of memory out of 5000000
+ 7021 multiletter control sequences out of 15000+600000
+ 36344 words of font info for 70 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 37i,16n,32p,258b,304s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on JDM_mixed_fishery.pdf (24 pages, 227046 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
+ 151 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
