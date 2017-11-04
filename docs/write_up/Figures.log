@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  15 SEP 2017 15:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  4 NOV 2017 16:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -569,7 +569,9 @@ File: figures/"Figure 4 - DensityDifferencesFigureswithCC".png Graphic file (typ
 <use figures/"Figure 4 - DensityDifferencesFigureswithCC".png>
 Package pdftex.def Info: figures/"Figure 4 - DensityDifferencesFigureswithCC".png used on input line 60.
 (pdftex.def)             Requested size: 469.75502pt x 427.05537pt.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/Fig1_Combined.png (PNG copy)> <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)>] [2 <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [3 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./Figures.aux) ) 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./figures/Fig1_Combined.png (PNG copy)>] [2 <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)> <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [3 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./Figures.aux) ) 
 Here is how much of TeX's memory you used:
  3410 strings out of 493029
  46663 string characters out of 6136234
@@ -577,9 +579,9 @@ Here is how much of TeX's memory you used:
  6909 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,5n,32p,414b,269s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,32p,414b,271s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on Figures.pdf (3 pages, 6509538 bytes).
+Output written on Figures.pdf (3 pages, 6509767 bytes).
 PDF statistics:
  22 PDF objects out of 1000 (max. 8388607)
  11 compressed objects within 1 object stream

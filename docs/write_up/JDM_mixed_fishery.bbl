@@ -1,0 +1,448 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{Worm2009}
+\bibinfo{author}{Worm, B.} \emph{et~al.}
+\newblock \bibinfo{title}{{Rebuilding Global Fisheries}}.
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{325}},
+  \bibinfo{pages}{578--585} (\bibinfo{year}{2009}).
+\newblock
+  \urlprefix\url{http://www.sciencemag.org/cgi/doi/10.1126/science.1173146}.
+
+\bibitem{FAO2016}
+\bibinfo{author}{FAO}.
+\newblock \bibinfo{title}{{The state of world fisheries and aquaculture}}.
+\newblock \emph{\bibinfo{journal}{Food and Agriculture Oraganization of the
+  United Nations}} \textbf{\bibinfo{volume}{2014}}, \bibinfo{pages}{218}
+  (\bibinfo{year}{2014}).
+\newblock
+  \urlprefix\url{http://scholar.google.com/scholar?hl=en{\&}btnG=Search{\&}q=intitle:THE+STATE+OF+WORLD+FISHERIES+AND+AQUACULTURE{\#}0}.
+\newblock \eprint{978-92-5-106675-1}.
+
+\bibitem{B??n??2016}
+\bibinfo{author}{B??n??, C.} \emph{et~al.}
+\newblock \bibinfo{title}{{Contribution of Fisheries and Aquaculture to Food
+  Security and Poverty Reduction: Assessing the Current Evidence}}.
+\newblock \emph{\bibinfo{journal}{World Development}}
+  \textbf{\bibinfo{volume}{79}}, \bibinfo{pages}{177--196}
+  (\bibinfo{year}{2016}).
+
+\bibitem{Mcclanahan2015}
+\bibinfo{author}{Mcclanahan, T.}, \bibinfo{author}{Allison, E.~H.} \&
+  \bibinfo{author}{Cinner, J.~E.}
+\newblock \bibinfo{title}{{Managing fisheries for human and food security}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{16}}, \bibinfo{pages}{78--103}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Branch2008}
+\bibinfo{author}{Branch, T.} \& \bibinfo{author}{Hilborn, R.}
+\newblock \bibinfo{title}{{Matching catches to quotas in a multispecies trawl
+  fishery: targeting and avoidance behavior under individual transferable
+  quotas}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{1435--1446}
+  (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://article.pubs.nrc-cnrc.gc.ca/ppv/RPViewDoc?issn=1205-7533{\&}volume=65{\&}issue=7{\&}startPage=1435{\&}ab=y}.
+
+\bibitem{Kuriyama2016}
+\bibinfo{author}{Kuriyama, P.~T.}, \bibinfo{author}{Branch, T.~A.},
+  \bibinfo{author}{Bellman, M.~A.} \& \bibinfo{author}{Rutherford, K.}
+\newblock \bibinfo{title}{{Catch shares have not led to catch-quota balancing
+  in two North American multispecies trawl fisheries}}.
+\newblock \emph{\bibinfo{journal}{Marine Policy}}
+  \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{60--70}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.marpol.2016.05.010}.
+
+\bibitem{Ulrich2016}
+\bibinfo{author}{Ulrich, C.} \emph{et~al.}
+\newblock \bibinfo{title}{{Achieving maximum sustainable yield in mixed
+  fisheries: A management approach for the North Sea demersal fisheries}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{74}}, \bibinfo{pages}{566--575}
+  (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{https://academic.oup.com/icesjms/article-lookup/doi/10.1093/icesjms/fsw126}.
+
+\bibitem{Batsleer2015}
+\bibinfo{author}{Batsleer, J.}, \bibinfo{author}{Hamon, K.~G.},
+  \bibinfo{author}{Overzee, H. M.~J.}, \bibinfo{author}{Rijnsdorp, A.~D.} \&
+  \bibinfo{author}{Poos, J.~J.}
+\newblock \bibinfo{title}{{High-grading and over-quota discarding in mixed
+  fisheries}}.
+\newblock \emph{\bibinfo{journal}{Reviews in Fish Biology and Fisheries}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{715--736}
+  (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{"http://dx.doi.org/10.1007/s11160-015-9403-0}.
+
+\bibitem{Borges2015}
+\bibinfo{author}{Borges, L.}
+\newblock \bibinfo{title}{{The evolution of a discard policy in Europe}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \bibinfo{pages}{534--540} (\bibinfo{year}{2015}).
+
+\bibitem{Uhlmann2014}
+\bibinfo{author}{Uhlmann, S.~S.} \emph{et~al.}
+\newblock \bibinfo{title}{{Discarded fish in European waters: General patterns
+  and contrasts}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{1235--1245}
+  (\bibinfo{year}{2014}).
+
+\bibitem{EuropeanParliamentandCounciloftheEuropeanUnion2013}
+\bibinfo{author}{{European Commission}}.
+\newblock \bibinfo{title}{{REGULATION (EU) No 1380/2013 OF THE EUROPEAN
+  PARLIAMENT AND OF THE COUNCIL of 11 December 2013 on the Common Fisheries
+  Policy, amending Council Regulations (EC) No 1954/2003 and (EC) No 1224/2009
+  and repealing Council Regulations (EC) No 2371/2002 and (EC}}
+  (\bibinfo{year}{2013}).
+
+\bibitem{EuropeanParliament2008}
+\bibinfo{author}{{European Parliament}}.
+\newblock \bibinfo{title}{{Directive 2009/28/EC of the European Parliament and
+  of the Council of 23 April 2009}}.
+\newblock \emph{\bibinfo{journal}{Official Journal of the European Union}}
+  \textbf{\bibinfo{volume}{140}}, \bibinfo{pages}{16--62}
+  (\bibinfo{year}{2009}).
+\newblock \eprint{534}.
+
+\bibitem{Garcia2003}
+\bibinfo{author}{Garcia, S.~M.}, \bibinfo{author}{Zerbi, A.},
+  \bibinfo{author}{C, A.}, \bibinfo{author}{{Do Chi}, T.} \&
+  \bibinfo{author}{Lasserre, G.}
+\newblock \bibinfo{title}{{The ecosystem approach to fisheries}}.
+\newblock \emph{\bibinfo{journal}{FAO Fisheries Technical Paper}}
+  \textbf{\bibinfo{volume}{443}}, \bibinfo{pages}{71} (\bibinfo{year}{2003}).
+\newblock \urlprefix\url{http://www.fao.org/docrep/006/Y4773E/y4773e05.htm}.
+
+\bibitem{Hoff2010a}
+\bibinfo{author}{Hoff, A.} \emph{et~al.}
+\newblock \bibinfo{title}{{Economic effort management in multispecies
+  fisheries: The FcubEcon model}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{67}}, \bibinfo{pages}{1802--1810}
+  (\bibinfo{year}{2010}).
+
+\bibitem{Condie2013}
+\bibinfo{author}{Condie, H.~M.}, \bibinfo{author}{Grant, A.} \&
+  \bibinfo{author}{Catchpole, T.~L.}
+\newblock \bibinfo{title}{{Incentivising selective fishing under a policy to
+  ban discards; lessons from European and global fisheries}}.
+\newblock \emph{\bibinfo{journal}{Marine Policy}}
+  \textbf{\bibinfo{volume}{45}}, \bibinfo{pages}{287--292}
+  (\bibinfo{year}{2014}).
+\newblock
+  \urlprefix\url{http://linkinghub.elsevier.com/retrieve/pii/S0308597X1300198X}.
+
+\bibitem{Condie2013a}
+\bibinfo{author}{Condie, H.~M.}, \bibinfo{author}{Grant, A.} \&
+  \bibinfo{author}{Catchpole, T.~L.}
+\newblock \bibinfo{title}{{Does banning discards in an otter trawler fishery
+  create incentives for more selective fishing?}}
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{148}}, \bibinfo{pages}{137--146}
+  (\bibinfo{year}{2013}).
+\newblock
+  \urlprefix\url{http://linkinghub.elsevier.com/retrieve/pii/S016578361300221X
+  http://dx.doi.org/10.1016/j.fishres.2013.09.011}.
+
+\bibitem{Fulton2011b}
+\bibinfo{author}{Fulton, E.~A.}, \bibinfo{author}{Smith, A.~D.},
+  \bibinfo{author}{Smith, D.~C.} \& \bibinfo{author}{{Van Putten}, I.~E.}
+\newblock \bibinfo{title}{{Human behaviour: The key source of uncertainty in
+  fisheries management}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{2--17} (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2010.00371.x}.
+
+\bibitem{vanPutten2012a}
+\bibinfo{author}{{Van Putten}, I.~E.} \emph{et~al.}
+\newblock \bibinfo{title}{{Theories and behavioural drivers underlying fleet
+  dynamics models}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{216--235}
+  (\bibinfo{year}{2012}).
+\newblock
+  \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2011.00430.x}.
+
+\bibitem{Fraser2008}
+\bibinfo{author}{Fraser, H.~M.}, \bibinfo{author}{Greenstreet, S. P.~R.},
+  \bibinfo{author}{Fryer, R.~J.} \& \bibinfo{author}{Piet, G.~J.}
+\newblock \bibinfo{title}{{Mapping spatial variation in demersal fish species
+  diversity and composition in the North Sea: Accounting for species- and
+  size-related catchability in survey trawls}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{531--538}
+  (\bibinfo{year}{2008}).
+
+\bibitem{Needle2011}
+\bibinfo{author}{Needle, C.~L.} \& \bibinfo{author}{Catarino, R.}
+\newblock \bibinfo{title}{{Evaluating the effect of real-time closures on cod
+  targeting}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{68}}, \bibinfo{pages}{1647--1655}
+  (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{http://icesjms.oxfordjournals.org/cgi/doi/10.1093/icesjms/fsr092}.
+
+\bibitem{Holmes2011}
+\bibinfo{author}{Holmes, S.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{{Using fishery-dependent data to inform the
+  development and operation of a co-management initiative to reduce cod
+  mortality and cut discards}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{68}}, \bibinfo{pages}{1679--1688}
+  (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{http://icesjms.oxfordjournals.org/cgi/doi/10.1093/icesjms/fsr101}.
+
+\bibitem{Beare2010}
+\bibinfo{author}{Beare, D.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{{Study for the Revision of the plaice box {\^{a}}"
+  Final Report}} \bibinfo{pages}{250--} (\bibinfo{year}{2010}).
+
+\bibitem{Dinmore2003}
+\bibinfo{author}{Dinmore, T.~A.}, \bibinfo{author}{Duplisea, D.~E.},
+  \bibinfo{author}{Rackham, B.~D.}, \bibinfo{author}{Maxwell, D.~L.} \&
+  \bibinfo{author}{Jennings, S.}
+\newblock \bibinfo{title}{{Impact of a large-scale area closure on patterns of
+  fishing disturbance and the consequences for benthic communities}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{60}}, \bibinfo{pages}{371--380}
+  (\bibinfo{year}{2003}).
+
+\bibitem{Gardner2008}
+\bibinfo{author}{Gardner, B.}, \bibinfo{author}{Sullivan, P.~J.},
+  \bibinfo{author}{Morreale, S.~J.} \& \bibinfo{author}{Epperly, S.~P.}
+\newblock \bibinfo{title}{{Spatial and temporal statistical analysis of bycatch
+  data: patterns of sea turtle bycatch in the North Atlantic}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{2461--2470}
+  (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://www.nrcresearchpress.com/doi/abs/10.1139/F08-152}.
+
+\bibitem{Dunn2011}
+\bibinfo{author}{Dunn, D.~C.}, \bibinfo{author}{Boustany, A.~M.} \&
+  \bibinfo{author}{Halpin, P.~N.}
+\newblock \bibinfo{title}{{Spatio-temporal management of fisheries to reduce
+  by-catch and increase fishing selectivity}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{110--119}
+  (\bibinfo{year}{2011}).
+\newblock
+  \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2010.00388.x}.
+
+\bibitem{Dunn2014a}
+\bibinfo{author}{Dunn, D.~C.} \emph{et~al.}
+\newblock \bibinfo{title}{{Empirical move-on rules to inform fishing
+  strategies: A New England case study}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{359--375}
+  (\bibinfo{year}{2014}).
+\newblock \urlprefix\url{http://doi.wiley.com/10.1111/faf.12019}.
+
+\bibitem{Thorson2015}
+\bibinfo{author}{Thorson, J.~T.} \emph{et~al.}
+\newblock \bibinfo{title}{{Spatial factor analysis: A new tool for estimating
+  joint species distributions and correlations in species range}}.
+\newblock \emph{\bibinfo{journal}{Methods in Ecology and Evolution}}
+  \textbf{\bibinfo{volume}{6}}, \bibinfo{pages}{627--637}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Thorson2015a}
+\bibinfo{author}{Thorson, J.~T.}, \bibinfo{author}{Shelton, A.~O.},
+  \bibinfo{author}{Ward, E.~J.} \& \bibinfo{author}{Skaug, H.~J.}
+\newblock \bibinfo{title}{{Geostatistical delta-generalized linear mixed models
+  improve precision for estimated abundance indices for West Coast
+  groundfishes}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{1297--1310}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Thorson2013}
+\bibinfo{author}{Thorson, J.~T.} \& \bibinfo{author}{Ward, E.~J.}
+\newblock \bibinfo{title}{{Accounting for space-time interactions in index
+  standardization models}}.
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{147}}, \bibinfo{pages}{426--433}
+  (\bibinfo{year}{2013}).
+
+\bibitem{Ellis2000}
+\bibinfo{author}{Ellis, J.~R.}, \bibinfo{author}{Rogers, S.~I.} \&
+  \bibinfo{author}{Freeman, S.~M.}
+\newblock \bibinfo{title}{{Demersal Assemblages in the Irish Sea, St George's
+  Channel and Bristol Channel}}.
+\newblock \emph{\bibinfo{journal}{Estuarine, Coastal and Shelf Science}}
+  \textbf{\bibinfo{volume}{51}}, \bibinfo{pages}{299--315}
+  (\bibinfo{year}{2000}).
+\newblock
+  \urlprefix\url{http://www.sciencedirect.com/science/article/pii/S0272771400906772}.
+
+\bibitem{Gerritsen2012}
+\bibinfo{author}{Gerritsen, H.~D.}, \bibinfo{author}{Lordan, C.},
+  \bibinfo{author}{Minto, C.} \& \bibinfo{author}{Kraak, S. B.~M.}
+\newblock \bibinfo{title}{{Spatial patterns in the retained catch composition
+  of Irish demersal otter trawlers: High-resolution fisheries data as a
+  management tool}}.
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{129-130}}, \bibinfo{pages}{127--136}
+  (\bibinfo{year}{2012}).
+
+\bibitem{Mateo2016}
+\bibinfo{author}{Mateo, M.}, \bibinfo{author}{Pawlowski, L.} \&
+  \bibinfo{author}{Robert, M.}
+\newblock \bibinfo{title}{{Highly mixed fisheries: fine-scale spatial patterns
+  in retained catches of French fisheries in the Celtic Sea}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science: Journal du
+  Conseil}} \bibinfo{pages}{fsw129} (\bibinfo{year}{2016}).
+\newblock
+  \urlprefix\url{http://icesjms.oxfordjournals.org/lookup/doi/10.1093/icesjms/fsw129}.
+
+\bibitem{STECF2017}
+\bibinfo{author}{STECF}.
+\newblock \bibinfo{title}{{EU's Scientific, Technical and Economic Committee on
+  Fisheries (STECF): Fisheries Dependent Information Database}}
+  (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{https://stecf.jrc.ec.europa.eu/dd/effort/graphs-annex}.
+
+\bibitem{Robinson2011}
+\bibinfo{author}{Robinson, L.~M.} \emph{et~al.}
+\newblock \bibinfo{title}{{Pushing the limits in marine species distribution
+  modelling: Lessons from the land present challenges and opportunities}}.
+\newblock \emph{\bibinfo{journal}{Global Ecology and Biogeography}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{789--802}
+  (\bibinfo{year}{2011}).
+
+\bibitem{Santos2016}
+\bibinfo{author}{Santos, J.} \emph{et~al.}
+\newblock \bibinfo{title}{{Reducing flatfish bycatch in roundfish fisheries}}.
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{184}}, \bibinfo{pages}{64--73}
+  (\bibinfo{year}{2016}).
+
+\bibitem{Ward2015}
+\bibinfo{author}{Ward, E.~J.} \emph{et~al.}
+\newblock \bibinfo{title}{{Using spatiotemporal species distribution models to
+  identify temporally evolving hotspots of species co-occurrence}}.
+\newblock \emph{\bibinfo{journal}{Ecological Applications}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{2198--2209}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Cosandey-Godin2015}
+\bibinfo{author}{Cosandey-Godin, A.}, \bibinfo{author}{Krainski, E.~T.},
+  \bibinfo{author}{Worm, B.} \& \bibinfo{author}{Flemming, J.~M.}
+\newblock \bibinfo{title}{{Applying Bayesian spatiotemporal models to fisheries
+  bycatch in the Canadian Arctic}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{186--197}
+  (\bibinfo{year}{2015}).
+\newblock
+  \urlprefix\url{http://www.nrcresearchpress.com/doi/abs/10.1139/cjfas-2014-0159}.
+
+\bibitem{Breivik2016}
+\bibinfo{author}{Breivik, O.~N.}, \bibinfo{author}{Storvik, G.} \&
+  \bibinfo{author}{Nedreaas, K.}
+\newblock \bibinfo{title}{{Latent Gaussian models to decide on spatial closures
+  for bycatch management in the Barents Sea shrimp fishery}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{73}}, \bibinfo{pages}{1271--1280}
+  (\bibinfo{year}{2016}).
+\newblock
+  \urlprefix\url{http://www.nrcresearchpress.com/doi/10.1139/cjfas-2015-0322}.
+
+\bibitem{Abbott2015}
+\bibinfo{author}{Abbott, J.~K.}, \bibinfo{author}{Haynie, A.~C.} \&
+  \bibinfo{author}{Reimer, M.~N.}
+\newblock \bibinfo{title}{{Hidden Flexibility: Institutions, Incentives, and
+  the Margins of Selectivity in Fishing}}.
+\newblock \emph{\bibinfo{journal}{Land Economics}}
+  \textbf{\bibinfo{volume}{91}}, \bibinfo{pages}{169--195}
+  (\bibinfo{year}{2015}).
+
+\bibitem{Thorson2016}
+\bibinfo{author}{Thorson, J.~T.} \& \bibinfo{author}{Kristensen, K.}
+\newblock \bibinfo{title}{{Implementing a generic method for bias correction in
+  statistical models using random effects, with spatial and population dynamics
+  examples}}.
+\newblock \emph{\bibinfo{journal}{Fisheries Research}}
+  \textbf{\bibinfo{volume}{175}}, \bibinfo{pages}{66--74}
+  (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.fishres.2015.11.016}.
+
+\bibitem{Pascoe2007}
+\bibinfo{author}{Pascoe, S.}, \bibinfo{author}{Koundouri, P.} \&
+  \bibinfo{author}{Bj{\o}rndal, T.}
+\newblock \bibinfo{title}{{Estimating targeting ability in multi-species
+  fisheries: a primal multi-output distance function approach}}.
+\newblock \emph{\bibinfo{journal}{Land Economics}}
+  \textbf{\bibinfo{volume}{83}}, \bibinfo{pages}{382--397}
+  (\bibinfo{year}{2007}).
+\newblock \urlprefix\url{http://le.uwpress.org/content/83/3/382.short}.
+
+\bibitem{Reimer2017}
+\bibinfo{author}{Reimer, M.~N.}, \bibinfo{author}{Abbott, J.~K.} \&
+  \bibinfo{author}{Wilen, J.~E.}
+\newblock \bibinfo{title}{{Fisheries Production : Management Institutions ,
+  Spatial Choice , and the Quest for Policy Invariance}}.
+\newblock \emph{\bibinfo{journal}{Marine Resource Economics}}
+  \textbf{\bibinfo{volume}{32}}, \bibinfo{pages}{143--168}
+  (\bibinfo{year}{2017}).
+
+\bibitem{Thorson2017}
+\bibinfo{author}{Thorson, J.~T.} \& \bibinfo{author}{Barnett, L. A.~K.}
+\newblock \bibinfo{title}{{Comparing estimates of abundance trends and
+  distribution shifts using single- and multispecies models of fishes and
+  biogenic habitat}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science: Journal du
+  Conseil}} \bibinfo{pages}{fsw193} (\bibinfo{year}{2017}).
+\newblock
+  \urlprefix\url{http://icesjms.oxfordjournals.org/lookup/doi/10.1093/icesjms/fsw193}.
+
+\bibitem{Thorson2016b}
+\bibinfo{author}{Thorson, J.~T.} \emph{et~al.}
+\newblock \bibinfo{title}{{Joint dynamic species distribution models: a tool
+  for community ordination and spatio-temporal monitoring}}.
+\newblock \emph{\bibinfo{journal}{Global Ecology and Biogeography}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{1144--1158}
+  (\bibinfo{year}{2016}).
+
+\bibitem{Thorson2014}
+\bibinfo{author}{Thorson, J.~T.} \emph{et~al.}
+\newblock \bibinfo{title}{{The importance of spatial models for estimating the
+  strength of density dependence}}.
+\newblock \emph{\bibinfo{journal}{Ecology}} \textbf{\bibinfo{volume}{96}},
+  \bibinfo{pages}{1202--1212} (\bibinfo{year}{2015}).
+\newblock
+  \urlprefix\url{http://dx.doi.org/10.1890/14-0739.1$\backslash$nhttp://www.esajournals.org/doi/pdf/10.1890/14-0739.1}.
+
+\bibitem{Kristensen2015}
+\bibinfo{author}{Kristensen, K.}, \bibinfo{author}{Nielsen, A.},
+  \bibinfo{author}{Berg, C.~W.}, \bibinfo{author}{Skaug, H.} \&
+  \bibinfo{author}{Bell, B.}
+\newblock \bibinfo{title}{{TMB: Automatic Differentiation and Laplace
+  Approximation}}.
+\newblock \emph{\bibinfo{journal}{Journal of Statistical Software}}
+  \textbf{\bibinfo{volume}{70}}, \bibinfo{pages}{1--21} (\bibinfo{year}{2016}).
+\newblock \urlprefix\url{http://arxiv.org/abs/1509.00660}.
+\newblock \eprint{1509.00660}.
+
+\bibitem{Piet2009}
+\bibinfo{author}{Piet, G.~J.}, \bibinfo{author}{{Van Hal}, R.} \&
+  \bibinfo{author}{Greenstreet, S. P.~R.}
+\newblock \bibinfo{title}{{Modelling the direct impact of bottom trawling on
+  the North Sea fish community to derive estimates of fishing mortality for
+  non-target fish species}}.
+\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
+  \textbf{\bibinfo{volume}{66}}, \bibinfo{pages}{1985--1998}
+  (\bibinfo{year}{2009}).
+
+\end{thebibliography}
