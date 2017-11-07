@@ -37,7 +37,7 @@
 \typeout{Written by Peter Czoschke}
 \typeout{ }
 
-\LoadClass[12pt]{article}
+\LoadClass[11pt]{article}
 \RequirePackage{cite}
 \RequirePackage{times}
 \RequirePackage{fullpage}
