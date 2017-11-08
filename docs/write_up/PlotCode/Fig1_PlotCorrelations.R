@@ -135,10 +135,10 @@ png(file = file.path("..", 'figures', "Figure 1 - Omega1Omega2_Correlations_blan
 par(mfrow= c(1,2))
 corrplot(COR_O1,  order="hclust" ,addCoef.col = cols_o1,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" , p.mat = P_O1, insig = 'blank',
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability')
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(a) Spatial Encounter probability', number.cex = 1.5)
 corrplot(COR_O2,  order="hclust", addCoef.col = cols_o2,
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = 'grey90' , p.mat = P_O2, insig = 'blank', 
-		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density')
+		  cl.pos = 'n', addrect = 3, tl.col = 'black', tl.cex = 1.5, title = '(b) Spatial Density', number.cex = 1.5)
 dev.off()
 
 ## As a pair of plots - epsilons
