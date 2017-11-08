@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex JDM_mixed_fishery_letter"] 1510158511 "JDM_mixed_fishery_letter.aux" "JDM_mixed_fishery_letter.bbl" "JDM_mixed_fishery_letter" 1510158512
+["bibtex JDM_mixed_fishery_letter"] 1510165100 "JDM_mixed_fishery_letter.aux" "JDM_mixed_fishery_letter.bbl" "JDM_mixed_fishery_letter" 1510165101
   "../JSDM.bib" 1510144321 111757 79f2f81f1d1c3e398d74e10a4bf382c1 ""
   "./naturemag.bst" 1510142564 34867 ae05936b307e5838449d1bb5fdbb2c19 ""
-  "JDM_mixed_fishery_letter.aux" 1510158512 23635 6c4877687f5a485e397d3bd1b1b50ab8 ""
+  "JDM_mixed_fishery_letter.aux" 1510165101 30148 09905a051fece4cf7eab5be691622893 ""
   "JDM_mixed_fishery_letter.bcf" 0 -1 0 ""
   (generated)
   "JDM_mixed_fishery_letter.blg"
   "JDM_mixed_fishery_letter.bbl"
-["pdflatex"] 1510158511 "JDM_mixed_fishery_letter.tex" "JDM_mixed_fishery_letter.pdf" "JDM_mixed_fishery_letter" 1510158512
+["pdflatex"] 1510165100 "JDM_mixed_fishery_letter.tex" "JDM_mixed_fishery_letter.pdf" "JDM_mixed_fishery_letter" 1510165101
   "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -123,9 +123,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1503478936 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1503478974 3854907 d1a0e17960728ead39eae1b7780bb183 ""
-  "JDM_mixed_fishery_letter.aux" 1510158512 23635 6c4877687f5a485e397d3bd1b1b50ab8 ""
-  "JDM_mixed_fishery_letter.bbl" 1510158511 16663 0ac3111c2b144b502a9f3fdc955ad48e "bibtex JDM_mixed_fishery_letter"
-  "JDM_mixed_fishery_letter.tex" 1510158508 46939 0f61da2ad3f0d92febc806bd137276c7 ""
+  "JDM_mixed_fishery_letter.aux" 1510165101 30148 09905a051fece4cf7eab5be691622893 ""
+  "JDM_mixed_fishery_letter.bbl" 1510165100 16663 931490319267cba550b139a946731937 "bibtex JDM_mixed_fishery_letter"
+  "JDM_mixed_fishery_letter.tex" 1510165097 47802 85bdc8fac437c35dca947c0ac3e296bb ""
   "figures/Fig1_Combined.png" 1504175317 2868383 6a40656c2411150e7b92f7d86b11af3e ""
   "figures/Figure 1 - Omega1Omega2_Correlations_blank.png" 1497898128 323981 5448a299c30e48c4029b7c68f83e3aea ""
   "figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png" 1501087089 1909782 750fd8a434d1c67d6193a40321e3539e ""
@@ -133,6 +133,6 @@
   "nature.cls" 1509967894 5006 5c08c29ac3f8bc172774984cc1217e8f ""
   (generated)
   "JDM_mixed_fishery_letter.pdf"
-  "JDM_mixed_fishery_letter.aux"
   "JDM_mixed_fishery_letter.log"
   "JDM_mixed_fishery_letter.soc"
+  "JDM_mixed_fishery_letter.aux"
