@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  8 NOV 2017 14:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  8 NOV 2017 15:11
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -543,22 +543,25 @@ Package: truncate 2001/08/20  ver 3.6
 \c@Changes@AddCountcoilin=\count121
 \c@Changes@DeleteCountcoilin=\count122
 \c@Changes@ReplaceCountcoilin=\count123
+\c@Changes@AddCountPaul=\count124
+\c@Changes@DeleteCountPaul=\count125
+\c@Changes@ReplaceCountPaul=\count126
 (./JDM_mixed_fishery_letter.aux)
 \openout1 = `JDM_mixed_fishery_letter.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 29.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
@@ -598,16 +601,16 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count124
+\scratchcounter=\count127
 \scratchdimen=\dimen133
 \scratchbox=\box33
-\nofMPsegments=\count125
-\nofMParguments=\count126
+\nofMPsegments=\count128
+\nofMParguments=\count129
 \everyMPshowfont=\toks29
-\MPscratchCnt=\count127
+\MPscratchCnt=\count130
 \MPscratchDim=\dimen134
-\MPnumerator=\count128
-\makeMPintoPDFobject=\count129
+\MPnumerator=\count131
+\makeMPintoPDFobject=\count132
 \everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
@@ -643,71 +646,72 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 30.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 44.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (1.63736pt too wide) in paragraph at lines 108--122
+Overfull \hbox (1.63736pt too wide) in paragraph at lines 109--123
 []\OT1/phv/m/n/10.95 Sustainability of Eu-ro-pean fish-eries has been ham-pered by this `mixed fish-ery prob-lem' for decades
  []
 
 [3]
-Overfull \hbox (9.67447pt too wide) in paragraph at lines 165--187
+Overfull \hbox (9.67447pt too wide) in paragraph at lines 167--189
  \OT1/phv/b/n/10.95 Frame-work for analysing spatio-temporal mixed fish-eries in-ter-ac-tions |   []   |   []   |   []   |   []
  []
 
 [4]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 208.
-LaTeX Font Info:    Try loading font information for OML+phv on input line 208.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 210.
+LaTeX Font Info:    Try loading font information for OML+phv on input line 210.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlphv.fd
 File: omlphv.fd 
 )
 LaTeX Font Info:    Font shape `OML/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 208.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 210.
 
-Overfull \hbox (88.96613pt too wide) in paragraph at lines 198--212
+Overfull \hbox (88.96613pt too wide) in paragraph at lines 200--214
 |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 
-Overfull \hbox (0.84882pt too wide) in paragraph at lines 217--218
+Overfull \hbox (0.84882pt too wide) in paragraph at lines 219--220
 []|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
-[5] [6] [7] [8] [9]
-Overfull \hbox (1.34297pt too wide) in paragraph at lines 370--371
-[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
- []
-
+[5] [6] [7]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 374.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 291.
+[8] [9]
+Overfull \hbox (1.34297pt too wide) in paragraph at lines 376--377
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
+ []
 
-Overfull \hbox (10.638pt too wide) in paragraph at lines 374--385
-[]|   []   |   []   |   []   |   []$[]$[][] \OT1/phv/m/n/10.95 : []|   []   |   []   |   []   |   []   |   []   |   []   |   []
+
+Overfull \hbox (28.17963pt too wide) in paragraph at lines 381--395
+[]|   []   |   []   |   []   |   []$[]$[][] \OT1/phv/m/n/10.95 : []|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 [10]
-Overfull \hbox (13.94719pt too wide) in paragraph at lines 400--401
+Overfull \hbox (13.94719pt too wide) in paragraph at lines 410--411
 |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 [11]
-Overfull \hbox (7.56117pt too wide) in paragraph at lines 419--431
+Overfull \hbox (7.56117pt too wide) in paragraph at lines 429--441
  \OT1/phv/b/n/10.95 Ad-dress-ing the sci-en-tific chal-lenges of the land-ing obli-ga-tion in mixed fish-eries |   []   |   []
  []
 
 [12] [13]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 510.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 520.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [14]
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 522.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 532.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 522.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 532.
 [15] [16] [17] [18] [19] [20] (./JDM_mixed_fishery_letter.bbl
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 1.
@@ -716,37 +720,37 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 [21] [22] [23] [24]) [25] <"figures/Fig1_Combined".png, id=96, 1589.94pt x 867.24pt>
 File: "figures/Fig1_Combined".png Graphic file (type png)
 <use "figures/Fig1_Combined".png>
-Package pdftex.def Info: "figures/Fig1_Combined".png used on input line 756.
+Package pdftex.def Info: "figures/Fig1_Combined".png used on input line 766.
 (pdftex.def)             Requested size: 469.75502pt x 256.23058pt.
 <"figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png, id=97, 1156.32pt x 578.16pt>
 File: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png Graphic file (type png)
 <use "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png>
-Package pdftex.def Info: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png used on input line 770.
+Package pdftex.def Info: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png used on input line 780.
 (pdftex.def)             Requested size: 469.75502pt x 234.87692pt.
 <"figures/Figure 1 - Omega1Omega2_Correlations_blank".png, id=98, 1606.0pt x 803.0pt>
 File: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png Graphic file (type png)
 <use "figures/Figure 1 - Omega1Omega2_Correlations_blank".png>
-Package pdftex.def Info: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png used on input line 780.
+Package pdftex.def Info: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png used on input line 790.
 (pdftex.def)             Requested size: 469.75502pt x 234.87349pt.
 <"figures/Figure 4 - DensityDifferencesFigureswithCC".png, id=99, 953.964pt x 867.24pt>
 File: "figures/Figure 4 - DensityDifferencesFigureswithCC".png Graphic file (type png)
 <use "figures/Figure 4 - DensityDifferencesFigureswithCC".png>
-Package pdftex.def Info: "figures/Figure 4 - DensityDifferencesFigureswithCC".png used on input line 793.
+Package pdftex.def Info: "figures/Figure 4 - DensityDifferencesFigureswithCC".png used on input line 803.
 (pdftex.def)             Requested size: 469.75502pt x 427.05537pt.
 \Changes@OutFile=\write3
 \openout3 = `JDM_mixed_fishery_letter.soc'.
 
 [26] [27 <./figures/Fig1_Combined.png (PNG copy)>] [28 <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)>] [29 <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [30 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./JDM_mixed_fishery_letter.aux) ) 
 Here is how much of TeX's memory you used:
- 4931 strings out of 493029
- 68535 string characters out of 6136234
- 176254 words of memory out of 5000000
- 8319 multiletter control sequences out of 15000+600000
+ 4947 strings out of 493029
+ 68919 string characters out of 6136234
+ 178357 words of memory out of 5000000
+ 8335 multiletter control sequences out of 15000+600000
  34524 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,16n,39p,1756b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,16n,39p,1705b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on JDM_mixed_fishery_letter.pdf (30 pages, 6721441 bytes).
+Output written on JDM_mixed_fishery_letter.pdf (30 pages, 6722156 bytes).
 PDF statistics:
  162 PDF objects out of 1000 (max. 8388607)
  110 compressed objects within 2 object streams
