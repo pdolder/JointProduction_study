@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: JDM_mixed_fishery_letter.aux
+The style file: naturemag.bst
+Database file #1: ../JSDM.bib
+You've used 38 entries,
+            2348 wiz_defined-function locations,
+            1256 strings with 19548 characters,
+and the built_in function-call counts, 16015 in all, are:
+= -- 1211
+> -- 400
+< -- 0
++ -- 200
+- -- 100
+* -- 1998
+:= -- 1782
+add.period$ -- 136
+call.type$ -- 38
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 38
+duplicate$ -- 1386
+empty$ -- 1423
+format.name$ -- 134
+if$ -- 3182
+int.to.chr$ -- 0
+int.to.str$ -- 38
+missing$ -- 320
+newline$ -- 220
+num.names$ -- 38
+pop$ -- 200
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 253
+stack$ -- 0
+substring$ -- 857
+swap$ -- 1409
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 106
+width$ -- 40
+write$ -- 467

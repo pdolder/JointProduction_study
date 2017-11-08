@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[]{changes}
+\definechangesauthor[color = red]{coilin}
 % cite is loaded from nature class
 \setlist{itemsep=1pt} % This controls spacing between items in the lists
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
@@ -19,7 +20,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Working title: Spatial separation of catches in highly mixed fisheries}
+\title{Spatial separation of catches in highly mixed fisheries}
 
 \author{Paul J. Dolder$^{1,2}$ \& James T. Thorson$^3$ \& Cóilín Minto$^1$}
 
@@ -40,29 +41,36 @@
 %\begin{linenumbers}
 
 \begin{abstract} 
-Overexploitation of fish populations occurs when catches continue in fisheries
-pursuing a mix of species and low quota species are discarded. As EU fisheries
+%% based on: https://www.nature.com/nature/authors/gta/2c_Summary_para.pdf
+%% Basic introduction 
+Mixed fisheries capture a mix of species at the same time and are a dominant type of fishery worldwide.
+Overexploitation in mixed fisheries occurs when catches continue for available quota species
+while low quota species are discarded. As EU fisheries
 management moves to count all fish caught against quota (the `Landings
 obligation'), the challenge is to catch available quota within new constraints,
 else lose productivity.  
-
+%% More detailed background
 A mechanism for decoupling exploitation of species caught together is spatial
-targeting, but this remains challenging due to complex fishery dynamics and a
-lack of understanding of spatiotemporal community dynamics. We develop
-a framework based on joint species distribution modelling (spatial dynamic factor
+targeting, but this remains challenging due to complex fishery and population dynamics in space and time. 
+%% General problem
+How far spatial targetting can go to practically separate species is often unknown and anecdotal.
+%% Summarising the main result
+Here we develop a dimension-reduction framework based on joint species distribution modelling (spatial dynamic factor
 analysis) to understand how spatial community and fishery dynamics interact to
-determine species and size composition in the example of the highly mixed
-fisheries of the Celtic Sea.  Clear common spatial patterns emerge for three
+determine species and size composition.  
+%%	 Two or three sentences explaining what the main result
+In the example application to the highly mixed
+fisheries of the Celtic Sea, clear common spatial patterns emerge for three
 distinct species-groups and, while distribution varies inter-annually, the same
 species-groups are consistently found in higher densities together, with more
-subtle differences within species-groups. \deleted{The results highlight both
+subtle differences within species-groups - where spatial separation may not be practically possible. \deleted{The results highlight both
 opportunities for and limitations of the ability to spatiotemporally separate
 catches.}
-
+%%  general context
 We highlight the importance of dimension reduction techniques to focus
 management discussion on axes of maximal separation in space and time. We
 propose that spatiotemporal modelling of available data is a scientific
-requirement to address the pervasive and nuanced challenges of managing mixed
+necessity to address the pervasive and nuanced challenges of managing mixed
 fisheries.  
 \end{abstract}
 
@@ -77,7 +85,7 @@ population sizes and allow increased sustainable catches, yet fisheries catch
 globally remains stagnant \deleted{\cite{FAO2016}}. In light of projected
 increased demand for fish protein \deleted{\cite{B??n??2016}} there is an
 important role for well managed fisheries in supporting future food security
-\cite{Mcclanahan2015} and \deleted{there} remains a need to ensure fisheries
+\cite{Mcclanahan2015} \deleted[id=coilin]{and} \deleted{there} \replaced[id=coilin]{necessitating that}{remains a need to ensure} fisheries
 are managed efficiently to maximise productivity.
 
 A particular challenge in realising increased catches from rebuilt populations
@@ -90,8 +98,8 @@ vessel must stop fishing when the first quota is reached (the `choke' species)
 or overexploitation of the weaker species occurs while fishers continue to
 catch more healthy species and throw back (`discard') the fish for which they
 have no quota \cite{Batsleer2015}. There is\deleted{, therefore,} a pressing need
-for scientific tools which simplify the complexities of mixed fisheries to help
-managers and fishers maximise catches. 
+for scientific tools which simplify the complexities of mixed fisheries to help 
+\replaced[id = coilin]{avoid discarding}{managers and fishers maximise catches}. 
 
 Sustainability of European fisheries has been hampered by this `mixed fishery
 problem' for decades with large-scale discarding resulting \cite{Uhlmann2014}.
@@ -102,13 +110,13 @@ counted against the respective stock quota\deleted{; second, by 2020 all fish
 	stocks must be fished so as to be able to produce their Maximum
 	Sustainable Yield
 	(MSY)\cite{EuropeanParliamentandCounciloftheEuropeanUnion2013}. The
-	changes are}, expected to contribute to attainment of the goal of Good
+	changes are}\deleted[id = coilin]{, expected to contribute to attainment of the goal of Good
 Environmental Status (GES) under the European Marine Strategy Framework
 Directive (MSFD; \cite{EuropeanParliament2008}) and move Europe towards an
-ecosystem based approach to fisheries management \cite{Garcia2003}. 
+ecosystem based approach to fisheries management \cite{Garcia2003}}. 
 
 \deleted{Societal objectives for fisheries to achieve MSY across ecosystem
-	components are paralleled by} Individual fishers goals to maximise
+	components are paralleled by} Individual fishers goals \added[id = coilin]{are to} maximise
 utility; whether that be profit, income or the continuance of traditional
 practices.  \deleted{Under the new policy,} Unless fishers can avoid catch of
 unwanted species they will have to stop fishing when reaching their first
@@ -123,7 +131,7 @@ characteristics (e.g.  introducing escapement panels in nets), or the timing
 and location of fishing activity \cite{vanPutten2012a}. For
 example, otter trawl gears are known to have higher catch rates of roundfish
 due to the higher headline and wider sweeps which herd demersal fish into the
-net while beam trawls employ chain mesh to 'dig' benthic flatfish species from
+net while beam trawls employ chain mesh to \replaced[id = coilin]{lift}{'dig'} benthic flatfish species from
 the seabed\cite{Fraser2008}.
 
 Spatiotemporal management measures \deleted{(such as time-limited fishery
@@ -139,8 +147,8 @@ complex with spatial, technological and community interactions combining.
 for understanding these complexities. We do so by implementing a
 spatio-temporal dimension reduction method and use the results to draw
 inference on the fishery-community dynamics, creating a framework to identify
-trends common among species-groups. We use this to describe where spatial
-measures can contribute to mitigating unwanted catches in highly mixed
+trends common among species-groups. We use this to describe \replaced[id = coilin]{the potential for and limitations of}{where} spatial
+measures \replaced[id = coilin]{for}{can contribute to} mitigating unwanted catches in highly mixed
 fisheries.
 
 
@@ -197,17 +205,17 @@ area (average 2011 - 2015;\cite{STECF2017}). Each species was separated into
 juvenile and adult size classes based on their legal minimum conservation
 reference size (Table S2).
 
-We analyse the data to understand how the different associations among emergent
+\deleted[id = coilin]{We analyse the data to understand how the different associations among emergent
 species-groups (combination of species and size class) and their potential
 drivers affect catch compositions in mixed fisheries. We consider how these
 have changed over time, and the implications for mixed fisheries in managing
-catches of quota species under the EU landing obligation.
+catches of quota species under the EU landing obligation.}
 
 \subsection{Common average spatial patterns driving species associations} A
 spatial dynamic factor analysis decomposes the dominant spatial patterns
 driving differences in encounter probability and positive density. The first
-three factors \deleted{(after PCA rotation)} account for 83.7 \% of the between
-species-group variance in average encounter probability and 69 \% of the
+three factors \deleted{(after PCA rotation)} account for 83.7\% of the between
+species-group variance in average encounter probability and 69\% of the
 between species-group variance in average positive density. A clear spatial
 pattern can been seen both for encounter probability and positive density, with
 a positive value associated with the first factor in the inshore north easterly
@@ -275,7 +283,7 @@ characterise these influences on species spatial dynamics.
 differences in factor coefficients show less structure (Figures S5, S6). These
 inter-annual differences are important as they reflect the ability of fishers
 to predict where they can target species from one year to the next, without
-which it may be difficult to avoid unwanted catch. There were, however,
+which it may be difficult to avoid unwanted catch \added[id = coilin]{in close to real-time}. There were, however,
 \deleted{While spatio-temporal factor coefficients did not show consistent
 	trends from year to year across all species,} common patterns in
 spatiotemporal factor coefficients among species-groups \deleted{there were clear
@@ -297,7 +305,7 @@ species groups, but this could not be explained by temperature \deleted{is often
 S6, no correlations found for either encounter probability or positive
 density).
 
-\subsection{Three clusters of species show similar spatial patterns} In order to
+\subsection{Three clusters of species show similar spatial patterns} \replaced[id = coilin]{To}{In order to}
 gain greater insight into the community dynamics we considered how
 species-groups covary in space and time through among species-group
 correlations. Pearson correlation coefficients for the modelled average spatial
@@ -358,17 +366,17 @@ factors and species behaviour.}
 
 
 \subsection{Subtle differences in distributions may be important to separate
-	catches within groups under the landing obligation}: The analysis shows
+	catches within groups \deleted[id = coilin]{under the landing obligation}}: \deleted[id = coilin]{The analysis shows
 the interdependence within species-groups of roundfish, flatfish and deeper
 water species, where catching one species within the group indicates a high
 probability of catching the other species, which has important implications for
 how spatial avoidance can be used to support implementation of the EU's
-landings obligation. If production from mixed fisheries is to be maximised,
+landings obligation. }If production from mixed fisheries is to be maximised,
 decoupling catches of species between and within the groups will be key. For
 example, asking where the maximal separation in the densities of two coupled
 species is likely to occur? To address this requirement, we map the difference
 in spatial distribution within a group for each pair of species within a
-species-groupings for a single year (2015; Figure 4). 
+species-groupings for a single year (2015; Figure 4). \added[id = coilin]{MAYBE PICK HADDOCK AND WHITING AS A QUICK REALLY IMPORTANT EXAMPLE?}
 
 \deleted{Cod had a more north-westerly distribution than
 haddock, while cod was more westerly distributed than whiting roughly
@@ -390,17 +398,17 @@ Predicted catch distribution from a ``typical'' otter trawl gear and beam trawl
 fishing at three different locations highlights the differences fishing gear
 and location makes on catches (Figure 4h). \deleted{As can be seen, both the gear
 	selectivity and area fished play important contributions to the catch
-	compositions;}. In the inshore area (location 'A') plaice and sole are
+	compositions;}. In the inshore area (location `A') plaice and sole are
 the two main species in catch reflecting their distribution and abundance,
 though the otter trawl gear catches a greater proportion of plaice to sole than
-the beam trawl.  The area between Britain and Ireland (location 'B') has a
+the beam trawl.  The area between Britain and Ireland (location `B') has a
 greater contribution of whiting, haddock, cod, hake and anglerfishes in the
 catch with the otter trawl catching a greater proportion of the roundfish,
 haddock, whiting and cod while the beam trawl catches more anglerfishes and
 megrims. The offshore area has a higher contribution of megrim, anglerfishes
 and hake with the otter trawl catching a greater share of hake and the beam
 trawl a greater proportion of megrim. Megrim dominates the catch for both gears
-in location 'C', reflecting its relative abundance in the area.  
+in location `C', reflecting its relative abundance in the area.  
 
 \subsection{Addressing the scientific challenges of the landing obligation in
 	mixed fisheries} \deleted{In application to the Celtic Sea} We have
@@ -410,9 +418,9 @@ exist in distributions within species-groups. The differences in catch
 compositions between gears at the same location (Figure 4h) show that changing
 fishing methods can go some way to affecting catch, yet that differences in
 catches between locations are likely to be more important. For example, beam
-trawls fishing at the inshore locations (e.g. location 'A' in Figure 4) are
+trawls fishing at the inshore locations (e.g. location `A' in Figure 4) are
 likely to predominately catch plaice and sole, yet switching to the offshore
-locations (e.g. location 'C') would likely yield greater catches of megrim and
+locations (e.g. location `C') would likely yield greater catches of megrim and
 anglerfishes.  Such changes in spatial fishing patterns are likely to play an
 important role in supporting implementation of the landings obligation.
 
@@ -450,8 +458,8 @@ how far spatial avoidance can go to achieving catch balancing in fisheries.
 Our model captures differences between location fished for two gear types and
 their broad scale effect on catch composition\deleted{, information crucial for
 	managers in implementing the landing obligation}.  It is
-likely\deleted{, however, that} this analysis reflects a lower bound on the
-utility of spatial avoidance as fine-scale behavioural decisions such as
+likely\deleted{, however, that} this analysis reflects a lower bound on \deleted[id = coilin]{the
+utility of spatial} avoidance as fine-scale behavioural decisions such as
 time-of-day, gear configuration and location choices can also be used to affect
 catch\cite{Abbott2015, Thorson2016}. Results of empirical studies undertaken
 elsewhere\cite{Branch2008, Kuriyama2016} suggest limits to the effectiveness of
@@ -697,7 +705,7 @@ and time.
 \newpage
 \Urlmuskip=0mu plus 1mu\relax
 \bibliographystyle{naturemag}
-\small{\bibliography{JSDM}}
+\small{\bibliography{../JSDM}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -740,7 +748,7 @@ and time.
 %% Figure 1 - spatial factors
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\linewidth]{"Fig1_Combined"}
+	\includegraphics[width=\linewidth]{"figures/Fig1_Combined"}
 	\label{fig:1}
 	\caption{Factor values for the first three factors for (a) Average
 		encounter probability and (b) Average positive density for the
@@ -754,7 +762,7 @@ and time.
 %% Figure 2 - PCA style plots
 \begin{figure}
 \begin{center}
-	\includegraphics[width=\linewidth]{"Figure 3 - PCAstyle_Plots_SpatioTemp"}
+	\includegraphics[width=\linewidth]{"figures/Figure 3 - PCAstyle_Plots_SpatioTemp"}
 	\label{fig:2}
 	\caption{Position of each species-group on the first two axes from the
 		factor analysis for (a) spatio-temporal encounter probability
@@ -764,7 +772,7 @@ and time.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width = \linewidth]{"Figure 1 - Omega1Omega2_Correlations_blank"}
+	\includegraphics[width = \linewidth]{"figures/Figure 1 - Omega1Omega2_Correlations_blank"}
 	\label{fig:3}
 	\caption{Inter-species correlations for (a) spatial encounter
 		probability over all years and (b) spatial positive density.
@@ -777,7 +785,7 @@ and time.
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width = \linewidth]{"Figure 4 - DensityDifferencesFigureswithCC"}
+	\includegraphics[width = \linewidth]{"figures/Figure 4 - DensityDifferencesFigureswithCC"}
 	\label{fig:4}
 	\caption{Differences in the standardised spatial density for pairs of
 		species and expected catch rates for two different gears at
