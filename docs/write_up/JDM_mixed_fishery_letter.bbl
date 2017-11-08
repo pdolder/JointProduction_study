@@ -54,14 +54,6 @@
   \urlprefix\url{http://scholar.google.com/scholar?hl=en{\&}btnG=Search{\&}q=intitle:THE+STATE+OF+WORLD+FISHERIES+AND+AQUACULTURE{\#}0}.
 \newblock \eprint{978-92-5-106675-1}.
 
-\bibitem{B??n??2016}
-\bibinfo{author}{B??n??, C.} \emph{et~al.}
-\newblock \bibinfo{title}{{Contribution of Fisheries and Aquaculture to Food
-  Security and Poverty Reduction: Assessing the Current Evidence}}.
-\newblock \emph{\bibinfo{journal}{World Development}}
-  \textbf{\bibinfo{volume}{79}}, \bibinfo{pages}{177--196}
-  (\bibinfo{year}{2016}).
-
 \bibitem{Mcclanahan2015}
 \bibinfo{author}{Mcclanahan, T.}, \bibinfo{author}{Allison, E.~H.} \&
   \bibinfo{author}{Cinner, J.~E.}
@@ -98,32 +90,6 @@
   \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{1235--1245}
   (\bibinfo{year}{2014}).
 
-\bibitem{EuropeanParliamentandCounciloftheEuropeanUnion2013}
-\bibinfo{author}{{European Commission}}.
-\newblock \bibinfo{title}{{REGULATION (EU) No 1380/2013 OF THE EUROPEAN
-  PARLIAMENT AND OF THE COUNCIL of 11 December 2013 on the Common Fisheries
-  Policy, amending Council Regulations (EC) No 1954/2003 and (EC) No 1224/2009
-  and repealing Council Regulations (EC) No 2371/2002 and (EC}}
-  (\bibinfo{year}{2013}).
-
-\bibitem{EuropeanParliament2008}
-\bibinfo{author}{{European Parliament}}.
-\newblock \bibinfo{title}{{Directive 2009/28/EC of the European Parliament and
-  of the Council of 23 April 2009}}.
-\newblock \emph{\bibinfo{journal}{Official Journal of the European Union}}
-  \textbf{\bibinfo{volume}{140}}, \bibinfo{pages}{16--62}
-  (\bibinfo{year}{2009}).
-\newblock \eprint{534}.
-
-\bibitem{Garcia2003}
-\bibinfo{author}{Garcia, S.~M.}, \bibinfo{author}{Zerbi, A.},
-  \bibinfo{author}{C, A.}, \bibinfo{author}{{Do Chi}, T.} \&
-  \bibinfo{author}{Lasserre, G.}
-\newblock \bibinfo{title}{{The ecosystem approach to fisheries}}.
-\newblock \emph{\bibinfo{journal}{FAO Fisheries Technical Paper}}
-  \textbf{\bibinfo{volume}{443}}, \bibinfo{pages}{71} (\bibinfo{year}{2003}).
-\newblock \urlprefix\url{http://www.fao.org/docrep/006/Y4773E/y4773e05.htm}.
-
 \bibitem{Condie2013}
 \bibinfo{author}{Condie, H.~M.}, \bibinfo{author}{Grant, A.} \&
   \bibinfo{author}{Catchpole, T.~L.}
@@ -144,16 +110,6 @@
   (\bibinfo{year}{2012}).
 \newblock
   \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2011.00430.x}.
-
-\bibitem{Fraser2008}
-\bibinfo{author}{Fraser, H.~M.}, \bibinfo{author}{Greenstreet, S. P.~R.},
-  \bibinfo{author}{Fryer, R.~J.} \& \bibinfo{author}{Piet, G.~J.}
-\newblock \bibinfo{title}{{Mapping spatial variation in demersal fish species
-  diversity and composition in the North Sea: Accounting for species- and
-  size-related catchability in survey trawls}}.
-\newblock \emph{\bibinfo{journal}{ICES Journal of Marine Science}}
-  \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{531--538}
-  (\bibinfo{year}{2008}).
 
 \bibitem{Needle2011}
 \bibinfo{author}{Needle, C.~L.} \& \bibinfo{author}{Catarino, R.}
@@ -230,14 +186,6 @@
 \newblock
   \urlprefix\url{https://stecf.jrc.ec.europa.eu/dd/effort/graphs-annex}.
 
-\bibitem{Robinson2011}
-\bibinfo{author}{Robinson, L.~M.} \emph{et~al.}
-\newblock \bibinfo{title}{{Pushing the limits in marine species distribution
-  modelling: Lessons from the land present challenges and opportunities}}.
-\newblock \emph{\bibinfo{journal}{Global Ecology and Biogeography}}
-  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{789--802}
-  (\bibinfo{year}{2011}).
-
 \bibitem{Santos2016}
 \bibinfo{author}{Santos, J.} \emph{et~al.}
 \newblock \bibinfo{title}{{Reducing flatfish bycatch in roundfish fisheries}}.
@@ -303,15 +251,6 @@
   \textbf{\bibinfo{volume}{175}}, \bibinfo{pages}{66--74}
   (\bibinfo{year}{2016}).
 \newblock \urlprefix\url{http://dx.doi.org/10.1016/j.fishres.2015.11.016}.
-
-\bibitem{Reimer2017}
-\bibinfo{author}{Reimer, M.~N.}, \bibinfo{author}{Abbott, J.~K.} \&
-  \bibinfo{author}{Wilen, J.~E.}
-\newblock \bibinfo{title}{{Fisheries Production : Management Institutions ,
-  Spatial Choice , and the Quest for Policy Invariance}}.
-\newblock \emph{\bibinfo{journal}{Marine Resource Economics}}
-  \textbf{\bibinfo{volume}{32}}, \bibinfo{pages}{143--168}
-  (\bibinfo{year}{2017}).
 
 \bibitem{Thorson2017}
 \bibinfo{author}{Thorson, J.~T.} \& \bibinfo{author}{Barnett, L. A.~K.}
