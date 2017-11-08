@@ -15,3 +15,4 @@
 ## re-include the pdfs from the write-up
 
 !/docs/write_up/*.pdf
+!/docs/write_up/figures/*.png
