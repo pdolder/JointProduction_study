@@ -1,11 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.24)  8 NOV 2017 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  8 NOV 2017 14:18
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**JDM_mixed_fishery_letter.tex --shell-escape
+**JDM_mixed_fishery_letter.tex
 (./JDM_mixed_fishery_letter.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (./nature.cls
 Document Class: nature 24/2/2004 v1.0
 A class for writing preprints for the journal Nature
@@ -27,38 +28,29 @@ File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-)
-(/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
-)
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
-)
-(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count87
@@ -73,19 +65,33 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen109
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count90
+\output=\toks16
+\linenoprevgraf=\count91
+\linenumbersep=\dimen111
+\linenumberwidth=\dimen112
+\c@linenumber=\count92
+\c@pagewiselinenumber=\count93
+\c@LN@truepage=\count94
+\c@internallinenumber=\count95
+\c@internallinenumbers=\count96
+\quotelinenumbersep=\dimen113
+\bframerule=\dimen114
+\bframesep=\dimen115
+\bframebox=\box26
+LaTeX Info: Redefining \\ on input line 3056.
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
-
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
-
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
@@ -318,7 +324,6 @@ File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
-
 (/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
@@ -359,7 +364,6 @@ File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
-
 (/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
@@ -383,142 +387,119 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip44
-\enit@outerparindent=\dimen111
-\enit@toks=\toks18
-\enit@inbox=\box26
-\enitdp@description=\count90
-)
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\enit@outerparindent=\dimen116
+\enit@toks=\toks19
+\enit@inbox=\box27
+\enitdp@description=\count97
+) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/03/03 v2.15a AMS math features
 \@mathmargin=\skip45
-
 For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
-
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks19
-\ex@=\dimen112
-))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\@emptytoks=\toks20
+\ex@=\dimen117
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen113
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+\pmbraise@=\dimen118
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count91
+\inf@bad=\count98
 LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count92
-\leftroot@=\count93
+\uproot@=\count99
+\leftroot@=\count100
 LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count94
-\DOTSCASE@=\count95
+\classnum@=\count101
+\DOTSCASE@=\count102
 LaTeX Info: Redefining \ldots on input line 394.
 LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
-\Mathstrutbox@=\box27
-\strutbox@=\box28
-\big@size=\dimen114
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen119
 LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
-\macc@depth=\count96
-\c@MaxMatrixCols=\count97
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
 \dotsspace@=\muskip11
-\c@parentequation=\count98
-\dspbrk@lvl=\count99
-\tag@help=\toks20
-\row@=\count100
-\column@=\count101
-\maxfields@=\count102
-\andhelp@=\toks21
-\eqnshift@=\dimen115
-\alignsep@=\dimen116
-\tagshift@=\dimen117
-\tagwidth@=\dimen118
-\totwidth@=\dimen119
-\lineht@=\dimen120
-\@envbody=\toks22
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
+\tag@help=\toks21
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
+\andhelp@=\toks22
+\eqnshift@=\dimen120
+\alignsep@=\dimen121
+\tagshift@=\dimen122
+\tagwidth@=\dimen123
+\totwidth@=\dimen124
+\lineht@=\dimen125
+\@envbody=\toks23
 \multlinegap=\skip46
 \multlinetaggap=\skip47
-\mathdisplay@stack=\toks23
+\mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
-
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
-
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+) (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 95.
-
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count103
+\Gread@gobject=\count110
 ))
-\Gin@req@height=\dimen121
-\Gin@req@width=\dimen122
-)
-(/usr/share/texlive/texmf-dist/tex/latex/changes/changes.sty
+\Gin@req@height=\dimen126
+\Gin@req@width=\dimen127
+) (/usr/share/texlive/texmf-dist/tex/latex/changes/changes.sty
 Package: changes 2015/04/27 v2.0.4 changes package
-
 *** changes package 2015/04/27 v2.0.4 ***
 (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
-
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks24
-\XKV@tempa@toks=\toks25
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks25
+\XKV@tempa@toks=\toks26
 )
-\XKV@depth=\count104
+\XKV@depth=\count111
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/xifthen/xifthen.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/xifthen/xifthen.sty
 Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
-
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count105
-\calc@Bcount=\count106
-\calc@Adimen=\dimen123
-\calc@Bdimen=\dimen124
+\calc@Acount=\count112
+\calc@Bcount=\count113
+\calc@Adimen=\dimen128
+\calc@Bdimen=\dimen129
 \calc@Askip=\skip48
 \calc@Bskip=\skip49
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count107
+\calc@Ccount=\count114
 \calc@Cskip=\skip50
-)
-(/usr/share/texlive/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
-))
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
-
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
@@ -532,40 +513,36 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdfcolmk.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdfcolmk.sty
 Package: pdfcolmk 2008/08/11 v1.2 Color support for pdfTeX via marks (HO)
 Package pdfcolmk Info: The color stack of pdfTeX >= 1.40 is used. Therefore
 (pdfcolmk)             this package is not necessary and not loaded.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box29
-\UL@hyphenbox=\box30
+) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box30
+\UL@hyphenbox=\box31
 \UL@skip=\skip51
-\UL@hook=\toks26
-\UL@height=\dimen125
-\UL@pe=\count108
-\UL@pixel=\dimen126
-\ULC@box=\box31
+\UL@hook=\toks27
+\UL@height=\dimen130
+\UL@pe=\count115
+\UL@pixel=\dimen131
+\ULC@box=\box32
 Package: ulem 2012/05/18
-\ULdepth=\dimen127
+\ULdepth=\dimen132
 )
-\c@Changes@AuthorCount=\count109
-\c@Changes@Author=\count110
-\c@Changes@AddCount=\count111
-\c@Changes@DeleteCount=\count112
-\c@Changes@ReplaceCount=\count113
-
+\c@Changes@AuthorCount=\count116
+\c@Changes@Author=\count117
+\c@Changes@AddCount=\count118
+\c@Changes@DeleteCount=\count119
+\c@Changes@ReplaceCount=\count120
 (/usr/share/texlive/texmf-dist/tex/latex/truncate/truncate.sty
 Package: truncate 2001/08/20  ver 3.6
-\@Trunc@RestHyph=\toks27
+\@Trunc@RestHyph=\toks28
 )
 \Changes@Len@summ=\skip52
 )
-\c@Changes@AddCountcoilin=\count114
-\c@Changes@DeleteCountcoilin=\count115
-\c@Changes@ReplaceCountcoilin=\count116
-
+\c@Changes@AddCountcoilin=\count121
+\c@Changes@DeleteCountcoilin=\count122
+\c@Changes@ReplaceCountcoilin=\count123
 (./JDM_mixed_fishery_letter.aux)
 \openout1 = `JDM_mixed_fishery_letter.aux'.
 
@@ -582,7 +559,6 @@ LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 28.
-
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
@@ -622,21 +598,19 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count117
-\scratchdimen=\dimen128
-\scratchbox=\box32
-\nofMPsegments=\count118
-\nofMParguments=\count119
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count120
-\MPscratchDim=\dimen129
-\MPnumerator=\count121
-\makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count124
+\scratchdimen=\dimen133
+\scratchbox=\box33
+\nofMPsegments=\count125
+\nofMParguments=\count126
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count127
+\MPscratchDim=\dimen134
+\MPnumerator=\count128
+\makeMPintoPDFobject=\count129
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
@@ -645,22 +619,16 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
@@ -669,162 +637,116 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
-
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 29.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
-
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (1.63736pt too wide) in paragraph at lines 104--117
-[]\OT1/phv/m/n/10.95 Sustainability of Eu-ro-pean fish-eries has been ham-pered
- by this `mixed fish-ery prob-lem' for decades
+Overfull \hbox (1.63736pt too wide) in paragraph at lines 108--122
+[]\OT1/phv/m/n/10.95 Sustainability of Eu-ro-pean fish-eries has been ham-pered by this `mixed fish-ery prob-lem' for decades
  []
 
 [3]
-Overfull \hbox (9.67447pt too wide) in paragraph at lines 160--182
- \OT1/phv/b/n/10.95 Frame-work for analysing spatio-temporal mixed fish-eries i
-n-ter-ac-tions |   []   |   []   |   []   |   []
+Overfull \hbox (9.67447pt too wide) in paragraph at lines 165--187
+ \OT1/phv/b/n/10.95 Frame-work for analysing spatio-temporal mixed fish-eries in-ter-ac-tions |   []   |   []   |   []   |   []
  []
 
 [4]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 203.
-LaTeX Font Info:    Try loading font information for OML+phv on input line 203.
-
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlphv.fd
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 208.
+LaTeX Font Info:    Try loading font information for OML+phv on input line 208.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlphv.fd
 File: omlphv.fd 
 )
 LaTeX Font Info:    Font shape `OML/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 203.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 208.
 
-Overfull \hbox (88.96613pt too wide) in paragraph at lines 193--207
+Overfull \hbox (88.96613pt too wide) in paragraph at lines 198--212
 |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 
-Overfull \hbox (0.84882pt too wide) in paragraph at lines 212--213
-[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
-]   |   []   |   []   |   []   |   []
+Overfull \hbox (0.84882pt too wide) in paragraph at lines 217--218
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 [5] [6] [7] [8] [9]
-Overfull \hbox (1.34297pt too wide) in paragraph at lines 365--366
-[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [
-]   |   []   |   []   |   []   |   []
+Overfull \hbox (1.34297pt too wide) in paragraph at lines 370--371
+[]|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 369.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 374.
 
-Overfull \hbox (10.638pt too wide) in paragraph at lines 369--380
-[]|   []   |   []   |   []   |   []$[]$[][] \OT1/phv/m/n/10.95 : []|   []   |  
- []   |   []   |   []   |   []   |   []   |   []
+Overfull \hbox (10.638pt too wide) in paragraph at lines 374--385
+[]|   []   |   []   |   []   |   []$[]$[][] \OT1/phv/m/n/10.95 : []|   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 [10]
-Overfull \hbox (13.94719pt too wide) in paragraph at lines 395--396
-|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   [] 
-  |   []   |   []   |   []   |   []   |   []   |   []   |   []
+Overfull \hbox (13.94719pt too wide) in paragraph at lines 400--401
+|   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []
  []
 
 [11]
-Overfull \hbox (7.56117pt too wide) in paragraph at lines 414--426
- \OT1/phv/b/n/10.95 Ad-dress-ing the sci-en-tific chal-lenges of the land-ing o
-bli-ga-tion in mixed fish-eries |   []   |   []
+Overfull \hbox (7.56117pt too wide) in paragraph at lines 419--431
+ \OT1/phv/b/n/10.95 Ad-dress-ing the sci-en-tific chal-lenges of the land-ing obli-ga-tion in mixed fish-eries |   []   |   []
  []
 
 [12] [13]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 505.
-
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 510.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [14]
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 517.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 522.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 517.
-
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 522.
 [15] [16] [17] [18] [19] [20] (./JDM_mixed_fishery_letter.bbl
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 9.
- [21] [22]
-[23] [24]) [25] <"figures/Fig1_Combined".png, id=96, 1589.94pt x 867.24pt>
+[21] [22] [23] [24]) [25] <"figures/Fig1_Combined".png, id=96, 1589.94pt x 867.24pt>
 File: "figures/Fig1_Combined".png Graphic file (type png)
-
 <use "figures/Fig1_Combined".png>
-Package pdftex.def Info: "figures/Fig1_Combined".png used on input line 751.
+Package pdftex.def Info: "figures/Fig1_Combined".png used on input line 756.
 (pdftex.def)             Requested size: 469.75502pt x 256.23058pt.
-
-<"figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png, id=97, 1156.32pt x 578.16p
-t>
-File: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png Graphic file (type png
-)
- <use "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png>
-Package pdftex.def Info: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png use
-d on input line 765.
+<"figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png, id=97, 1156.32pt x 578.16pt>
+File: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png Graphic file (type png)
+<use "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png>
+Package pdftex.def Info: "figures/Figure 3 - PCAstyle_Plots_SpatioTemp".png used on input line 770.
 (pdftex.def)             Requested size: 469.75502pt x 234.87692pt.
-
-<"figures/Figure 1 - Omega1Omega2_Correlations_blank".png, id=98, 1606.0pt x 80
-3.0pt>
-File: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png Graphic file (ty
-pe png)
- <use "figures/Figure 1 - Omega1Omega2_Correlations_blank".png>
-Package pdftex.def Info: "figures/Figure 1 - Omega1Omega2_Correlations_blank".p
-ng used on input line 775.
+<"figures/Figure 1 - Omega1Omega2_Correlations_blank".png, id=98, 1606.0pt x 803.0pt>
+File: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png Graphic file (type png)
+<use "figures/Figure 1 - Omega1Omega2_Correlations_blank".png>
+Package pdftex.def Info: "figures/Figure 1 - Omega1Omega2_Correlations_blank".png used on input line 780.
 (pdftex.def)             Requested size: 469.75502pt x 234.87349pt.
-
-<"figures/Figure 4 - DensityDifferencesFigureswithCC".png, id=99, 953.964pt x 8
-67.24pt>
-File: "figures/Figure 4 - DensityDifferencesFigureswithCC".png Graphic file (ty
-pe png)
- <use "figures/Figure 4 - DensityDifferencesFigureswithCC".png>
-Package pdftex.def Info: "figures/Figure 4 - DensityDifferencesFigureswithCC".p
-ng used on input line 788.
+<"figures/Figure 4 - DensityDifferencesFigureswithCC".png, id=99, 953.964pt x 867.24pt>
+File: "figures/Figure 4 - DensityDifferencesFigureswithCC".png Graphic file (type png)
+<use "figures/Figure 4 - DensityDifferencesFigureswithCC".png>
+Package pdftex.def Info: "figures/Figure 4 - DensityDifferencesFigureswithCC".png used on input line 793.
 (pdftex.def)             Requested size: 469.75502pt x 427.05537pt.
 \Changes@OutFile=\write3
 \openout3 = `JDM_mixed_fishery_letter.soc'.
 
-
-[26] [27 <./figures/Fig1_Combined.png (PNG copy)>] [28 <./figures/Figure 3 - PC
-Astyle_Plots_SpatioTemp.png (PNG copy)>] [29 <./figures/Figure 1 - Omega1Omega2
-_Correlations_blank.png (PNG copy)>] [30 <./figures/Figure 4 - DensityDifferenc
-esFigureswithCC.png (PNG copy)>] (./JDM_mixed_fishery_letter.aux) ) 
+[26] [27 <./figures/Fig1_Combined.png (PNG copy)>] [28 <./figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png (PNG copy)>] [29 <./figures/Figure 1 - Omega1Omega2_Correlations_blank.png (PNG copy)>] [30 <./figures/Figure 4 - DensityDifferencesFigureswithCC.png (PNG copy)>] (./JDM_mixed_fishery_letter.aux) ) 
 Here is how much of TeX's memory you used:
- 4729 strings out of 494953
- 65490 string characters out of 6180977
- 168129 words of memory out of 5000000
- 7870 multiletter control sequences out of 15000+600000
+ 4931 strings out of 493029
+ 68535 string characters out of 6136234
+ 176254 words of memory out of 5000000
+ 8319 multiletter control sequences out of 15000+600000
  34524 words of font info for 72 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 38i,16n,39p,1771b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/
-texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/he
-lvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro
-8a.pfb>
-Output written on JDM_mixed_fishery_letter.pdf (30 pages, 6718631 bytes).
+ 1141 hyphenation exceptions out of 8191
+ 38i,16n,39p,1756b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on JDM_mixed_fishery_letter.pdf (30 pages, 6721441 bytes).
 PDF statistics:
  162 PDF objects out of 1000 (max. 8388607)
  110 compressed objects within 2 object streams
