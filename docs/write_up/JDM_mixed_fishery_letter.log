@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.9)  9 NOV 2017 10:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.23)  9 NOV 2017 11:31
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **JDM_mixed_fishery_letter.tex
@@ -659,7 +659,7 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8> not available
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (1.63736pt too wide) in paragraph at lines 113--148
+Overfull \hbox (1.63736pt too wide) in paragraph at lines 113--147
 []\OT1/phv/m/n/10.95 Sustainability of Eu-ro-pean fish-eries has been ham-pered by this `mixed fish-ery prob-lem' for decades
  []
 
@@ -713,13 +713,13 @@ Package pdftex.def Info: "figures/Figure 4 - DensityDifferencesFigureswithCC".pn
 Here is how much of TeX's memory you used:
  4954 strings out of 493029
  69171 string characters out of 6136234
- 147445 words of memory out of 5000000
+ 147447 words of memory out of 5000000
  8342 multiletter control sequences out of 15000+600000
  34524 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,16n,39p,426b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on JDM_mixed_fishery_letter.pdf (23 pages, 6717237 bytes).
+Output written on JDM_mixed_fishery_letter.pdf (23 pages, 6717296 bytes).
 PDF statistics:
  139 PDF objects out of 1000 (max. 8388607)
  95 compressed objects within 1 object stream
