@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex SupplementaryTablesandFigures"] 1512654808 "SupplementaryTablesandFigures.aux" "SupplementaryTablesandFigures.bbl" "SupplementaryTablesandFigures" 1512654810
+["bibtex SupplementaryTablesandFigures"] 1512656744 "SupplementaryTablesandFigures.aux" "SupplementaryTablesandFigures.bbl" "SupplementaryTablesandFigures" 1512656745
   "../JSDM.bib" 1509047866 111757 79f2f81f1d1c3e398d74e10a4bf382c1 ""
   "./Science.bst" 1512645954 26882 d44ba44187a978cfea85a3cd97387589 ""
-  "SupplementaryTablesandFigures.aux" 1512654809 4562 b0fdc42a6bbb843d0afaec7e62bbb226 ""
+  "SupplementaryTablesandFigures.aux" 1512656745 4621 209687d67fb6b09a80d69a2f112778d5 ""
   "SupplementaryTablesandFigures.bcf" 0 -1 0 ""
   (generated)
-  "SupplementaryTablesandFigures.bbl"
   "SupplementaryTablesandFigures.blg"
-["pdflatex"] 1512654808 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1512654810
+  "SupplementaryTablesandFigures.bbl"
+["pdflatex"] 1512656744 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1512656745
   "../figures/Aniso.png" 1501151616 83359 406208d7589197b1b16d7bf10c3fa70e ""
   "../figures/AreaMap.png" 1501079240 113066 8bc7c5c8bfd6688b2d5b293b77d0e606 ""
   "../figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
@@ -149,12 +149,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1512585473 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1512585530 3854800 61def254b42a7b15a7d1849086cebe52 ""
-  "SupplementaryTablesandFigures.aux" 1512654809 4562 b0fdc42a6bbb843d0afaec7e62bbb226 ""
-  "SupplementaryTablesandFigures.bbl" 1512654808 919 33a3a295843f5b939fae8157fea8caba "bibtex SupplementaryTablesandFigures"
-  "SupplementaryTablesandFigures.tex" 1512654807 20692 5d249fc5fc8456d83e42d918da37b770 ""
+  "SupplementaryTablesandFigures.aux" 1512656745 4621 209687d67fb6b09a80d69a2f112778d5 ""
+  "SupplementaryTablesandFigures.bbl" 1512656744 1039 1d04089314b402cfab54fe31ed9f928f "bibtex SupplementaryTablesandFigures"
+  "SupplementaryTablesandFigures.tex" 1512656742 24354 536b4e594736d3d4ae3a28d8261481e4 ""
   "scicite.sty" 1512645950 21940 f3b9f4a675770828af17c69b198998fc ""
   (generated)
-  "SupplementaryTablesandFigures.aux"
+  "SupplementaryTablesandFigures.soc"
   "SupplementaryTablesandFigures.pdf"
   "SupplementaryTablesandFigures.log"
-  "SupplementaryTablesandFigures.soc"
+  "SupplementaryTablesandFigures.aux"

@@ -87,7 +87,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{linenumbers}
 
-\section*{Methods}
+
+\section*{Supplemetary Text}
+
+While this exploratory factor analysis is modelling unobserved drivers of
+distribution, we considered what might be driving the differences seen in the
+spatial factor loadings. The first factor was highly correlated with log(depth)
+for both encounter probability (-0.85, CI = -0.88 to -0.81; Fig. S1) and
+positive density (-0.71, CI = -0.77 to -0.65; Fig. S2).  A random forest
+classification tree assigned  80 \% of the variance in the first factor for
+encounter probability to depth and predominant substrate type, with the
+majority (86 \%) of the variance explained by depth (random forest
+classification tree). The variance explained by these variables dropped to 25
+\% on the second factor with a more even split between depth and substrate,
+while explaining 60 \% of the variance on the third factor.  For positive
+density, the variables explained less of the variance with 62 \%, 35 \%, and 31
+\% for each of the factors, respectively.
+
+It is clear that depth and to a lesser extent substrate are important
+predictors for the main driver of similarities and differences in distributions
+and abundances for the different species.  The first factor correlates strongly
+with these variables, despite them not explicitly being incorporated in the
+model. While depth was incorporated as a covariate in an alternative model
+formulation (see Methods), it was found not to improve predictions. The utility
+of these variables as predictors of species distributions has been, as
+identified in other marine species distribution models\cite{Robinson2011}; the
+advantage to the approach taken here is that, where such data is unavailable at
+appropriate spatial resolution, the spatial factor analysis can adequately
+characterise these influences on species spatial dynamics.
+
+While there are clear spatial patterns in the factor coefficients describing
+differences in average (over time) encounter probability and positive density
+(Fig. 1), inter-annual differences in factor coefficients show less structure
+(Figs. S5, S6). These inter-annual differences are important as they reflect
+the ability of fishers to predict where they can target species from one year
+to the next, without which it may be difficult to avoid unwanted catch. There
+were, however, While spatio-temporal factor coefficients did not show
+consistent trends from year to year across all species. Common patterns in
+spatiotemporal factor coefficients among species there were clear relationships
+(Fig. 2).  The same factors appear to drive spatiotemporal distributions of
+megrim, anglerfish species and hake (the deeper water species, species-group
+negatively associated with the second axes of Fig. 2a) and the roundfish and
+flatfish (species-group more positively associated with the second axes of Fig.
+2a).  For spatio-temporal positive density (Fig. 2b) cod, haddock and whiting
+(the roundfish species) are separated from plaice, sole (the flatfish) and
+deeper water species.  As such it can be predicted that higher catches of a
+species within a group (e.g.  cod in roundfish) would be expected when catching
+another species within that group (e.g.  whiting in roundfish). This suggets
+that one or more common environmental drivers are influencing the distributions
+of the species groups, and that driver differentially affects the species
+groups, but this could not be explained by temperature, often included as a
+covariate in species distribution models, but was found not to contribute to
+the variance in the first factor values (Fig. S6, no correlations found for
+either encounter probability or positive density).
+
+
+\section*{Materials and Methods}
 
 We use a geostatistical Vector Autoregressive Spatiotemporal model
 	(VAST)\footnote{Software in the R statistical programming language can
@@ -301,6 +356,7 @@ co-occurrence and the strength of associations in space and time.
 
 %% Figures %%
 
+\clearpage
 
 \begin{figure}[!ht]
 	\label{fig:S1}
@@ -445,6 +501,9 @@ co-occurrence and the strength of associations in space and time.
 \end{figure}
 
 %% Tables %%
+
+\clearpage
+
 \begin{table}[!ht]
 	\caption{List of survey codes, names and brief description}
 	\center

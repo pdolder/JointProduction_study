@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex spat_sep_mixed_fishery_report"] 1512655661 "spat_sep_mixed_fishery_report.aux" "spat_sep_mixed_fishery_report.bbl" "spat_sep_mixed_fishery_report" 1512655852
+["bibtex spat_sep_mixed_fishery_report"] 1512658791 "spat_sep_mixed_fishery_report.aux" "spat_sep_mixed_fishery_report.bbl" "spat_sep_mixed_fishery_report" 1512659113
   "../JSDM.bib" 1509047866 111757 79f2f81f1d1c3e398d74e10a4bf382c1 ""
   "./Science.bst" 1512645954 26882 d44ba44187a978cfea85a3cd97387589 ""
-  "spat_sep_mixed_fishery_report.aux" 1512655852 2542 829b0a4aac060ab3f52cc87a6164eb7d ""
+  "spat_sep_mixed_fishery_report.aux" 1512659113 2542 9e6134e56662f7736a64bbda32d4d8e9 ""
   "spat_sep_mixed_fishery_report.bcf" 0 -1 0 ""
   (generated)
-  "spat_sep_mixed_fishery_report.bbl"
   "spat_sep_mixed_fishery_report.blg"
-["pdflatex"] 1512655852 "spat_sep_mixed_fishery_report.tex" "spat_sep_mixed_fishery_report.pdf" "spat_sep_mixed_fishery_report" 1512655852
+  "spat_sep_mixed_fishery_report.bbl"
+["pdflatex"] 1512659112 "spat_sep_mixed_fishery_report.tex" "spat_sep_mixed_fishery_report.pdf" "spat_sep_mixed_fishery_report" 1512659113
   "../figures/Fig1_Combined.png" 1504175317 2868383 6a40656c2411150e7b92f7d86b11af3e ""
   "../figures/Figure 1 - Omega1Omega2_Correlations_blank.png" 1510174294 370517 ffd886b00e9f1612826478e3b5ddd33f ""
   "../figures/Figure 3 - PCAstyle_Plots_SpatioTemp.png" 1501087089 1909782 750fd8a434d1c67d6193a40321e3539e ""
@@ -102,11 +102,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1512585473 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1512585530 3854800 61def254b42a7b15a7d1849086cebe52 ""
   "scicite.sty" 1512645950 21940 f3b9f4a675770828af17c69b198998fc ""
-  "spat_sep_mixed_fishery_report.aux" 1512655852 2542 829b0a4aac060ab3f52cc87a6164eb7d ""
-  "spat_sep_mixed_fishery_report.bbl" 1512655661 3220 ad6f18238c9061fd3145ccd0986c160d "bibtex spat_sep_mixed_fishery_report"
-  "spat_sep_mixed_fishery_report.tex" 1512655851 37366 a63239403e23f3fe9c923f26fa436873 ""
+  "spat_sep_mixed_fishery_report.aux" 1512659113 2542 9e6134e56662f7736a64bbda32d4d8e9 ""
+  "spat_sep_mixed_fishery_report.bbl" 1512658791 3220 ad6f18238c9061fd3145ccd0986c160d "bibtex spat_sep_mixed_fishery_report"
+  "spat_sep_mixed_fishery_report.tex" 1512659112 37498 f7300203e2c1fd699f639c681765d02b ""
   (generated)
   "spat_sep_mixed_fishery_report.soc"
-  "spat_sep_mixed_fishery_report.pdf"
-  "spat_sep_mixed_fishery_report.aux"
   "spat_sep_mixed_fishery_report.log"
+  "spat_sep_mixed_fishery_report.aux"
+  "spat_sep_mixed_fishery_report.pdf"
