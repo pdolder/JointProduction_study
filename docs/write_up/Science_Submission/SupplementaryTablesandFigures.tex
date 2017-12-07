@@ -1,0 +1,524 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up 
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
+% more content on each page 
+\usepackage{lineno} % add some line nos to aid reading
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[hyphens]{url} % for breaking url's in the bib
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{scicite}
+\usepackage{times}
+\usepackage[final]{changes}
+\usepackage{xpatch}
+
+%% For editing
+\definechangesauthor[color = red]{coilin}
+\definechangesauthor[color = blue]{Paul}
+\definechangesauthor[color = purple]{brutus}
+
+\newcounter{bibstartvals}
+\setcounter{bibstartvals}{26}
+
+\xpatchcmd{\thebibliography}{%
+	\usecounter{enumiv}%
+}{%
+	\usecounter{enumiv}%
+	\setcounter{enumiv}{\value{bibstartvals}}%
+}{}{}
+
+% figures here	
+\graphicspath{'../figures/'}
+
+% The following parameters seem to provide a reasonable page setup.
+\topmargin 0.0cm
+\oddsidemargin 0.2cm
+\textwidth 16cm 
+\textheight 21cm
+\footskip 1.0cm
+
+%% To allow supplementary table and figure numbering
+%% http://bytesizebio.net/2013/03/11/adding-supplementary-tables-and-figures-in-latex/
+
+\newcommand{\beginsupplement}{%
+		        \setcounter{table}{0}
+		        \renewcommand{\thetable}{S\arabic{table}}%
+		        \setcounter{figure}{0}
+		        \renewcommand{\thefigure}{S\arabic{figure}}%
+			     }
+
+%%  Title
+\title{Supplementary material:  Spatial separation of catches in highly mixed fisheries}
+
+\author
+{Paul J. Dolder,$^{1,2\ast}$ James T. Thorson,$^3$ \& Cóilín Minto$^1$\\
+\\
+\normalsize{$^1,2$Marine and Freshwater Research Centre, Galway-Mayo Institute of
+	Technology (GMIT)}\\
+\normalsize{Dublin Road, Galway, H91 T8NW, Ireland}\\
+\normalsize{$^2$Centre for Environment, Fisheries and Aquaculture Science
+	(Cefas),}\\
+\normalsize{Pakefield Road, Lowestoft, Suffolk, NR33 0HT, UK}\\
+\normalsize{$^3$North West Fisheries Science Center, NOAA,}\\
+\normalsize{2725 Montlake Blvd E, Seattle,Washington, 98112, USA}\\
+\\
+\normalsize{$^\ast$To whom correspondence should be addressed; E-mail:
+	paul.dolder@gmit.ie}
+}
+
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Double-space the manuscript.
+\baselineskip24pt
+
+\beginsupplement
+
+% Make the title.
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{linenumbers}
+
+\section*{Methods}
+
+We use a geostatistical Vector Autoregressive Spatiotemporal model
+	(VAST)\footnote{Software in the R statistical programming language can
+	be found here: \url{www.github.com/james-thorson/VAST}} to implement a
+delta-generalised linear mixed modelling (GLMM) framework that takes account of
+spatio-temporal correlations among species through implementation of a spatial
+dynamic factor analysis (SDFA). Spatial variation is captured through a
+Gaussian Markov Random Field, while we model random variation among species and
+years. Covariates affecting catchability (to account for differences between
+fishing surveys) and density (to account for environmental preferences) can be
+incorporated for predictions of presence and positive density. The following
+briefly summarises the key methods implemented in the VAST framework. For full
+details of the model the reader is invited directed to Thorson \textit{et al}
+2017\cite{Thorson2017}.
+
+\textbf{\textit{SDFA:}} A spatial dynamic factor analysis incorporates advances
+in joint dynamic species models\cite{Thorson2017} to take account of
+associations among species by modelling response variables as a multivariate
+process. This is achieved through implementing a factor analysis decomposition
+where common latent trends are estimated so that the number of common trends is
+less than the number of species modelled. The factor coefficients are then
+associated through a function for each factor that returns a positive or
+negative association of one or more species with any location. Log-density of
+any species is then be described as a linear combination of factors and
+loadings: 
+
+\begin{equation} \theta_{c}(s,t) = \sum_{j=1}^{n_{j}}
+	L_{c,j}\psi_{j}(s,t) +\sum_{k=1}^{n_{k}} \gamma_{k,c}\chi_{k}(s,t)
+\end{equation} 
+
+Where $\theta_{c}(s,t)$ represents log-density for species $c$
+at site $s$ at time $t$, $\psi_{j}$ is the coefficient for factor $j$,
+$L_{c,j}$ the loading matrix representing association of species $c$ with
+factor $j$ and $\gamma_{k,c}\chi_{k}(s,t)$ the linear effect of covariates at
+each site and time\cite{Thorson2016b}. 
+
+The factor analysis can identify community dynamics and where species have
+similar spatio-temporal patterns, allowing inference of species distributions
+and abundance of poorly sampled species through association with other species
+and allows for computation of spatio-temporal correlations among
+species\cite{Thorson2016b}.
+
+\added[id = brutus]{We use the resultant factor analysis\deleted{is used} to identify
+	community dynamics and drivers common among 18 species and results
+	presented through transformation of the loading matrices using PCA
+	rotation}. 
+
+\textbf{\textit{Estimation of abundances:}} Spatio-temporal encounter
+probability and positive catch rates are modelled separately with
+spatio-temporal encounter probability modelled using a logit-link linear
+predictor;
+
+		\begin{equation}
+			\begin{split}
+			logit[p(s_{i},c_{i},t_{i})] =	\beta_{p}(c_{i},t_{i}) +
+			& \sum\limits_{f=1}^{n_{\omega}} L_{\omega}(c_{i},f)
+			\omega_{p}(s_{i},f) + \sum\limits_{f=1}^{n_{\varepsilon}}
+			L_{\varepsilon}(c_{i},f) \varepsilon_{p}(s_{i},f,t_{i}) + \\ 
+			& \sum\limits_{v=1}^{n_{v}}\delta_{p}(v)Q_{p}(c_{i}, v_{i})
+		\end{split}
+		\end{equation}
+
+and positive catch rates modelling using a gamma- distribution\cite{Thorson2015a}.
+
+		\begin{equation}
+			\begin{split}
+			log[r(s_{i},c_{i},t_{i})] = \beta_{r}(c_{i},t_{i}) +
+			& \sum\limits_{f=1}^{n_{\omega}} L_{\omega}(c_{i},f)
+			\omega_{r}(s_{i},f) +\sum\limits_{f=1}^{n_{\varepsilon}} 
+			L_{\varepsilon}(c_{i},f) \varepsilon_{r}(s_{i},f,t_{i}) + \\
+			& \sum\limits_{v=1}^{n_{v}}\delta_{r}(v) Q_{r}(c_{i}, v_{i})
+			\end{split}
+		\end{equation}
+
+where $p(s_{i}, c_{i}, t_{i})$ is the predictor for encounter probability for
+observation $i$, at location $s$ for species $c$ and time $t$ and $r(s_{i},
+c_{i}, t_{i})$ is similarly the predictor for the positive density.
+$\beta_{*}(c_{i},t_{i})$ is the intercept, $\omega_{*}(s_{i},c_{i})$ the
+spatial variation at location $s$ for factor $f$, with $L_{\omega}(c_{i},f)$
+the loading matrix for spatial covariation among species.
+$\varepsilon_{*}(s_{i},c_{i},t_{i})$ is the linear predictor for
+spatio-temporal variation, with $L_{\varepsilon}(c_{i}, f)$ the loading matrix
+for spatio-temporal covariance among species and $\delta_{*}(c_{i}, v_{i})$ the
+contribution of catchability covariates for the linear predictor with
+$Q_{c_{i}, v_{i}}$ the catchability covariates for species $c$ and vessel $v$;
+$*$ can be either $p$ for probability of encounter or $r$ for positive density.
+
+The Delta-Gamma formulation is then:
+
+\begin{equation}
+	\begin{split}
+	& Pr(C = 0) = 1 - p \\
+	& Pr(C = c | c > 0) = p \cdot \frac{\lambda^{k}c^{k-1} \cdot exp(-\lambda c)}{\Gamma_{k}}
+	\end{split}
+\end{equation}
+
+for the probability $p$ of a non-zero catch $C$ given a gamma distribution for
+for the positive catch with a rate parameter $\lambda$ and shape parameter $k$.
+
+\textbf{\textit{Spatio-temporal variation:}} The spatiotemporal variation is
+modelled using Gaussian Markov Random Fields (GMRF) \replaced[id = Paul]{where
+	observations are correlation in space}{where data is associated to
+	nearby locations} through a Matérn covariance function with the
+parameters estimated within the model. Here, the correlation decays smoothly
+over space the further from the location and includes geometric anisotropy to
+reflect the fact that correlations may decline in one direction faster than
+another (e.g.  moving offshore)\cite{Thorson2013}.  The best fit estimated an
+anisotropic covariance where the correlations were stronger in a north-east -
+south-west direction, extending approximately 97 km and 140 km before
+correlations for encounter probability and positive density reduced to
+\textless 10 \%, respectively (Fig. S9). Incorporating the
+spatiotemporal correlations among and within species provides more efficient
+use of the data as inference can be made about poorly sampled locations from
+the covariance structure.
+
+A probability distribution for spatio-temporal variation in both encounter
+probability and positive catch rate was specified, $\varepsilon_{*}(s,p,t)$,
+with a three-dimensional multivariate normal distribution so that:
+
+	\begin{equation}
+		vec[\mathbf{E}_{*}(t)] \sim MVN(0,\mathbf{R}_{*} \otimes
+		\mathbf{V}_{{\varepsilon}{*}})
+	\end{equation}
+
+Here, $vec[\mathbf{E}_{*}(t)]$ is the stacked columns of the matrices
+describing $\varepsilon{*}(s,p,t)$ at every location, species and time,
+$\mathbf{R}_{*}$ is a correlation matrix for encounter probability or positive
+catch rates among locations and $\mathbf{V}_{*}$ a covariance matrix for
+encounter probability or positive catch rate among species (modelled within the
+factor analysis). $\otimes$ represents the Kronecker product so that the
+correlation among any location and species can be computed\cite{Thorson2017}.
+		
+\textbf{\textit{Incorporating covariates}} Survey catchability (the relative
+efficiency of a gear catching a species) was estimated as a fixed effect in the
+model, $\delta_{s}(v)$, to account for differences in spatial fishing patterns
+and gear characteristics which affect encounter and capture probability of the
+sampling gear\cite{Thorson2014}. Parameter estimates (Fig. S10)
+showed clear differential effects of surveys using otter trawl gears (more
+effective for round fish species) and beam trawl gears (more effective for
+flatfish species).
+
+No fixed covariates for habitat quality or other predictors of encounter
+probability or positive density were included. While incorporation may improve
+the spatial predictive performance\cite{Thorson2017}, it was not found to be
+the case here based on model selection with Akaike Information Criterion (AIC)
+and Bayesian Information Criterion (BIC).
+
+\textbf{\textit{Parameter estimation}} Parameter estimation was undertaken
+through Laplace approximation of the marginal likelihood for fixed effects
+while integrating the joint likelihood (which includes the probability of the
+random effects) with respect to random effects. This was implemented using
+Template Model Builder (TMB;\cite{Kristensen2015}) with computation through
+support by the Irish Centre for High End Computing (ICHEC;
+\url{https://www.ichec.ie}) facility.  
+
+The model integrates data from seven fisheries independent surveys taking
+account of correlations among species spatio-temporal distributions and
+abundances to predict spatial density estimates consistent with the resolution
+of the data. 
+
+The model was been fit to nine species separated into adult and juvenile size
+classes (Table S2) to seven survey series (Table S1)
+in the Celtic Sea bound by 48$^{\circ}$ N to 52 $^{\circ}$ N latitude and 12
+$^{\circ}$ W to 2$^{\circ}$ W longitude (Fig. S8) for the years
+1990 - 2015 inclusive. 
+
+The following steps were undertaken for data processing: i) data for survey
+stations and catches were downloaded from ICES Datras
+(\url{www.ices.dk/marine-data/data-portals/Pages/DATRAS.aspx}) or obtained
+directly from the Cefas Fishing Survey System (FSS); ii) data were checked and
+any tows with missing or erroneously recorded station information (e.g. tow
+duration or distance infeasible) removed; iii) swept area for each of the
+survey tows was estimated based on fitting a GAM to gear variables so that
+Doorspread = s(Depth) + DoorWt + WarpLength + WarpDiameter + SweepLength and a
+gear specific correction factor taken from the literature\cite{Piet2009}; iii)
+fish lengths were converted to biomass (Kg) through estimating a von
+bertalanffy length weight relationship, $Wt = a \cdot L^{b}$, fit to sampled
+length and weight of fish obtained in the EVHOE survey and aggregated within
+size classes (adult and juvenile). 
+
+The final dataset comprised of estimates of catches (including zeros) for each
+station and species and estimated swept area for the tow.
+
+The spatial domain was setup to include 250 knots representing the Gaussian
+Random Fields. The model was configured to estimate nine factors each to describe
+the spatial and spatiotemporal encounter probability and positive density
+parameters, with a logit-link for the linear predictor for encounter
+probability and log-link for the linear predictor for positive density, with an
+assumed gamma distribution.
+
+Three candidate models were identified, i) a base model where the vessel
+interaction was a random effect, ii) the base but where the vessel x species
+effect was estimated as a fixed covariate, iii) with vessel x species effect
+estimated, but with the addition of estimating fixed density covariates for
+both predominant habitat type at a knot and depth. AIC and BIC model selection
+favoured the second model (Table S3). The final model included
+\replaced[id = Paul]{estimating 1,674 fixed parameters and predicting 129,276
+	random effect values}{estimating 130,950 coefficients (1,674 fixed
+	parameters and 129,276 random effect values)}.
+
+Q-Q plots show good fit between the derived estimates and the data for positive
+catch rates and between the predicted and observed encounter probability
+(Figs. S11,S12).  Further, model outputs are consistent with
+stock-level trends abundances over time from international assessments
+(Fig. S13), yet also provide detailed insight into species
+co-occurrence and the strength of associations in space and time. 
+
+
+\bibliography{../JSDM}
+\bibliographystyle{Science}
+
+%% Figures %%
+
+
+\begin{figure}[!ht]
+	\label{fig:S1}
+	\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"../figures/Factor1_DepthO1"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"../figures/Factor1_HabitatO1"}
+\end{subfigure}
+\caption{Left: Average spatial encounter probability factor 1 values correlated
+	against; Left - Depth, Right - substrate type}
+
+\end{figure}
+
+%%
+
+\begin{figure}[!ht]
+	\label{fig:S2}
+	
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"../figures/Factor1_DepthO2"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"../figures/Factor1_HabitatO2"}
+\end{subfigure}
+\caption{Left: Average spatial positive density factor 1 values correlated
+	against; Left- Depth, Right- substrate type}
+
+\end{figure}
+
+\begin{figure}[!ht]
+	\label{fig:S3}
+\begin{subfigure}{0.55\textwidth}
+\includegraphics[width = \linewidth]{"../figures/Depth"}
+\end{subfigure}	
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width = \linewidth]{"../figures/Substrate"}
+\end{subfigure}
+\caption{Left: Depth, Right: Substrate assigned to each spatial knot}
+
+\end{figure}
+
+%%%%%%%%
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width = 0.75\linewidth]{"../figures/Suppl - SpatioTempLoadingsEpsilon1"}
+	\label{fig:S5}
+	\caption{Spatial Loadings for first three factors every five years for
+	spatio-temporal encounter probability}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.75\linewidth]{"../figures/Suppl - SpatioTempLoadingsEpsilon2"}
+	\label{fig:S7}
+	\caption{Spatial Loadings for first three factors every five years for
+	spatio-temporal density}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.55\linewidth]{"../figures/Suppl - TempAndFactors"}
+	\label{fig:S6}
+	\caption{Association of temperature and knots (individual lines; top)
+		with Spatio-temporal factor loadings for encounter probability
+	(middle) and density (bottom)}
+	\end{center}
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = \linewidth]{"../figures/Suppl - Epsilon1Epsilon2_Correlations_blank"}
+	\label{fig:S8}
+	\caption{Inter-species correlations for (a) spatio-temporal encounter
+		probability and b) spatio-temporal density.  Species-groups are
+		clustered into three groups based on a hierarchical clustering
+		method with non-significant correlations (those where the
+		Confidence Interval spanned zero) left blank}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"../figures/AreaMap"}
+	\label{fig:S9}
+	\caption{Spatial bounds of case study area}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"../figures/Aniso"}
+	\label{fig:S10}
+	\caption{Estimates of distances at 10 \% correlation from the Matérn
+		covariance function for encounter probability and positive
+		catch rates}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.85\linewidth]{"../figures/Suppl - QEstimatesALL"}
+	\label{fig:S11}
+	\caption{Fixed effect estimates for surveys for each species-group. Note
+	all values within a species-group are relative to the CEXP survey}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"../figures/Diag--Encounter_prob"}
+	\label{fig:S12}
+	\caption{Model diagnostics output showing correlation between the
+		predicted encounter probability and the data}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"../figures/Q-Q_plot"}
+	\label{fig:S13}
+	\caption{Model diagnostics output showing the Q-Q plot for the positive
+	catch rates}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width =0.9\linewidth]{"../figures/RealativeIndexVRelativeAssessSSB"}
+	\label{fig:S14}
+	\caption{Comparison between the standardised index from the VAST
+		output and the standardised spawning stock biomass (SSB) from
+		the assessments for cod, haddock and whiting}
+	\end{center}
+\end{figure}
+
+%% Tables %%
+\begin{table}[!ht]
+	\caption{List of survey codes, names and brief description}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{4cm} p{3cm} }
+		\hline
+		Survey code    & Name 	& Gear & Temporal extent \\
+		\hline
+		CEXP           & Celtic Explorer (IE)   & Otter trawl & 2003 - 2015 \\
+		CARLHELMAR     & Carlhelmar (UK)	& Commercial beam trawl & 1989 - 2013 \\
+		NWGFS          & North West groundfish survey (UK) & Beam trawl & 1988 - 2015 \\
+		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
+		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
+		THA2           & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
+		WCGFS          & Western channel groundfish survey (UK) & Otter
+		trawl (Portugese high headline) & 1982 - 2004 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[!ht]
+	\caption{List of species codes, names and minimum conservation
+		reference size used to separate juvenile and adult fish}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{6cm} p{2cm} }
+		\hline
+		Species code & Common name              & Species & MCRS (cm) \\
+		\hline
+		juv          & Juvenile                 & \\
+		adu          & Adult                    & \\
+		\hline
+		bud          & Black bellied anglerfish & \textit{Lophius
+			budgessa} &  32* \\
+		cod          & Atlantic cod             & \textit{Gadus morhua}
+		& 35 \\
+		had          & Atlatic haddock          & \textit{Melanogrammus
+			aeglefinus} & 30 \\
+		hke          & Atlantic hake            & \textit{Merluccius
+			merluccius} & 27 \\
+		meg          & Megrim                   & \textit{Lepidorhombus
+			whiffiagonis} & 20 \\
+		pisc         & White bellied anglerfish & \textit{Lophius
+			piscatorius}	& 32* \\
+		ple          & European Plaice          & \textit{Pleuronectes
+			platessa} & 27 \\
+		sol          & Common sole              & \textit{Solea solea}
+		& 24 \\
+		whg          & Atlantic whiting         & \textit{Merlangius
+			merlangus} & 27 \\
+		\hline
+	\end{tabular}
+	*Anglerfish species estimated based on a 500g minimum marketing weight
+
+\end{table}
+
+
+\begin{table}[!ht]
+	\caption{Description of model variants and AIC / BIC }
+	\begin{tabular} { {p}{1cm} p{4cm} p{2cm} p{2cm} p{2cm} p{2cm} }
+		\hline
+		Model & Description & No fixed parameters & No random
+		parameters & AIC & BIC \\
+		\hline
+		H0 & Vessel random effects, no covariates & 1462 & 129276 &
+		125954 & 140187 \\
+		H1 & With fixed gear effect, no density covariates & 1674 &
+		129276 & 116012 & 132309 \\
+		
+		H2 & With fixed gear effect, substrate and depth density
+		covariates & 1688 & 129276 & 116013 & 132446 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\end{linenumbers}
+
+\end{document}
