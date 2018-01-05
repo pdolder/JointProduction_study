@@ -32,7 +32,7 @@
 	Technology (GMIT), Dublin Road, Galway, H91 T8NW, Ireland 
 \item Centre for Environment, Fisheries and Aquaculture Science (Cefas),
 	Pakefield Road, Lowestoft, Suffolk, NR33 0HT, UK
-\item North West Fisheries Science Center, NOAA, 2725 Montlake Blvd E, Seattle,
+\item Fisheries Resource Analysis and Monitoring Division, Northwest Fisheries Science Center, National Marine Fisheries Service, NOAA, 2725 Montlake Blvd E, Seattle,
 	Washington, 98112, USA
 \end{affiliations}
 
@@ -70,11 +70,11 @@ fisheries.
 \section*{}
 \subsection{Mixed fisheries and the EU landings obligation} 
 
-Recent efforts to reduce exploitation rates in commercial fisheries has begun
+Recent efforts to reduce exploitation rates in commercial fisheries have begun
 the process of rebuilding depleted fish populations \cite{Worm2009}.  Improved
 management of fisheries has the potential to increase population sizes and
 allow increased sustainable catches, yet fisheries catch globally remains
-stagnant \cite{FAO2016}. In light of projected increased demand for fish
+stagnant \cite{FAO2016}. In light of a projected increase in demand for fish
 protein \cite{B??n??2016} there is an important role for well managed fisheries
 in supporting future food security \cite{Mcclanahan2015} and there
 remains a need to ensure fisheries are managed efficiently to maximise
@@ -98,7 +98,7 @@ problem' for decades with large-scale discarding resulting \cite{Borges2015,
 	Uhlmann2014}.  A paradigm shift is being introduced under the EU Common
 Fisheries Policy (CFP) reform of 2012 through two significant management
 changes.  First, by 2019 all fish that are caught are due to be counted against
-the respective stock quota; second, by 2020 all fish stocks must be fished so
+the respective stock quota even if they are discarded; second, by 2020 all fish stocks must be fished so
 as to be able to produce their Maximum Sustainable Yield
 (MSY)\cite{EuropeanParliamentandCounciloftheEuropeanUnion2013}. The changes are
 expected to contribute to attainment of the goal of Good Environmental Status
@@ -118,7 +118,7 @@ their catch with available quota depends on being able to exploit target
 species while avoiding unwanted catch. Methods by which fishers can alter their
 fishing patterns include by switching fishing method (e.g. trawling to
 netting), changing technical gear characteristics (e.g.  introducing escapement
-panels in nets), or the timing and location of fishing activity
+panels in nets), or altering the timing and location of fishing activity
 \cite{Fulton2011b, vanPutten2012a}. Otter trawl gears are known to have higher
 catch rates of roundfish due to the higher headline and wider sweeps which herd
 demersal fish into the net. Conversely, beam trawls, which employ chain mesh to
@@ -135,10 +135,11 @@ generally been targeted at individual species without considering associations
 and interactions among several species. Highly mixed fisheries are complex with
 spatial, technological and community interactions combining. The design of
 spatio-temporal management measures which aim to allow exploitation of high quota
-stocks while protecting low quota stocks requires understanding of these
+stocks while protecting low quota stocks requires understanding these
 interactions at a scale meaningful to managers and fishers. Here, our goal is
 to develop a framework for understanding these complexities. We do so by
-implementing a spatio-temporal dimension reduction method and use the results
+implementing a spatio-temporal dimension reduction method that estimates 
+the likely correlation in catches for multiple species at each fishing location.  We then use the results
 to draw inference on the fishery-community dynamics, creating a framework to
 identify trends common among species-groups. We use this to describe where
 spatial measures can contribute to mitigating unwanted catches in highly mixed
@@ -159,7 +160,8 @@ spatial variation (9 factors; which we call 'average' spatial variation) and
 spatio-temporal variation (9 factors) for encounter probability and positive
 catch rates (which we call 'positive density') separately \cite{Thorson2015a}.
 We use the resultant factor analysis to identify community dynamics
-and drivers common among 18 species-groups and present results through
+and drivers common among 9 species, each analyzed separately for juveniles and adult stages.
+We refer to each combination of species and size class as a "species group", and present results through
 transformation of the loading matrices using PCA rotation. By describing the
 species-groups dynamics through underlying contributory spatiotemporal factors
 we can take account of how the factors contribute to affect catches of the
@@ -226,11 +228,10 @@ density, which may reflect two different spatial distributions in the more
 offshore and in the inshore areas (Figure 1).
 
 On the third factor, there is a positive association with the easterly waters
-for encounter probability and negative with the westerly waters. This manifests
-in the species associations as splitting the roundfish species cod, haddock and
-whiting which all have a positive association with the third factor for average
-encounter probability from the rest of the species-groups which have a negative
-association. Positive density is driven by a north / south split (Figure 1),
+for encounter probability and negative with the westerly waters. This splits the roundfish species (cod, haddock and
+whiting, which all have a positive association with the third factor for average
+encounter probability) from the rest of the species-groups (which have a negative
+association). Positive density is driven by a north / south split (Figure 1),
 with positive values in the northerly areas. Juvenile monkfish (\emph{L.
 	budgessa} and \emph{L. piscatorius}), cod, juvenile haddock, hake,
 adult plaice and whiting are also positively associated with the third factor
@@ -292,8 +293,8 @@ either encounter probability or positive density).
 
 \subsection{Three clusters of species show similar spatial patterns} In order to
 gain greater insight into the community dynamics we considered how
-species-groups covary in space and time through among species-group
-correlations. Pearson correlation coefficients for the modelled average spatial
+species-groups covary in space and time through correlations among species groups. 
+Pearson correlation coefficients for the modelled average spatial
 encounter probability (Figure 3a) show clear strong associations between adult
 and juvenile size classes for all species (\textgreater 0.75 for all species
 except hake, 0.56).  Among species-groups, hierarchical clustering identified
@@ -333,7 +334,7 @@ spatiotemporal population correlations (representing how correlations between
 species-group \textit{x} and species-group \textit{y} change from year to
 year), indicating generally predictable relationships between species-groups
 from one year to the next. This suggests that a positive or negative
-association between two species-groups is likely be persist from one year to
+association between two species-groups is likely to persist from one year to
 the next, and that species-groups are consistently associated with each other
 in the catch. The correlation coefficients were 0.59 (0.52 - 0.66) and 0.47
 (0.38 - 0.55) for encounter probability and positive density respectively.
@@ -395,7 +396,7 @@ megrim. Megrim dominates the catch for both gears in location 'C', reflecting
 its relative abundance in the area.  
 
 \subsection{Addressing the scientific challenges of the landing
-	obligation in mixed fisheries} In application to the Celtic Sea we have
+	obligation in mixed fisheries} In application to the Celtic Sea, we have
 identified spatial separation of three distinct species-groupings (roundfish,
 flatfish and deeper water species) while showing that only subtle differences
 exist in distributions within species-groups. The differences in catch compositions
@@ -426,9 +427,9 @@ predictions of high ratios of bycatch species to target species \cite{Ward2015,
 suited to this as they incorporate spatial dependency while providing for
 probabilities to be drawn from posterior distributions of the parameter
 estimates.  We posit that such advice could be enhanced by integrating data
-obtained directly from commercial fishing vessels at a higher temporal
-resolution, providing real-time forecasts to inform fishing choices that also
-captures seasonal differences in distributions, akin to weather forecasting.
+obtained directly from commercial fishing vessels rapidly while modeling densities at small time scales (e.g., weekly). 
+Short-term forecasts of distribution could inform fishing choices while also
+capturing seasonal differences in distributions, akin to weather forecasting.
 Advice informed by a model including a seasonal or real-time component could
 inform optimal policies for time-area closures, move-on rules or even as
 informal information to be utilised by fishers directly without the need for
@@ -493,7 +494,7 @@ species-groups and years. Covariates affecting catchability (to account for
 differences between fishing surveys) and density (to account for environmental
 preferences) can be incorporated for predictions of presence and positive
 density. The following briefly summarises the key methods implemented in the
-VAST framework. For full details of the model the reader is invited directed to
+VAST framework. For full details see 
 Thorson \textit{et al} 2017 \cite{Thorson2017}.
 
 \textbf{\textit{SDFA:}} A spatial dynamic factor analysis incorporates advances
@@ -517,10 +518,10 @@ matrix representing association of species $c$ with factor $j$ and
 $\gamma_{k,c}\chi_{k}(s,t)$ the linear effect of covariates at each site and
 time \cite{Thorson2016b}. 
 
-The factor analysis can identify community dynamics and where species have
-similar spatio-temporal patterns, allowing inference of species distributions
-and abundance of poorly sampled species through association with other species
-and allows for computation of spatio-temporal correlations among species-groups
+The factor analysis can summarize community dynamics and identify which species and life-stages have
+similar spatio-temporal patterns. This allows inference regarding species distributions
+and abundance of poorly sampled species through association with other species,
+and also provides estimates of spatio-temporal correlations among species-groups
 \cite{Thorson2016b}.
 
 \textbf{\textit{Estimation of abundances:}} Spatio-temporal encounter
@@ -629,12 +630,12 @@ support by the Irish Centre for High End Computing (ICHEC;
 
 \subsection{Data}
 
-The model integrates data from seven fisheries independent surveys taking
+The model integrates data from seven fisheries-independent surveys taking
 account of correlations among species-group spatio-temporal distributions and
 abundances to predict spatial density estimates consistent with the resolution
 of the data. 
 
-The model was been fit to nine species separated into adult and juvenile size
+The model was fitted to nine species separated into adult and juvenile size
 classes (Table S2) to seven survey series (Table S1) in the Celtic Sea bound by
 48$^{\circ}$ N to 52 $^{\circ}$ N latitude and 12 $^{\circ}$ W to 2$^{\circ}$ W
 longitude (Figure S8) for the years 1990 - 2015 inclusive. 
