@@ -1,10 +1,11 @@
 # Fdb version 3
-["pdflatex"] 1505383833 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1505383835
-  "/etc/texmf/web2c/texmf.cnf" 1461342086 1101 af7716885e081ab43982cab7b4672c1a ""
+["pdflatex"] 1516289186 "SupplementaryTablesandFigures.tex" "SupplementaryTablesandFigures.pdf" "SupplementaryTablesandFigures" 1516289187
+  "/etc/texmf/web2c/texmf.cnf" 1512585396 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
@@ -48,10 +49,10 @@
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1503478936 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1503478974 3854907 d1a0e17960728ead39eae1b7780bb183 ""
-  "SupplementaryTablesandFigures.aux" 1505383834 4064 a1fdc1f569309ade89f563f213ed2393 ""
-  "SupplementaryTablesandFigures.tex" 1505383831 7925 d93d5bd20ccd7b053a0630b5da4c8620 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1512585473 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1512585530 3854800 61def254b42a7b15a7d1849086cebe52 ""
+  "SupplementaryTablesandFigures.aux" 1516289187 4145 74ad7411c84644554445b5d2197d979d ""
+  "SupplementaryTablesandFigures.tex" 1516289185 8008 b0aca99f45fb1a52dbc8a2c5f3182bfa ""
   "figures/Aniso.png" 1501151616 83359 406208d7589197b1b16d7bf10c3fa70e ""
   "figures/AreaMap.png" 1501079240 113066 8bc7c5c8bfd6688b2d5b293b77d0e606 ""
   "figures/Depth.png" 1499960647 2785848 7427fd2e1801e180ba7e0eedc8a3f529 ""
@@ -67,7 +68,7 @@
   "figures/Suppl - QEstimatesALL.png" 1497900592 309162 2a5e66197442c6ba8566772713ce4f33 ""
   "figures/Suppl - SpatioTempLoadingsEpsilon1.png" 1498475530 1950479 de73eb8763d0c7a605334226b8231d20 ""
   "figures/Suppl - SpatioTempLoadingsEpsilon2.png" 1503582620 1918157 6a54e3c4d6294492f6510b1234a30769 ""
-  "figures/Suppl - TempAndFactors.png" 1500041845 1332083 3b18635891ba1169ac7b2976e03f8630 ""
+  "figures/Suppl - TempAndFactors.png" 1500041835 1332083 3b18635891ba1169ac7b2976e03f8630 ""
   (generated)
   "SupplementaryTablesandFigures.aux"
   "SupplementaryTablesandFigures.pdf"

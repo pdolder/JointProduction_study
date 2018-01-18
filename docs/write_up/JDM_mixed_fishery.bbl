@@ -5,6 +5,37 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
+\bibitem{Batsleer2015}
+\bibinfo{author}{Batsleer, J.}, \bibinfo{author}{Hamon, K.~G.},
+  \bibinfo{author}{Overzee, H. M.~J.}, \bibinfo{author}{Rijnsdorp, A.~D.} \&
+  \bibinfo{author}{Poos, J.~J.}
+\newblock \bibinfo{title}{{High-grading and over-quota discarding in mixed
+  fisheries}}.
+\newblock \emph{\bibinfo{journal}{Reviews in Fish Biology and Fisheries}}
+  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{715--736}
+  (\bibinfo{year}{2015}).
+\newblock \urlprefix\url{"http://dx.doi.org/10.1007/s11160-015-9403-0}.
+
+\bibitem{Branch2008}
+\bibinfo{author}{Branch, T.} \& \bibinfo{author}{Hilborn, R.}
+\newblock \bibinfo{title}{{Matching catches to quotas in a multispecies trawl
+  fishery: targeting and avoidance behavior under individual transferable
+  quotas}}.
+\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
+  Sciences}} \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{1435--1446}
+  (\bibinfo{year}{2008}).
+\newblock
+  \urlprefix\url{http://article.pubs.nrc-cnrc.gc.ca/ppv/RPViewDoc?issn=1205-7533{\&}volume=65{\&}issue=7{\&}startPage=1435{\&}ab=y}.
+
+\bibitem{Dunn2014a}
+\bibinfo{author}{Dunn, D.~C.} \emph{et~al.}
+\newblock \bibinfo{title}{{Empirical move-on rules to inform fishing
+  strategies: A New England case study}}.
+\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{359--375}
+  (\bibinfo{year}{2014}).
+\newblock \urlprefix\url{http://doi.wiley.com/10.1111/faf.12019}.
+
 \bibitem{Worm2009}
 \bibinfo{author}{Worm, B.} \emph{et~al.}
 \newblock \bibinfo{title}{{Rebuilding Global Fisheries}}.
@@ -39,17 +70,6 @@
   \textbf{\bibinfo{volume}{16}}, \bibinfo{pages}{78--103}
   (\bibinfo{year}{2015}).
 
-\bibitem{Branch2008}
-\bibinfo{author}{Branch, T.} \& \bibinfo{author}{Hilborn, R.}
-\newblock \bibinfo{title}{{Matching catches to quotas in a multispecies trawl
-  fishery: targeting and avoidance behavior under individual transferable
-  quotas}}.
-\newblock \emph{\bibinfo{journal}{Canadian Journal of Fisheries and Aquatic
-  Sciences}} \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{1435--1446}
-  (\bibinfo{year}{2008}).
-\newblock
-  \urlprefix\url{http://article.pubs.nrc-cnrc.gc.ca/ppv/RPViewDoc?issn=1205-7533{\&}volume=65{\&}issue=7{\&}startPage=1435{\&}ab=y}.
-
 \bibitem{Kuriyama2016}
 \bibinfo{author}{Kuriyama, P.~T.}, \bibinfo{author}{Branch, T.~A.},
   \bibinfo{author}{Bellman, M.~A.} \& \bibinfo{author}{Rutherford, K.}
@@ -69,17 +89,6 @@
   (\bibinfo{year}{2017}).
 \newblock
   \urlprefix\url{https://academic.oup.com/icesjms/article-lookup/doi/10.1093/icesjms/fsw126}.
-
-\bibitem{Batsleer2015}
-\bibinfo{author}{Batsleer, J.}, \bibinfo{author}{Hamon, K.~G.},
-  \bibinfo{author}{Overzee, H. M.~J.}, \bibinfo{author}{Rijnsdorp, A.~D.} \&
-  \bibinfo{author}{Poos, J.~J.}
-\newblock \bibinfo{title}{{High-grading and over-quota discarding in mixed
-  fisheries}}.
-\newblock \emph{\bibinfo{journal}{Reviews in Fish Biology and Fisheries}}
-  \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{715--736}
-  (\bibinfo{year}{2015}).
-\newblock \urlprefix\url{"http://dx.doi.org/10.1007/s11160-015-9403-0}.
 
 \bibitem{Borges2015}
 \bibinfo{author}{Borges, L.}
@@ -239,15 +248,6 @@
   (\bibinfo{year}{2011}).
 \newblock
   \urlprefix\url{http://doi.wiley.com/10.1111/j.1467-2979.2010.00388.x}.
-
-\bibitem{Dunn2014a}
-\bibinfo{author}{Dunn, D.~C.} \emph{et~al.}
-\newblock \bibinfo{title}{{Empirical move-on rules to inform fishing
-  strategies: A New England case study}}.
-\newblock \emph{\bibinfo{journal}{Fish and Fisheries}}
-  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{359--375}
-  (\bibinfo{year}{2014}).
-\newblock \urlprefix\url{http://doi.wiley.com/10.1111/faf.12019}.
 
 \bibitem{Thorson2015}
 \bibinfo{author}{Thorson, J.~T.} \emph{et~al.}
