@@ -1,0 +1,263 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up 
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % Required to make the margins smaller to fit
+% more content on each page 
+\usepackage{lineno} % add some line nos to aid reading
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[hyphens]{url} % for breaking url's in the bib
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% cite is loaded from nature class
+\setlist{itemsep=1pt} % This controls spacing between items in the lists
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+% figures here	
+\graphicspath{"../figures/"}
+
+%% To allow supplementary table and figure numbering
+%% http://bytesizebio.net/2013/03/11/adding-supplementary-tables-and-figures-in-latex/
+
+\newcommand{\beginsupplement}{%
+		        \setcounter{table}{0}
+		        \renewcommand{\thetable}{S\arabic{table}}%
+		        \setcounter{figure}{0}
+		        \renewcommand{\thefigure}{S\arabic{figure}}%
+			     }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\beginsupplement
+
+
+%% Figures %%
+
+
+\begin{figure}[!ht]
+	\label{fig:S1}
+	\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO1"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO1"}
+\end{subfigure}
+\caption{Left: Average spatial encounter probability factor 1 values correlated
+	against; Left - Depth, Right - substrate type.}
+
+\end{figure}
+
+%%
+
+\begin{figure}[!ht]
+	\label{fig:S2}
+	
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO2"}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO2"}
+\end{subfigure}
+\caption{Left: Average spatial positive density factor 1 values correlated
+	against; Left- Depth, Right- substrate type.}
+
+\end{figure}
+
+\begin{figure}[!ht]
+	\label{fig:S3}
+\begin{subfigure}{0.55\textwidth}
+\includegraphics[width = \linewidth]{"figures/Depth"}
+\end{subfigure}	
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width = \linewidth]{"figures/Substrate"}
+\end{subfigure}
+\caption{Left: Depth, Right: Substrate assigned to each spatial knot.}
+
+\end{figure}
+
+%%%%%%%%
+
+\begin{figure}
+\begin{center}
+	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon1"}
+	\label{fig:S5}
+	\caption{Spatial Loadings for first three factors every five years for
+	spatio-temporal encounter probability.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon2"}
+	\label{fig:S7}
+	\caption{Spatial Loadings for first three factors every five years for
+	spatio-temporal density.}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.6\linewidth]{"figures/Suppl - TempAndFactors"}
+	\label{fig:S6}
+	\caption{Association of temperature and knots (individual lines; top)
+		with Spatio-temporal factor loadings for encounter probability
+	(middle) and density (bottom).}
+	\end{center}
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = \linewidth]{"figures/Suppl - Epsilon1Epsilon2_Correlations_blank"}
+	\label{fig:S8}
+	\caption{Inter-species correlations for (a) spatio-temporal encounter
+		probability and b) spatio-temporal density. Species are
+		clustered into three groups based on a hierarchical clustering
+		method with non-significant correlations (the Confidence
+		Interval [$\pm$ 1.96 * SEs] spanned zero) left blank.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/AreaMap"}
+	\label{fig:S9}
+	\caption{Spatial bounds of case study area.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/Aniso"}
+	\label{fig:S10}
+	\caption{Estimates of distances at 10 \% correlation from the Matérn
+		covariance function for encounter probability and positive
+		catch rates.}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/Suppl - QEstimatesALL"}
+	\label{fig:S11}
+	\caption{Fixed effect estimates for surveys for each species-group.
+		Point estimate as a circle with $\pm$1.96 x SE shown as a line.
+		Note all values within a species-group are relative to the CEXP
+		survey.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/Diag--Encounter_prob"}
+	\label{fig:S12}
+	\caption{Model diagnostics output showing correlation between the
+		predicted encounter probability and the data.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"figures/Q-Q_plot"}
+	\label{fig:S13}
+	\caption{Model diagnostics output showing the Q-Q plot for the positive
+	catch rates.}
+	\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width =0.9\linewidth]{"figures/RealativeIndexVRelativeAssessSSB"}
+	\label{fig:S14}
+	\caption{Comparison between the standardised index from the VAST
+		output and the standardised spawning stock biomass (SSB) from
+		the assessments for cod, haddock and whiting.}
+	\end{center}
+\end{figure}
+
+%% Tables %%
+\begin{table}[!ht]
+	\caption{List of survey codes, names and brief description.}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{4cm} p{3cm} }
+		\hline
+		Survey code    & Name 	& Gear & Temporal extent \\
+		\hline
+		CEXP           & Celtic Explorer (IE)   & Otter trawl & 2003 - 2015 \\
+		CARLHELMAR     & Carlhelmar (UK)	& Commercial beam trawl & 1989 - 2013 \\
+		NWGFS          & North West groundfish survey (UK) & Beam trawl & 1988 - 2015 \\
+		Q1SWBEAM       & Quarter 1 south-west beam trawl survey (UK) 	& beam trawl & 2006 - 2015 \\
+		Q4SWIBTS       & Quarter 4 south-west international bottom trawl survey (UK) & Otter trawl & 2003 - 2010 \\
+		THA2           & EVHOE survey on Thalasa (FR) & Otter trawl & 1997 - 2015 \\
+		WCGFS          & Western channel groundfish survey (UK) & Otter
+		trawl (Portugese high headline) & 1982 - 2004 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[!ht]
+	\caption{List of species codes, names and minimum conservation
+		reference size used to separate juvenile and adult fish.}
+	\center
+	\begin{tabular}{ p{3cm} p{4cm} p{6cm} p{2cm} }
+		\hline
+		Species code & Common name              & Species & MCRS (cm) \\
+		\hline
+		juv          & Juvenile                 & \\
+		adu          & Adult                    & \\
+		\hline
+		bud          & Black bellied anglerfish & \textit{Lophius
+			budgessa} &  32* \\
+		cod          & Atlantic cod             & \textit{Gadus morhua}
+		& 35 \\
+		had          & Atlatic haddock          & \textit{Melanogrammus
+			aeglefinus} & 30 \\
+		hke          & Atlantic hake            & \textit{Merluccius
+			merluccius} & 27 \\
+		meg          & Megrim                   & \textit{Lepidorhombus
+			whiffiagonis} & 20 \\
+		pisc         & White bellied anglerfish & \textit{Lophius
+			piscatorius}	& 32* \\
+		ple          & European Plaice          & \textit{Pleuronectes
+			platessa} & 27 \\
+		sol          & Common sole              & \textit{Solea solea}
+		& 24 \\
+		whg          & Atlantic whiting         & \textit{Merlangius
+			merlangus} & 27 \\
+		\hline
+	\end{tabular}
+	*Anglerfish species estimated based on a 500g minimum marketing weight
+
+\end{table}
+
+
+\begin{table}[!ht]
+	\caption{Description of model variants and AIC / BIC.}
+	\begin{tabular} { {p}{1cm} p{4cm} p{2cm} p{2cm} p{2cm} p{2cm} }
+		\hline
+		Model & Description & No fixed parameters & No random
+		parameters & AIC & BIC \\
+		\hline
+		H0 & Vessel random effects, no covariates & 1462 & 129276 &
+		125954 & 140187 \\
+		H1 & With fixed gear effect, no density covariates & 1674 &
+		129276 & 116012 & 132309 \\
+		
+		H2 & With fixed gear effect, substrate and depth density
+		covariates & 1688 & 129276 & 116013 & 132446 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\end{document}
