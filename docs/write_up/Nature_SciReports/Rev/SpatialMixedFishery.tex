@@ -8,7 +8,11 @@
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage[final]{changes}
+\usepackage[draft]{changes}
+\definechangesauthor[color = red]{CM}
+\definechangesauthor[color = blue]{PD}
+\definechangesauthor[color = purple]{JT}
+
 \usepackage{url}
 \usepackage[strings]{underscore}
 % cite is loaded from nature class
@@ -126,44 +130,51 @@ Conflicts between overall management goals and drivers for individual actors
 must be overcome to achieve sustainability. Societal objectives for fisheries
 to achieve MSY across ecosystem components are paralleled by individual fishers
 goals to maximise utility; whether that be profit, income or the continuance of
-traditional practices.  Under the new policy, unless fishers can avoid catch of
-unwanted species they will have to stop fishing when reaching their first
-restrictive quota. This introduces a potential significant cost to fishers of
-under-utilised quota\cite{Hoff2010a, Ulrich2016} and provides a strong
-incentive to mitigate such losses\cite{Condie2013, Condie2013a}. \\
+traditional practices\added[id=PD]{\cite{Holland2008}}.  Under the new policy,
+unless fishers can avoid catch of unwanted species they will have to stop
+fishing when reaching their first restrictive quota. This introduces a
+potential significant cost to fishers of under-utilised quota\cite{Hoff2010a,
+	Ulrich2016} and provides a strong incentive to mitigate such
+losses\cite{Condie2013, Condie2013a}. \\
 
 The ability to align catch with available quota depends on being able to
 exploit target species while avoiding unwanted catch. Methods by which fishers
 can alter their fishing patterns include by switching fishing method (e.g.
 trawling to netting), changing technical gear characteristics (e.g.
 introducing escapement panels in nets), or altering the timing and location of
-fishing activity\cite{Fulton2011b, vanPutten2012a}.  Otter trawl gears are
-known to have higher catch rates of roundfish due to the higher headline and
-wider sweeps which herd demersal fish into the net.  Conversely, beam trawls,
-which employ chain mesh to 'dig' benthic flatfish species, have higher catch
-rates for these species\cite{Fraser2008}.\\
+fishing activity\cite{Fulton2011b, vanPutten2012a}.  \added[id=PD]{For
+	example,} Otter trawl gears are known to have higher catch rates of
+roundfish due to the higher headline and wider sweeps which herd demersal fish
+into the net.  Conversely, beam trawls, which employ chain mesh to 'dig'
+benthic flatfish species, have higher catch rates for these
+species\cite{Fraser2008}. \added[id=PD]{Fishing location choice also has a
+	significant effect of catch\cite{Gerritsen2012}, something that fishers
+	routinely consider in their decision making based on their own
+	knowledge.} \\
 
-Design of spatiotemporal management measures requires an effective framework to
-reduce and understand the complexities of the system. Spatiotemporal management
-measures (such as time-limited fishery closures) have been applied to reduce
-unwanted catch with varying degrees of success (e.g.\cite{Needle2011,
-	Holmes2011, Beare2010, Dinmore2003}) while move-on rules have also been
-proposed or implemented to influence catch rates of particular vulnerable
-species in order to reduce or eliminate discards (e.g.\cite{Gardner2008,
-	Dunn2011, Dunn2014a}). However, such measures have generally been
-targeted at individual species without considering associations and
-interactions among several species. Highly mixed fisheries are complex with
-spatial, technological and community interactions combining. The design of
-spatio-temporal management measures which aim to allow exploitation of high
-quota stocks while protecting low quota stocks requires understanding these
-interactions at a scale meaningful to managers and fishers. Here, our goal is
-to develop a framework for understanding these complexities. We do so by
-1) implementing a spatio-temporal dimension reduction method that estimates the
-likely correlation in catches for multiple species at each fishing location, 2)
-using the results to draw inference on the fishery-community dynamics, 3)
-creating a framework to identify trends common among species, and 4)
-describing the poteital for and limitation of spatial measures to mitigate
-unwanted catches in highly mixed fisheries.\\
+\replaced[id=PD]{Integrating spatiotemporal information from across multiple
+	sources}{Design of spatiotemporal management measures} requires an
+effective framework to reduce and understand the complexities of the system.
+\added[id=PD]{In the past} spatiotemporal management measures (such as
+time-limited fishery closures) have been applied to reduce unwanted catch with
+varying degrees of success (e.g.\cite{Needle2011, Holmes2011, Beare2010,
+	Dinmore2003}) while move-on rules have also been proposed or
+implemented to influence catch rates of particular vulnerable species in order
+to reduce or eliminate discards (e.g.\cite{Gardner2008, Dunn2011, Dunn2014a}).
+However, such measures have generally been targeted at individual species
+without considering associations and interactions among several species. Highly
+mixed fisheries are complex with spatial, technological and community
+interactions combining. The design of spatiotemporal management measures which
+aim to allow exploitation of high quota stocks while protecting low quota
+stocks requires understanding these interactions at a scale meaningful to
+managers and fishers. Here, our goal is to develop a framework for
+understanding these complexities. We do so by 1) implementing a spatio-temporal
+dimension reduction method that estimates the likely correlation in catches for
+multiple species at each fishing location, 2) using the results to draw
+inference on the fishery-community dynamics, 3) creating a framework to
+identify trends common among species, and 4) describing the potential for and
+limitation of spatial measures to mitigate unwanted catches in highly mixed
+fisheries.\\
 
 \subsection*{Framework for analysing spatio-temporal mixed fisheries
 	interactions \\}
@@ -176,22 +187,23 @@ Autoregressive Spatiotemporal model (VAST). We implement a factor analysis
 decomposition to describe trends in spatiotemporal dynamics of the different
 species as a function of latent variables\cite{Thorson2015} representing
 spatial variation (9 factors; which we call 'average' spatial variation) and
-spatio-temporal variation (9 factors) for encounter probability and positive
+spatiotemporal variation (9 factors) for encounter probability and positive
 catch rates (which we call 'positive density') separately\cite{Thorson2015a}.
 We use the resultant factor analysis to identify community dynamics and drivers
-common among 9 species, each analyzed separately for juveniles and adult
-stages.  We refer to each combination of species and size class as a "species
-group", and present results through transformation of the loading matrices
-using PCA rotation. By describing the species dynamics through
-underlying contributory spatiotemporal factors we can take account of how the
-factors contribute to affect catches of the species in mixed fisheries.
-We use Gaussian Markov Random Fields (GMRFs) to capture spatial and temporal
-dependence within and among species groups for both encounter probability and
-positive density\cite{Thorson2013}. VAST is set in a mixed modelling framework
-to allow estimation of fixed effects to account for systematic differences
-driving encounter and catches, such as differences in sampling efficiency
-(a.k.a.  catchability), while random effects capture the spatio-temporal
-dynamics of the fish community.\\
+common among 9 species, each analysed separately for juveniles and adult
+stages.  We refer to each combination of species and size class as a
+"species\deleted[id=PD]{ group}", and present results through transformation of
+the loading matrices using PCA rotation. By describing the species dynamics
+through underlying \deleted[id=PD]{contributory} spatiotemporal factors we can
+take account of how the factors contribute to affect catches of the species in
+mixed fisheries.  We use Gaussian Markov Random Fields (GMRFs) to capture
+spatial and temporal dependence within and among species\deleted[id=PD]{
+	groups} for both encounter probability and positive
+density\cite{Thorson2013}. VAST is set in a mixed modelling framework to allow
+estimation of fixed effects to account for systematic differences driving
+encounter and catches, such as differences in sampling efficiency (a.k.a.
+catchability), while random effects capture the spatiotemporal dynamics of the
+fish community.\\
 
 \subsection*{Dynamics of Celtic Sea fisheries\\}
 
@@ -212,15 +224,15 @@ Atlantic whiting (\textit{Merlangius merlangus}), European Hake
 megrim (\textit{Lepidorhombus whiffiagonis}), European Plaice
 (\textit{Pleuronectes platessa}) and Common Sole (\textit{Solea solea}). These
 species make up \textgreater 60 \% of landings by towed fishing gears for the
-area (average 2011 - 2015;\cite{STECF2017}). Each species was separated into
+area (average 2011 - 2015\cite{STECF2017}). Each species was separated into
 juvenile and adult size classes based on their legal minimum conservation
 reference size (Table S2).\\
 
 We analyse the data to understand how the different associations among emergent
-species (combination of species and size class) and their potential
-drivers affect catch compositions in mixed fisheries. We consider how these
-have changed over time, and the implications for mixed fisheries in managing
-catches of quota species under the EU landing obligation.\\
+species\added[id=PD]{-groups} (combination of species and size class) and their
+potential drivers affect catch compositions in mixed fisheries. We consider how
+these have changed over time, and the implications for mixed fisheries in
+managing catches of quota species under the EU landing obligation.\\
 
 
 \section*{Results\\}
