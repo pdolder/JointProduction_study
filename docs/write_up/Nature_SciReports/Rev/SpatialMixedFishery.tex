@@ -255,9 +255,10 @@ indicative of a more inshore distribution for these species.\\
 
 On the second spatial factor for encounter probability a north / south split
 can be seen at approximately 49$^{\circ}$ N while positive density is more
-driven by a positive value in the deeper westerly waters as well as some
-inshore areas. Species values for the second factor indicate there are
-positive associations for juvenile monkfish (\emph{L. piscatorius}), juvenile
+driven by a positive \replaced[id=PD]{coefficient}{value} in the deeper
+westerly waters as well as some inshore areas. Species
+\replaced[id=PD]{coefficients}{values} for the second factor indicate there are
+positive associations for juvenile monkfish (\emph{L.  piscatorius}), juvenile
 hake, juvenile megrim, plaice and juvenile whiting with average positive
 density, which may reflect two different spatial distributions in the more
 offshore and in the inshore areas (Figure 1).\\
@@ -265,15 +266,17 @@ offshore and in the inshore areas (Figure 1).\\
 On the third factor, there is a positive association with the easterly waters
 for encounter probability and negative with the westerly waters. This splits
 the roundfish species (cod, haddock and whiting, which all have a positive
-association with the third factor for average encounter probability) from the
-rest of the species (which have a negative association). Positive
-density is driven by a north / south split (Figure 1), with positive values in
-the northerly areas. Juvenile monkfish (\emph{L.  budgessa} and \emph{L.
-	piscatorius}), cod, juvenile haddock, hake, adult plaice and whiting
-are also positively associated with the third factor towards the north while
-adult monkfish (\emph{L. budgessa} and \emph{L.  piscatorius}), adult haddock,
-megrims, juvenile plaice and sole are negatively associated reflecting their
-more southerly distribution (Figure 1).\\
+\replaced[id=PD]{coefficient for}{association with} the third factor for
+average encounter probability) from the rest of the species (which have a
+negative \replaced[id=PD]{coefficient}{association}). Positive density is
+driven by a north / south split (Figure 1), with positive
+\added[id=PD]{coefficient} values in the northerly areas. Juvenile monkfish
+(\emph{L.  budgessa} and \emph{L.  piscatorius}), cod, juvenile haddock, hake,
+adult plaice and whiting are also positively associated with the third factor
+towards the north while adult monkfish (\emph{L. budgessa} and \emph{L.
+	piscatorius}), adult haddock, megrims, juvenile plaice and sole
+\replaced[id=PD]{have negative coefficients}{are negatively associated}
+reflecting their more southerly distribution (Figure 1).\\
 
 While this exploratory factor analysis is modelling unobserved drivers of
 distribution, we considered what might be driving the differences seen in the
@@ -300,54 +303,56 @@ advantage to the approach taken here is that, where such data is unavailable at
 appropriate spatial resolution, the spatial factor analysis can adequately
 characterise these influences on species spatial dynamics.\\
 
-\subsection*{Time-varying species distributions, but stability within
-		species groups\\} While there are clear spatial
-patterns in the factor coefficients describing differences in average (over
-time) encounter probability and positive density (Figure 1), the inter-annual
-differences in factor coefficients show less structure (Figures S5, S6). These
-inter-annual differences are important as they reflect the ability of fishers
-to predict where they can target species from one year to the next, without
-which it may be difficult to avoid unwanted catch.\\
+\subsection*{Time-varying species distributions, but stability within species
+	groups\\} While there are clear spatial patterns in the factor
+coefficients describing differences in average (over time) encounter
+probability and positive density (Figure 1), the inter-annual differences in
+factor coefficients show less structure (Figures S5, S6). These inter-annual
+differences are important as they reflect the ability of fishers to predict
+where they can target \added[id=PD]{or avoid} species from one year to the
+next, without which it may be difficult to avoid unwanted catch.\\
 
-While spatio-temporal factor coefficients did not show consistent trends from
-year to year across all species, among species there were clear
-relationships (Figure 2).  The same factors appear to drive spatio-temporal
-distributions of megrim, anglerfish species and hake (the deeper water species,
-species-grouping negatively associated with the second axes of Figure 2a) and
-the roundfish and flatfish (species-grouping more positively associated with
-the second axes of Figure 2a). For spatio-temporal positive density (Figure 2b)
-cod, haddock and whiting (the roundfish species) are separated from plaice,
-sole (the flatfish) and deeper water species. As such, it can be predicted that
-higher catches of a species within a group (e.g. cod in roundfish) would be
-expected when catching another species within that group (e.g. whiting in
-roundfish). This suggests that one or more common environmental drivers are
-influencing the distributions of the species groups, and that driver
-differentially affects the species groups. Temperature is often included as a
-covariate in species distribution models, but was found not to contribute to
-the variance in the first factor values (Figure S6, no correlations found for
-either encounter probability or positive density) and so was not included as a
-covariate in the final model.\\
+While spatiotemporal factor coefficients did not show consistent trends from
+year to year across all species, among species there were clear relationships
+(Figure 2).  The same factors appear to drive spatiotemporal distributions of
+megrim, anglerfish species and hake (the deeper water species,
+species-group\deleted[id=PD]{ing} negatively associated with the second axes of
+Figure 2a) and the roundfish and flatfish (species-group\deleted[id=PD]{ing}
+more positively associated with the second axes of Figure 2a). For
+spatiotemporal positive density (Figure 2b) cod, haddock and whiting (the
+roundfish species) are separated from plaice, sole (the flatfish) and deeper
+water species. As such, it can be predicted that higher catches of a species
+within a \added[id=PD]{species-}group (e.g. cod in roundfish) would be expected
+when catching another species within that \added[id=PD]{species-}group (e.g.
+whiting in roundfish). This suggests that one or more common environmental
+drivers are influencing the distributions of the species groups, and that
+driver differentially affects the species groups.  Temperature is often
+included as a covariate in species distribution models, but was found not to
+contribute to the variance in the first factor values (Figure S6, no
+correlations found for either encounter probability or positive density) and so
+was not included as a covariate in the final model.\\
 
-\subsection*{Three clusters of species show similar spatial patterns\\} In order to
-gain greater insight into the community dynamics we considered how
-species covary in space and time through correlations among species. 
-Pearson correlation coefficients for the modelled average spatial
-encounter probability (Figure 3a) show clear strong associations between adult
-and juvenile size classes for all species (\textgreater 0.75 for all species
-except hake, 0.56).  Among species, hierarchical clustering identified
-the same three common groups as our visual inspection of factor loadings above,
-with roundfish (cod, haddock, whiting) closely grouped in their association,
-with correlations for adult cod with adult haddock and adult whiting of 0.73
-and 0.5 respectively, while adult haddock with adult whiting was 0.63 (Figure
-3a). Flatfish (plaice and sole) are also strongly correlated with adult plaice
-and sole having a coefficient of 0.75.  The final group are principally the
-species found in the deeper waters (hake, megrim and both anglerfish species)
-with the megrim strongly associated with the budegassa anglerfish species
-(0.88). Negative relationships were found between plaice, sole and the monkfish
-species (-0.27, -0.26 for the adult size class with budegassa adults
-respectively) and hake (-0.33, -0.37) (Figure 3a) indicating spatial separation
-in distributions. This confirms the associations among species seen in the
-factor loadings, with three distinct species-group assemblages being present.\\
+\subsection*{Three clusters of species show similar spatial patterns\\} In
+order to gain greater insight into the community dynamics we considered how
+species covary in space and time through correlations among species.  Pearson
+correlation coefficients for the modelled average spatial encounter probability
+(Figure 3a) show clear strong associations between adult and juvenile size
+classes for all species (\textgreater 0.75 for all species except hake, 0.56).
+Among species, hierarchical clustering identified the same three common
+\added[id=PD]{species-}groups as our visual inspection of factor loadings
+above, with roundfish (cod, haddock, whiting) closely grouped
+\deleted[id=PD]{in their association}, with correlations for adult cod with
+adult haddock and adult whiting of 0.73 and 0.5 respectively, while adult
+haddock with adult whiting was 0.63 (Figure 3a). Flatfish (plaice and sole) are
+also strongly correlated with adult plaice and sole having a coefficient of
+0.75.  The final group are principally the species found in the deeper waters
+(hake, megrim and both anglerfish species) with the megrim strongly associated
+with the budegassa anglerfish species (0.88). Negative relationships were found
+between plaice, sole and the monkfish species (-0.27, -0.26 for the adult size
+class with budegassa adults respectively) and hake (-0.33, -0.37) (Figure 3a)
+indicating spatial separation in distributions. This confirms the associations
+among species seen in the factor loadings, with three distinct species-group
+assemblages being present.\\
 
 Correlation coefficients for the average positive density (Figure 3b) show
 fewer significant positive or negative relationships among species then
@@ -366,25 +371,24 @@ successfully.\\
 In addition to the average spatial correlations, we also estimate
 spatiotemporal correlations. Spatial population correlations (representing the
 average correlations between pairs for species \textit{x} and species
-\textit{y} across all years) are linearly associated with the
-spatiotemporal population correlations (representing how correlations between
-species \textit{x} and species \textit{y} change from year to
-year), indicating generally predictable relationships between species
-from one year to the next. This suggests that a positive or negative
-association between two species is likely to persist from one year to
-the next, and that species are consistently associated with each other
-in the catch. The correlation coefficients were 0.59 (0.52 - 0.66) and 0.47
-(0.38 - 0.55) for encounter probability and positive density respectively.
-However, a linear regression between the spatial correlations and the
-spatio-temporal correlations shows high variance (R\textsuperscript{2} = 0.36
-and 0.22 respectively), indicating that the scale of these relationships does
-change from one-year to the next. This would have implications for the
-predictability of the relationship between catches of one species and
-another when trying to balance catch with quotas in mixed fisheries. It can
-also be seen in the spatial factor maps that there are subtle differences in
-spatial patterns in factor loading values from one year to the next (Figures S4
-and S5) indicating changes may be driven by temporally changing environmental
-factors and species behaviour.\\
+\textit{y} across all years) are linearly associated with the spatiotemporal
+population correlations (representing how correlations between species
+\textit{x} and species \textit{y} change from year to year), indicating
+generally predictable relationships between species from one year to the next.
+This suggests that a positive or negative association between two species is
+likely to persist from one year to the next, and that species are consistently
+associated with each other in the catch. The correlation coefficients were 0.59
+(0.52 - 0.66) and 0.47 (0.38 - 0.55) for encounter probability and positive
+density respectively.  However, a linear regression between the spatial
+correlations and the spatiotemporal correlations shows high variance
+(R\textsuperscript{2} = 0.36 and 0.22 respectively), indicating that the scale
+of these relationships do\deleted[id=PD]{es} change from one year to the next.
+This would have implications for the predictability of the relationship between
+catches of one species and another when trying to balance catch with quotas in
+mixed fisheries. It can also be seen in the spatial factor maps that there are
+subtle differences in spatial patterns in factor loading values from one year
+to the next (Figures S4 and S5) indicating changes may be driven by temporally
+changing environmental factors and species behaviour.\\
 
 
 \subsection*{Subtle differences in distributions may be important to separate
@@ -418,18 +422,18 @@ the English Channel along the coast of France.\\
 Predicted catch distribution from a ``typical'' otter trawl gear and beam trawl
 fishing at three different locations highlights the differences fishing gear
 makes on catches (Figure 4h). As can be seen, both the gear selectivity and
-area fished play important contributions to the catch compositions; in the
-inshore area (location 'A') plaice and sole are the two main species in catch
-reflecting their distribution and abundance, though the otter trawl gear
-catches a greater proportion of plaice to sole than the beam trawl.  The area
-between Britain and Ireland (location 'B') has a greater contribution of
-whiting, haddock, cod, hake and anglerfishes in the catch with the otter trawl
-catching a greater proportion of the roundfish, haddock, whiting and cod while
-the beam trawl catches more anglerfishes and megrims. The offshore area has a
-higher contribution of megrim, anglerfishes and hake with the otter trawl
-catching a greater share of hake and the beam trawl a greater proportion of
-megrim. Megrim dominates the catch for both gears in location 'C', reflecting
-its relative abundance in the area.  \\
+\replaced[id=PD]{location}{area} fished play important contributions to the
+catch compositions; in the inshore area (location 'A') plaice and sole are the
+two main species in catch reflecting their distribution and abundance, though
+the otter trawl gear catches a greater proportion of plaice to sole than the
+beam trawl.  The area between Britain and Ireland (location 'B') has a greater
+contribution of whiting, haddock, cod, hake and anglerfishes in the catch with
+the otter trawl catching a greater proportion of the roundfish, haddock,
+whiting and cod while the beam trawl catches more anglerfishes and megrims. The
+offshore area has a higher contribution of megrim, anglerfishes and hake with
+the otter trawl catching a greater share of hake and the beam trawl a greater
+proportion of megrim. Megrim dominates the catch for both gears in location
+'C', reflecting its relative abundance in the area.  \\
 
 \section*{Discussion\\}
 
