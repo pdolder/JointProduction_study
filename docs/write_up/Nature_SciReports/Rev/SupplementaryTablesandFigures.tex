@@ -16,7 +16,7 @@
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 
 % figures here	
-\graphicspath{"../figures/"}
+\graphicspath{{"./Figures/Suppl/"}}
 
 %% To allow supplementary table and figure numbering
 %% http://bytesizebio.net/2013/03/11/adding-supplementary-tables-and-figures-in-latex/
@@ -43,10 +43,10 @@
 \begin{figure}[!ht]
 	\label{fig:S1}
 	\begin{subfigure}{0.5\textwidth}
-	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO1"}
+	\includegraphics[width = \linewidth]{"Factor1_DepthO1"}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
-	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO1"}
+	\includegraphics[width = \linewidth]{"Factor1_HabitatO1"}
 \end{subfigure}
 \caption{Left: Average spatial encounter probability factor 1 values correlated
 	against; Left - Depth, Right - substrate type.}
@@ -59,10 +59,10 @@
 	\label{fig:S2}
 	
 \begin{subfigure}{0.5\textwidth}
-	\includegraphics[width = \linewidth]{"figures/Factor1_DepthO2"}
+	\includegraphics[width = \linewidth]{"Factor1_DepthO2"}
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
-	\includegraphics[width = \linewidth]{"figures/Factor1_HabitatO2"}
+	\includegraphics[width = \linewidth]{"Factor1_HabitatO2"}
 \end{subfigure}
 \caption{Left: Average spatial positive density factor 1 values correlated
 	against; Left- Depth, Right- substrate type.}
@@ -72,10 +72,10 @@
 \begin{figure}[!ht]
 	\label{fig:S3}
 \begin{subfigure}{0.55\textwidth}
-\includegraphics[width = \linewidth]{"figures/Depth"}
+\includegraphics[width = \linewidth]{"Depth"}
 \end{subfigure}	
 \begin{subfigure}{0.45\textwidth}
-\includegraphics[width = \linewidth]{"figures/Substrate"}
+\includegraphics[width = \linewidth]{"Substrate"}
 \end{subfigure}
 \caption{Left: Depth, Right: Substrate assigned to each spatial knot.}
 
@@ -85,7 +85,7 @@
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon1"}
+	\includegraphics[width = 0.8\linewidth]{"Suppl - SpatioTempLoadingsEpsilon1"}
 	\label{fig:S5}
 	\caption{Spatial Loadings for first three factors every five years for
 	spatio-temporal encounter probability.}
@@ -94,7 +94,7 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.8\linewidth]{"figures/Suppl - SpatioTempLoadingsEpsilon2"}
+	\includegraphics[width = 0.8\linewidth]{"Suppl - SpatioTempLoadingsEpsilon2"}
 	\label{fig:S7}
 	\caption{Spatial Loadings for first three factors every five years for
 	spatio-temporal density.}
@@ -104,7 +104,7 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.6\linewidth]{"figures/Suppl - TempAndFactors"}
+	\includegraphics[width = 0.6\linewidth]{"Suppl - TempAndFactors"}
 	\label{fig:S6}
 	\caption{Association of temperature and knots (individual lines; top)
 		with Spatio-temporal factor loadings for encounter probability
@@ -116,7 +116,7 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = \linewidth]{"figures/Suppl - Epsilon1Epsilon2_Correlations_blank"}
+	\includegraphics[width = \linewidth]{"Suppl - Epsilon1Epsilon2_Correlations_blank"}
 	\label{fig:S8}
 	\caption{Inter-species correlations for (a) spatio-temporal encounter
 		probability and b) spatio-temporal density. Species are
@@ -128,16 +128,27 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.9\linewidth]{"figures/AreaMap"}
+	\includegraphics[width = \linewidth]{"Pairwise_Correlations"}
 	\label{fig:S9}
+	\caption{Pairwise species correlation coefficients for a) spatial
+		encounter probability and spatiotemporal encounter probability,
+	and b) spatial positive densitiy and spatiotemporal positive density}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[width = 0.9\linewidth]{"AreaMap"}
+	\label{fig:S10}
 	\caption{Spatial bounds of case study area.}
 	\end{center}
 \end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.9\linewidth]{"figures/Aniso"}
-	\label{fig:S10}
+	\includegraphics[width = 0.9\linewidth]{"Aniso"}
+	\label{fig:S11}
 	\caption{Estimates of distances at 10 \% correlation from the Matérn
 		covariance function for encounter probability and positive
 		catch rates.}
@@ -147,8 +158,8 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.9\linewidth]{"figures/Suppl - QEstimatesALL"}
-	\label{fig:S11}
+	\includegraphics[width = 0.9\linewidth]{"Suppl - QEstimatesALL"}
+	\label{fig:S12}
 	\caption{Fixed effect estimates for surveys for each species-group.
 		Point estimate as a circle with $\pm$1.96 x SE shown as a line.
 		Note all values within a species-group are relative to the CEXP
@@ -158,8 +169,8 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.9\linewidth]{"figures/Diag--Encounter_prob"}
-	\label{fig:S12}
+	\includegraphics[width = 0.9\linewidth]{"Diag--Encounter_prob"}
+	\label{fig:S13}
 	\caption{Model diagnostics output showing correlation between the
 		predicted encounter probability and the data.}
 	\end{center}
@@ -167,8 +178,8 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width = 0.9\linewidth]{"figures/Q-Q_plot"}
-	\label{fig:S13}
+	\includegraphics[width = 0.9\linewidth]{"Q-Q_plot"}
+	\label{fig:S14}
 	\caption{Model diagnostics output showing the Q-Q plot for the positive
 	catch rates.}
 	\end{center}
@@ -176,8 +187,8 @@
 
 \begin{figure}[!ht]
 \begin{center}
-	\includegraphics[width =0.9\linewidth]{"figures/RealativeIndexVRelativeAssessSSB"}
-	\label{fig:S14}
+	\includegraphics[width =0.9\linewidth]{"RealativeIndexVRelativeAssessSSB"}
+	\label{fig:S15}
 	\caption{Comparison between the standardised index from the VAST
 		output and the standardised spawning stock biomass (SSB) from
 		the assessments for cod, haddock and whiting.}

@@ -201,8 +201,26 @@ O1E1$E1 <- E1$value
 plot(O1E1$O1, O1E1$E1)
 summary(lm(O1E1$E1 ~ O1E1$O1))
 abline(lm(O1E1$E1 ~ O1E1$O1))
-
 cor.test(O1E1$O1, O1E1$E1)
+
+est     <- cor.test(O1E1$O1, O1E1$E1)$estimate
+up.conf <- cor.test(O1E1$O1, O1E1$E1)$conf.int[1]
+lo.conf <- cor.test(O1E1$O1, O1E1$E1)$conf.int[2]
+p.val   <- ifelse(cor.test(O1E1$O1, O1E1$E1)$p.value < 0.001, "< 0.001",
+	   ifelse(cor.test(O1E1$O1, O1E1$E1)$p.value < 0.01, "< 0.01",
+	   ifelse(cor.test(O1E1$O1, O1E1$E1)$p.value < 0.05, "< 0.05",
+		  "> 0.05")))
+library(ggplot2)
+
+p1 <- ggplot(O1E1, aes(x = O1, y = E1)) + geom_point() +
+	geom_smooth(method = "lm") + theme_bw() +
+	ggtitle(paste("Pairwise species correlation coefficients \n",
+	paste("Correlation coefficient = ", 
+	      signif(est,2)," (",signif(up.conf,2),"-", signif(lo.conf,2),") ", ", p-val = ", p.val, sep =""))) +
+	xlab("Spatial encounter probability") +
+	ylab("Spatiotemporal encounter probability")  
+
+
 
 ## Density::
 O2E2 <- reshape2::melt(COR_O2)
@@ -213,7 +231,30 @@ O2E2$E2 <- E2$value
 
 plot(O2E2$O2, O2E2$E2)
 summary(lm(O2E2$E2 ~ O2E2$O2))
-anbline(lm(O2E2$E2 ~ O2E2$O2))
+abline(lm(O2E2$E2 ~ O2E2$O2))
 
 cor.test(O2E2$O2, O2E2$E2)
 
+est     <- cor.test(O2E2$O2, O2E2$E2)$estimate
+up.conf <- cor.test(O2E2$O2, O2E2$E2)$conf.int[1]
+lo.conf <- cor.test(O2E2$O2, O2E2$E2)$conf.int[2]
+p.val   <- ifelse(cor.test(O2E2$O2, O2E2$E2)$p.value < 0.001, "< 0.001",
+	   ifelse(cor.test(O2E2$O2, O2E2$E2)$p.value < 0.01, "< 0.01",
+	   ifelse(cor.test(O2E2$O2, O2E2$E2)$p.value < 0.05, "< 0.05",
+		  "> 0.05")))
+
+
+p2 <- ggplot(O2E2, aes(x = O2, y = E2)) + geom_point() +
+	geom_smooth(method = "lm") + theme_bw() +
+	ggtitle(paste("Pairwise species correlation coefficients \n",
+	paste("Correlation coefficient = ", 
+	      signif(est,2)," (",signif(up.conf,2),"-", signif(lo.conf,2),") ", ", p-val = ", p.val, sep =""))) +
+	xlab("Spatial positive density") +
+	ylab("Spatiotemporal positive density")  
+
+
+library(cowplot)
+
+png(file.path("..", "figures", "Pairwise_Correlations.png"), width = 1200, height = 600)
+plot_grid(p1, p2, labels = c("A", "B"))
+dev.off()
