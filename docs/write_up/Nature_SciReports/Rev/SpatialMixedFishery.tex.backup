@@ -8,7 +8,8 @@
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage[draft]{changes}
+%%\usepackage[draft]{changes}
+\usepackage[final]{changes}
 \definechangesauthor[color = red]{CM}
 \definechangesauthor[color = blue]{PD}
 \definechangesauthor[color = purple]{JT}
@@ -269,7 +270,7 @@ obligation.\\
 \subsection*{\deleted[id = CM]{Common\deleted[id=PD]{average spatial patterns} driv\replaced{ers
 		for groups of}{ing} species \replaced[id=PD]{determining
 		spatial distributions}{associations}} 
-		\added[id = CM]{Spatial distribution of three species assemblages}
+		\added[id = CM]{Common drivers of the spatial distribution of the assemblages}
 		\\} A spatial dynamic
 factor analysis \added[id=PD]{was used to} decompose\deleted[id=PD]{s} the
 dominant spatial patterns driving differences in average spatial variation.
@@ -329,7 +330,7 @@ with a more even split between depth and substrate, while explaining 60 \% of
 the variance on the third factor.  For \added[id=PD]{average} positive density,
 the variables explained less of the variance with 62 \%, 35 \%, and 31 \% for
 each of the factors, respectively.\\
-(THE PARAGRAPH BELOW SEEMS CONTRADICTORY - POST-HOC COVARIATES EXPLAIN A GOOD DEAL OF THE VARIABILITY BUT NOT WHEN INCORPORATED? EXPLAIN THIS CAREFULLY.)\\
+(THE PARAGRAPH BELOW SEEMS CONTRADICTORY - POST-HOC THEY EXPLAIN A LOT OF VARIABILITY BUT NOT WHEN INCORPORATED? EXPLAIN THIS CAREFULLY.)\\
 It is clear that depth and to a lesser extent substrate are important
 predictors for the main driver of similarities and differences in distributions
 and abundances for the different species. The first factor correlates
@@ -414,7 +415,7 @@ size class with budegassa adults respectively) and hake (-0.33, -0.37) (Figure
 \replaced[id=PD]{confirmed}{present}.\\
 
 Correlation coefficients for the average positive density (Figure 3b) show
-fewer significant positive or negative relationships among species th\replaced[id = CM]{a}{e}n for
+fewer significant positive or negative relationships among species then for
 encounter probability, but still evident are the strong
 \replaced[id=JT]{correlation}{association} among the roundfish with higher
 catches of cod \deleted[id=PD]{are} \replaced[id=JT]{correlated}{associated}
@@ -429,8 +430,8 @@ megrim, anglerfish (budegassa) and hake with adult sole (-0.61, -0.61 and -0.47
 respectively), plaice (-0.36 and -0.35 for megrim and hake only) indicate high
 catches of one can predict low catches of the other successfully.\\
 
-\replaced[id=PD]{\deleted[id = CM]{We sought}To understand how stable relationships between
-	catches of pairs of species were from one year to the next\deleted[id = CM]{. To do so }, we
+\replaced[id=PD]{We sought to understand how stable relationships between
+	catches of pairs of species were from one year to the next. To do so we
 	regressed the correlation coefficients for}{In addition to the average
 	spatial correlations, we also estimated spatiotemporal correlations
 	\added[id=PD]{Figure S7}. Spatial population correlations
@@ -467,8 +468,8 @@ year to the next (Figures S4 and S5), indicating changes may be driven by
 temporally changing environmental factors and species behaviour.\\
 
 
-\subsection*{\deleted[id = CM]{Subtle differences in distributions may be important to} \added[id = CM]{Potential to} separate
-	catches within \replaced[id = CM]{assemblages}{groups} under the landing obligation\deleted[id = CM]{:}\\} The analysis
+\subsection*{Subtle differences in distributions may be important to separate
+	catches within groups under the landing obligation:\\} The analysis
 shows the interdependence within \added[id=PD]{three} assemblages of
 roundfish, flatfish and deeper water species, where catching one species within
 the group indicates a high probability of catching the other
@@ -590,7 +591,7 @@ different sizes\cite{Pascoe2007}. \\
 	example, are fishers likely to fish in ``safe" areas where its known
 	there are lower catches of the target species but also decreased risk
 	of encountering bycatch? How do decisions about level of risk affect
-	\added[id = CM]{the} likelihood of overshooting available quota and potential profit and
+	likelihood of overshooting available quota and potential profit and
 	losses for individual trips? Set in this context, the
 	\deleted[id=JT]{model} parameter estimates could be used to simulate
 	from a distribution of catches in the fishery at different locations
@@ -614,7 +615,7 @@ harvest strategies. \replaced[id=PD]{Modelling of different spatial strategies
 information useful for examining trade-offs in quota setting by integrating
 potential for spatial targeting in changing catch composition, thus provide a
 scientific contribution to \added[id=PD]{assessing the ability of technical
-	measures \replaced[id = CM]{to}{for}} meet\deleted[id = CM]{ing} the goal of maximising catches in mixed fisheries
+	measures for} meeting the goal of maximising catches in mixed fisheries
 within single stock quota constraints\cite{Ulrich2016}. Further, the
 correlations among species could provide information on fisheries at risk of
 capturing protected, endangered or threatened species such as elasmobranches,
@@ -628,8 +629,8 @@ the assemblages using spatial management measures. This has important
 implications for management of the mixed fisheries under the EU landing
 obligation. Our analysis identifies where it may be easier to separate catches
 of species (among groups) and where it is more challenging (within groups). We
-propose that the \added[id = CM]{deimension-reduction} framework presented in Figures 1-4 provides a viable route to
-reducing the complexity of highly mixed \replaced[id = CM]{fisheries}{systems}.  This can allow informed
+propose that the framework presented in Figures 1-4 provides a viable route to
+reducing the complexity of highly mixed systems.  This can allow informed
 management discussion over more traditional anecdotal knowledge of
 single-species distribution in space and time.\\
 
@@ -656,7 +657,7 @@ associations among species by modelling response variables as a multivariate
 process. This is achieved through implementing a factor analysis decomposition
 where common latent trends are estimated so that the number of common trends is
 less than the number of species modelled. The factor coefficients are then
-associated through \replaced[id = CM]{loadings}{a function} for each factor that return\deleted[id = CM]{s} a positive or
+associated through a function for each factor that returns a positive or
 negative association of one or more species with any location. Log-density of
 any species is then be described as a linear combination of factors and
 loadings: \begin{equation} \theta_{c}(s,t) = \sum_{j=1}^{n_{j}}
@@ -817,7 +818,7 @@ surveys and on request to the author for the remaining five surveys.\\
 
 \subsection*{Model setup\\}
 
-The spatial domain was set\added[id = CM]{ }up to include 250 knots representing the Gaussian
+The spatial domain was setup to include 250 knots representing the Gaussian
 Random Fields. The model was configured to estimate nine factors each to describe
 the spatial and spatiotemporal encounter probability and positive density
 parameters, with a logit-link for the linear predictor for encounter
