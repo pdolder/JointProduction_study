@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex SpatialMixedFishery"] 1529915205 "SpatialMixedFishery.aux" "SpatialMixedFishery.bbl" "SpatialMixedFishery" 1529915212
+["bibtex SpatialMixedFishery"] 1530449754 "SpatialMixedFishery.aux" "SpatialMixedFishery.bbl" "SpatialMixedFishery" 1530449755
   "./naturemag-doi.bst" 1529048062 35743 4066fe29395af583bcd86c4523cae927 ""
-  "JSDM.bib" 1529085055 113302 cdc710c739629b2a6aa4442efcf75ced ""
-  "SpatialMixedFishery.aux" 1529913688 19070 ba8f056de7477ac451e2cbf3bce765d3 ""
+  "JSDM.bib" 1530432252 113305 7671ffceaa49b5de070303aa98b17bea ""
+  "SpatialMixedFishery.aux" 1530449755 27309 189eb20b0b5975de03a3f28282cf22ae ""
   "SpatialMixedFishery.bcf" 0 -1 0 ""
   (generated)
   "SpatialMixedFishery.blg"
   "SpatialMixedFishery.bbl"
-["pdflatex"] 1529915212 "SpatialMixedFishery.tex" "SpatialMixedFishery.pdf" "SpatialMixedFishery" 1529915212
+["pdflatex"] 1530449754 "SpatialMixedFishery.tex" "SpatialMixedFishery.pdf" "SpatialMixedFishery" 1530449755
   "/etc/texmf/web2c/texmf.cnf" 1525122473 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -154,17 +154,17 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1525122653 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1525122670 4126870 c71b2c3dd0d218bbf16cc61120a4a1c2 ""
-  "SpatialMixedFishery.aux" 1529913688 19070 ba8f056de7477ac451e2cbf3bce765d3 ""
-  "SpatialMixedFishery.bbl" 1529915205 23471 aaab2417a054e3f7c14e1c631f871c85 "bibtex SpatialMixedFishery"
-  "SpatialMixedFishery.out" 1529913688 48 63244f6d6b65df316ce5925e16a5bf6c ""
-  "SpatialMixedFishery.tex" 1529915211 53717 df90604f286d368b737c9c8efa67ab78 ""
+  "SpatialMixedFishery.aux" 1530449755 27309 189eb20b0b5975de03a3f28282cf22ae ""
+  "SpatialMixedFishery.bbl" 1530449754 23452 a536fc46cde681799eaabf2ed6f4d49d "bibtex SpatialMixedFishery"
+  "SpatialMixedFishery.out" 1530449755 48 63244f6d6b65df316ce5925e16a5bf6c ""
+  "SpatialMixedFishery.tex" 1530449752 55205 e605f0ff42ac3ebabefd55603a392d43 ""
   "jabbrv-ltwa-all.ldf" 1529048166 49107 ef89484545be005458b7162f37634c99 ""
   "jabbrv-ltwa-en.ldf" 1529048168 268657 c239d07b7cc89e14f920c5fc8ed8d12e ""
   "jabbrv.sty" 1529048093 14752 c831ad9835d4fbea22332e27ca9f1c2a ""
   "wlscirep.cls" 1529048062 5788 9df2749839c3a8af12c7b5623dab1715 ""
   (generated)
-  "SpatialMixedFishery.soc"
   "SpatialMixedFishery.aux"
+  "SpatialMixedFishery.soc"
+  "SpatialMixedFishery.log"
   "SpatialMixedFishery.pdf"
   "SpatialMixedFishery.out"
-  "SpatialMixedFishery.log"
