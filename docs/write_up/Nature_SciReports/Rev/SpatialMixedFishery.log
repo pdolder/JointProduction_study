@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.30)  1 JUL 2018 13:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.30)  9 JUL 2018 13:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -772,7 +772,7 @@ Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
 (/usr/share/texlive/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 ))
-changes-option 'draft'
+changes-option 'final'
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdfcolmk.sty
 Package: pdfcolmk 2016/05/16 v1.3 Color support for pdfTeX via marks (HO)
 Package pdfcolmk Info: The color stack of pdfTeX >= 1.40 is used. Therefore
@@ -1005,166 +1005,154 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--114
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--128
+Underfull \hbox (badness 10000) in paragraph at lines 115--129
 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 129--139
+Underfull \hbox (badness 10000) in paragraph at lines 130--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--154
+Underfull \hbox (badness 10000) in paragraph at lines 141--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--179
+Underfull \hbox (badness 10000) in paragraph at lines 158--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 184--215
+Underfull \hbox (badness 10000) in paragraph at lines 184--220
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 218--224
-
- []
-
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 234.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
-File: omlptm.fd 
-)
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 234.
-
-Underfull \hbox (badness 10000) in paragraph at lines 225--238
+Underfull \hbox (badness 10000) in paragraph at lines 223--229
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 239--247
-
- []
-
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 274.
-
-Overfull \hbox (62.00375pt too wide) in paragraph at lines 274--274
-||   []   |   []   |   []   |   []$[]$[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 274--292
+Underfull \hbox (badness 10000) in paragraph at lines 230--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 293--302
+Underfull \hbox (badness 10000) in paragraph at lines 245--253
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 285--302
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--312
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--327
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 303--317
+Underfull \hbox (badness 10000) in paragraph at lines 328--344
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--345
+Underfull \hbox (badness 10000) in paragraph at lines 345--358
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--357
+Underfull \hbox (badness 10000) in paragraph at lines 362--370
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--388
+Underfull \hbox (badness 10000) in paragraph at lines 371--401
+
+ []
+
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 409.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
+File: omlptm.fd 
+)
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 409.
+
+Underfull \hbox (badness 10000) in paragraph at lines 405--429
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 391--416
+Underfull \hbox (badness 10000) in paragraph at lines 430--445
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--432
+Underfull \hbox (badness 10000) in paragraph at lines 451--483
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 438--469
+Underfull \hbox (badness 10000) in paragraph at lines 488--500
 
  []
 
 
-Overfull \hbox (58.21121pt too wide) in paragraph at lines 472--472
-||   []   |   []   |   []   |   []   |   []   |   []   |   []   |   []$[]$[][] []\OT1/phv/b/n/10 Po-ten-tial to$[]$[][] sep-a-rate catches within []assemblages|   []$[]$[][]
+Underfull \hbox (badness 10000) in paragraph at lines 501--519
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--485
+Underfull \hbox (badness 10000) in paragraph at lines 520--536
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 486--504
+Underfull \hbox (badness 10000) in paragraph at lines 539--553
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 505--521
+Underfull \hbox (badness 10000) in paragraph at lines 554--567
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 524--538
+Underfull \hbox (badness 10000) in paragraph at lines 568--588
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 539--552
+Underfull \hbox (badness 10000) in paragraph at lines 589--603
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 553--573
+Underfull \hbox (badness 10000) in paragraph at lines 621--622
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 574--588
+Underfull \hbox (badness 10000) in paragraph at lines 623--640
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
+Underfull \hbox (badness 10000) in paragraph at lines 642--653
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--624
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 626--636
-
- []
-
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 643.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 660.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1173,135 +1161,134 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 642--653
+Underfull \hbox (badness 10000) in paragraph at lines 659--670
+
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 671.
+
+Underfull \hbox (badness 10000) in paragraph at lines 682--688
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 689--694
 
  []
 
 [7]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 654.
-
-Underfull \hbox (badness 10000) in paragraph at lines 665--670
+Underfull \hbox (badness 10000) in paragraph at lines 720--733
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 671--676
+Underfull \hbox (badness 10000) in paragraph at lines 742--745
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 702--715
+Underfull \hbox (badness 10000) in paragraph at lines 746--759
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--727
+Underfull \hbox (badness 10000) in paragraph at lines 768--776
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 728--741
+Underfull \hbox (badness 10000) in paragraph at lines 777--785
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 786--791
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 792--799
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 750--758
+Underfull \hbox (badness 10000) in paragraph at lines 802--806
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 759--767
+Underfull \hbox (badness 10000) in paragraph at lines 807--811
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 768--773
+Underfull \hbox (badness 10000) in paragraph at lines 812--827
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 774--781
+Underfull \hbox (badness 10000) in paragraph at lines 828--830
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 784--788
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 789--793
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 794--809
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 810--812
-
- []
-
-
-Overfull \hbox (33.33513pt too wide) in paragraph at lines 815--818
+Overfull \hbox (33.33513pt too wide) in paragraph at lines 833--836
 \OT1/ptm/m/n/10 (-20) Data used to fit the model is avail-able via the ICES Da-tras data por-tal ([][]$\OT1/pcr/m/n/10 http : / / www . ices . dk / marine-[]data / data-[]portals /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 815--818
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 821--827
+Underfull \hbox (badness 10000) in paragraph at lines 833--836
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 828--835
+Underfull \hbox (badness 10000) in paragraph at lines 839--845
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 838--844
+Underfull \hbox (badness 10000) in paragraph at lines 846--853
 
  []
 
-[10] (./SpatialMixedFishery.bbl [11]
+
+Underfull \hbox (badness 10000) in paragraph at lines 856--862
+
+ []
+
+[9] [10] (./SpatialMixedFishery.bbl [11]
 Underfull \hbox (badness 1303) in paragraph at lines 376--383
 []\OT1/ptm/m/n/10 (+20) Santos, J. \OT1/ptm/m/it/10 (+20) et al.  \OT1/ptm/m/n/10 (+20) Re-duc-ing flat-fish by-catch in round-fish fish-eries.  \OT1/ptm/m/it/10 (+20) Fish. Res. \OT1/ptm/b/n/10 184\OT1/ptm/m/n/10 (+20) , 64--73 (2016).  DOI
  []
 
 [12]) [13]
-Underfull \hbox (badness 10000) in paragraph at lines 861--865
+Underfull \hbox (badness 10000) in paragraph at lines 879--883
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 866--871
+Underfull \hbox (badness 10000) in paragraph at lines 884--889
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 898--902
+Underfull \hbox (badness 10000) in paragraph at lines 916--920
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--908
+Underfull \hbox (badness 10000) in paragraph at lines 922--926
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 909--914
+Underfull \hbox (badness 10000) in paragraph at lines 927--932
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 915--918
+Underfull \hbox (badness 10000) in paragraph at lines 933--936
 
  []
 
@@ -1311,28 +1298,28 @@ AED: lastpage setting LastPage
 \Changes@OutFile=\write4
 \openout4 = `SpatialMixedFishery.soc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 920.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 920.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 938.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 938.
 (./SpatialMixedFishery.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 920.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 920.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 938.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 938.
 Package rerunfilecheck Info: File `SpatialMixedFishery.out' has not changed.
 (rerunfilecheck)             Checksum: 63244F6D6B65DF316CE5925E16A5BF6C;48.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 920.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 938.
  ) 
 Here is how much of TeX's memory you used:
- 19565 strings out of 492982
- 370054 string characters out of 6134896
- 536025 words of memory out of 5000000
- 22558 multiletter control sequences out of 15000+600000
- 63355 words of font info for 256 fonts, out of 8000000 for 9000
+ 19571 strings out of 492982
+ 370088 string characters out of 6134896
+ 528025 words of memory out of 5000000
+ 22553 multiletter control sequences out of 15000+600000
+ 62526 words of font info for 262 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,77p,1542b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,77p,302b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on SpatialMixedFishery.pdf (15 pages, 204252 bytes).
+Output written on SpatialMixedFishery.pdf (15 pages, 192231 bytes).
 PDF statistics:
  317 PDF objects out of 1000 (max. 8388607)
  285 compressed objects within 3 object streams
  69 named destinations out of 1000 (max. 500000)
- 41993 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 41481 words of extra memory for PDF output out of 42996 (max. 10000000)
 
