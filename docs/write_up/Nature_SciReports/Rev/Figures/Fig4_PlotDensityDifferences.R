@@ -367,7 +367,9 @@ comb_plot <- ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3)
                   x = c(0.05, 0.05, 0.05, 0.35, 0.35, 0.35, 0.65, 0.65), y = c(0.92, 0.62, 0.32,0.92,0.62,0.32, 0.92, 0.62), 
                   size = 15, hjust = 0)
 
-save_plot(file.path('Fig4.eps'), comb_plot,ncol = 3, nrow = 3, device = cairo_ps)
+#save_plot(file.path('Fig4.eps'), comb_plot,ncol = 3, nrow = 3, device = cairo_ps)
+save_plot(file.path('Fig4.png'), comb_plot,ncol = 3, nrow = 3)
+
 
 
 

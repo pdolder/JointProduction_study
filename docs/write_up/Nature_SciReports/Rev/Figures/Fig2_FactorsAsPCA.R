@@ -314,7 +314,8 @@ leg <- ggplot(data.frame(x = rep(0,1), y = rep(0,1)), aes(x= x, y = y))  + xlim(
 
 plot_grid(g1,g2,leg, ncol = 3, rel_widths =c(8,8,3),  labels = c('(A) Factor loading for spatio-temporal encounter probability',
 			    '(B) Factor loading for spatio-temporal catch rates',''), hjust = -0.15, vjust = 2)
-ggsave(file =  file.path('Fig2.eps'), width = 16, height = 8, device = cairo_ps)
+#ggsave(file =  file.path('Fig2.eps'), width = 16, height = 8, device = cairo_ps)
+ggsave(file =  file.path('Fig2.png'), width = 16, height = 8)
 
 
 #### END ###

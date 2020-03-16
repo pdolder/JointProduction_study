@@ -1,5 +1,5 @@
 #####################################################################
-### Code for plotting differences in density for cod, had and whg ###
+
 #####################################################################
 
 rm(list = ls())
@@ -9,9 +9,12 @@ run <- '2017-06-16_M1'
 load(file.path('..', '..', '..','results', 'CovariatesAtKnot.RData'))
 load(file.path('..', '..' , '..','results', run, 'Save.RData'))
 
-MapDetails_List = SpatialDeltaGLMM::MapDetails_Fn( "Region"=Region, "NN_Extrap"=Spatial_List$PolygonList$NN_Extrap, "Extrapolation_List"=Extrapolation_List )
+Include <- Extrapolation_List[["Area_km2_x"]]>0 & rowSums(Extrapolation_List[["a_el"]])>0
+PlotDF2 <- cbind(Extrapolation_List[["Data_Extrap"]][,c("Lat", "Lon")], 'x2i' = NA, Include )
+PlotDF2$x2i <- Spatial_List$PolygonList$NN_Extrap$nn.idx[,1]
 
-cod <- cod_or <-  Save$Report$Index_xcyl[,1,,]
+
+cod <- cod_or <- Save$Report$Index_xcyl[,1,,]
 had <- had_or <- Save$Report$Index_xcyl[,9,,]
 whg <- whg_or <- Save$Report$Index_xcyl[,11,,]
 ple <- ple_or <- Save$Report$Index_xcyl[,15,,]
@@ -19,6 +22,16 @@ sol <- sol_or <- Save$Report$Index_xcyl[,17,,]
 hke <- hke_or <- Save$Report$Index_xcyl[,13,,]
 pis <- pis_or <- Save$Report$Index_xcyl[,7,,]
 meg <- meg_or <- Save$Report$Index_xcyl[,3,,]
+
+cod <- cod_or <- Save$Report$D_xcy[,1,]
+had <- had_or <- Save$Report$D_xcy[,9,]
+whg <- whg_or <- Save$Report$D_xcy[,11,]
+ple <- ple_or <- Save$Report$D_xcy[,15,]
+sol <- sol_or <- Save$Report$D_xcy[,17,]
+hke <- hke_or <- Save$Report$D_xcy[,13,]
+pis <- pis_or <- Save$Report$D_xcy[,7,]
+meg <- meg_or <- Save$Report$D_xcy[,3,]
+
 
 # Check overall index
 #par(mfrow = c(1,3))
@@ -103,6 +116,8 @@ ylim = c(48, 52)
 ## The map for all areas
 
 DF2 <- MapDetails_List[['PlotDF']]
+DF2 <- PlotDF2
+
 
 DF2$cod_had <- plotDF$cod_had[match(DF2$x2i, plotDF$knot)]
 DF2$cod_whg <- plotDF$cod_whg[match(DF2$x2i, plotDF$knot)]
@@ -367,7 +382,7 @@ comb_plot <- ggdraw() + draw_plot(p1, x = 0, y = 0.6, width = 0.3, height = 0.3)
                   x = c(0.05, 0.05, 0.05, 0.35, 0.35, 0.35, 0.65, 0.65), y = c(0.92, 0.62, 0.32,0.92,0.62,0.32, 0.92, 0.62), 
                   size = 15, hjust = 0)
 
-save_plot(file.path('..','figures','Figure 4 - DensityDifferencesFigureswithCC.png'), comb_plot,ncol = 3, nrow = 3)
+save_plot(file.path('..','figures','Figure 4 - DensityDifferencesFigureswithCC_REV.png'), comb_plot,ncol = 3, nrow = 3)
 
 
 

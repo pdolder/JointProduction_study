@@ -77,9 +77,9 @@ cols_o2 <- ifelse(cols_o2 < 0.05, "grey20", "grey90")
 cols_o2 <- as.vector(cols_o2)
 
 
-#png(file = file.path("Fig3.png"), width = 1600, height = 800)
-setEPS()
-postscript("Fig3.eps", width = 16, height = 8)
+png(file = file.path("Fig3.png"), width = 1600, height = 800)
+#setEPS()
+#postscript("Fig3.eps", width = 16, height = 8)
 par(mfrow= c(1,2))
 corrplot(COR_O1,  order="hclust" ,addCoef.col = cols_o1, method = "square",
 	          col=rev(brewer.pal(n=8, name="RdYlBu")),mar=c(0,0,1,0), bg = "grey90" , p.mat = P_O1, insig = 'blank',

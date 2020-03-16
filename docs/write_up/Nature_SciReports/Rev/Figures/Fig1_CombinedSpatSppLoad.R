@@ -358,6 +358,6 @@ comb_plot <- plot_grid(l1, l2, l3, l4, l5,
 	  rel_widths = c(1,1,1,1,0.2
 			 ))
 
-save_plot("Fig1.eps", comb_plot, ncol = 5, nrow = 3, device = cairo_ps)
-#save_plot("Fig1.png", comb_plot, ncol = 5, nrow = 3)
+#save_plot("Fig1.eps", comb_plot, ncol = 5, nrow = 3, device = cairo_ps)
+save_plot("Fig1.png", comb_plot, ncol = 5, nrow = 3)
 
